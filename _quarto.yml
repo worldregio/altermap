@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Altermap"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "En bref"
+      - href: equipe.qmd
+        text: Equipe
+      - posts.qmd
+    right: 
+      - icon: github # add icons as navbar buttons
+        href: https://github.com/worldregio/altermap/
+        target: _blank
+  page-footer:
+    background: dark
+    left: Copyright 2026, Claude Grasland
+format:
+  html:
+    theme: 
+      light: minty    
+      dark: solar
+    css: styles.css
+    toc: true
+
+
+

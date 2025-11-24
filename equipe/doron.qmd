@@ -1,0 +1,74 @@
+---
+title: "Adrien DORON"
+name: "DORON Adrien"
+image: img/doron.jpg
+bibliography: biblio/doron.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Enseignant·es
+about:
+  template: marquee
+  image: img/doron.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: UMR Géographie-cités, Université Paris-Cité 
+statut: "Maître de conférence en Géographie"
+pays: France
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
+
+::: {#liste}
+-   à compléter
+-   
+-   
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements dispensés
+
+<div>
+
+-   à compléter
+-   
+-   
+
+</div>
+
+## <i class="bi bi-clipboard-data"></i> Données mobilisées
+
+-   à compléter
+-   
+-   
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

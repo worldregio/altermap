@@ -1,0 +1,77 @@
+---
+title: "Amandine SPIRE"
+name: "SPIRE Amandine"
+image: img/spire.jpg
+bibliography: biblio/spire.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Enseignant·es
+about:
+  template: marquee
+  image: img/spire.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: UMR CESSMA, Université Paris-Cité 
+statut: "Maître de conférences en Géographie"
+pays: France
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
+
+::: {#liste}
+- Droit à la ville, pratiques citadines, gouvernement urbain
+- Eviction, relocalisation, déguerpissements
+- Expériences migratoires et relations aux institutions
+- Méthodologie, recherche-action, écriture, film
+- Afrique de l’Ouest (Togo, Ghana) et France
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements dispensés
+
+<div>
+
+-   Méthodes qualitatives
+-   Géographies des Suds
+-   Géographie sociale
+- ...
+
+</div>
+
+## <i class="bi bi-clipboard-data"></i> Données mobilisées
+
+-   à compléter
+-   
+-   
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

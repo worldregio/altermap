@@ -1,0 +1,115 @@
+---
+title: "ALTERMAP"
+subtitle: "Méthodes qualitatives et quantitatives pour l’étude des cartes mentales et des représentations de l’altérité en Europe et en Afrique."
+toc: false
+about:
+  id: hero-heading
+  template: trestles  
+  image-width: 17em
+  image-shape: round
+  image: img/worldmap_sensible.jpg
+  image-alt: "Carte sensible du Monde"
+  links:
+    - text: Pour cette carte, j’ai brodé le monde sur une toile de coton. Les parties en perles correspondent aux lieux que j’aimerais le plus visiter (réalisation d'une élève du Lycée le Corbusier d'Illkirch-Graffenstaden en 2019-20).
+      href: https://www.lyceelecorbusier.eu/dnmade-is/?p=4058
+---
+
+
+:::{#hero-heading}
+Le projet ALTERMAP vise à développer l’innovation pédagogique dans le domaine des imaginaires géographiques et des représentations de l’altérité spatiale. Il portera plus précisément sur le rôle des cartes mentales dans l’enseignement de géographie en licence et l’initiation à la recherche en master. 
+
+
+Associant des enseignants-chercheurs de l’Université Paris Cité et de l’Université Cheikh Anta Diop ainsi que d’autres universités du Sénégal, il prendra la forme originale de la co-construction d’un questionnaire et de la réalisation d’entretiens sur les représentations de l’Europe en Afrique et de l’Afrique en France. Dans chaque pays le questionnaire sera administré par les étudiants de master ou de doctorat auprès des étudiants de licence et fera l’objet de restitution des résultats dans les enseignements thématiques (géographie sociale, géographie des Nords et des Suds, structure du Monde actuel, mobilités et migrations…) et d’utilisation comme exemple dans les enseignements méthodologiques (méthodes qualitatives, statistiques, cartographie, géomatique …). 
+
+Le projet se clôturera par une école d’été associant les enseignants-chercheurs des deux pays ainsi que des doctorants intéressés pour consolider les acquis de l’enquête en termes méthodologiques. Cette école d’été permettra un partage des expériences réalisées en matière par exemple d’analyse textuelle des discours, de cartographie sensible, de visualisation des espaces attractifs et répulsifs, de modélisation statistique des facteurs déterminants les perceptions de l’altérité. 
+
+Idéalement, cette expérience d’innovation pédagogique débouchera sur l’élaboration de thèses en cotutelles et sur un élargissement de l’enquête à d’autres pays du Nord et du Sud dans le cadre de réponse à des appels d’offres internationaux de l’Union Européenne, l’Union Africaine ou la Banque Mondiale.
+
+:::
+
+
+
+### Institutions et financement
+
+::: {layout="[70,30]"}
+::: {first-column}
+Le projet AlterMap est organisé conjointement conjointement par
+des enseignants-chercheurs français de [l'UFR GHES de l'université Paris-Cité](https://u-paris.fr/ghes/) et par leurs  homologues sénégalais de [l'Université Cheikh Anta Diop (UCAD)](https://www.ucad.sn/), [l'Université du Sine Saloum Elhadj Ibrahima Niass (USSEIN)](https://www.ussein.sn/) et [l'Université Gaston Berger de Saint-Louis](https://www.ugb.sn/fr)
+
+
+Le financement principal est apporté par les crédits de [l'IDEX Innovation Pédagogique de l'Université Paris-Cité 2025](https://u-paris.fr/aap-innovations-pedagogiques-2025/)
+
+
+Le projet associé des enseignants-chercheurs des laboratoires de recherche [Géographie-cités](https://geographie-cites.cnrs.fr/), [CESSMA](https://www.cessma.org/) [Prodig](https://www.prodig.cnrs.fr/), [Ladyss](https://www.ladyss.com/) ainsi que  des ingénieurs des unités de service [Riate](https://riate.cnrs.fr/) et [Geoteca](https://geoteca.u-paris.fr/). 
+
+![](img/logo_geocites.jpg){height=40}
+![](img/logo_cessma.jpg){height=30}
+![](img/logo_PRODIG.png){height=40}
+![](img/logo_ladyss.png){height=40}
+![](img/logo_RIATE.jpg){height=30}
+![](img/logo_geoteca.jpg){height=30}
+:::
+::: {second-column}
+
+![](img/logo_idex.jpg){width=300}
+
+![](img/logo_GHES.png){width=300}
+
+![](img/logo_UCAD.png){width=70}
+![](img/logo_USSEIN.png){width=70}
+![](img/logo_UGB.png){width=70}
+
+:::
+:::
+
+
+
+
+
+
+
+
+### Coordinateurs
+
+::: {layout="[50,50]"}
+::: {first-column}
+
+
+**Claude GRASLAND**
+
+Université Paris Cité, 
+
+UMR Géographie-cités
+
+---
+
+**Anne BOUHALI**
+
+Université Paris Cité
+
+UMR CESSMA
+
+:::
+
+::: {second-column}
+
+
+**Cheikh BA**
+
+UCAD - Dakar, Sénégal
+
+Institut de Gouvernance territoriale.
+
+---
+
+**Labaly TOURE**
+
+USSEIN – Kaolack, Sénégal
+
+Département de Géomatique
+
+:::
+:::
+
+
+

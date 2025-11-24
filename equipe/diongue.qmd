@@ -1,0 +1,76 @@
+---
+title: "Momar DIONGUE"
+name: "DIONGUE Momar"
+image : img/diongue.jpg
+bibliography: biblio/diongue.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Coordination
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/diongue.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: Université Cheikh Anta Diop (UCAD)
+statut: Professeur de Géographie
+pays: Sénégal
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
+
+::: {#liste}
+
+- Géographie humaine
+- ...
+
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements dispensés
+
+<div>
+
+-   A compléter
+-
+-
+
+</div>
+
+## <i class="bi bi-clipboard-data"></i> Données mobilisées
+
+-   A compléter
+-
+-
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

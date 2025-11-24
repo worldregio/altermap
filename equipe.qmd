@@ -1,0 +1,30 @@
+---
+title: "**Equipe**"
+image : img/participants.jpg
+listing:
+  id: participants
+  fields: [image, name, affiliation, pays]
+  filter-ui: [name, affiliation, pays]
+  contents: equipe
+  sort: "name"
+  sort-ui: [name, affiliation, pays]
+  type: table
+  categories: true
+  image-height: 100px
+  table-hover: true
+  field-links: ["name"]
+  image-placeholder: img/wip.jpg
+  page-size: 50
+  field-display-names:
+    name: "Nom"
+    pays: "Pays"
+    affiliation: "Affiliation(s)"
+about:
+  template: marquee
+  image-width: 40em
+---
+
+Vous trouverez ci-dessous la liste de toutes celles et ceux qui participent ou ont participé d'une manière ou d'une autre au projet Altermap.
+
+::: {#participants}
+:::
