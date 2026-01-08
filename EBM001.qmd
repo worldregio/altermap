@@ -1,0 +1,504 @@
+---
+title: "Enquête EuroBroadMap 2010 "
+subtitle: "Questionnaire et tableaux de données"
+author: "Claude Grasland"
+date: "2025-08-26"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: 
+      light: minty    
+      dark: solar
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: styles.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+```{r}
+library(knitr)
+library(dplyr)
+library(labelled)
+```
+
+
+Les archives du projet EuroBroadMap n'ont pas fait l'objet d'un dépôt en bonne dûe forme à la fin du projet et différentes versions de la base de données corrigée ont circulé avant qu'une version stabilisée ne soit finalement arrêtée tardivement. C'est la raison pour laquelle il est important de repartir de cette dernière version et de la tranformer en un fichier stabilisé une bonne fois pour toutes ... 15 ans après !
+
+
+
+## Le questionnaire 2010
+
+L'enquête avait été réalisée sur format papier sous la forme d'une feuille A3 recto-verso pliée. Chaque enquêteur l'avait ensuite traduit dans la langue de son pays et adapté dans lé détail. Une première phase de test du questionnaire avait permis d'harmoniser au maximum les questions et de s'assurer qu'elles pourraient être posées dans tous les pays dans les mêmes termes.
+
+En dehors des métadonnées enregistrées par l'enquêteur (lieu et date d'enquête, niveau et cursus des étudiants interrogés), toutes les informations ont été recueillies à partir du questionnaire que remplissaient les étudiants d'une même salle de cours. La durée moyenne de réponse était de 15 à 30 minutes.
+
+### Données de cadrage et expérience du monde
+
+La première partie du questionnaire apportait des données de cadrage sur les individus (âge, sexe) mais aussi sur leurs mobilités personnelles et celle de leurs ascendants. On a ainsi pu évaluer l'expérience plus ou moins grande qu'ont les étudiants de l'étranger, des autres pays et des autres langues. Une question portait plus directement sur le niveau d'échelle auquel les étudiants ont le sentiment d'appartenir, du local au global. Mais on verra par la suite que son interprétation s'est avérée difficile. 
+
+
+![EuroBroadmap 2010, partie 1](img/survey1.png){width=800}
+
+
+### Attraction et répulsion
+
+Une manière efficace de mettre à jour les représentations du Monde des étudiants a consisté à leur demander les villes et les pays où ils souhaiteraient vivre ou ne pas vivre dans un futur proche. Ces questions en apparence banales se sont révélées très riches en termes d'interprétation et ont été à l'origine du développement de nombreuses méthodes d'analyse inédites. 
+
+![EuroBroadmap 2010, partie 2](img/survey2a.png){width=600}
+
+![EuroBroadmap 2010, partie 2](img/survey2b.png){width=600}
+
+
+### Découpage du Monde
+
+Cette question centrale du questionnaire devait permettre de découvrir les imaginaires géographiques des étudiants et de repérer en particulier comment ils se situent dans le dcécoupage général du monde qu'ils proposent. Elle a nécessité un lourd travail de post-traitement puisque les réponses étaient initialement données sur un format papier. Il a fallu numriser les polygones et les raccorder à leur étiquette avant de pouvoir démarrer les analyses. **Cette partie de la base est actuellement perdue**  tant sous forme papier que numérique...
+
+![EuroBroadmap 2010, partie 3](img/survey3a.png){width=800}
+
+![EuroBroadmap 2010, partie 3](img/survey3b.png){width=400}
+
+
+
+### Europe dans le Monde
+
+La dernière partie du questionnaire visait à demander aux étudiants de tracer leur limite de l'Europe, qu'ils en soient ou non originaires. Cette analyse a montré des convergences générales mais aussi un certain nombre de divergences dans les tracés, notamment vers l'Est avec des inclusions variables de la Turquie et de la Russie. Quant à la question sur les mots associés à l'Europe, elle s'est révélée passionnante mais a soulevé des difficultés de traduction. Les enquêteurs de chaque pays ont en effet été chargé de traduire en anglais les réponses initiales dans la langue du pays, ce qui a engendrée un certain nombre de biais et une perte d'information qui est irréversible puisqueles questionnaires papiers n'ont pas été conservés. 
+
+![EuroBroadmap 2010, partie 4](img/survey4.png){width=800}
+
+
+
+
+
+
+
+## Données statistiques
+
+IL n'a pas été très simple de retrouver 15 ans après les données statistiques mais nous avons fini par retrouver les dernières versions corrigées de la partie statistique de la base de donnée. Nous procédons ici à leur récupération et à leur mise en forme dans un tableau utilisable dans R
+
+Le fichier de données intitulé *ebm_complete.csv* comporte 9167 lignes et 144 colonnes. Il s'ouvre sans difficultés à l'aide du programme R suivant 
+
+```{r}
+don <-readRDS("data/ebm/survey/ebm2010_V2.RDS")
+kable(head(don), caption =  "Extrait de la base de données")
+```
+
+
+Comme on peut le constater il y a beaucoup plus de variables que dans le questionnaire car plusieurs colonnes ont été ajoutées sous la forme de métadonnées ou de variables déduites des réponses. Rappelons que la saisie a été effectuée par les chercheurs des différents pays à partir des questionnaires papiers qui ont ensuite été transmis au coordinateur français pour scanner les données géométriques. Ce sont les chercheurs responsables des enquêtes dans chaque pays qui ont assuré la traduction des réponses de la langue de leur pays vers l'anglais.
+
+Nous avons toutefois procédé à un recodage des villes pour utiliser les codes geonames, plus généraux que ceux des aéroports qui avaient été retenus en 2010 pour localiser les villes. C'est le fichier *ebm2010_V2* qui sert désormais de référence. Il est fourni au format excel (.xlsx) mais nous préférons l'utiliser au format de sauvegarde interne de R (.RDS) afin de conserver tous les attributs des variables
+
+### Métadonnées
+
+Un fichier de métadonnées *ebm_meta.csv* a été réalisé à la fin du projet, permettant de comprendre le contenu parfois ésotérique des noms de variables et de faire le lien avec le questionnaire. Il constitue une source indispensable pour reprendre l'analuse des résultats et se charge facilement avec le programme suivant.
+
+
+```{r}
+meta <-read.table("data/ebm/survey/ebm_meta.csv", 
+               header=T, 
+               sep=";",
+               quote='"', 
+               stringsAsFactors = F,
+               na.strings = "")
+kable(meta, caption = "Métadonnées")
+```
+
+
+Ce fichier de métadonnées a été intégré dans le label des variables du fichier *ebm2010_V2.RDS*.
+
+
+### Fichier pédagogique
+
+Toutes les variables contenues dans le fichier complet ne sont pas utiles et la taille de celui-ci est à coup sûr trop grande pour des exercices à vocation pédagogique. Nous avons donc produit un tableau plus petit de 22 colonnes qui conserve une partie seulement des variables et leur donne des codes plus simples.
+
+```{r}
+sel <- don %>% select(id= Code, cit=G_City, sta=G_State, stu=G_Study, 
+                    sex=A1_Gender, age=A2_Age, nai=A3_Born_i, nat=A4_Nat1_State, lan=A5_lang1Name,nblan= AX_Nblang, nbmig=AX_nbliv, nbvis = AX_Nbvis,
+                    inc = A10_LevInc_raw, lev = A13_Rank1, rel = A14_Relig, 
+                    rel_name = A14_Relig_Niv1, 
+                    stalik1 = B2_STALIK1_iso, stalik2 = B2_STALIK2_iso, stalik3 = B2_STALIK3_iso,  
+                    staunl1 = B2_STAUNL1_iso, staunl2 = B2_STAUNL2_iso, staunl3 = B2_STAUNL3_iso)
+
+kable(head(sel), caption = "Tableau pédagogique")
+
+saveRDS(sel,"data/ebm/survey/ebm2010_exo.RDS")
+
+```
+
+
+## Géocodage
+
+Les questions relatives au choix de villes et de pays attractifs ou répulsifs ont fait l'objet d'un travail important de post-traitement afin d'éliminer les réponses erronées et coder les localisations des villes citées. Nous reproduisons ici la démarche qui a été suivie pour aboutir à un fichier d'analyse plus facile à manipuler statisttiquement et à cartographier. 
+
+
+### Forme du questionnaire
+
+La partie B du questionnaire se composait en pratique de 4 blocs de questions inter-reliées entre lesquels nous avions introduit volontairement un *effet de halo*, c'es-à-dire assumé le fait que le choix des réponses à une question aurait une influence sur les autres. Il est de ca fait important de bien rappeler la mise en page visuelle du formulaire rempli sur papier par les étudiants : 
+
+
+![Question B du questionnaire EuroBroadMap](img/survey2.png){width=600}
+
+Plusieurs éléments sont à prendre en compte pour constituer un fichier restituant toute la richesse de ce bloc de question :
+
+- **Exclusion du pays dont la personne a la nationalité** : Cette règle qui visait à forcer les étudiants à se projeter en dehors des limites de leur espace national n'a pas toujours été respectée. Il faut donc en principe mettre à part ou éliminer les réponses non conformes aux attentes. Mais en gardant en tête que les étudiants étrangers pouvaient déclarer dans leurs réponses les pays ou villes dans lesquelles ils ont été enquêtés. Ainsi, un étudiant camerounais qui aurait répondu à l'enquête pendant ses études à Paris pouvait déclarer la France ou Paris dans ses réponses. 
+
+- **Double présence des pays dans les réponses** : Les pays apparaissient évidemment directement dans les réponses aux questions où on leur demande ceux où ils voudraient vivre ou ne pas vivre. Mais ils apparaissent aussi indirectement dans le choix des villes où ils ont déclaré vouloir vivre ou ne pas vivre. Dans le premier cas, un pays est cité au plus une fois, soit en positif, soit en négatif. Dans le second cas, unpays peut apparaître plusieurs fois, aussi bien en positif qu'en négatif. Par exemple, un étudiant tunisien peut déclarer qu'il aimerait bien vivre à Marseille ou Montpellier mais pas à Paris ou Bordeaux. 
+
+- **Rang et nombre de réponses** : la mise en page suggère un ordre des réponses qu'il est intéressant de conserver. Il ne s'agit pas nécessairement d'un ordre de préférence ou de rejet. Mais plutôt un ordre chronologique qui révèle d'éventuelles associations d'idées suivies par la personne qui répond aux questions. Il s'agit en tous les cas d'une information intéressante à conserver. Quant au nombre de réponses, il n'est évidemment pas toujours égal au maximum proposé et doit être pris en considération dans les analyses. 
+
+- **Non respect des types de lieux attendus** : l'enquête portait sur les villes et les pays, mais certains étudiants n'ont pas respecté la consigne. Il y a tout d'abord eu des erreurs volontaires ou non de réponse par rapport à ces deux catégories. Ainsi, une ville peut apparaître dans les listes de pays ou l'inverse. Mais il peut aussi arriver, surtout dans le cas des pays, que les étudiants donnent en réponse des espaces infra-nationaux (e.g. Ecosse, Pays de Galles, ...), des espaces suprantionaux (Eurpope, Afrique subsaharienne, ...) , des espaces transnationaux (e.g. Kurdistan) voire des catégories non géographiques (pays riches, pays froids, ...). Le codage des réponses doit permettre de conserver ces cas pourune analyse spéarée et, lorsque cela est possible, de les rattacher aux réponses attendues. 
+
+- **Ambiguïtés** : Il existe enfin des cas où la réponse n'a pau être identifiée ou est ambiguë. 
+
+Toutes ces questions soulèvent des problèmes complexes et imposent de faire des choix. La solution proposée dans le projet EuroBroadMap n'est donc pas la seule possible et il est important de garder la trace des choix effectués sous la forme d'un programme reproductible et modifiable.
+
+
+### Extraction des pays
+
+On commence par construire un nouveau tableau comportant les 10 réponses de chaque étudiant en format vertical. On ajoute une colonne "city" vide.
+
+```{r}
+
+tab<-readRDS("data/ebm/survey/ebm2010_V2.RDS")
+
+#(C.1) State ... like to live
+R1<-data.frame(tab$Code,tab$B2_STALIK1_iso)
+names(R1)<-c("Code","state")
+R1$city<-NA
+R1$name<-tab$B2_STALIK1_eng
+R1$type<-"STA"
+R1$rank<-1
+
+R2<-data.frame(tab$Code,tab$B2_STALIK2_iso)
+names(R2)<-c("Code","state")
+R2$city<-NA
+R2$name<-tab$B2_STALIK2_eng
+R2$type<-"STA"
+R2$rank<-2
+
+R3<-data.frame(tab$Code,tab$B2_STALIK3_iso)
+names(R3)<-c("Code","state")
+R3$city<-NA
+R3$name<-tab$B2_STALIK3_eng
+R3$type<-"STA"
+R3$rank<-3
+
+R4<-data.frame(tab$Code,tab$B2_STALIK4_iso)
+names(R4)<-c("Code","state")
+R4$city<-NA
+R4$name<-tab$B2_STALIK4_eng
+R4$type<-"STA"
+R4$rank<-4
+
+R5<-data.frame(tab$Code,tab$B2_STALIK5_iso)
+names(R5)<-c("Code","state")
+R5$city<-NA
+R5$name<-tab$B2_STALIK5_eng
+R5$type<-"STA"
+R5$rank<-5
+
+stalik<-rbind(R1,R2,R3,R4,R5)
+stalik$opi<-1
+
+# (C.2) State ... not like to live
+
+R1<-data.frame(tab$Code,tab$B2_STAUNL1_iso)
+names(R1)<-c("Code","state")
+R1$city<-NA
+R1$name<-tab$B2_STAUNL1_eng
+R1$type<-"STA"
+R1$rank<-1
+
+R2<-data.frame(tab$Code,tab$B2_STAUNL2_iso)
+names(R2)<-c("Code","state")
+R2$city<-NA
+R2$name<-tab$B2_STAUNL2_eng
+R2$type<-"STA"
+R2$rank<-2
+
+R3<-data.frame(tab$Code,tab$B2_STAUNL3_iso)
+names(R3)<-c("Code","state")
+R3$city<-NA
+R3$name<-tab$B2_STAUNL3_eng
+R3$type<-"STA"
+R3$rank<-3
+
+R4<-data.frame(tab$Code,tab$B2_STAUNL4_iso)
+names(R4)<-c("Code","state")
+R4$city<-NA
+R4$name<-tab$B2_STAUNL4_eng
+R4$type<-"STA"
+R4$rank<-4
+
+R5<-data.frame(tab$Code,tab$B2_STAUNL5_iso)
+names(R5)<-c("Code","state")
+R5$city<-NA
+R5$name<-tab$B2_STAUNL5_eng
+R5$type<-"STA"
+R5$rank<-5
+
+staunl<-rbind(R1,R2,R3,R4,R5)
+staunl$opi<--1
+
+sta <-rbind(stalik, staunl) %>% arrange(Code,type,opi,rank)
+
+```
+
+
+Le tableau passe alors de 9317 lignes (nombre d'étudiants) à 93170 puisqu'il y a dix réponses possibles. A ce stade, on conserve la totalité des réponses même lorsqu'elles sont vides. Prenons deux exemples d'étudiant ayant des réponses plus ou moins complètes
+
+
+```{r}
+ex1 <-sta %>% filter(Code %in% c("FRA-LEH-ART-001", "FRA-LEH-ART-004")) 
+kable(ex1, caption = "Réponse de deux étudiants sur les pays")
+```
+
+- **Commentaire** : Le premier étudiant a fourni deux réponses relatives aux pays où il aimerai vivre (Belgique et Canada) et aucune concernantles pays où il n'aimerai pas vivre. Le second étudiant a fourni 3 réponses concernant les pays où il aimerai vivre, dont une qui ne correspond pas à un pays (Amérique du Nord). Il a indiqué par ailleurs 5 pays où il n'aimerai pas vivre. 
+
+
+### Extraction des villes
+
+On reccommence la même opération pour les dix questions sur les villes mais en remplissant cette fois-ci les deux colonnes relatives à la ville et au pays où elle se trouve.
+
+```{r}
+# (C.3) City ... like to live
+
+R1<-data.frame(tab$Code,tab$B1_CITLIK1_State,tab$B1_CITLIK1_Code,tab$B1_CITLIK1_Name)
+names(R1)<-c("Code","state","city","name")
+R1$type<-"CIT"
+R1$rank<-1
+
+R2<-data.frame(tab$Code,tab$B1_CITLIK2_State,tab$B1_CITLIK2_Code,tab$B1_CITLIK2_Name)
+names(R2)<-c("Code","state","city","name")
+R2$type<-"CIT"
+R2$rank<-2
+
+R3<-data.frame(tab$Code,tab$B1_CITLIK3_State,tab$B1_CITLIK3_Code,tab$B1_CITLIK3_Name)
+names(R3)<-c("Code","state","city","name")
+R3$type<-"CIT"
+R3$rank<-3
+
+R4<-data.frame(tab$Code,tab$B1_CITLIK4_State,tab$B1_CITLIK4_Code,tab$B1_CITLIK4_Name)
+names(R4)<-c("Code","state","city","name")
+R4$type<-"CIT"
+R4$rank<-4
+
+R5<-data.frame(tab$Code,tab$B1_CITLIK5_State,tab$B1_CITLIK5_Code,tab$B1_CITLIK5_Name)
+names(R5)<-c("Code","state","city","name")
+R5$type<-"CIT"
+R5$rank<-5
+
+citlik<-rbind(R1,R2,R3,R4,R5)
+citlik$opi<-1
+
+# (C.4) City ... not like to live
+
+R1<-data.frame(tab$Code,tab$B1_CITUNL1_State,tab$B1_CITUNL1_Code,tab$B1_CITUNL1_Name)
+names(R1)<-c("Code","state","city","name")
+R1$type<-"CIT"
+R1$rank<-1
+
+R2<-data.frame(tab$Code,tab$B1_CITUNL2_State,tab$B1_CITUNL2_Code,tab$B1_CITUNL2_Name)
+names(R2)<-c("Code","state","city","name")
+R2$type<-"CIT"
+R2$rank<-2
+
+R3<-data.frame(tab$Code,tab$B1_CITUNL3_State,tab$B1_CITUNL3_Code,tab$B1_CITUNL3_Name)
+names(R3)<-c("Code","state","city","name")
+R3$type<-"CIT"
+R3$rank<-3
+
+R4<-data.frame(tab$Code,tab$B1_CITUNL4_State,tab$B1_CITUNL4_Code,tab$B1_CITUNL4_Name)
+names(R4)<-c("Code","state","city","name")
+R4$type<-"CIT"
+R4$rank<-4
+
+R5<-data.frame(tab$Code,tab$B1_CITUNL5_State,tab$B1_CITUNL5_Code,tab$B1_CITUNL5_Name)
+names(R5)<-c("Code","state","city","name")
+R5$type<-"CIT"
+R5$rank<-5
+
+citunl<-rbind(R1,R2,R3,R4,R5)
+citunl$opi<-(-1)
+
+cit<-rbind(citlik,citunl) %>% arrange(Code,type,opi,rank)
+```
+
+Reprenons l'exemple des deux étudiants précédents pour voir comment leurs réponses sur les villes apparaissent dans le tableau :
+
+```{r}
+ex1 <-cit %>% filter(Code %in% c("FRA-LEH-ART-001", "FRA-LEH-ART-004")) 
+kable(ex1, caption = "Réponse de deux étudiants sur les villes")
+```
+
+- **Commentaire** : Le premier étudiant n'a fourni aucune réponse sur les villes qu'il considère comme attractives ou répulsives. Le second étduant a indiqué en revanche cinq villes répulsives et quatre villes attractives. Chacune des 9 villes citées a été reconnue et codée, ce qui a permis de remplir la colonne correspondant au pays dans lequel la ville se trouve. On a ici un bon exemple de cas où un pays peut-être cité à la fois positivement et négativement puisque l'étudiant declare qu'il aimerait bien vivre à New-York mais pas à Miami. 
+
+
+### Assemblage 
+
+On rassemble des deux tableaux en un seul et on leur ajoute des métadonnées pour faciliter la sélection ultérieure des étudiants en fonction de leur nombre de réponses aux quatre groupes de questions.
+
+```{r}
+tot <- rbind(sta,cit)
+
+nbstalik <- tot %>% filter(type == "STA", opi==1, is.na(state)==F) %>% 
+  group_by(Code) %>% count() %>% rename(nbstalik=n)
+nbstaunl <- tot %>% filter(type == "STA", opi==-1, is.na(state)==F) %>% 
+  group_by(Code) %>% count() %>% rename(nbstaunl=n)
+nbcitlik <- tot %>% filter(type == "CIT", opi==1, is.na(city)==F) %>% 
+  group_by(Code) %>% count() %>% rename(nbcitlik=n)
+nbcitunl <- tot %>% filter(type == "CIT", opi==-1, is.na(city)==F) %>% 
+  group_by(Code) %>% count() %>% rename(nbcitunl=n)
+
+tot <-tot %>% left_join(nbstalik) %>% left_join(nbstaunl) %>% left_join(nbcitlik) %>% left_join(nbcitunl)
+
+tot$nbstalik[is.na(tot$nbstalik)]<-0
+tot$nbstaunl[is.na(tot$nbstaunl)]<-0
+tot$nbcitlik[is.na(tot$nbcitlik)]<-0
+tot$nbcitunl[is.na(tot$nbcitunl)]<-0
+
+tot$nbsta <-tot$nbstalik+tot$nbstaunl
+tot$nbcit <-tot$nbcitlik+tot$nbcitunl
+
+tot$nbrep <-tot$nbsta+tot$nbcit
+
+tot<-tot %>% arrange(Code,type, opi, rank)
+```
+
+On peut désormais plus facilement extraire des échantillons répondant à certaines caractéristiques en terme de nombre de réponses. Voici un exemple de questionnaire complet où l'étudiant a fourni 20 réponses :
+
+```{r}
+ex1 <-tot %>% filter(Code %in% c("TUR-ERZ-ART-040")) 
+kable(ex1, caption = "Cas d'un étudiant ayant répondu à toutes les questions")
+```
+
+- **Commentaire** : L'étudiant a bien fourni 20 réponses mais on peut voir que, dans le cas des villes, certaines réponses sont codées 0 car elles ne corrrespondent pas à des villes mais à des espaces infranationaux (Palestine, Ecosse) ou supranationaux (Afrique). Nous ne modifions cependant pas le comptage puisque ce qui est mesuré ici est le nombre de réponses et non pas leur caractère conforme ou pas aux attentes. 
+
+
+On sauvegarde le tableau obtenu sous le nom *ebm2010_attrep* au format RDS et au format .csv
+
+```{r, eval=FALSE}
+saveRDS(tot, "data/ebm/survey/ebm2010_attrep.RDS")
+write.table(tot,"data/2010/ebm2010_attrep.csv", sep=";",row.names = F,fileEncoding = "UTF-8")
+```
+
+
+### Géocodage
+
+Les ingénieurs du projet EuroBroadMap ont effectué un important travail de codage des villes et des pays cités, que nous allons récupérer mais aussi légèrement modifier ou compléter. 
+
+#### pays ou assimilés
+
+
+On commence par extraire tous les couples de noms de pays et de codes.
+```{r}
+tot <- readRDS("data/ebm/survey/ebm2010_attrep.RDS")
+loc <- tot %>% filter(type == "STA", is.na(name)==F) %>% group_by(state,name) %>% count() %>% mutate(state=as.character(state), name=as.character(name))
+
+iso <-loc %>% filter(nchar(state)==3) %>% as.data.frame() %>% select(-name)
+```
+
+
+On charge ensuite un fonds de carte de référence comportant des codes iso3 et des clés d'agrégation vers des niveaux supérieurs et on effectue la jointure avec les code EuroBradMpa
+
+```{r}
+library(sf)
+map <-readRDS("data/ebm/geom/wld_all.RDS")
+
+
+cod <- map %>% select(iso3, name,region, continent)
+map <-merge( cod,iso, by.x="iso3",by.y="state",all.x=T,all.y=F) 
+map$n[is.na(map$n)]<-0
+map <- map %>% arrange(-n)
+
+kable(head(st_drop_geometry(map)),caption = "Pays les plus cités")
+
+```
+
+On vérifie le fonds de carte en représentant pour chaque pays le nombre de fois où il a été cité positivement ou négativement :
+
+```{r}
+library(mapsf)
+mf_map(map,type="base", bg="lightblue",col="lightyellow")
+mf_map(map, type = "prop",var="n",col="red", inches = 0.1)
+mf_layout("Nombre de citations des pays dans la base EuroBroadMap", frame=T,
+          credits = "Source : EuroBroadMap", 
+          arrow=F, scale = F)
+```
+
+
+On n'effectue pas ici de recodage des entités infra-nationales et on laisse à l'appréciation des chercheurs le choix - par exemple - de regrouper l'Ecosse ou le pays de Galles avec le Royaume-Uni. Les codes du type X-yyy permettent en effet de retrouver le pays auquel appartient une zone infranationale. 
+
+
+#### Villes ou assimilés
+
+
+On reprend la même procédure :
+
+```{r}
+tot <- readRDS("data/ebm/survey/ebm2010_attrep.RDS")
+loc <- tot %>% filter(type == "CIT", city !=0) %>% 
+                 mutate(name=as.character(name)) %>%
+                 group_by(city,name) %>% count() %>% 
+                 arrange(-n)
+
+kable(head(loc),caption = "Villes les plus cités")
+```
+
+
+On charge ensuite un fonds de carte des pays et celui des villes, en s'assurant qu'ils ont bien la même projection
+
+```{r}
+library(sf)
+sta <-readRDS("data/ebm/geom/ebm_states.RDS")
+cit <- readRDS("data/ebm/geom/ebm_cities.RDS")
+
+cit <-cit %>% left_join(loc) %>% arrange(-n) %>% filter(n >0)
+```
+
+On produit une carte permettant de visualiser les villes les plus citées, que ce soit positivement ou négativement
+
+```{r}
+library(mapsf)
+mf_map(sta,type="base", bg="lightblue",col="lightyellow")
+mf_map(cit, type = "prop",var="n",col="red", inches = 0.1)
+mf_layout("Nombre de citations des villes dans la base EuroBroadMap", frame=T,
+          credits = "Source : EuroBroadMap", 
+          arrow=F, scale = F)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

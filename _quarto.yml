@@ -10,6 +10,12 @@ website:
         text: "En bref"
       - href: equipe.qmd
         text: Equipe
+      - text: Sources & archives
+        menu:
+          - text: Archives EuroBroadMap (2010)
+          - href: EBM001.qmd        
+          - href: SEN.qmd
+          - href: FRA.qmd
       - posts.qmd
     right: 
       - icon: github # add icons as navbar buttons
