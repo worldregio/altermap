@@ -44,29 +44,26 @@ format:
 :::
 :::
 
+- Contact : [denis.chartier@u-paris.fr](mailto:denis.chartier@u-paris.fr)
+
 ## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
 
 ::: {#liste}
 -   à compléter
 -   
--   
+ 
 :::
 
-## <i class="bi bi-person-video3"></i> Enseignements dispensés
+## <i class="bi bi-person-video3"></i> Enseignements liés auprojet
 
 <div>
 
--   Techniques d'enquête qualitatives
--   Entretien semi-directif
--   ...
+-   Techniques d'enquête qualitative (L3)
+-   à compléter
+
 
 </div>
 
-## <i class="bi bi-clipboard-data"></i> Données mobilisées
-
--   à compléter
--   
--   
 
 ## <i class="bi bi-file-earmark-text"></i> Publications
 

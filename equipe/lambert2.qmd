@@ -1,0 +1,71 @@
+---
+title: "Nicolas LAMBERT"
+name: "LAMBERT Nicolas"
+image : img/lambert.jpg
+bibliography: biblio/lambert.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/lambert.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: UAR RIATE, CNRS
+statut: Ingénieur de recherche en science de l'information géographique
+pays: France
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [nicolas.lambert@cnrs.fr](mailto:nicolas.lambert@cnrs.fr)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+-   Cartographie
+-   Geovisualisation
+-   Web
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   Cartographie (L/M)
+-   Géomatique (M)
+-   Webmapping (M)
+
+</div>
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

@@ -1,0 +1,79 @@
+---
+title: "Anastasie MENDY"
+name: "MENDY Anastasie"
+image : img/mendy.jpg
+bibliography: biblio/mendy.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Coordination
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/mendy.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: Université Cheikh Anta Diop (UCAD)
+statut: Professeur de Géographie, Chef de département
+pays: Sénégal
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [anastasie.mendy@ucad.edu.sn](mailto:anastasie.mendy@ucad.edu.sn)
+
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+
+-   Hydrologie, Bassins versant
+-   Environnement
+-   Climatologie
+-   Risques
+
+
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   Hydrologie
+-   Risques
+
+
+
+
+</div>
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

@@ -1,29 +1,30 @@
 [
   {
-    "listing": "/posts.html",
-    "items": [
-      "/posts/2025-11-24-rename-africa/index.html"
-    ]
-  },
-  {
     "listing": "/equipe.html",
     "items": [
       "/equipe/ba.html",
-      "/equipe/bouhali.html",
+      "/equipe/bouhali2.html",
       "/equipe/chartier.html",
-      "/equipe/diallo.html",
+      "/equipe/diallo2.html",
       "/equipe/diongue.html",
-      "/equipe/diouf.html",
-      "/equipe/doron.html",
-      "/equipe/grasland.html",
-      "/equipe/lambert.html",
-      "/equipe/lanne.html",
-      "/equipe/madelin.html",
-      "/equipe/ndao.html",
-      "/equipe/pistre.html",
-      "/equipe/spire.html",
+      "/equipe/diouf2.html",
+      "/equipe/doron2.html",
+      "/equipe/grasland2.html",
+      "/equipe/lambert2.html",
+      "/equipe/lanne2.html",
+      "/equipe/madelin2.html",
+      "/equipe/mendy.html",
+      "/equipe/ndao2.html",
+      "/equipe/pistre2.html",
+      "/equipe/spire2.html",
       "/equipe/timera.html",
-      "/equipe/toure.html"
+      "/equipe/toure2.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/2025-11-24-rename-africa/index.html"
     ]
   }
 ]

@@ -1,0 +1,73 @@
+---
+title: "Adrien DORON"
+name: "DORON Adrien"
+image: img/doron.jpg
+bibliography: biblio/doron.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Enseignant·es
+about:
+  template: marquee
+  image: img/doron.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: UMR Géographie-cités, Université Paris-Cité 
+statut: "Maître de conférence en Géographie"
+pays: France
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [adrien.doron@u-paris.fr](mailto:adrien.doron@u-paris.fr)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+-   circulations, mobilités
+-   ville
+-   commerce, marchés
+-   mondialisation
+-   transnational   
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   Initiation aux techniques d'enquête qualitative (L2)
+-   Structures du monde actuel (L3)  
+-   Méthodes d'observation (M2) 
+
+</div>
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

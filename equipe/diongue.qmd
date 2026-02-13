@@ -45,12 +45,18 @@ format:
 :::
 :::
 
-## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
+- Contact : [momar.diongue@ucad.edu.sn](mailto:momar.diongue@ucad.edu.sn)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
 
 ::: {#liste}
 
-- Géographie humaine
-- ...
+-   Urbain, périurbain
+-   Foncier
+-   Aménagement
+-   Mobilités
+-   Périphéries
+
 
 :::
 
@@ -58,17 +64,15 @@ format:
 
 <div>
 
--   A compléter
--
--
+-   Politique urbaines, aménagement urbain
+-   Foncier
+-   Cartographie
+-   Méthodes mixtes : entretiens, observations
+
+
 
 </div>
 
-## <i class="bi bi-clipboard-data"></i> Données mobilisées
-
--   A compléter
--
--
 
 ## <i class="bi bi-file-earmark-text"></i> Publications
 

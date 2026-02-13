@@ -1,0 +1,76 @@
+---
+title: "Mouhamad Lamine DIALLO"
+name: "DIALLO Mouhamad Lamine"
+image : img/diallo.jpeg
+bibliography: biblio/diallo.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Coordination
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/diallo.jpeg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: Université Cheikh Anta Diop (UCAD) - FASTEF
+statut: Maître de Conférences en Géographie
+pays: Sénégal
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [mouhamadoulamine9.diallo@ucad.edu.sn](mailto:mouhamadoulamine9.diallo@ucad.edu.sn)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+
+-   Ressources
+-   Territoire
+-   Développement
+-   Conflits
+
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   Pratiques pédagogiques
+-   Epistémologie de la géographie
+-   Géographie de la population
+
+</div>
+
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

@@ -1,0 +1,74 @@
+---
+title: "Labaly TOURÉ"
+name: "TOURÉ Labaly"
+image : img/toure.png
+bibliography: biblio/toure.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Coordination
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/toure.png
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: Université du Sine Saloum El-Hâdj Ibrahima Niass
+statut: Enseignant-Chercheur en Géomatique
+pays: Sénégal
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [labaly.toure@ussein.edu.sn](mailto:labaly.toure@ussein.edu.sn)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+-   Geomatique
+-   Foncier
+-   Agriculture
+-   Environnement
+-   Santé
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   SIG
+-   Analyse spatiale
+-   Géomatique
+
+</div>
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

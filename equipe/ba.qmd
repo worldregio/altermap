@@ -43,21 +43,20 @@ format:
 ::: {#pays}
 <i class="bi bi-globe2"></i> {{< meta pays >}}\
 :::
+
 :::
 
-## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
+- Contact : [cheikh25.ba@ucad.edu.sn](mailto:mail: cheikh25.ba@ucad.edu.sn)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
 
 ::: {#liste}
 
-- Géographie humaine
-- Aménagement du territoire
-- Géographie économique
-- Anthropologie politique/Anthropologie du développement
-- Géographie sociale 
+- A compléter
 
 :::
 
-## <i class="bi bi-person-video3"></i> Enseignements dispensés
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
 
 <div>
 
@@ -67,11 +66,6 @@ format:
 
 </div>
 
-## <i class="bi bi-clipboard-data"></i> Données mobilisées
-
--   A compléter
--
--
 
 ## <i class="bi bi-file-earmark-text"></i> Publications
 

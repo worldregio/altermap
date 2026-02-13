@@ -1,143 +1,143 @@
 [
   {
-    "objectID": "equipe/diallo.html",
-    "href": "equipe/diallo.html",
-    "title": "Mouhamad Lamine DIALLO",
+    "objectID": "FRA.html",
+    "href": "FRA.html",
+    "title": "Polarisation - France",
     "section": "",
-    "text": "Maître de Conférences en Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\n Sénégal"
+    "text": "On propose ici un mini-atlas des principaux résultats de l’enquête obtenus dans chacun des pays."
   },
   {
-    "objectID": "equipe/diallo.html#thème-de-recherche",
-    "href": "equipe/diallo.html#thème-de-recherche",
-    "title": "Mouhamad Lamine DIALLO",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nDidactique de la géographie\n…"
+    "objectID": "FRA.html#echantillonage",
+    "href": "FRA.html#echantillonage",
+    "title": "Polarisation - France",
+    "section": "(1) Echantillonage",
+    "text": "(1) Echantillonage\nNous présentons tout d’abord les principales caractéristiques de l’échantillon en termes de lieux, disciplines, âge et sexe.\n\nLieux d’enquête\n\n\n\nVilles ou régions dans lesquelles l’enquête a été réalisée\n\n\n\nn\n%\nval%\n\n\n\n\nLe Havre\n205\n32.7\n32.7\n\n\nLyon\n151\n24.1\n24.1\n\n\nParis\n271\n43.2\n43.2\n\n\nTotal\n627\n100.0\n100.0\n\n\n\n\n\n\n\nDomaines d’études\n\n\n\nRépartition par domaines d’étude\n\n\n\nn\n%\nval%\n\n\n\n\nArt, Lettres, Cinéma\n63\n10.0\n10.0\n\n\nEconomie, Gestion\n83\n13.2\n13.2\n\n\nSciences exactes, Ingénieurs\n106\n16.9\n16.9\n\n\nSanté, Médecine\n147\n23.4\n23.4\n\n\nSciences Politiques, Droit\n85\n13.6\n13.6\n\n\nSciences Humaines et Sociales\n143\n22.8\n22.8\n\n\nTotal\n627\n100.0\n100.0\n\n\n\n\n\n\n\nSexe\n\n\n\nRépartition par sexe\n\n\n\nn\n%\nval%\n\n\n\n\nFemme\n350\n55.8\n56\n\n\nHomme\n275\n43.9\n44\n\n\nNA\n2\n0.3\nNA\n\n\nTotal\n627\n100.0\n100\n\n\n\n\n\n\n\nÂge\n\n\n\nDistribution des âges\n\n\n\nn\n%\nval%\n\n\n\n\n18 ans et -\n13\n2.1\n2.3\n\n\n19 ans\n75\n12.0\n13.0\n\n\n20 ans\n226\n36.0\n39.2\n\n\n21 ans\n137\n21.9\n23.7\n\n\n22 ans\n62\n9.9\n10.7\n\n\n23 ans\n22\n3.5\n3.8\n\n\n24 ans\n16\n2.6\n2.8\n\n\n25 ans et +\n26\n4.1\n4.5\n\n\nNA\n50\n8.0\nNA\n\n\nTotal\n627\n100.0\n100.0"
   },
   {
-    "objectID": "equipe/diallo.html#enseignements-dispensés",
-    "href": "equipe/diallo.html#enseignements-dispensés",
-    "title": "Mouhamad Lamine DIALLO",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nA compléter"
+    "objectID": "FRA.html#pays-attractifs-et-répulsifs",
+    "href": "FRA.html#pays-attractifs-et-répulsifs",
+    "title": "Polarisation - France",
+    "section": "(2) Pays attractifs et répulsifs",
+    "text": "(2) Pays attractifs et répulsifs\n\nSaillance\nQuels pays ont été les plus cités, quelle qu’en soit la raison ?\n\n\n\nFrance : 20 pays les plus cités par les étudiants (Enquête EuroBroadmap 2009)\n\n\n\n\n\n\n\n\n\n\nrang\ncode\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nUSA\nUnited States of America\n607\n400\n65.9\n\n\n2\nGBR\nU.K. of Great Britain and Northern Ireland\n607\n291\n47.9\n\n\n3\nCHN\nChina\n607\n248\n40.9\n\n\n4\nESP\nSpain\n607\n240\n39.5\n\n\n5\nITA\nItaly\n607\n201\n33.1\n\n\n6\nDEU\nGermany\n607\n190\n31.3\n\n\n7\nCAN\nCanada\n607\n179\n29.5\n\n\n8\nJPN\nJapan\n607\n177\n29.2\n\n\n9\nIRQ\nIraq\n607\n168\n27.7\n\n\n10\nRUS\nRussian Federation\n607\n165\n27.2\n\n\n11\nAUS\nAustralia\n607\n157\n25.9\n\n\n12\nAFG\nAfghanistan\n607\n110\n18.1\n\n\n13\nIRN\nIran (Islamic Republic of)\n607\n106\n17.5\n\n\n14\nCHE\nSwitzerland\n607\n85\n14.0\n\n\n16\nIND\nIndia\n607\n78\n12.9\n\n\n16\nSWE\nSweden\n607\n78\n12.9\n\n\n18\nBEL\nBelgium\n607\n70\n11.5\n\n\n18\nIRL\nIreland\n607\n70\n11.5\n\n\n19\nBRA\nBrazil\n607\n62\n10.2\n\n\n20\nISR\nIsrael\n607\n61\n10.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAttraction\nQuels pays ont été les plus cités comme lmieux où les étudiants souhaiteraient vivre dans un future proche ?\n\n\n\nFrance : 20 pays les plus attractifs pour les étudiants (Enquête EuroBroadmap 2009)\n\n\n\n\n\n\n\n\n\n\nrang\ncode\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nUSA\nUnited States of America\n607\n301\n49.6\n\n\n2\nGBR\nU.K. of Great Britain and Northern Ireland\n607\n241\n39.7\n\n\n3\nESP\nSpain\n607\n212\n34.9\n\n\n4\nITA\nItaly\n607\n167\n27.5\n\n\n5\nCAN\nCanada\n607\n165\n27.2\n\n\n6\nAUS\nAustralia\n607\n145\n23.9\n\n\n7\nDEU\nGermany\n607\n114\n18.8\n\n\n8\nJPN\nJapan\n607\n83\n13.7\n\n\n9\nSWE\nSweden\n607\n74\n12.2\n\n\n10\nCHE\nSwitzerland\n607\n58\n9.6\n\n\n11\nIRL\nIreland\n607\n53\n8.7\n\n\n12\nBEL\nBelgium\n607\n43\n7.1\n\n\n12\nARG\nArgentina\n607\n43\n7.1\n\n\n14\nBRA\nBrazil\n607\n35\n5.8\n\n\n14\nNZL\nNew Zealand\n607\n35\n5.8\n\n\n16\nCHN\nChina\n607\n34\n5.6\n\n\n17\nNOR\nNorway\n607\n33\n5.4\n\n\n18\nNLD\nNetherlands\n607\n26\n4.3\n\n\n18\nFIN\nFinland\n607\n26\n4.3\n\n\n20\nMAR\nMorocco\n607\n25\n4.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRépulsion\nQuels pays ont été les plus cités comme lieux où les étudiants ne souhaiteraient pas vivre dans un future proche ?\n\n\n\nFrance : 20 pays les plus répulsifs pour les étudiants (Enquête EuroBroadmap 2009)\n\n\n\n\n\n\n\n\n\n\nrang\ncode\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nCHN\nChina\n607\n214\n35.3\n\n\n2\nIRQ\nIraq\n607\n167\n27.5\n\n\n3\nRUS\nRussian Federation\n607\n147\n24.2\n\n\n4\nAFG\nAfghanistan\n607\n109\n18.0\n\n\n5\nIRN\nIran (Islamic Republic of)\n607\n103\n17.0\n\n\n6\nUSA\nUnited States of America\n607\n99\n16.3\n\n\n7\nJPN\nJapan\n607\n94\n15.5\n\n\n8\nDEU\nGermany\n607\n76\n12.5\n\n\n10\nIND\nIndia\n607\n57\n9.4\n\n\n10\nPRK\nDemocratic People’s Republic of Korea\n607\n57\n9.4\n\n\n11\nISR\nIsrael\n607\n54\n8.9\n\n\n12\nGBR\nU.K. of Great Britain and Northern Ireland\n607\n50\n8.2\n\n\n13\nDZA\nAlgeria\n607\n49\n8.1\n\n\n14\nPAK\nPakistan\n607\n36\n5.9\n\n\n15\nITA\nItaly\n607\n34\n5.6\n\n\n16\nMEX\nMexico\n607\n32\n5.3\n\n\n18\nTUR\nTurkey\n607\n29\n4.8\n\n\n18\nROU\nRomania\n607\n29\n4.8\n\n\n19\nESP\nSpain\n607\n28\n4.6\n\n\n22\nCHE\nSwitzerland\n607\n27\n4.4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthèse"
   },
   {
-    "objectID": "equipe/diallo.html#données-mobilisées",
-    "href": "equipe/diallo.html#données-mobilisées",
-    "title": "Mouhamad Lamine DIALLO",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nA compléter"
+    "objectID": "FRA.html#villes-attractives-et-répulsives",
+    "href": "FRA.html#villes-attractives-et-répulsives",
+    "title": "Polarisation - France",
+    "section": "(3) Villes attractives et répulsives",
+    "text": "(3) Villes attractives et répulsives\n\nSaillance\nQuels villes ont été les plus citées, quelle qu’en soit la raison ?\n\n\n\nFrance : 20 villes les plus citées par les étudiants (Enquête EuroBroadmap 2009)\n\n\nrang\nville\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nNew York City\nUSA\n577\n324\n56.2\n\n\n2\nLondon\nGBR\n577\n322\n55.8\n\n\n3\nBerlin\nDEU\n577\n166\n28.8\n\n\n4\nTokyo\nJPN\n577\n152\n26.3\n\n\n5\nBeijing\nCHN\n577\n139\n24.1\n\n\n6\nBarcelona\nESP\n577\n136\n23.6\n\n\n7\nBaghdad\nIRQ\n577\n134\n23.2\n\n\n8\nRome\nITA\n577\n110\n19.1\n\n\n9\nMoskva\nRUS\n577\n106\n18.4\n\n\n10\nMadrid\nESP\n577\n96\n16.6\n\n\n11\nLos Angeles\nUSA\n577\n92\n15.9\n\n\n12\nKabul\nAFG\n577\n84\n14.6\n\n\n13\nSydney\nAUS\n577\n80\n13.9\n\n\n14\nMontreal\nCAN\n577\n59\n10.2\n\n\n15\nDublin\nIRL\n577\n57\n9.9\n\n\n16\nMexico City\nMEX\n577\n56\n9.7\n\n\n18\nBrussels\nBEL\n577\n48\n8.3\n\n\n18\nSan Francisco\nUSA\n577\n48\n8.3\n\n\n19\nAlgiers\nDZA\n577\n46\n8.0\n\n\n20\nJerusalem\nISR\n577\n41\n7.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAttraction\nQuels villes ont été les plus citées comme lieux où les étudiants souhaiteraient vivre dans un futur proche ?\n\n\n\nFrance : 20 villes les plus attractives pour les étudiants (Enquête EuroBroadmap 2009)\n\n\nrang\nville\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nLondon\nGBR\n577\n267\n46.3\n\n\n2\nNew York City\nUSA\n577\n254\n44.0\n\n\n3\nBarcelona\nESP\n577\n128\n22.2\n\n\n4\nBerlin\nDEU\n577\n101\n17.5\n\n\n5\nRome\nITA\n577\n86\n14.9\n\n\n6\nSydney\nAUS\n577\n73\n12.7\n\n\n7\nMadrid\nESP\n577\n68\n11.8\n\n\n8\nTokyo\nJPN\n577\n64\n11.1\n\n\n9\nLos Angeles\nUSA\n577\n61\n10.6\n\n\n10\nMontreal\nCAN\n577\n58\n10.1\n\n\n11\nSan Francisco\nUSA\n577\n47\n8.1\n\n\n12\nDublin\nIRL\n577\n42\n7.3\n\n\n13\nBuenos Aires\nARG\n577\n35\n6.1\n\n\n14\nBrussels\nBEL\n577\n31\n5.4\n\n\n14\nAmsterdam\nNLD\n577\n31\n5.4\n\n\n16\nMiami\nUSA\n577\n30\n5.2\n\n\n17\nStockholm\nSWE\n577\n29\n5.0\n\n\n18\nToronto\nCAN\n577\n25\n4.3\n\n\n18\nQuebec\nCAN\n577\n25\n4.3\n\n\n20\nFlorence\nITA\n577\n21\n3.6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRépulsion\nQuels villes ont été les plus citées comme lieux où les étudiants ne souhaiteraient pas vivre dans un futur proche ?\n\n\n\nFrance : 20 villes les plus répulsives pour les étudiants (Enquête EuroBroadmap 2009)\n\n\nrang\nville\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nBaghdad\nIRQ\n577\n133\n23.1\n\n\n2\nBeijing\nCHN\n577\n130\n22.5\n\n\n3\nMoskva\nRUS\n577\n98\n17.0\n\n\n4\nTokyo\nJPN\n577\n88\n15.3\n\n\n5\nKabul\nAFG\n577\n84\n14.6\n\n\n6\nNew York City\nUSA\n577\n70\n12.1\n\n\n7\nBerlin\nDEU\n577\n65\n11.3\n\n\n8\nLondon\nGBR\n577\n55\n9.5\n\n\n9\nMexico City\nMEX\n577\n49\n8.5\n\n\n10\nAlgiers\nDZA\n577\n45\n7.8\n\n\n11\nTehran\nIRN\n577\n37\n6.4\n\n\n12\nJerusalem\nISR\n577\n34\n5.9\n\n\n13\nLos Angeles\nUSA\n577\n31\n5.4\n\n\n14\nMadrid\nESP\n577\n28\n4.9\n\n\n16\nRome\nITA\n577\n24\n4.2\n\n\n16\nHong Kong\nHKG\n577\n24\n4.2\n\n\n16\nShanghai\nCHN\n577\n24\n4.2\n\n\n18\nMumbai\nIND\n577\n22\n3.8\n\n\n19\nDubai\nARE\n577\n19\n3.3\n\n\n20\nNew Delhi\nIND\n577\n18\n3.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthèse"
   },
   {
-    "objectID": "equipe/diallo.html#publications",
-    "href": "equipe/diallo.html#publications",
-    "title": "Mouhamad Lamine DIALLO",
-    "section": " Publications",
-    "text": "Publications\n\n\nCoderre M, Diallo ML, Diawara A, Campbell B. 2019. La vision minière pour l’afrique et les transformations des cadres règlementaires miniers: Les expériences du mali et du sénégal. Canadian Journal of Development Studies/Revue canadienne d’études du développement 40: 464–481\n\n\nDiallo ML. 2009. Mine d’or et développement durable. Quelques réflexions sur le site de sabodala (sénégal oriental). EchoGéo\n\n\nDiallo ML. 2017. Le sénégal des mines: Les territoires de l’or et du phosphate\n\n\nNdaw N, Diallo M, Niang S, Sy B. 2020. Dynamiques territoriales des niayes: Divergences économiques entre industrie extractive minière et agriculture (littoral nord du sénégal). European Scientific Journal 16: 152–171"
-  },
-  {
-    "objectID": "equipe/grasland.html",
-    "href": "equipe/grasland.html",
-    "title": "Claude GRASLAND",
+    "objectID": "equipe/spire2.html",
+    "href": "equipe/spire2.html",
+    "title": "Amandine SPIRE",
     "section": "",
-    "text": "Professeur des universités en Géographie\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\n France"
+    "text": "Maître de conférences en Géographie\n\n\nUMR CESSMA, Université Paris-Cité\n\n\n France"
   },
   {
-    "objectID": "equipe/grasland.html#thème-de-recherche",
-    "href": "equipe/grasland.html#thème-de-recherche",
-    "title": "Claude GRASLAND",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nModélisation des flux de presse à l’échelle mondiale\nAnalyse des représentations des territoires à l’aide d’enquêtes\nGéopolitique de l’Europe dans le Monde"
+    "objectID": "equipe/spire2.html#thèmes-de-recherche",
+    "href": "equipe/spire2.html#thèmes-de-recherche",
+    "title": "Amandine SPIRE",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\ncitadinité\nmigration\nmarge, décentrement\nécriture, expérience, film,\nrecherche-action\nAfrique"
   },
   {
-    "objectID": "equipe/grasland.html#enseignements-dispensés",
-    "href": "equipe/grasland.html#enseignements-dispensés",
-    "title": "Claude GRASLAND",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nStatistique univariée et bivariée\nAnalyse spatiale des phénomènes sociaux\nModélisation statistique et analyse multivariée\nStatistique, cartographie et analyse spatiale avec R"
+    "objectID": "equipe/spire2.html#enseignements-liés-au-projet",
+    "href": "equipe/spire2.html#enseignements-liés-au-projet",
+    "title": "Amandine SPIRE",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nMobilités, migrations (L2)\nEnjeux migratoires (M2)\nLe développement en question (L3)"
   },
   {
-    "objectID": "equipe/grasland.html#données-mobilisées",
-    "href": "equipe/grasland.html#données-mobilisées",
-    "title": "Claude GRASLAND",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nRecensements au niveau agrégé ou individuel\nEnquêtes individuelles\nDonnées web (flux RSS, twitter…)\nDonnées internationales ou mondiales (e.g. Eurostat, Banque Mondiale)"
-  },
-  {
-    "objectID": "equipe/grasland.html#publications",
-    "href": "equipe/grasland.html#publications",
-    "title": "Claude GRASLAND",
+    "objectID": "equipe/spire2.html#publications",
+    "href": "equipe/spire2.html#publications",
+    "title": "Amandine SPIRE",
     "section": " Publications",
-    "text": "Publications\n\n\nBennasr A, Baron M, Ruffray S de, Grasland C, Guérin-Pace F. 2015. Dilemmes de la réforme régionale tunisienne. Analyse spatiale et territoriale des propositions de réorganisation du maillage administratif. Revue d’Économie Régionale & Urbaine Décembre: 853–882 DOI: 10.3917/reru.155.0853\n\n\nBopda A, Grasland C, Poulain M. 2000. Évaluation comparative de l’influence des limites linguistiques sur les comportements migratoires : Applications au cas de la Belgique, du Cameroun et de Tchecoslovaquie. In Actes Du Colloque International de La Rochelle, 22-26 Novembre 1998 « Régimes Démographiques Et Territoires : Les Frontières En Question »107–124.\n\n\nDidelon C, Grasland C, Richard Y. 2008. Atlas de l’Europe dans le monde. Reclus CNRS GDRE S4 La Documentation française: Montpellier Paris.\n\n\nGrasland C, Hamez G. 2005. Vers la construction d’un indicateur de cohésion territoriale européen ? L’Espace géographique 34: 97–116 DOI: 10.3917/eg.342.0097\n\n\nLangar A, Baron M, Grasland C. 2018. Les territoires du football en Tunisie (1906-2015). EchoGéo DOI: 10.4000/echogeo.16209"
+    "text": "Publications\n\n\nAmandine S. 2011. L’étranger et la ville en afrique de l’ouest. Karthala Editions.\n\n\nAragau C, Bridonneau M, Jourdam-Boutin M, Spire A. 2024. Temporalités des expériences de recherche: Enjeux de construction et de transmission des savoirs géographiques. Carnets de géographes\n\n\nLeroy D, Spire A. 2024. Une restitution sans écrit. Attentes et tensions au terme d’une recherche-action. Journal des anthropologues 178179: 27–41\n\n\nSpire A, Beier R. 2024. Rester citadin malgré tout. Penser les citadinités à travers l’expérience des réinstallations urbaines, à partir de deux villes africaines. In Annales de géographieArmand Colin; 75–98.\n\n\nSpire A, Lanne J-B, Kouakou L, Dominguez S. 2024. Urban modernization through the minibus window in yopougon (abidjan): The impacts of new infrastructure on urban life. Flux 135136: 103–118"
   },
   {
-    "objectID": "equipe/lambert.html",
-    "href": "equipe/lambert.html",
-    "title": "Nicolas LAMBERT",
+    "objectID": "equipe/diongue.html",
+    "href": "equipe/diongue.html",
+    "title": "Momar DIONGUE",
     "section": "",
-    "text": "Ingénieur de recherche en science de l’information géographique\n\n\nUAR RIATE, CNRS\n\n\n France"
+    "text": "Professeur de Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\n Sénégal"
   },
   {
-    "objectID": "equipe/lambert.html#thème-de-recherche",
-    "href": "equipe/lambert.html#thème-de-recherche",
-    "title": "Nicolas LAMBERT",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nRecherches méthodologiques sur les méthodes de représentation de données spatiales, notamment sur le web, à travers des processus traçables et reproductibles (langages informatiques : R, Javascript [Observable/d3js])"
+    "objectID": "equipe/diongue.html#thèmes-de-recherche",
+    "href": "equipe/diongue.html#thèmes-de-recherche",
+    "title": "Momar DIONGUE",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nUrbain, périurbain\nFoncier\nAménagement\nMobilités\nPériphéries"
   },
   {
-    "objectID": "equipe/lambert.html#enseignements-dispensés",
-    "href": "equipe/lambert.html#enseignements-dispensés",
-    "title": "Nicolas LAMBERT",
+    "objectID": "equipe/diongue.html#enseignements-dispensés",
+    "href": "equipe/diongue.html#enseignements-dispensés",
+    "title": "Momar DIONGUE",
     "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nCartographie\nDes cartes : pourquoi ? comment ?\nUtilisation de R : cartes de flux, anamorphoses, package Xarigan"
+    "text": "Enseignements dispensés\n\n\nPolitique urbaines, aménagement urbain\nFoncier\nCartographie\nMéthodes mixtes : entretiens, observations"
   },
   {
-    "objectID": "equipe/lambert.html#données-mobilisées",
-    "href": "equipe/lambert.html#données-mobilisées",
-    "title": "Nicolas LAMBERT",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nEssentiellement des données publiques, open source (e.g. OpenStreetMap)"
-  },
-  {
-    "objectID": "equipe/lambert.html#publications",
-    "href": "equipe/lambert.html#publications",
-    "title": "Nicolas LAMBERT",
+    "objectID": "equipe/diongue.html#publications",
+    "href": "equipe/diongue.html#publications",
+    "title": "Momar DIONGUE",
     "section": " Publications",
-    "text": "Publications\n\n\nBahoken F, Lambert N. 2020. Méfiez-vous des cartes, pas des migrants ! antiAtlas Journal Available at: https://shs.hal.science/halshs-02937095 [Accessed January 16, 2023]\n\n\nBahoken F, Jégou L, Lagarde D, Lambert N. 2020. La séduction des cartes du geoweb. Le cas des flux de migrants internationaux. Cybergeo: European Journal of Geography DOI: 10.4000/cybergeo.33792\n\n\nGiraud T, Lambert N. 2019. Reproducible Workflow for Cartography - Migrants Deaths in the Mediterranean. Proceedings of the ICA 2: NA Available at: https://link.gale.com/apps/doc/A616974458/AONE?u=anon~df1b8fb9&sid=googleScholar&xid=352bef90 [Accessed January 16, 2023]\n\n\nLambert N, Zanin C. 2016. Manuel de cartographie: Principes, méthodes, applications. Armand Colin: Paris.\n\n\nLambert N, Zanin C. 2019. Mad maps: L’atlas qui va changer votre vision du monde. Armand Colin: Malakoff."
+    "text": "Publications\n\n\nDiongue M. 2010. Périurbanisation différentielle: Mutations et reorganisation de l’espace à l’est de la région dakaroise (diamniadio, sangalkam et yene), sénégal. Carnets de géographes\n\n\nDiongue M. 2014. Périphérie urbaine et risques d’inondation à dakar (sénégal): Le cas de yeumbeul nord. Eso Travaux et documents, Résumés des Travaux 37: 45–54\n\n\nLesteven G, Pochet P, Parvex A, Diongue M. 2025. Mobility resilience to climate change: People’s adaptation of daily travel and road infrastructure to recurrent flooding in dakar, senegal. Built Environment 51: 406–420\n\n\nTimera MB, Diongue M, Sakho P, Diagne A, Niang-Diène A. 2018. Champ épistémique des travaux des géographes paul pélissier et cheikh ba: Entre complémentarités, recoupements et débordements disciplinaires. Cahiers de géographie du Québec 62: 169–189\n\n\nTimera MB, Diongue M, Thiam O. 2019. L’élection présidentielle de février 2019 au sénégal. Entre renouveau de l’échiquier politique et percée du vote régionaliste. EchoGéo"
   },
   {
-    "objectID": "equipe/madelin.html",
-    "href": "equipe/madelin.html",
-    "title": "Malika MADELIN",
+    "objectID": "equipe/doron2.html",
+    "href": "equipe/doron2.html",
+    "title": "Adrien DORON",
     "section": "",
-    "text": "Maîtresse de conférences en Géographie\n\n\nUMR PRODIG, Université Paris-Cité\n\n\n France"
+    "text": "Maître de conférence en Géographie\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\n France"
   },
   {
-    "objectID": "equipe/madelin.html#thème-de-recherche",
-    "href": "equipe/madelin.html#thème-de-recherche",
-    "title": "Malika MADELIN",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nSciences participatives en environnement (pollution de l’air et plateforme de visualisation [AirCitizen])\nVariabilité spatio-temporelledes températures, à partir de données crowdsourcées, de données satellitaires et de mesures de terrain [ANR H2C]\nEffets du changement urbain sur lesexpositions environnementales, les comportements liés à la santé et la santé autodéclarée [ANR FabHealth]\nDiffusion spatio-temporelle des locations saisonnières touristiques en banlieue parisienne [ANR Wisdhom]"
+    "objectID": "equipe/doron2.html#thèmes-de-recherche",
+    "href": "equipe/doron2.html#thèmes-de-recherche",
+    "title": "Adrien DORON",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\ncirculations, mobilités\nville\ncommerce, marchés\nmondialisation\ntransnational"
   },
   {
-    "objectID": "equipe/madelin.html#enseignements-dispensés",
-    "href": "equipe/madelin.html#enseignements-dispensés",
-    "title": "Malika MADELIN",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nGéomatique et systèmes d’information géographique, sous QGIS et R\nWepmapping avec plusieurs solutions/logiciels/librairies\nAnalyse spatiale : atelier pratique et approfondissement sur l’interpolation. des données, R\nStatistiques : applications en environnement, R"
+    "objectID": "equipe/doron2.html#enseignements-liés-au-projet",
+    "href": "equipe/doron2.html#enseignements-liés-au-projet",
+    "title": "Adrien DORON",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nInitiation aux techniques d’enquête qualitative (L2)\nStructures du monde actuel (L3)\n\nMéthodes d’observation (M2)"
   },
   {
-    "objectID": "equipe/madelin.html#données-mobilisées",
-    "href": "equipe/madelin.html#données-mobilisées",
-    "title": "Malika MADELIN",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nDonnées spatiotemporelles\nDonnées « de référence » et « émergentes » (données de plates-formes web de services, données contributives)\nDonnées raster (satellitaires et de modèle)\nDonnées vectorielles\nDonnées GPS"
-  },
-  {
-    "objectID": "equipe/madelin.html#publications",
-    "href": "equipe/madelin.html#publications",
-    "title": "Malika MADELIN",
+    "objectID": "equipe/doron2.html#publications",
+    "href": "equipe/doron2.html#publications",
+    "title": "Adrien DORON",
     "section": " Publications",
-    "text": "Publications\n\n\nBigot S, Duché S, Madelin M, Rome S. 2017. Étude Du Climat Urbain : Pour Une Mise à Disposition De Nouveaux Services Climatiques. Bulletin de la Société Géographique de Liège 68: 13–36\n\n\nDahech S, Charfi S, Madelin M. 2020. Représentativité des températures mesurées dans la station météorologique Paris-Montsouris. Climatologie 17: 5 DOI: 10.1051/climat/202017005\n\n\nMadelin M, Dupuis V. 2020. Intensité et spatialisation de l’îlot de chaleur urbain parisien à partir de données participatives. Climatologie 17: 9 DOI: 10.1051/climat/202017009\n\n\nPecout H, Grasland C, Guérois M, Goix RL, Madelin M, Nussbaum F, Valette J-F. 2019. Informations territoriales locales et analyse comparative des dynamiques métropolitaines. Le projet Grandes métropoles., Cailly L, Lafarge R, Ruas A, Saez G (eds).Karthala; 363. Available at: https://hal.science/hal-01353618 [Accessed January 16, 2023]\n\n\nRenan LR, Rességuier L, Corpetti T, Jégou N, Madelin M, Leeuwen C van, Quénol H. 2017. Comparison of two fine scale spatial models for mapping temperatures inside winegrowing areas. Agricultural and Forest Meteorology 247: 159–169 DOI: 10.1016/j.agrformet.2017.07.020"
+    "text": "Publications\n\n\nBouhali A, Doron A, Racaud S. 2023. Circulations marchandes et mondialisation des pauvres: Transformations sociales et spatiales vues des suds. Suds 287: 5–20\n\n\nDoron A. 2015. De la marge au monde: La structuration mouvementée d’une place marchande transnationale à ben gardane (tunisie). Les Cahiers d’EMAM. Études sur le Monde arabe et la Méditerranée\n\n\nDoron A. 2017. Devenir importateur transnational en tunisie: Articulations entre mobilités et relations sociales. Espace populations sociétés. Space populations societies\n\n\nDoron A. 2018. Routes tunisiennes de l’échange marchand: Géographie post-révolution d’un réseau de marchés mondialisés.PhD thesis, Université Toulouse le Mirail-Toulouse II.\n\n\nDoron A. 2022. Ben gardane (tunisie): Une place financière de la mondialisation des pauvres. Afrique (s) en mouvement 4: 44–56"
+  },
+  {
+    "objectID": "equipe/toure2.html",
+    "href": "equipe/toure2.html",
+    "title": "Labaly TOURÉ",
+    "section": "",
+    "text": "Enseignant-Chercheur en Géomatique\n\n\nUniversité du Sine Saloum El-Hâdj Ibrahima Niass\n\n\n Sénégal"
+  },
+  {
+    "objectID": "equipe/toure2.html#thèmes-de-recherche",
+    "href": "equipe/toure2.html#thèmes-de-recherche",
+    "title": "Labaly TOURÉ",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nGeomatique\nFoncier\nAgriculture\nEnvironnement\nSanté"
+  },
+  {
+    "objectID": "equipe/toure2.html#enseignements-liés-au-projet",
+    "href": "equipe/toure2.html#enseignements-liés-au-projet",
+    "title": "Labaly TOURÉ",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nSIG\nAnalyse spatiale\nGéomatique"
+  },
+  {
+    "objectID": "equipe/toure2.html#publications",
+    "href": "equipe/toure2.html#publications",
+    "title": "Labaly TOURÉ",
+    "section": " Publications",
+    "text": "Publications\n\n\nBégué A, Leroux L, Soumaré M, Faure J-F, Diouf AA, Augusseau X, Touré L, Tonneau J-P. 2020. Remote Sensing Products and Services in Support of Agricultural Public Policies in Africa: Overview and Challenges. Frontiers in Sustainable Food Systems 4 Available at: https://www.frontiersin.org/articles/10.3389/fsufs.2020.00058 [Accessed January 23, 2023]\n\n\nBourgoin J, Corniaux C, Touré L, Cesaro J-D. 2019. Atlas des dynamiques observées dans le bassin de collecte de la Laiterie du Berger.\n\n\nSow M, Touré L, Sow EH. 2025. Estimation du carbone de la mangrove de la réserve de biosphère du delta du saloum (RBDS) à partir des données d’observation de la terre. Revue de Géographie Tropicale et d’Environnement 2025: 27–44\n\n\nTouré L. 2025. Suivi spatio-temporel de la turbidité des eaux du lac de guiers (sénégal) par télédétection optique : Apport des indices TSM et TSS dérivés des images sentinel-2. Dalogeo\n\n\nTouré L, Njeugbeut Bbiafeu C, Youan Ta M, Sow M, Bonnet E. 2025. Vulnérabilité urbaine face aux inondations en afrique de l’ouest: Cartographie des enjeux et évaluation des dommages à abidjan (côte d’ivoire) et saint-louis (sénégal). International Journal of Humanities and Social Science Invention (IJHSSI) 14: 50–61"
   },
   {
     "objectID": "equipe/ba.html",
@@ -147,25 +147,18 @@
     "text": "Maître de conférence en Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD) - Institut de la gouvernance territoriale\n\n\n Sénégal"
   },
   {
-    "objectID": "equipe/ba.html#thème-de-recherche",
-    "href": "equipe/ba.html#thème-de-recherche",
+    "objectID": "equipe/ba.html#thèmes-de-recherche",
+    "href": "equipe/ba.html#thèmes-de-recherche",
     "title": "Cheikh Abdoul Ahad Mbacké BA",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nGéographie humaine\nAménagement du territoire\nGéographie économique\nAnthropologie politique/Anthropologie du développement\nGéographie sociale"
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nA compléter"
   },
   {
-    "objectID": "equipe/ba.html#enseignements-dispensés",
-    "href": "equipe/ba.html#enseignements-dispensés",
+    "objectID": "equipe/ba.html#enseignements-liés-au-projet",
+    "href": "equipe/ba.html#enseignements-liés-au-projet",
     "title": "Cheikh Abdoul Ahad Mbacké BA",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nA compléter"
-  },
-  {
-    "objectID": "equipe/ba.html#données-mobilisées",
-    "href": "equipe/ba.html#données-mobilisées",
-    "title": "Cheikh Abdoul Ahad Mbacké BA",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nA compléter"
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nA compléter"
   },
   {
     "objectID": "equipe/ba.html#publications",
@@ -189,18 +182,11 @@
     "text": "Thème de recherche\n\n\nà compléter"
   },
   {
-    "objectID": "equipe/chartier.html#enseignements-dispensés",
-    "href": "equipe/chartier.html#enseignements-dispensés",
+    "objectID": "equipe/chartier.html#enseignements-liés-auprojet",
+    "href": "equipe/chartier.html#enseignements-liés-auprojet",
     "title": "Denis CHARTIER",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nTechniques d’enquête qualitatives\nEntretien semi-directif\n…"
-  },
-  {
-    "objectID": "equipe/chartier.html#données-mobilisées",
-    "href": "equipe/chartier.html#données-mobilisées",
-    "title": "Denis CHARTIER",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nà compléter"
+    "section": " Enseignements liés auprojet",
+    "text": "Enseignements liés auprojet\n\n\nTechniques d’enquête qualitative (L3)\nà compléter"
   },
   {
     "objectID": "equipe/chartier.html#publications",
@@ -210,81 +196,116 @@
     "text": "Publications\n\n\nChartier D. 2005. ONG internationales environnementalistes et politiques forestières tropicales: L’exemple de greenpeace en amazonie. Anthropologie et sociétés 29: 103–120\n\n\nChartier D. 2020. ONG. Dictionnaire critique de l’Anthropocène\n\n\nChartier D, Rodary E. 2007. Géographie de l’environnement, écologie politique et cosmopolitiques. L’Espace Politique. Revue en ligne de géographie politique et de géopolitique\n\n\nChartier D, Rodary E. 2016. Manifeste pour une géographie environnementale. Géographie, écologie et politique. Sciences Po (Les Presses de)."
   },
   {
-    "objectID": "equipe/ndao.html",
-    "href": "equipe/ndao.html",
+    "objectID": "equipe/ndao2.html",
+    "href": "equipe/ndao2.html",
     "title": "Aliou NDAO",
     "section": "",
     "text": "Maître de Conférence en Géographie\n\n\nUniversité Gaston Berger (UGB) - Laboratoire Leïdi\n\n\n Sénégal"
   },
   {
-    "objectID": "equipe/ndao.html#thème-de-recherche",
-    "href": "equipe/ndao.html#thème-de-recherche",
+    "objectID": "equipe/ndao2.html#thèmes-de-recherche",
+    "href": "equipe/ndao2.html#thèmes-de-recherche",
     "title": "Aliou NDAO",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nGéographie humaine\n…"
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nMutation des campagnes\nNouvelle économie rurale\nMobilités, transports, vie de relations\nBassin arachidier\nSénégal"
   },
   {
-    "objectID": "equipe/ndao.html#enseignements-dispensés",
-    "href": "equipe/ndao.html#enseignements-dispensés",
+    "objectID": "equipe/ndao2.html#enseignements-liés-au-projet",
+    "href": "equipe/ndao2.html#enseignements-liés-au-projet",
     "title": "Aliou NDAO",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nA compléter"
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nTechniques d’investigation\nRelations ville-campagne"
   },
   {
-    "objectID": "equipe/ndao.html#données-mobilisées",
-    "href": "equipe/ndao.html#données-mobilisées",
-    "title": "Aliou NDAO",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nA compléter"
-  },
-  {
-    "objectID": "equipe/ndao.html#publications",
-    "href": "equipe/ndao.html#publications",
+    "objectID": "equipe/ndao2.html#publications",
+    "href": "equipe/ndao2.html#publications",
     "title": "Aliou NDAO",
     "section": " Publications",
-    "text": "Publications\n\n\nNdao A, Lombard J. 2020. L’avenir du transport urbain au sénégal passe-t-il par les motos-taxis. The Conversation\n\n\nNdao A, Gaye D, Ndiaye M. 2021. Dynamique économique dans le bassin arachidier: Entre résilience et vulnérabilité. Espace Géographique et Société Marocaine\n\n\nThiandoum M, Casse LO, Ndao A. 2024. Le jeu des acteurs au tour de l’arboriculture dans le péri urbain safene (région de thiès-sénégal). Revue de géographie du laboratoire Leı̈di: Dynamique des territoires et développement: 44–60"
+    "text": "Publications\n\n\nNdao A. 2024. Le bassin arachidier sénégalais ; une autre trajectoire économique est-elle possible ? Revue environnement et dynamique des sociétés: 17–34\n\n\nNdao A, Lombard J. 2020. L’avenir du transport urbain au sénégal passe-t-il par les motos-taxis. The Conversation\n\n\nNdao A, Gaye D, Ndiaye M. 2021. Dynamique économique dans le bassin arachidier: Entre résilience et vulnérabilité. Espace Géographique et Société Marocaine\n\n\nNdao A, Lombard J, Sakho P. 2025. Les chauffeurs n’ont pas de frontières. Transport et mobilités commerciales dans les périphéries méridionales du sénégal. Espace populations sociétés. Space populations societies\n\n\nThiandoum M, Casse LO, Ndao A. 2024. Le jeu des acteurs au tour de l’arboriculture dans le péri urbain safene (région de thiès-sénégal). Revue de géographie du laboratoire Leı̈di: Dynamique des territoires et développement: 44–60"
   },
   {
-    "objectID": "equipe/toure.html",
-    "href": "equipe/toure.html",
-    "title": "Labaly TOURÉ",
+    "objectID": "equipe/diallo2.html",
+    "href": "equipe/diallo2.html",
+    "title": "Mouhamad Lamine DIALLO",
     "section": "",
-    "text": "Enseignant-Chercheur en Géomatique\n\n\nUniversité du Sine Saloum El-Hâdj Ibrahima Niass\n\n\n Sénégal"
+    "text": "Maître de Conférences en Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\n Sénégal"
   },
   {
-    "objectID": "equipe/toure.html#thème-de-recherche",
-    "href": "equipe/toure.html#thème-de-recherche",
-    "title": "Labaly TOURÉ",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nDynamique spatiotemporelle des ressources naturelles en moyenne Casamance\nOutils de gestion foncière\nCartographie des structures de santé au Sénégal\nDynamiques territoriale"
+    "objectID": "equipe/diallo2.html#thèmes-de-recherche",
+    "href": "equipe/diallo2.html#thèmes-de-recherche",
+    "title": "Mouhamad Lamine DIALLO",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nRessources\nTerritoire\nDéveloppement\nConflits"
   },
   {
-    "objectID": "equipe/toure.html#enseignements-dispensés",
-    "href": "equipe/toure.html#enseignements-dispensés",
-    "title": "Labaly TOURÉ",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nSIG, y compris sur QGIS\nAnalyse spatiale\nCartographie thématique\nWebmapping\nOutils de collecte de données\nTraitement des données satellitaires\nSémiologie graphique"
+    "objectID": "equipe/diallo2.html#enseignements-liés-au-projet",
+    "href": "equipe/diallo2.html#enseignements-liés-au-projet",
+    "title": "Mouhamad Lamine DIALLO",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nPratiques pédagogiques\nEpistémologie de la géographie\nGéographie de la population"
   },
   {
-    "objectID": "equipe/toure.html#données-mobilisées",
-    "href": "equipe/toure.html#données-mobilisées",
-    "title": "Labaly TOURÉ",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nDonnées GPS\nImages satellites\nEnquêtes"
-  },
-  {
-    "objectID": "equipe/toure.html#publications",
-    "href": "equipe/toure.html#publications",
-    "title": "Labaly TOURÉ",
+    "objectID": "equipe/diallo2.html#publications",
+    "href": "equipe/diallo2.html#publications",
+    "title": "Mouhamad Lamine DIALLO",
     "section": " Publications",
-    "text": "Publications\n\n\nBégué A, Leroux L, Soumaré M, Faure J-F, Diouf AA, Augusseau X, Touré L, Tonneau J-P. 2020. Remote Sensing Products and Services in Support of Agricultural Public Policies in Africa: Overview and Challenges. Frontiers in Sustainable Food Systems 4 Available at: https://www.frontiersin.org/articles/10.3389/fsufs.2020.00058 [Accessed January 23, 2023]\n\n\nBourgoin J, Corniaux C, Touré L, Cesaro J-D. 2019. Atlas des dynamiques observées dans le bassin de collecte de la Laiterie du Berger.\n\n\nCormier-Salem M-C, Touré L, Fabre M, Bouaita Y, Ba Mamadou El Abass B, Habert É. 2016. SIRENA, une plateforme participative au service de la gouvernance du delta transfrontalier du fleuve Sénégal. Revue d’ethnoécologie DOI: 10.4000/ethnoecologie.2653\n\n\nTouré L, Sy BA, Cormier M-C. Degradation of Forest and Agricultural Resources and Adaptation Strategies in Middle Casamance\n\n\nTouré L, Sy BA, Wade S. 2015. Étude par télédétection de la dégradation des ressources naturelles et stratégies de gestion dans la région de Sédhiou, Moyenne Casamance au Sénégal"
+    "text": "Publications\n\n\nDiallo ML. 2017. L’industrie du phosphate de taı̈ba au sénégal: Front minier et tensions locales. VertigO-la revue électronique en sciences de l’environnement\n\n\nDiallo ML, Magrin G. 2015. L’enfer est pavé de bonnes intentions: La régulation environnementale et sociale de l’or au sénégal oriental. Ressources mondialisées. Essais de géographie politique: p–305\n\n\nDiallo ML, Arnaud-Fassetta G, Magrin G, et al. 2024. Gold mining, discourses, and threats: What is really damaging the fluvial hydrosystem of the faleme river? Journal of Political Ecology 32: 869\n\n\nEl Hadji Serigne T, Diallo ML. 2025. Dynamique récente de l’orpaillage entre le mali et le sénégal: Les facteurs du regain de l’activité et les relations entre les mines et la rivière falémé. Revue Internationale de la Recherche Scientifique (Revue-IRS) 3: 4231–4242\n\n\nNdaw N, Diallo M, Niang S, Sy B. 2020. Dynamiques territoriales des niayes: Divergences économiques entre industrie extractive minière et agriculture (littoral nord du sénégal). European Scientific Journal 16: 152–171"
   },
   {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Faut-il renommer l’Afrique?\n\n\n\nAfrique\n\nContinent\n\nBibliographie\n\n\n\nDeux philosophes africains proposent de remplacer Afrique par Anaesia\n\n\n\n\n\nNov 24, 2025\n\n\nClaude Grasland\n\n\n\n\n\nNo matching items"
+    "objectID": "axe3.html#expériences",
+    "href": "axe3.html#expériences",
+    "title": "3. La perception du changement climatique et des vulnérabilités",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe3.html#résultats",
+    "href": "axe3.html#résultats",
+    "title": "3. La perception du changement climatique et des vulnérabilités",
+    "section": "Résultats",
+    "text": "Résultats"
+  },
+  {
+    "objectID": "axe2.html#expériences",
+    "href": "axe2.html#expériences",
+    "title": "2. Représentaions des limites urbain-rural",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe2.html#résultats",
+    "href": "axe2.html#résultats",
+    "title": "2. Représentaions des limites urbain-rural",
+    "section": "Résultats",
+    "text": "Résultats"
+  },
+  {
+    "objectID": "axe5.html#expériences",
+    "href": "axe5.html#expériences",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe5.html#résultats",
+    "href": "axe5.html#résultats",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
+    "section": "Résultats",
+    "text": "Résultats"
+  },
+  {
+    "objectID": "axe6.html#expériences",
+    "href": "axe6.html#expériences",
+    "title": "6. Habiter la ville : pratiques urbaines, inégalités d’accès",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe6.html#résultats",
+    "href": "axe6.html#résultats",
+    "title": "6. Habiter la ville : pratiques urbaines, inégalités d’accès",
+    "section": "Résultats",
+    "text": "Résultats"
   },
   {
     "objectID": "EBM001.html",
@@ -319,7 +340,7 @@
     "href": "equipe.html",
     "title": "Equipe",
     "section": "",
-    "text": "Vous trouverez ci-dessous la liste de toutes celles et ceux qui participent ou ont participé d’une manière ou d’une autre au projet Altermap.\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Nom\n      \n      \n        Affiliation(s)\n      \n      \n        Pays\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nNom\n\n\nAffiliation(s)\n\n\nPays\n\n\n\n\n\n\n\n\n\nBA Cheikh Abdoul Ahad Mbacké\n\n\nUniversité Cheikh Anta Diop (UCAD) - Institut de la gouvernance territoriale\n\n\nSénégal\n\n\n\n\n\n\n\nBOUHALI Anne\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nCHARTIER Denis\n\n\nUMR LADYSS, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nDIALLO Mouhamad Lamine\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nDIONGUE Momar\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDIOUF Ibrahima Faye\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDORON Adrien\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nGRASLAND Claude\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nLAMBERT Nicolas\n\n\nUAR RIATE, CNRS\n\n\nFrance\n\n\n\n\n\n\n\nLANNE Jean-Baptiste\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMADELIN Malika\n\n\nUMR PRODIG, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nNDAO Aliou\n\n\nUniversité Gaston Berger (UGB) - Laboratoire Leïdi\n\n\nSénégal\n\n\n\n\n\n\n\nPISTRE Pierre\n\n\nUMR Géographie-Cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nSPIRE Amandine\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nTIMERA Mamadou Bouna\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nTOURÉ Labaly\n\n\nUniversité du Sine Saloum El-Hâdj Ibrahima Niass\n\n\nSénégal\n\n\n\n\nNo matching items"
+    "text": "Vous trouverez ci-dessous la liste de toutes celles et ceux qui participent ou ont participé d’une manière ou d’une autre au projet Altermap.\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Nom\n      \n      \n        Affiliation(s)\n      \n      \n        Pays\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nNom\n\n\nAffiliation(s)\n\n\nPays\n\n\n\n\n\n\n\n\n\nBA Cheikh Abdoul Ahad Mbacké\n\n\nUniversité Cheikh Anta Diop (UCAD) - Institut de la gouvernance territoriale\n\n\nSénégal\n\n\n\n\n\n\n\nBOUHALI Anne\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nCHARTIER Denis\n\n\nUMR LADYSS, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nDIALLO Mouhamad Lamine\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nDIONGUE Momar\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDIOUF Ibrahima Faye\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDORON Adrien\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nGRASLAND Claude\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nLAMBERT Nicolas\n\n\nUAR RIATE, CNRS\n\n\nFrance\n\n\n\n\n\n\n\nLANNE Jean-Baptiste\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMADELIN Malika\n\n\nUMR PRODIG, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMENDY Anastasie\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nNDAO Aliou\n\n\nUniversité Gaston Berger (UGB) - Laboratoire Leïdi\n\n\nSénégal\n\n\n\n\n\n\n\nPISTRE Pierre\n\n\nUMR Géographie-Cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nSPIRE Amandine\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nTIMERA Mamadou Bouna\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nTOURÉ Labaly\n\n\nUniversité du Sine Saloum El-Hâdj Ibrahima Niass\n\n\nSénégal\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "SEN.html",
@@ -406,32 +427,60 @@
     "text": "Pour cette carte, j’ai brodé le monde sur une toile de coton. Les parties en perles correspondent aux lieux que j’aimerais le plus visiter (réalisation d’une élève du Lycée le Corbusier d’Illkirch-Graffenstaden en 2019-20).\n  \n\n  \n  \nLe projet ALTERMAP vise à développer l’innovation pédagogique dans le domaine des imaginaires géographiques et des représentations de l’altérité spatiale. Il portera plus précisément sur le rôle des cartes mentales dans l’enseignement de géographie en licence et l’initiation à la recherche en master.\nAssociant des enseignants-chercheurs de l’Université Paris Cité et de l’Université Cheikh Anta Diop ainsi que d’autres universités du Sénégal, il prendra la forme originale de la co-construction d’un questionnaire et de la réalisation d’entretiens sur les représentations de l’Europe en Afrique et de l’Afrique en France. Dans chaque pays le questionnaire sera administré par les étudiants de master ou de doctorat auprès des étudiants de licence et fera l’objet de restitution des résultats dans les enseignements thématiques (géographie sociale, géographie des Nords et des Suds, structure du Monde actuel, mobilités et migrations…) et d’utilisation comme exemple dans les enseignements méthodologiques (méthodes qualitatives, statistiques, cartographie, géomatique …).\nLe projet se clôturera par une école d’été associant les enseignants-chercheurs des deux pays ainsi que des doctorants intéressés pour consolider les acquis de l’enquête en termes méthodologiques. Cette école d’été permettra un partage des expériences réalisées en matière par exemple d’analyse textuelle des discours, de cartographie sensible, de visualisation des espaces attractifs et répulsifs, de modélisation statistique des facteurs déterminants les perceptions de l’altérité.\nIdéalement, cette expérience d’innovation pédagogique débouchera sur l’élaboration de thèses en cotutelles et sur un élargissement de l’enquête à d’autres pays du Nord et du Sud dans le cadre de réponse à des appels d’offres internationaux de l’Union Européenne, l’Union Africaine ou la Banque Mondiale.\n\n\n\n\nInstitutions et financement\n\n\n\nLe projet AlterMap est organisé conjointement conjointement par des enseignants-chercheurs français de l’UFR GHES de l’université Paris-Cité et par leurs homologues sénégalais de l’Université Cheikh Anta Diop (UCAD), l’Université du Sine Saloum Elhadj Ibrahima Niass (USSEIN) et l’Université Gaston Berger de Saint-Louis\nLe financement principal est apporté par les crédits de l’IDEX Innovation Pédagogique de l’Université Paris-Cité 2025\nLe projet associé des enseignants-chercheurs des laboratoires de recherche Géographie-cités, CESSMA Prodig, Ladyss ainsi que des ingénieurs des unités de service Riate et Geoteca.\n     \n\n\n\n\n  \n\n\n\n\n\nCoordinateurs\n\n\n\nClaude GRASLAND\nUniversité Paris Cité,\nUMR Géographie-cités\n\nAnne BOUHALI\nUniversité Paris Cité\nUMR CESSMA\n\n\nCheikh BA\nUCAD - Dakar, Sénégal\nInstitut de Gouvernance territoriale.\n\nLabaly TOURE\nUSSEIN – Kaolack, Sénégal\nDépartement de Géomatique"
   },
   {
+    "objectID": "axe4.html#expériences",
+    "href": "axe4.html#expériences",
+    "title": "2. Représentaions des limites urbain-rural",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe4.html#résultats",
+    "href": "axe4.html#résultats",
+    "title": "2. Représentaions des limites urbain-rural",
+    "section": "Résultats",
+    "text": "Résultats"
+  },
+  {
+    "objectID": "axe1.html#expériences",
+    "href": "axe1.html#expériences",
+    "title": "1. Représentations et découpages du Monde",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe1.html#résultats",
+    "href": "axe1.html#résultats",
+    "title": "1. Représentations et découpages du Monde",
+    "section": "Résultats",
+    "text": "Résultats"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Faut-il renommer l’Afrique?\n\n\n\nAfrique\n\nContinent\n\nBibliographie\n\n\n\nDeux philosophes africains proposent de remplacer Afrique par Anaesia\n\n\n\n\n\nNov 24, 2025\n\n\nClaude Grasland\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "equipe/timera.html",
     "href": "equipe/timera.html",
     "title": "Mamadou Bouna TIMERA",
     "section": "",
-    "text": "Professeur de Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\n Sénégal"
+    "text": "Professeur de Géographie, Doyen de la FALSH\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\n Sénégal"
   },
   {
-    "objectID": "equipe/timera.html#thème-de-recherche",
-    "href": "equipe/timera.html#thème-de-recherche",
+    "objectID": "equipe/timera.html#thèmes-de-recherche",
+    "href": "equipe/timera.html#thèmes-de-recherche",
     "title": "Mamadou Bouna TIMERA",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nGéographie humaine\nDidactique de la géographie\nAnalyse spatiale\nAménagement du territoire"
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nA compléter"
   },
   {
-    "objectID": "equipe/timera.html#enseignements-dispensés",
-    "href": "equipe/timera.html#enseignements-dispensés",
+    "objectID": "equipe/timera.html#enseignements-liés-au-projet",
+    "href": "equipe/timera.html#enseignements-liés-au-projet",
     "title": "Mamadou Bouna TIMERA",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nA compléter"
-  },
-  {
-    "objectID": "equipe/timera.html#données-mobilisées",
-    "href": "equipe/timera.html#données-mobilisées",
-    "title": "Mamadou Bouna TIMERA",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nA compléter"
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nA compléter"
   },
   {
     "objectID": "equipe/timera.html#publications",
@@ -441,269 +490,227 @@
     "text": "Publications\n\n\nTimera MB. 2004. L’invention de la géographie scolaire au sénégal (de la période coloniale à nos jours).PhD thesis, Université Paris 7.\n\n\nTimera MB. 2009. L’identité sénégalaise à travers la géographie scolaire, de l’indépendance aux années 1990. L’espace géographique 38: 233–250\n\n\nTimera MB. 2022. La géographie scolaire au sénégal: Interrogations sur les permanences scolaires. Revue Etudes Africaines\n\n\nTimera MB, Diongue M, Sakho P, Diagne A, Niang-Diène A. 2018. Champ épistémique des travaux des géographes paul pélissier et cheikh ba: Entre complémentarités, recoupements et débordements disciplinaires. Cahiers de géographie du Québec 62: 169–189\n\n\nTimera MB, Diongue M, Thiam O. 2019. L’élection présidentielle de février 2019 au sénégal. Entre renouveau de l’échiquier politique et percée du vote régionaliste. EchoGéo\n\n\nTiméra MB. 2022. La représentation cartographique des ethnies à l’école : À la croisée du récit national multisitué et des approches scientifiques ? Studia Universitatis Babes-Bolyai-Studia Europaea 67: 1–21"
   },
   {
-    "objectID": "equipe/spire.html",
-    "href": "equipe/spire.html",
-    "title": "Amandine SPIRE",
-    "section": "",
-    "text": "Maître de conférences en Géographie\n\n\nUMR CESSMA, Université Paris-Cité\n\n\n France"
-  },
-  {
-    "objectID": "equipe/spire.html#thème-de-recherche",
-    "href": "equipe/spire.html#thème-de-recherche",
-    "title": "Amandine SPIRE",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nDroit à la ville, pratiques citadines, gouvernement urbain\nEviction, relocalisation, déguerpissements\nExpériences migratoires et relations aux institutions\nMéthodologie, recherche-action, écriture, film\nAfrique de l’Ouest (Togo, Ghana) et France"
-  },
-  {
-    "objectID": "equipe/spire.html#enseignements-dispensés",
-    "href": "equipe/spire.html#enseignements-dispensés",
-    "title": "Amandine SPIRE",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nMéthodes qualitatives\nGéographies des Suds\nGéographie sociale\n…"
-  },
-  {
-    "objectID": "equipe/spire.html#données-mobilisées",
-    "href": "equipe/spire.html#données-mobilisées",
-    "title": "Amandine SPIRE",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nà compléter"
-  },
-  {
-    "objectID": "equipe/spire.html#publications",
-    "href": "equipe/spire.html#publications",
-    "title": "Amandine SPIRE",
-    "section": " Publications",
-    "text": "Publications\n\n\nAmandine S. 2011. L’étranger et la ville en afrique de l’ouest. KARTHALA Editions.\n\n\nBlot J, Spire A. 2014. Déguerpissements et conflits autour des légitimités citadines dans les villes du sud. L’Espace Politique. Revue en ligne de géographie politique et de géopolitique\n\n\nMorange M, Spire A. 2017. Mise en ordre, mise aux normes et droit à la ville: Perspectives croisées depuis les villes du sud. Métropoles\n\n\nSpire A, Choplin A. 2018. Street vendors facing urban beautification in accra (ghana): Eviction, relocation and formalization. Articulo-Journal of Urban Research\n\n\nSpire A, Lanne J-B, Kouakou L, Dominguez S. 2024. Urban modernization through the minibus window in yopougon (abidjan): The impacts of new infrastructure on urban life. Flux 135136: 103–118"
-  },
-  {
-    "objectID": "equipe/lanne.html",
-    "href": "equipe/lanne.html",
-    "title": "Jean-Baptiste LANNE",
-    "section": "",
-    "text": "Maître de conférences en Géographie\n\n\nUMR CESSMA, Université Paris-Cité\n\n\n France"
-  },
-  {
-    "objectID": "equipe/lanne.html#thème-de-recherche",
-    "href": "equipe/lanne.html#thème-de-recherche",
-    "title": "Jean-Baptiste LANNE",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nGéographie urbaine des villes africaines\nMétiers précaires en ville\nQuartiers marginalisés, imaginaires du ghetto\nMéthodes qualitatives, recherche-création (écritures)\nTerrains : Kenya, plus récemment Côte d’Ivoire et Afrique du Sud."
-  },
-  {
-    "objectID": "equipe/lanne.html#enseignements-dispensés",
-    "href": "equipe/lanne.html#enseignements-dispensés",
-    "title": "Jean-Baptiste LANNE",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nMéthodes qualitatives\nGéographies des Suds\nGéographie sociale\n…"
-  },
-  {
-    "objectID": "equipe/lanne.html#données-mobilisées",
-    "href": "equipe/lanne.html#données-mobilisées",
-    "title": "Jean-Baptiste LANNE",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nà compléter"
-  },
-  {
-    "objectID": "equipe/lanne.html#publications",
-    "href": "equipe/lanne.html#publications",
-    "title": "Jean-Baptiste LANNE",
-    "section": " Publications",
-    "text": "Publications\n\n\nGuinard P, Lanne J-B. 2023. Emotions from and beyond the classroom. An experiment in teaching and sharing emotional methodologies in a geography course. Journal of Geography in Higher Education 47: 719–736\n\n\nLanne J-B. 2018. Des vies en veille: Géographies abandonnées des acteurs quotidiens de la sécurité à nairobi.PhD thesis, Université Michel de Montaigne-Bordeaux III.\n\n\nLanne J-B, Morange M. 2024. Penser les citadinités depuis l’afrique de l’est. Introduction au dossier. EchoGéo\n\n\nLanne J-B, Pommerolle M-E. 2024. “I can’t segregate myself”: Self-narrating and ‘small boundary’work in nairobi’s ghettos. Africa 94: 594–612\n\n\nSpire A, Lanne J-B, Kouakou L, Dominguez S. 2024. Urban modernization through the minibus window in yopougon (abidjan): The impacts of new infrastructure on urban life. Flux 135136: 103–118"
-  },
-  {
-    "objectID": "equipe/pistre.html",
-    "href": "equipe/pistre.html",
-    "title": "Pierre PISTRE",
-    "section": "",
-    "text": "Maître de conférences en Géographie\n\n\n\n\n\n\n\n France"
-  },
-  {
-    "objectID": "equipe/pistre.html#thème-de-recherche",
-    "href": "equipe/pistre.html#thème-de-recherche",
-    "title": "Pierre PISTRE",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nÉtude des dynamiques sociodémographiques dans les campagnes françaises (structures de population, migrations, mobilités…) à partir de données du recensement de la population"
-  },
-  {
-    "objectID": "equipe/pistre.html#enseignements-dispensés",
-    "href": "equipe/pistre.html#enseignements-dispensés",
-    "title": "Pierre PISTRE",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nInitiation aux statistiques et à la cartographie\nAnalyse de données avec R"
-  },
-  {
-    "objectID": "equipe/pistre.html#données-mobilisées",
-    "href": "equipe/pistre.html#données-mobilisées",
-    "title": "Pierre PISTRE",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nEnquêtes nationales françaises (Logement, Transport et déplacement, Histoire de vie…)\nBases de données individuelles (RPLS/logements sociaux, SIRENE/Activités économiques…) ##  Publications\n\n\n\nCommenges H, Pistre P, Cura R. 2014. SLIDER: Software for LongItudinal Data Exploration with R. Cybergeo: European Journal of Geography DOI: 10.4000/cybergeo.26530\n\n\nCottineau C, Chapron P, Texier ML, Rey-Coyrehourcq S. Chapter 4: Incremental Territorial Modelling. In Pumain D., 2020, Geographical Modeling, ISTE.\n\n\nFromentin J, Pistre P. 2021. L’immigration dans les campagnes françaises : Des effectifs limités mais des origines qui ne cessent de se diversifier. Population Societes 591: 1–4 Available at: https://www.cairn.info/revue-population-et-societes-2021-7-page-1.htm [Accessed January 23, 2023]\n\n\nPistre P. 2016. Recensements de la population pour l’étude des reprises démographiques et des migrations résidentielles dans l’espace peu dense (1975‑2011). Economie et Statistique 483: 151–178 DOI: 10.3406/estat.2016.10677\n\n\nPistre P. 2021. Rester à la campagne, en partir ou y revenir. Métropolitiques Available at: https://metropolitiques.eu/Rester-a-la-campagne-en-partir-ou-y-revenir.html [Accessed January 23, 2023]\n\n\nPistre P, Richard F. 2018. Seulement 5 ou 15 % de ruraux en France métropolitaine ? Les malentendus du zonage en aires urbaines. Géoconfluences Available at: https://shs.hal.science/halshs-01858695 [Accessed January 23, 2023]"
-  },
-  {
-    "objectID": "equipe/diouf.html",
-    "href": "equipe/diouf.html",
+    "objectID": "equipe/diouf2.html",
+    "href": "equipe/diouf2.html",
     "title": "Ibrahima Faye DIOUF",
     "section": "",
     "text": "Maître de conférence en Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\n Sénégal"
   },
   {
-    "objectID": "equipe/diouf.html#thème-de-recherche",
-    "href": "equipe/diouf.html#thème-de-recherche",
+    "objectID": "equipe/diouf2.html#thèmes-de-recherche",
+    "href": "equipe/diouf2.html#thèmes-de-recherche",
     "title": "Ibrahima Faye DIOUF",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nGéographie humaine\n…"
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nRural\nFoncier\nAgriculture\nSystème alimentaire\nPériurbain"
   },
   {
-    "objectID": "equipe/diouf.html#enseignements-dispensés",
-    "href": "equipe/diouf.html#enseignements-dispensés",
+    "objectID": "equipe/diouf2.html#enseignements-liés-au-projet",
+    "href": "equipe/diouf2.html#enseignements-liés-au-projet",
     "title": "Ibrahima Faye DIOUF",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nA compléter"
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nAnalyse de documents géographiques (L)\nCartographie (L)\nStratégies spatiales traditionnelles (M1)"
   },
   {
-    "objectID": "equipe/diouf.html#données-mobilisées",
-    "href": "equipe/diouf.html#données-mobilisées",
-    "title": "Ibrahima Faye DIOUF",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nA compléter"
-  },
-  {
-    "objectID": "equipe/diouf.html#publications",
-    "href": "equipe/diouf.html#publications",
+    "objectID": "equipe/diouf2.html#publications",
+    "href": "equipe/diouf2.html#publications",
     "title": "Ibrahima Faye DIOUF",
     "section": " Publications",
-    "text": "Publications\n\n\nDelville PL, Diongue M, Diouf IF. 2023. The practical norms of land governance in senegalese communes. Institutional incompleteness, politicisation, semi-formality and bricolage. Land Use Policy 132: 106828\n\n\nDiouf IF. 2013. Système mixte agriculture irriguée et élevage transhumant: L’enjeu autour de l’accès aux ressources foncières dans la moyenne vallée du fleuve sénégal.PhD thesis, Université Toulouse le Mirail-Toulouse II.\n\n\nDiouf IF, Diongue M, Timera M. 2020. L’agro-écologie dans la zone des niayes: Expériences d’une transition dans les communes de diender guedj et de kayar (sénégal). Revue Ivoirienne de Géographie des Savanes: 2521–212\n\n\nNdiaye I, Diouf IF, Gomis D, Badiane SD. 2024. Valorisation des interstices urbains à travers l’horticulture ornementale à dakar: Acteurs et retombées socio-économiques. NAAJ-Revue africaine sur les changements climatiques et les énergies renouvelables 3: 133–157\n\n\nTimera MB, Diouf IF. 2021. L’ouverture au monde: Un principe de construction de l’identité en question dans l’enseignement de la géographie au sénégal. Cahiers de la recherche sur l’éducation et les savoirs: 221–244\n\n\nTimera MB, Diouf IF, Diongue M, Sakho P. 2018. Enseignement de la migration au sénégal. e-Migrinter"
+    "text": "Publications\n\n\nDelville PL, Diongue M, Diouf IF. 2023. The practical norms of land governance in senegalese communes. Institutional incompleteness, politicisation, semi-formality and bricolage. Land Use Policy 132: 106828\n\n\nDiouf IF, Diongue M, Timera M. 2020. L’agro-écologie dans la zone des niayes: Expériences d’une transition dans les communes de diender guedj et de kayar (sénégal). Revue Ivoirienne de Géographie des Savanes: 2521–212\n\n\nNdiaye I, Diouf IF, Gomis D, Badiane SD. 2024. Valorisation des interstices urbains à travers l’horticulture ornementale à dakar: Acteurs et retombées socio-économiques. NAAJ-Revue africaine sur les changements climatiques et les énergies renouvelables 3: 133–157\n\n\nTimera MB, Diouf IF. 2021. L’ouverture au monde: Un principe de construction de l’identité en question dans l’enseignement de la géographie au sénégal. Cahiers de la recherche sur l’éducation et les savoirs: 221–244\n\n\nTimera MB, Diouf IF, Diongue M, Sakho P. 2018. Enseignement de la migration au sénégal. e-Migrinter"
   },
   {
-    "objectID": "equipe/bouhali.html",
-    "href": "equipe/bouhali.html",
+    "objectID": "equipe/lambert2.html",
+    "href": "equipe/lambert2.html",
+    "title": "Nicolas LAMBERT",
+    "section": "",
+    "text": "Ingénieur de recherche en science de l’information géographique\n\n\nUAR RIATE, CNRS\n\n\n France"
+  },
+  {
+    "objectID": "equipe/lambert2.html#thèmes-de-recherche",
+    "href": "equipe/lambert2.html#thèmes-de-recherche",
+    "title": "Nicolas LAMBERT",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nCartographie\nGeovisualisation\nWeb"
+  },
+  {
+    "objectID": "equipe/lambert2.html#enseignements-liés-au-projet",
+    "href": "equipe/lambert2.html#enseignements-liés-au-projet",
+    "title": "Nicolas LAMBERT",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nCartographie (L/M)\nGéomatique (M)\nWebmapping (M)"
+  },
+  {
+    "objectID": "equipe/lambert2.html#publications",
+    "href": "equipe/lambert2.html#publications",
+    "title": "Nicolas LAMBERT",
+    "section": " Publications",
+    "text": "Publications\n\n\nBahoken F, Lambert N. 2025. Cartographia: Comment les géographes (re) dessinent le monde. Armand Colin.\n\n\nGiraud T, Lambert N. 2019. Reproducible Workflow for Cartography - Migrants Deaths in the Mediterranean. Proceedings of the ICA 2: NA Available at: https://link.gale.com/apps/doc/A616974458/AONE?u=anon~df1b8fb9&sid=googleScholar&xid=352bef90 [Accessed January 16, 2023]\n\n\nLambert N, Zanin C. 2019. Mad maps: L’atlas qui va changer votre vision du monde. Armand Colin: Malakoff.\n\n\nLambert N, Zanin C. 2025. Manuel de cartographie: Principes, méthodes, applications. Armand Colin: Paris.\n\n\nLambert N, Giraud T, Ysebaert R. 2022. Chapitre 3-enjeux de communication dans la multireprésentation cartographique reproductible. ISTE Group."
+  },
+  {
+    "objectID": "equipe/grasland2.html",
+    "href": "equipe/grasland2.html",
+    "title": "Claude GRASLAND",
+    "section": "",
+    "text": "Professeur des universités en Géographie\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\n France"
+  },
+  {
+    "objectID": "equipe/grasland2.html#thèmes-de-recherche",
+    "href": "equipe/grasland2.html#thèmes-de-recherche",
+    "title": "Claude GRASLAND",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nMondialisation et régionalisation\nFlux internationaux de presse\nMaillages territoriaux"
+  },
+  {
+    "objectID": "equipe/grasland2.html#enseignements-liés-au-projet",
+    "href": "equipe/grasland2.html#enseignements-liés-au-projet",
+    "title": "Claude GRASLAND",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nStatistique, cartographie et analyse spatiale (M1, M2)\nStructures du Monde actuel (L3)\nTechniques d’enquête qualitative (L3)"
+  },
+  {
+    "objectID": "equipe/grasland2.html#publications",
+    "href": "equipe/grasland2.html#publications",
+    "title": "Claude GRASLAND",
+    "section": " Publications",
+    "text": "Publications\n\n\nBeauguitte L, Didelon C, Grasland C. 2012. Le projet EuroBroadMap. Politique européenne 37: 156–167\n\n\nBennasr A, Baron M, Ruffray S de, Grasland C, Guérin-Pace F. 2015. Dilemmes de la réforme régionale tunisienne. Analyse spatiale et territoriale des propositions de réorganisation du maillage administratif. Revue d’Économie Régionale & Urbaine Décembre: 853–882 DOI: 10.3917/reru.155.0853\n\n\nDidelon C, Grasland C, Richard Y. 2008. Atlas de l’Europe dans le monde. Reclus CNRS GDRE S4 La Documentation française: Montpellier Paris.\n\n\nDidelon-Loiseau C, Grasland C. 2014. Internal and external perceptions of europe/the EU in the world through mental maps. In Communicating Europe in Times of Crisis: External Perceptions of the European UnionSpringer; 65–94.\n\n\nGrasland C. 2025. The diffusion of the concept of ‘the global south’in the press: The case of africa. Third World Quarterly: 1–15"
+  },
+  {
+    "objectID": "equipe/mendy.html",
+    "href": "equipe/mendy.html",
+    "title": "Anastasie MENDY",
+    "section": "",
+    "text": "Professeur de Géographie, Chef de département\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\n Sénégal"
+  },
+  {
+    "objectID": "equipe/mendy.html#thèmes-de-recherche",
+    "href": "equipe/mendy.html#thèmes-de-recherche",
+    "title": "Anastasie MENDY",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nHydrologie, Bassins versant\nEnvironnement\nClimatologie\nRisques"
+  },
+  {
+    "objectID": "equipe/mendy.html#enseignements-liés-au-projet",
+    "href": "equipe/mendy.html#enseignements-liés-au-projet",
+    "title": "Anastasie MENDY",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nHydrologie\nRisques"
+  },
+  {
+    "objectID": "equipe/mendy.html#publications",
+    "href": "equipe/mendy.html#publications",
+    "title": "Anastasie MENDY",
+    "section": " Publications",
+    "text": "Publications\n\n\nBodian A, Dacosta H, Diouf RN, Ndiaye EHO, Mendy A. 2016. Contribution à la connaissance de l’aléa pluvial au sénégal grâce à la valorisation des données pluviographiques historiques. Climatologie 13: 38–46\n\n\nDos Santos S, Aholou C, Bon B, Cartier S, Cornou C, Dotsou Y, Duminil J, Feltran G, Gaté R, Gurgel H, et al. 2023. A shared fieldwork area: Fertile ground for interdisciplinary research into cities in the global south. Sustainability science: understand, co-construct, transform (volume 2): 100–103\n\n\nMendy A. 2023. Variabilité des pluies au xxe siècle à dakar, sénégal. Norois 268269: 109–127\n\n\nSantos S dos, Artadji A, Sow PG, Mendy A, Wade CS. 2025. Inondations à dakar: Un défi pour les pouvoirs publics\n\n\nThiaw I, Mendy A, Dacosta H, Sow AA. 2025. La migration de retour à niomré: Défis, opportunités, et perspectives de réintégration. Revue Sociologie, Anthropologie, Psychologie 1"
+  },
+  {
+    "objectID": "equipe/lanne2.html",
+    "href": "equipe/lanne2.html",
+    "title": "Jean-Baptiste LANNE",
+    "section": "",
+    "text": "Maître de conférences en Géographie\n\n\nUMR CESSMA, Université Paris-Cité\n\n\n France"
+  },
+  {
+    "objectID": "equipe/lanne2.html#thèmes-de-recherche",
+    "href": "equipe/lanne2.html#thèmes-de-recherche",
+    "title": "Jean-Baptiste LANNE",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\ngéographie urbaine\nvilles africaines\nquartiers stigmatisés\nprécarité\ngéographie de la réparation"
+  },
+  {
+    "objectID": "equipe/lanne2.html#enseignements-liés-au-projet",
+    "href": "equipe/lanne2.html#enseignements-liés-au-projet",
+    "title": "Jean-Baptiste LANNE",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nGéographie des suds globalisés (L1)\nInitiation aux techniques d’enquête qualitative (L2)\nTechnique d’enquête qualitative (M1)"
+  },
+  {
+    "objectID": "equipe/lanne2.html#publications",
+    "href": "equipe/lanne2.html#publications",
+    "title": "Jean-Baptiste LANNE",
+    "section": " Publications",
+    "text": "Publications\n\n\nGuinard P, Lanne J-B. 2023. Emotions from and beyond the classroom. An experiment in teaching and sharing emotional methodologies in a geography course. Journal of Geography in Higher Education 47: 719–736\n\n\nLanne J-B. 2018. Des vies en veille: Géographies abandonnées des acteurs quotidiens de la sécurité à nairobi.PhD thesis, Université Michel de Montaigne-Bordeaux III.\n\n\nLanne J-B, Morange M. 2024. Penser les citadinités depuis l’afrique de l’est. Introduction au dossier. EchoGéo\n\n\nLanne J-B, Pommerolle M-E. 2024. “I can’t segregate myself”: Self-narrating and ‘small boundary’work in nairobi’s ghettos. Africa 94: 594–612\n\n\nSpire A, Lanne J-B, Kouakou L, Dominguez S. 2024. Urban modernization through the minibus window in yopougon (abidjan): The impacts of new infrastructure on urban life. Flux 135136: 103–118"
+  },
+  {
+    "objectID": "equipe/madelin2.html",
+    "href": "equipe/madelin2.html",
+    "title": "Malika MADELIN",
+    "section": "",
+    "text": "Maîtresse de conférences en Géographie\n\n\nUMR PRODIG, Université Paris-Cité\n\n\n France"
+  },
+  {
+    "objectID": "equipe/madelin2.html#thèmes-de-recherche",
+    "href": "equipe/madelin2.html#thèmes-de-recherche",
+    "title": "Malika MADELIN",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nclimatologie, climat urbain\npollution de l’air\nchangement climatique\ngéomatique\n\nstatistiques"
+  },
+  {
+    "objectID": "equipe/madelin2.html#enseignements-liés-au-projet",
+    "href": "equipe/madelin2.html#enseignements-liés-au-projet",
+    "title": "Malika MADELIN",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nClimatologie (L1)\nSIG (M1)\nEnvironnement et risques (M2)"
+  },
+  {
+    "objectID": "equipe/madelin2.html#publications",
+    "href": "equipe/madelin2.html#publications",
+    "title": "Malika MADELIN",
+    "section": " Publications",
+    "text": "Publications\n\n\nBigot S, Duché S, Madelin M, Rome S. 2017. Étude Du Climat Urbain : Pour Une Mise à Disposition De Nouveaux Services Climatiques. Bulletin de la Société Géographique de Liège 68: 13–36\n\n\nDahech S, Charfi S, Madelin M. 2020. Représentativité des températures mesurées dans la station météorologique Paris-Montsouris. Climatologie 17: 5 DOI: 10.1051/climat/202017005\n\n\nMadelin M, Dupuis V. 2020. Intensité et spatialisation de l’îlot de chaleur urbain parisien à partir de données participatives. Climatologie 17: 9 DOI: 10.1051/climat/202017009\n\n\nPecout H, Grasland C, Guérois M, Goix RL, Madelin M, Nussbaum F, Valette J-F. 2019. Informations territoriales locales et analyse comparative des dynamiques métropolitaines. Le projet Grandes métropoles., Cailly L, Lafarge R, Ruas A, Saez G (eds).Karthala; 363. Available at: https://hal.science/hal-01353618 [Accessed January 16, 2023]\n\n\nRenan LR, Rességuier L, Corpetti T, Jégou N, Madelin M, Leeuwen C van, Quénol H. 2017. Comparison of two fine scale spatial models for mapping temperatures inside winegrowing areas. Agricultural and Forest Meteorology 247: 159–169 DOI: 10.1016/j.agrformet.2017.07.020"
+  },
+  {
+    "objectID": "equipe/bouhali2.html",
+    "href": "equipe/bouhali2.html",
     "title": "Anne BOUHALI",
     "section": "",
     "text": "Maître de conférence en Géographie\n\n\nUMR CESSMA, Université Paris-Cité\n\n\n France"
   },
   {
-    "objectID": "equipe/bouhali.html#thème-de-recherche",
-    "href": "equipe/bouhali.html#thème-de-recherche",
+    "objectID": "equipe/bouhali2.html#thèmes-de-recherche",
+    "href": "equipe/bouhali2.html#thèmes-de-recherche",
     "title": "Anne BOUHALI",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nà compléter"
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\ngéographie urbaine\ngéographie du commerce\ncirculations marchandes\nmobilités\nmigrations"
   },
   {
-    "objectID": "equipe/bouhali.html#enseignements-dispensés",
-    "href": "equipe/bouhali.html#enseignements-dispensés",
+    "objectID": "equipe/bouhali2.html#enseignements-liés-au-projet",
+    "href": "equipe/bouhali2.html#enseignements-liés-au-projet",
     "title": "Anne BOUHALI",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nà compléter"
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nDéplacement pédagogique au Maroc (M1)\nDécentrer le regard (M1)\nTerritoires et pouvoir (L2)"
   },
   {
-    "objectID": "equipe/bouhali.html#données-mobilisées",
-    "href": "equipe/bouhali.html#données-mobilisées",
-    "title": "Anne BOUHALI",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nà compléter"
-  },
-  {
-    "objectID": "equipe/bouhali.html#publications",
-    "href": "equipe/bouhali.html#publications",
+    "objectID": "equipe/bouhali2.html#publications",
+    "href": "equipe/bouhali2.html#publications",
     "title": "Anne BOUHALI",
     "section": " Publications",
-    "text": "Publications\n\n\nBouhali A. 2015. Médina j’dida (oran), un quartier-marché sur les routes algériennes du commerce transnational. Les Cahiers d’EMAM. Études sur le Monde arabe et la Méditerranée\n\n\nBouhali A. 2018. Negotiating streets and space in transnational trade marketplaces in oran (algeria) and cairo (egypt):“place struggle” in the commercial city. Articulo-Journal of Urban Research\n\n\nBouhali A. 2020. Vers l’émergence d’un modèle du quartier commercial transnational? Les quartiers du made in china au caire et à oran. Mappemonde. Revue trimestrielle sur l’image géographique et les formes du territoire\n\n\nBouhali A, Chuang Y-H. 2019. Les routes de la soie existent déjà. Routes transnationales et places marchandes du made in china entre asie, afrique et europe. Mappemonde. Revue trimestrielle sur l’image géographique et les formes du territoire\n\n\nBouhali A, Doron A, Racaud S. 2023. Circulations marchandes et mondialisation des pauvres: Transformations sociales et spatiales vues des suds. Suds 287: 5–20"
+    "text": "Publications\n\n\nBouhali A. 2020. Vers l’émergence d’un modèle du quartier commercial transnational? Les quartiers du made in china au caire et à oran. Mappemonde. Revue trimestrielle sur l’image géographique et les formes du territoire\n\n\nBouhali A, Belguidoum S. 2022. Une mondialisation discrète. Afrique (s) en mouvement 4: 8–10\n\n\nBouhali A, Mareı̈ N. 2022. Routes, places et stratégies du business transnational entre casablanca (maroc), nouakchott (mauritanie) et dakar (sénégal). L’Espace Politique. Revue en ligne de géographie politique et de géopolitique\n\n\nBouhali A, Doron A, Racaud S. 2023. Circulations marchandes et mondialisation des pauvres: Transformations sociales et spatiales vues des suds. Suds 287: 5–20\n\n\nLemarchand N, Wayens B, Bouhali A, Laroche S. 2024. French-speaking geography of retailing and consumption: An overview. Belgeo. Revue belge de géographie"
   },
   {
-    "objectID": "equipe/doron.html",
-    "href": "equipe/doron.html",
-    "title": "Adrien DORON",
+    "objectID": "equipe/pistre2.html",
+    "href": "equipe/pistre2.html",
+    "title": "Pierre PISTRE",
     "section": "",
-    "text": "Maître de conférence en Géographie\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\n France"
+    "text": "Maître de conférences en Géographie\n\n\n\n\n\n\n\n France"
   },
   {
-    "objectID": "equipe/doron.html#thème-de-recherche",
-    "href": "equipe/doron.html#thème-de-recherche",
-    "title": "Adrien DORON",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nà compléter"
+    "objectID": "equipe/pistre2.html#thèmes-de-recherche",
+    "href": "equipe/pistre2.html#thèmes-de-recherche",
+    "title": "Pierre PISTRE",
+    "section": " Thèmes de recherche",
+    "text": "Thèmes de recherche\n\n\nGéographie rurale,\nGéographie de la population,\nGéographie sociale,\nMobilités spatiales,\nStatistiques publiques, France"
   },
   {
-    "objectID": "equipe/doron.html#enseignements-dispensés",
-    "href": "equipe/doron.html#enseignements-dispensés",
-    "title": "Adrien DORON",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nà compléter"
+    "objectID": "equipe/pistre2.html#enseignements-liés-au-projet",
+    "href": "equipe/pistre2.html#enseignements-liés-au-projet",
+    "title": "Pierre PISTRE",
+    "section": " Enseignements liés au projet",
+    "text": "Enseignements liés au projet\n\n\nDémographie (L2)\nProjet étudiant - méthodologie (L3)\nEpistémologie des données (M1)"
   },
   {
-    "objectID": "equipe/doron.html#données-mobilisées",
-    "href": "equipe/doron.html#données-mobilisées",
-    "title": "Adrien DORON",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nà compléter"
-  },
-  {
-    "objectID": "equipe/doron.html#publications",
-    "href": "equipe/doron.html#publications",
-    "title": "Adrien DORON",
+    "objectID": "equipe/pistre2.html#publications",
+    "href": "equipe/pistre2.html#publications",
+    "title": "Pierre PISTRE",
     "section": " Publications",
-    "text": "Publications\n\n\nBouhali A, Doron A, Racaud S. 2023. Circulations marchandes et mondialisation des pauvres: Transformations sociales et spatiales vues des suds. Suds 287: 5–20\n\n\nDoron A. 2015. De la marge au monde: La structuration mouvementée d’une place marchande transnationale à ben gardane (tunisie). Les Cahiers d’EMAM. Études sur le Monde arabe et la Méditerranée\n\n\nDoron A. 2017. Devenir importateur transnational en tunisie: Articulations entre mobilités et relations sociales. Espace populations sociétés. Space populations societies\n\n\nDoron A. 2018. Routes tunisiennes de l’échange marchand: Géographie post-révolution d’un réseau de marchés mondialisés.PhD thesis, Université Toulouse le Mirail-Toulouse II."
-  },
-  {
-    "objectID": "equipe/diongue.html",
-    "href": "equipe/diongue.html",
-    "title": "Momar DIONGUE",
-    "section": "",
-    "text": "Professeur de Géographie\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\n Sénégal"
-  },
-  {
-    "objectID": "equipe/diongue.html#thème-de-recherche",
-    "href": "equipe/diongue.html#thème-de-recherche",
-    "title": "Momar DIONGUE",
-    "section": " Thème de recherche",
-    "text": "Thème de recherche\n\n\nGéographie humaine\n…"
-  },
-  {
-    "objectID": "equipe/diongue.html#enseignements-dispensés",
-    "href": "equipe/diongue.html#enseignements-dispensés",
-    "title": "Momar DIONGUE",
-    "section": " Enseignements dispensés",
-    "text": "Enseignements dispensés\n\n\nA compléter"
-  },
-  {
-    "objectID": "equipe/diongue.html#données-mobilisées",
-    "href": "equipe/diongue.html#données-mobilisées",
-    "title": "Momar DIONGUE",
-    "section": " Données mobilisées",
-    "text": "Données mobilisées\n\nA compléter"
-  },
-  {
-    "objectID": "equipe/diongue.html#publications",
-    "href": "equipe/diongue.html#publications",
-    "title": "Momar DIONGUE",
-    "section": " Publications",
-    "text": "Publications\n\n\nDiongue M. 2010. Périurbanisation différentielle: Mutations et reorganisation de l’espace à l’est de la région dakaroise (diamniadio, sangalkam et yene), sénégal. Carnets de géographes\n\n\nDiongue M. 2014. Périphérie urbaine et risques d’inondation à dakar (sénégal): Le cas de yeumbeul nord. Eso Travaux et documents, Résumés des Travaux 37: 45–54\n\n\nLesteven G, Pochet P, Parvex A, Diongue M. 2025. Mobility resilience to climate change: People’s adaptation of daily travel and road infrastructure to recurrent flooding in dakar, senegal. Built Environment 51: 406–420\n\n\nTimera MB, Diongue M, Sakho P, Diagne A, Niang-Diène A. 2018. Champ épistémique des travaux des géographes paul pélissier et cheikh ba: Entre complémentarités, recoupements et débordements disciplinaires. Cahiers de géographie du Québec 62: 169–189\n\n\nTimera MB, Diongue M, Thiam O. 2019. L’élection présidentielle de février 2019 au sénégal. Entre renouveau de l’échiquier politique et percée du vote régionaliste. EchoGéo"
-  },
-  {
-    "objectID": "FRA.html",
-    "href": "FRA.html",
-    "title": "Polarisation - France",
-    "section": "",
-    "text": "On propose ici un mini-atlas des principaux résultats de l’enquête obtenus dans chacun des pays."
-  },
-  {
-    "objectID": "FRA.html#echantillonage",
-    "href": "FRA.html#echantillonage",
-    "title": "Polarisation - France",
-    "section": "(1) Echantillonage",
-    "text": "(1) Echantillonage\nNous présentons tout d’abord les principales caractéristiques de l’échantillon en termes de lieux, disciplines, âge et sexe.\n\nLieux d’enquête\n\n\n\nVilles ou régions dans lesquelles l’enquête a été réalisée\n\n\n\nn\n%\nval%\n\n\n\n\nLe Havre\n205\n32.7\n32.7\n\n\nLyon\n151\n24.1\n24.1\n\n\nParis\n271\n43.2\n43.2\n\n\nTotal\n627\n100.0\n100.0\n\n\n\n\n\n\n\nDomaines d’études\n\n\n\nRépartition par domaines d’étude\n\n\n\nn\n%\nval%\n\n\n\n\nArt, Lettres, Cinéma\n63\n10.0\n10.0\n\n\nEconomie, Gestion\n83\n13.2\n13.2\n\n\nSciences exactes, Ingénieurs\n106\n16.9\n16.9\n\n\nSanté, Médecine\n147\n23.4\n23.4\n\n\nSciences Politiques, Droit\n85\n13.6\n13.6\n\n\nSciences Humaines et Sociales\n143\n22.8\n22.8\n\n\nTotal\n627\n100.0\n100.0\n\n\n\n\n\n\n\nSexe\n\n\n\nRépartition par sexe\n\n\n\nn\n%\nval%\n\n\n\n\nFemme\n350\n55.8\n56\n\n\nHomme\n275\n43.9\n44\n\n\nNA\n2\n0.3\nNA\n\n\nTotal\n627\n100.0\n100\n\n\n\n\n\n\n\nÂge\n\n\n\nDistribution des âges\n\n\n\nn\n%\nval%\n\n\n\n\n18 ans et -\n13\n2.1\n2.3\n\n\n19 ans\n75\n12.0\n13.0\n\n\n20 ans\n226\n36.0\n39.2\n\n\n21 ans\n137\n21.9\n23.7\n\n\n22 ans\n62\n9.9\n10.7\n\n\n23 ans\n22\n3.5\n3.8\n\n\n24 ans\n16\n2.6\n2.8\n\n\n25 ans et +\n26\n4.1\n4.5\n\n\nNA\n50\n8.0\nNA\n\n\nTotal\n627\n100.0\n100.0"
-  },
-  {
-    "objectID": "FRA.html#pays-attractifs-et-répulsifs",
-    "href": "FRA.html#pays-attractifs-et-répulsifs",
-    "title": "Polarisation - France",
-    "section": "(2) Pays attractifs et répulsifs",
-    "text": "(2) Pays attractifs et répulsifs\n\nSaillance\nQuels pays ont été les plus cités, quelle qu’en soit la raison ?\n\n\n\nFrance : 20 pays les plus cités par les étudiants (Enquête EuroBroadmap 2009)\n\n\n\n\n\n\n\n\n\n\nrang\ncode\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nUSA\nUnited States of America\n607\n400\n65.9\n\n\n2\nGBR\nU.K. of Great Britain and Northern Ireland\n607\n291\n47.9\n\n\n3\nCHN\nChina\n607\n248\n40.9\n\n\n4\nESP\nSpain\n607\n240\n39.5\n\n\n5\nITA\nItaly\n607\n201\n33.1\n\n\n6\nDEU\nGermany\n607\n190\n31.3\n\n\n7\nCAN\nCanada\n607\n179\n29.5\n\n\n8\nJPN\nJapan\n607\n177\n29.2\n\n\n9\nIRQ\nIraq\n607\n168\n27.7\n\n\n10\nRUS\nRussian Federation\n607\n165\n27.2\n\n\n11\nAUS\nAustralia\n607\n157\n25.9\n\n\n12\nAFG\nAfghanistan\n607\n110\n18.1\n\n\n13\nIRN\nIran (Islamic Republic of)\n607\n106\n17.5\n\n\n14\nCHE\nSwitzerland\n607\n85\n14.0\n\n\n16\nIND\nIndia\n607\n78\n12.9\n\n\n16\nSWE\nSweden\n607\n78\n12.9\n\n\n18\nBEL\nBelgium\n607\n70\n11.5\n\n\n18\nIRL\nIreland\n607\n70\n11.5\n\n\n19\nBRA\nBrazil\n607\n62\n10.2\n\n\n20\nISR\nIsrael\n607\n61\n10.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAttraction\nQuels pays ont été les plus cités comme lmieux où les étudiants souhaiteraient vivre dans un future proche ?\n\n\n\nFrance : 20 pays les plus attractifs pour les étudiants (Enquête EuroBroadmap 2009)\n\n\n\n\n\n\n\n\n\n\nrang\ncode\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nUSA\nUnited States of America\n607\n301\n49.6\n\n\n2\nGBR\nU.K. of Great Britain and Northern Ireland\n607\n241\n39.7\n\n\n3\nESP\nSpain\n607\n212\n34.9\n\n\n4\nITA\nItaly\n607\n167\n27.5\n\n\n5\nCAN\nCanada\n607\n165\n27.2\n\n\n6\nAUS\nAustralia\n607\n145\n23.9\n\n\n7\nDEU\nGermany\n607\n114\n18.8\n\n\n8\nJPN\nJapan\n607\n83\n13.7\n\n\n9\nSWE\nSweden\n607\n74\n12.2\n\n\n10\nCHE\nSwitzerland\n607\n58\n9.6\n\n\n11\nIRL\nIreland\n607\n53\n8.7\n\n\n12\nBEL\nBelgium\n607\n43\n7.1\n\n\n12\nARG\nArgentina\n607\n43\n7.1\n\n\n14\nBRA\nBrazil\n607\n35\n5.8\n\n\n14\nNZL\nNew Zealand\n607\n35\n5.8\n\n\n16\nCHN\nChina\n607\n34\n5.6\n\n\n17\nNOR\nNorway\n607\n33\n5.4\n\n\n18\nNLD\nNetherlands\n607\n26\n4.3\n\n\n18\nFIN\nFinland\n607\n26\n4.3\n\n\n20\nMAR\nMorocco\n607\n25\n4.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRépulsion\nQuels pays ont été les plus cités comme lieux où les étudiants ne souhaiteraient pas vivre dans un future proche ?\n\n\n\nFrance : 20 pays les plus répulsifs pour les étudiants (Enquête EuroBroadmap 2009)\n\n\n\n\n\n\n\n\n\n\nrang\ncode\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nCHN\nChina\n607\n214\n35.3\n\n\n2\nIRQ\nIraq\n607\n167\n27.5\n\n\n3\nRUS\nRussian Federation\n607\n147\n24.2\n\n\n4\nAFG\nAfghanistan\n607\n109\n18.0\n\n\n5\nIRN\nIran (Islamic Republic of)\n607\n103\n17.0\n\n\n6\nUSA\nUnited States of America\n607\n99\n16.3\n\n\n7\nJPN\nJapan\n607\n94\n15.5\n\n\n8\nDEU\nGermany\n607\n76\n12.5\n\n\n10\nIND\nIndia\n607\n57\n9.4\n\n\n10\nPRK\nDemocratic People’s Republic of Korea\n607\n57\n9.4\n\n\n11\nISR\nIsrael\n607\n54\n8.9\n\n\n12\nGBR\nU.K. of Great Britain and Northern Ireland\n607\n50\n8.2\n\n\n13\nDZA\nAlgeria\n607\n49\n8.1\n\n\n14\nPAK\nPakistan\n607\n36\n5.9\n\n\n15\nITA\nItaly\n607\n34\n5.6\n\n\n16\nMEX\nMexico\n607\n32\n5.3\n\n\n18\nTUR\nTurkey\n607\n29\n4.8\n\n\n18\nROU\nRomania\n607\n29\n4.8\n\n\n19\nESP\nSpain\n607\n28\n4.6\n\n\n22\nCHE\nSwitzerland\n607\n27\n4.4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthèse"
-  },
-  {
-    "objectID": "FRA.html#villes-attractives-et-répulsives",
-    "href": "FRA.html#villes-attractives-et-répulsives",
-    "title": "Polarisation - France",
-    "section": "(3) Villes attractives et répulsives",
-    "text": "(3) Villes attractives et répulsives\n\nSaillance\nQuels villes ont été les plus citées, quelle qu’en soit la raison ?\n\n\n\nFrance : 20 villes les plus citées par les étudiants (Enquête EuroBroadmap 2009)\n\n\nrang\nville\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nNew York City\nUSA\n577\n324\n56.2\n\n\n2\nLondon\nGBR\n577\n322\n55.8\n\n\n3\nBerlin\nDEU\n577\n166\n28.8\n\n\n4\nTokyo\nJPN\n577\n152\n26.3\n\n\n5\nBeijing\nCHN\n577\n139\n24.1\n\n\n6\nBarcelona\nESP\n577\n136\n23.6\n\n\n7\nBaghdad\nIRQ\n577\n134\n23.2\n\n\n8\nRome\nITA\n577\n110\n19.1\n\n\n9\nMoskva\nRUS\n577\n106\n18.4\n\n\n10\nMadrid\nESP\n577\n96\n16.6\n\n\n11\nLos Angeles\nUSA\n577\n92\n15.9\n\n\n12\nKabul\nAFG\n577\n84\n14.6\n\n\n13\nSydney\nAUS\n577\n80\n13.9\n\n\n14\nMontreal\nCAN\n577\n59\n10.2\n\n\n15\nDublin\nIRL\n577\n57\n9.9\n\n\n16\nMexico City\nMEX\n577\n56\n9.7\n\n\n18\nBrussels\nBEL\n577\n48\n8.3\n\n\n18\nSan Francisco\nUSA\n577\n48\n8.3\n\n\n19\nAlgiers\nDZA\n577\n46\n8.0\n\n\n20\nJerusalem\nISR\n577\n41\n7.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAttraction\nQuels villes ont été les plus citées comme lieux où les étudiants souhaiteraient vivre dans un futur proche ?\n\n\n\nFrance : 20 villes les plus attractives pour les étudiants (Enquête EuroBroadmap 2009)\n\n\nrang\nville\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nLondon\nGBR\n577\n267\n46.3\n\n\n2\nNew York City\nUSA\n577\n254\n44.0\n\n\n3\nBarcelona\nESP\n577\n128\n22.2\n\n\n4\nBerlin\nDEU\n577\n101\n17.5\n\n\n5\nRome\nITA\n577\n86\n14.9\n\n\n6\nSydney\nAUS\n577\n73\n12.7\n\n\n7\nMadrid\nESP\n577\n68\n11.8\n\n\n8\nTokyo\nJPN\n577\n64\n11.1\n\n\n9\nLos Angeles\nUSA\n577\n61\n10.6\n\n\n10\nMontreal\nCAN\n577\n58\n10.1\n\n\n11\nSan Francisco\nUSA\n577\n47\n8.1\n\n\n12\nDublin\nIRL\n577\n42\n7.3\n\n\n13\nBuenos Aires\nARG\n577\n35\n6.1\n\n\n14\nBrussels\nBEL\n577\n31\n5.4\n\n\n14\nAmsterdam\nNLD\n577\n31\n5.4\n\n\n16\nMiami\nUSA\n577\n30\n5.2\n\n\n17\nStockholm\nSWE\n577\n29\n5.0\n\n\n18\nToronto\nCAN\n577\n25\n4.3\n\n\n18\nQuebec\nCAN\n577\n25\n4.3\n\n\n20\nFlorence\nITA\n577\n21\n3.6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRépulsion\nQuels villes ont été les plus citées comme lieux où les étudiants ne souhaiteraient pas vivre dans un futur proche ?\n\n\n\nFrance : 20 villes les plus répulsives pour les étudiants (Enquête EuroBroadmap 2009)\n\n\nrang\nville\npays\néchantillon\nréponses\nproportion (%)\n\n\n\n\n1\nBaghdad\nIRQ\n577\n133\n23.1\n\n\n2\nBeijing\nCHN\n577\n130\n22.5\n\n\n3\nMoskva\nRUS\n577\n98\n17.0\n\n\n4\nTokyo\nJPN\n577\n88\n15.3\n\n\n5\nKabul\nAFG\n577\n84\n14.6\n\n\n6\nNew York City\nUSA\n577\n70\n12.1\n\n\n7\nBerlin\nDEU\n577\n65\n11.3\n\n\n8\nLondon\nGBR\n577\n55\n9.5\n\n\n9\nMexico City\nMEX\n577\n49\n8.5\n\n\n10\nAlgiers\nDZA\n577\n45\n7.8\n\n\n11\nTehran\nIRN\n577\n37\n6.4\n\n\n12\nJerusalem\nISR\n577\n34\n5.9\n\n\n13\nLos Angeles\nUSA\n577\n31\n5.4\n\n\n14\nMadrid\nESP\n577\n28\n4.9\n\n\n16\nRome\nITA\n577\n24\n4.2\n\n\n16\nHong Kong\nHKG\n577\n24\n4.2\n\n\n16\nShanghai\nCHN\n577\n24\n4.2\n\n\n18\nMumbai\nIND\n577\n22\n3.8\n\n\n19\nDubai\nARE\n577\n19\n3.3\n\n\n20\nNew Delhi\nIND\n577\n18\n3.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthèse"
+    "text": "Publications\n\n\nBerthomière W, Fromentin J, Hochedez C, Imbert C, Lessault D, Pistre P, Przybyl S. 2021. Présences étrangères dans les campagnes du sud-ouest de la france. Contribution d’initiatives récentes à la diversification sociale et économique des espaces ruraux. Cybergeo: European Journal of Geography\n\n\nDoignon Y, Pistre P. 2025. L’écart d’âge entre conjoints. Atlas de la population française: 211–215\n\n\nFromentin J, Pistre P. 2021. L’immigration dans les campagnes françaises : Des effectifs limités mais des origines qui ne cessent de se diversifier. Population Societes 591: 1–4 Available at: https://www.cairn.info/revue-population-et-societes-2021-7-page-1.htm [Accessed January 23, 2023]\n\n\nHochedez C, Lessault D, Pistre P. 2024. Enquêter les migrations internationales dans des espaces de faible densité. Retours réflexifs sur l’articulation d’approches statistiques et d’approches de terrain plurielles. In Annales de géographieArmand Colin; 25–51.\n\n\nPistre P. 2021. Rester à la campagne, en partir ou y revenir. Métropolitiques Available at: https://metropolitiques.eu/Rester-a-la-campagne-en-partir-ou-y-revenir.html [Accessed January 23, 2023]"
   }
 ]

@@ -1,0 +1,76 @@
+---
+title: "Aliou NDAO"
+name: "NDAO Aliou"
+image : img/ndao.jpg
+bibliography: biblio/ndao.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Coordination
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/ndao.jpg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: Université Gaston Berger (UGB) - Laboratoire Leïdi
+statut: Maître de Conférence en Géographie
+pays: Sénégal
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [ndao.aliou@ugb.edu.sn](mailto:ndao.aliou@ugb.edu.sn)
+
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+
+-   Mutation des campagnes 
+-   Nouvelle économie rurale 
+-   Mobilités, transports, vie de relations
+-   Bassin arachidier
+-   Sénégal
+
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   Techniques d'investigation
+-   Relations ville-campagne
+
+</div>
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

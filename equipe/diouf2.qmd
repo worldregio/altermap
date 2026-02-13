@@ -1,0 +1,77 @@
+---
+title: "Ibrahima Faye DIOUF"
+name: "DIOUF Ibrahima Faye"
+image : img/diouf.jpeg
+bibliography: biblio/diouf.bib
+nocite: '@*'
+csl: geo.csl
+categories: 
+- Coordination
+- Enseignant·es
+about:
+  template: marquee
+  image:  img/diouf.jpeg
+  image-width: 18em
+  image-shape: rounded
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+      
+affiliation: Université Cheikh Anta Diop (UCAD)
+statut: Maître de conférence en Géographie
+pays: Sénégal
+title-block-categories: false
+
+format:
+  html: 
+    css: styles_bis.css
+---
+
+::: {#profil}
+::: {#statut}
+{{< meta statut >}}
+:::
+
+::: {#affiliation}
+{{< meta affiliation >}}
+:::
+
+::: {#pays}
+<i class="bi bi-globe2"></i> {{< meta pays >}}\
+:::
+:::
+
+- Contact : [ibrahimafaye.diouf@ucad.edu.sn](mailto:ibrahimafaye.diouf@ucad.edu.sn)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
+
+::: {#liste}
+
+-   Rural
+-   Foncier
+-   Agriculture
+-   Système alimentaire
+-   Périurbain
+
+:::
+
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
+
+<div>
+
+-   Analyse de documents géographiques (L)
+-   Cartographie (L)
+-   Stratégies spatiales traditionnelles (M1)
+
+</div>
+
+
+
+## <i class="bi bi-file-earmark-text"></i> Publications
+
+::: {#refs}
+:::

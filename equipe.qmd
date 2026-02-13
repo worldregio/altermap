@@ -1,6 +1,6 @@
 ---
 title: "**Equipe**"
-image : img/participants.jpg
+image : img/ucad2026.jpg
 listing:
   id: participants
   fields: [image, name, affiliation, pays]

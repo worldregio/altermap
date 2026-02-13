@@ -22,7 +22,7 @@ about:
       href: https://github.com
       
 affiliation: Université Cheikh Anta Diop (UCAD) - FASTEF
-statut: Professeur de Géographie
+statut: Professeur de Géographie, Doyen de la FALSH
 pays: Sénégal
 title-block-categories: false
 
@@ -45,32 +45,27 @@ format:
 :::
 :::
 
-## <i class="bi bi-ui-checks-grid"></i> Thème de recherche
+- Contact : [mamadou.timera@ucad.edu.sn](mailto:mamadou.timera@ucad.edu.sn)
+
+## <i class="bi bi-ui-checks-grid"></i> Thèmes de recherche
 
 ::: {#liste}
 
-- Géographie humaine
-- Didactique de la géographie
-- Analyse spatiale
-- Aménagement du territoire
+-   A compléter
 
 :::
 
-## <i class="bi bi-person-video3"></i> Enseignements dispensés
+## <i class="bi bi-person-video3"></i> Enseignements liés au projet
 
 <div>
 
 -   A compléter
--
--
+
+
 
 </div>
 
-## <i class="bi bi-clipboard-data"></i> Données mobilisées
 
--   A compléter
--
--
 
 ## <i class="bi bi-file-earmark-text"></i> Publications
 

@@ -10,6 +10,20 @@ website:
         text: "En bref"
       - href: equipe.qmd
         text: Equipe
+      - text: Groupes de travail
+        menu:
+          - href: axe1.qmd  
+            text: "1. Découpages du Monde"
+          - href: axe2.qmd  
+            text: "2. Limites urbain-rural"            
+          - href: axe3.qmd  
+            text: "3. Changement climatique"
+          - href: axe4.qmd  
+            text: "4. Maillages territoriaux" 
+          - href: axe5.qmd  
+            text: "5. Trajectoires de vie"
+          - href: axe6.qmd  
+            text: "6. Habiter la ville"             
       - text: Sources & archives
         menu:
           - text: Archives EuroBroadMap (2010)

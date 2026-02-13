@@ -1,0 +1,53 @@
+---
+title: "1. Représentations et découpages du Monde "
+subtitle: "Projet Altermap"
+author: "X, Y, Z ..."
+date: "2026-03-01"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: 
+      light: minty    
+      dark: solar
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: styles.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Objectifs
+
+
+
+## Expériences
+
+
+
+## Résultats
+
+
+
+
+
+
+
+
+
