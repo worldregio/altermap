@@ -1,5 +1,5 @@
 ---
-title: "2. Représentaions des limites urbain-rural"
+title: "4. Régions, maillages et gouverance territoriale : décentralisation ou déconcentration"
 subtitle: "Projet Altermap"
 author: "X, Y, Z ..."
 date: "2026-03-01"
