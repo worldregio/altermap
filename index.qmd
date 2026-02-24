@@ -7,11 +7,10 @@ about:
   template: trestles  
   image-width: 17em
   image-shape: round
-  image: img/worldmap_sensible.jpg
+  image: img/ucad2026b.jpg
   image-alt: "Carte sensible du Monde"
   links:
-    - text: Pour cette carte, j’ai brodé le monde sur une toile de coton. Les parties en perles correspondent aux lieux que j’aimerais le plus visiter (réalisation d'une élève du Lycée le Corbusier d'Illkirch-Graffenstaden en 2019-20).
-      href: https://www.lyceelecorbusier.eu/dnmade-is/?p=4058
+    - text: Première rencontre des partenaires franco-sénégalais du projet Altermap à Dakar en Février 2026. Photo prise par Adrien Doron (dont la place est vide ...)
 ---
 
 

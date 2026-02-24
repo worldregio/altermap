@@ -1,7 +1,6 @@
 ---
 title: "4. Régions, maillages et gouverance territoriale : décentralisation ou déconcentration"
 subtitle: "Projet Altermap"
-author: "X, Y, Z ..."
 date: "2026-03-01"
 date-format: iso
 lang: fr
@@ -33,15 +32,27 @@ editor:
     wrap: 72
 ---
 
+
+## Participants
+
+- [**Cheik BA (coord.)**](/equipe/ba2.html)
+- [Anne BOUHALI](/equipe/ba2.html)
+- [Claude GRASLAND](/equipe/grasland2.html)
+- [Aliou NDAO](/equipe/ndao2.html)
+
+
+
 ## Objectifs
 
-
+![](img/wip.jpg){width=300}
 
 ## Expériences
 
-
+![](img/wip.jpg){width=300}
 
 ## Résultats
+
+![](img/wip.jpg){width=300}
 
 
 

@@ -1,7 +1,6 @@
 ---
 title: "2. Représentaions des limites urbain-rural"
 subtitle: "Projet Altermap"
-author: "X, Y, Z ..."
 date: "2026-03-01"
 date-format: iso
 lang: fr
@@ -32,22 +31,24 @@ editor:
   markdown: 
     wrap: 72
 ---
+## Participants
+
+- [Moumar DIONGUE](/equipe/diongue.html)
+- [**Ibrahima Faye DIOUF (coord.)**](/equipe/diouf2.html)
+- [Jean-Baptiste LANNE](/equipe/lanne2.html)
+- [Malika MADELIN](/equipe/madelin2.html)
+- [**Aliou NDAO (coord.)**](/equipe/ndao2.html)
+- [Pierre PISTRE](/equipe/pistre2.html)
+
 
 ## Objectifs
 
-
+![](img/wip.jpg){width=300}
 
 ## Expériences
 
-
+![](img/wip.jpg){width=300}
 
 ## Résultats
 
-
-
-
-
-
-
-
-
+![](img/wip.jpg){width=300}
