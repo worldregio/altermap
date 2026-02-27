@@ -1,0 +1,49 @@
+---
+title: "Objectif des groupes de travail"
+subtitle: "Projet Altermap"
+date: "2026-03-01"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: 
+      light: minty    
+      dark: solar
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: styles.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+## Constitution des groupes (Janvier-Février 2026)
+
+Le premier séjour des enseignants-chercheurs français à Dakar en janvier 2026 a permis de rencontrer les collègues sénégalais et de proposer six thèmes pouvant se prêter à des expériences pédagogiques dans le domaine des cartes mentales en France et au Sénégal.Ces thèmes ont été ensuite soumis à l'ensemble des participants afin que ceux-ci puissent se positionner sur ceux qui les intéressent le plus. On a demandé également à ceux qui le souhaitaient de se proposer comme coordinateurs. Voici le résultat de la consultation au 1er mars 2026
+
+![Participants ](img/axes.jpg)
+
+
+## Réalisation d'expériences pilotes (Mars-Juin 2026)
+
+Il revient maintenant à chaque groupe de travail de se réunir pour échanger des idées d'expériences pilotes à réaliser entre mars et juin 2026 dans le cadre de nos enesignements. Ces expériences seront idéalement conduites en parallèle au Sénégal et en France afin d'en comparer les résultats. On croisera également les résultats des différents groupes de travail afin de mettre à jour des interactions possibles ou des partages d'expériences. 
+
+## Séminaire de Paris (6-8 Juillet 2026)
+
+Le premier séminaire du projet réunira l'ensemble des groupes de travail sur le campus Condorcet à Paris du 6 au 8 juillet 2026. Il permettra de croiser les résultats des expériences obtenues et de définir des priorités et une stratégie pour l'année universitaire 2026-27 où le projet entrera dans sa phase principale. C'est en effet au cours de cette année universitaire que l'on réalisera des expériences à une échelle plus large, mobilisant les étudiants comme sujet mais aussi comme acteurs des études de cartes mentales.

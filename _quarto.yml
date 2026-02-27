@@ -12,6 +12,8 @@ website:
         text: Equipe
       - text: Groupes de travail
         menu:
+          - href: axe0.qmd  
+            text: "Objectifs"
           - href: axe1.qmd  
             text: "1. Découpages du Monde"
           - href: axe2.qmd  
