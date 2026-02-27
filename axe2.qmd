@@ -33,6 +33,7 @@ editor:
 ---
 ## Participants
 
+- [**Mouhamad Lamine DIALLO (coord)**](/equipe/diallo2.html)
 - [Moumar DIONGUE](/equipe/diongue.html)
 - [**Ibrahima Faye DIOUF (coord.)**](/equipe/diouf2.html)
 - [Jean-Baptiste LANNE](/equipe/lanne2.html)

@@ -24,12 +24,6 @@ website:
             text: "5. Trajectoires de vie"
           - href: axe6.qmd  
             text: "6. Habiter la ville"             
-      - text: Sources & archives
-        menu:
-          - text: Archives EuroBroadMap (2010)
-          - href: EBM001.qmd        
-          - href: SEN.qmd
-          - href: FRA.qmd
       - posts.qmd
     right: 
       - icon: github # add icons as navbar buttons

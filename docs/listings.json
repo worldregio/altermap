@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/2026-02-24-sketchmap/index.html"
+    ]
+  },
+  {
     "listing": "/equipe.html",
     "items": [
       "/equipe/ba2.html",
@@ -19,12 +25,6 @@
       "/equipe/spire2.html",
       "/equipe/timera.html",
       "/equipe/toure2.html"
-    ]
-  },
-  {
-    "listing": "/posts.html",
-    "items": [
-      "/posts/2026-02-24-sketchmap/index.html"
     ]
   }
 ]

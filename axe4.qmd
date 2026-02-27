@@ -37,6 +37,7 @@ editor:
 
 - [**Cheik BA (coord.)**](/equipe/ba2.html)
 - [Anne BOUHALI](/equipe/ba2.html)
+- [Mouhamad Lamine DIALLO](/equipe/diallo2.html)
 - [Claude GRASLAND](/equipe/grasland2.html)
 - [Aliou NDAO](/equipe/ndao2.html)
 

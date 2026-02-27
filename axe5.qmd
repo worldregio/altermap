@@ -37,7 +37,7 @@ editor:
 
 
 - [Anne BOUHALI](/equipe/bouhali2.html)
-- [Mouhamad Lamine DIALLO (?)](/equipe/diallo2.html)
+- [**Mouhamad Lamine DIALLO (coord)**](/equipe/diallo2.html)
 - [Ibrahima Faye DIOUF](/equipe/diouf2.html)
 - [**Adrien DORON (coord.)**](/equipe/doron2.html)
 - [Amandine SPIRE](/equipe/spire2.html)

@@ -38,9 +38,9 @@ editor:
 - [Anne BOUHALI](/equipe/bouhali2.html)
 - [Moumar DIONGUE](/equipe/diongue.html)
 - [Ibrahima Faye DIOUF](/equipe/diouf2.html)
-- [Adrien DORON (coord.)](/equipe/doron2.html)
+- [Adrien DORON](/equipe/doron2.html)
 - [Jean-Baptiste LANNE](/equipe/lanne2.html)
-- [Anastasie MENDY (coord.)](/equipe/mendy.html)
+- [Anastasie MENDY](/equipe/mendy.html)
 - [Amandine SPIRE](/equipe/spire2.html)
 
 
