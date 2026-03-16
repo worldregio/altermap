@@ -34,7 +34,7 @@ editor:
 
 ## Participants
 
-- [Denis CHARTIER (?)](/equipe/chartier.html)
+- [Denis CHARTIER](/equipe/chartier.html)
 - [Claude GRASLAND](/equipe/grasland2.html)
 - [**Malika MADELIN (coord.)**](/equipe/madelin2.html)
 - [**Anastasie MENDY (coord.)**](/equipe/mendy.html)
