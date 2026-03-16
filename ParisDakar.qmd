@@ -1,0 +1,416 @@
+---
+title: "Paris-Dakar 2009"
+subtitle: "Matériel pour exercices pédagogiques"
+author: "Claude Grasland, Mamadou Bouna Timera, Labaly Toure"
+date: "2026-03-11"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: yeti
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: custom.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+```{r}
+library(knitr)
+library(dplyr)
+library(labelled)
+library(readxl)
+library(questionr)
+
+```
+
+
+
+
+## Introduction
+
+On utilise ici un extrait de l'enquête EuroBroadMap 2009 ne comportant que les réponses des étudiants de Paris et de Dakar. On n'a retenu pour cet exercice un petit nombre de variables que les étudiants pourront facilement manipuler à l'aide d'un simple tableur Excel ou, s'il est plus avancé, à l'aide du logiciel R.
+
+
+
+```{r}
+don <- read_xlsx("data/parisdakar/ebmsurvey2009.xlsx",sheet = "data")
+fra <-don %>% filter(sta=="France")
+sen <- don %>% filter(sta=="Sénégal")
+meta <- read_xlsx("data/parisdakar/ebmsurvey2009.xlsx",sheet = "meta")
+source <- read_xlsx("data/parisdakar/ebmsurvey2009.xlsx",sheet = "source")
+```
+
+
+La feuille data comporte 479 lignes, chacune correspondant aux réponses d'un étudiant français ou sénégalais. L'anaonymat des étudiants est préservé grâce à un code unique.
+
+```{r}
+kable(head(don))
+```
+
+
+La définition des variables retenues est présentée dans la feuille de métadonnées en français et en anglais. On se limite ici à l'affichage en français :
+
+```{r}
+kable(meta[,1:2])
+```
+
+
+Enfin le dernier onglet de la feuille excel présente la source et indique la citation du projet et des auteurs de l'enquête.
+
+```{r}
+kable(source)
+
+```
+
+
+## 1. Echantillonage
+On se propose dans cet exercice de comparer les caractéristiques des deux échantillons d'étudiants qui ont été collectés respectivement à Paris et Dakar en 2019. L'objectif du projet EuroBroadMap était d'enquêter des étudiants de 3e année de licence et d'arriver dans chaque ville  à un effectif de 240 étudiants répartis en 6 domaines d'études. 
+
+
+### Nombre de réponses
+
+```{r}
+tab<-table(don$cit)
+freq(tab,valid = F, total = T)
+```
+
+Il y a eu 208 réponses à Dakar et 271 à Paris. L'objectif de 240 réponses par ville n'a donc pas été tout à fait atteint à Dakar et légèrement dépassé à Paris.
+
+
+
+
+### Domaines d'étude
+
+Les étudiants devaient être échantillonés dans six domaines d'étude : art et littérarure (ART), économie et gestion (BUS), sciences de l'ingénieur, mathématiques, physique et biologie (ENG), santé, pharmaie  et médecine (HEA), sciences politiques et droit (POP), sciences humaines et sociales (SHS). On dispose de cette variable que pour l'échantillon des étudiants de Paris où les quotas semblent assez équilbrés
+
+```{r}
+tab<-table(don$stu)
+freq(tab,valid = F,total = T)
+```
+
+Dans le cas de Dakar,on ignore si les quotas ont été respectés car le champs idenifiant les dommaines d'étude n'a pas été enregistré.
+
+
+### Sexe
+
+```{r}
+par(mfrow=c(1,1))
+don$sex<-as.factor(don$sex)
+levels(don$sex) <- c("Femmes", "Hommes")
+tab<-table(don$cit, don$sex)
+lprop(tab)
+mosaicplot(tab, col=c("lightgreen","lightyellow"),main = "Sexe des étudiants", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" )
+```
+
+L'échantillon de Dakar comporte une nette majorité d'hommes. Celui de Paris une légère majorité de femmes. Dans le cas français, il existe peu de variations du sex-ratio par discipline, même si les femmes sont plus nombreuses dans les domaines artisitiques et moins nombreuses en économie-gestion et sciences de l'ingénieur.
+
+```{r}
+par <- don %>% filter(cit=="Paris")
+tab <- table(par$sex, par$stu)
+cprop(tab)
+```
+
+
+### Âge
+
+La consigne étant de cibler si possible des étudiants de 3e année d'universitaire, on pouvait s'attendre à un âge modal d'environ 20 ans. or, si tel est bien le cas à Paris, il n'en va pas de même à Dakar où la majorité des étudiants enquêtés avaient plutôt de 26 à 30 ans.
+
+```{r}
+boxplot(don$age~don$cit, horizontal=T,ylim = c(15, 40),
+        ylab= "Ville d'enquête", xlab="âge des étudiants", main = "Distribution des âges des étudiants",sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" )
+```
+
+
+
+## 2. Variables de cadrage
+
+En dehors des variables utilisées pour définir l'échantillon, quelques variables de cadrage ont été retenus pour analyser les résultats aux questions constituant le coeur du questionnaire.
+
+### Niveau économique familial
+
+L'autoévaluation du niveau économique a été faite sur une échelle graphique comportant quatre cases. Mais les étudiants ont souvent coché des cases situées sur les lignes séparant les cases, ce qui aboutissait à 9 réponses possibles au lieu de 4. Nous avons procédé à un regroupement pour revenir à 4 niveaux en prenant par défaut le niveau le plus pas en cas d'ambiguïté. On obtient les résultats suivants pour les deux pays : 
+
+```{r}
+table(don$inc)
+don$inc4<-as.factor(don$inc)
+levels(don$inc4)<-c("1 très bas","1 très bas","2.bas","2.bas","3.haut","3.haut","4.très haut","4.très haut")
+tab<-table(don$cit, don$inc4)
+lprop(tab)
+mypal=rainbow(10)
+mosaicplot(tab,,col =mypal,main = "Autoévaluation de la richesses familiale", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" ,las = 1)
+```
+
+On constate - sans surprise - que l'autoévaluation de leur niveau économique par les étudiants est différente dans les deux pays et sensiblement plus élevé dans le cas des étudiants français. 
+
+
+### Langues parlées
+
+
+#### Langue maternelle
+
+Nous avons tout d'abord examine les langues maternelles déclarées par les étudiants à l'aide de la question relative à la langue principale parlée à l'âge de cinq ans. Les résultats des deux pays sont très différents.
+
+
+```{r}
+langsen <- sen %>% filter(is.na(lan)==F) %>%
+                   group_by(lan) %>% 
+                   summarise(n= n())  %>%
+                   mutate(rang = rank(-n),
+                              pct = 100*n/sum(n)) %>%
+                   select(rang, lan, n, pct) %>%
+                   arrange(rang)
+
+kable(langsen, digits = c(0,0,0,1),col.names = c("rang","Langue","nb. réponses", "%"),
+      caption = "Langues maternelles des étudiants sénégalais")
+```
+
+
+```{r}
+langfra <- fra %>% filter(is.na(lan)==F) %>%
+                   group_by(lan) %>% 
+                   summarise(n= n())  %>%
+                   mutate(rang = rank(-n),
+                              pct = 100*n/sum(n)) %>%
+                   select(rang, lan, n, pct) %>%
+                   arrange(rang)
+
+kable(langfra, digits = c(0,0,0,1),col.names = c("rang","Langue","nb. réponses", "%"),
+      caption = "Langues maternelles des étudiants français")
+```
+
+
+De prime abord, la diversité semble plus importante en France puisqu'on trouve 13 langues maternelles différentes au Sénégal contre 17 en France. Mais si on raisonne en termes de concentration la réponse est inverse. En France, le français regroupe 87% des réponses suivi par l'arabe (3%) et l'anglais (2%). Au Sénégal, la première langue maternelle est le  Wolof (39%) suivi du Sere (20%), du Diola (16%) et du Fulah (8%).
+
+
+#### Diversité linguistique
+
+En totalisant l'ensemble des langues que l'étudiant connaît ou a pratiqué depuis son enfance, on obtient une mesure de la diversité de son univers linguistique. 
+
+
+```{r}
+sel <- don %>% filter(nblan >0)
+sel$nblan2 <- as.factor(sel$nblan)
+levels(sel$nblan2)<-c("1","2","3","4+","4+","4+")
+tab<-table(sel$cit, sel$nblan2)
+lprop(tab)
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Diversité linguistique", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" ,las = 1, ylab ="Nb.de langues parlées")
+```
+
+On voit que la plupart des étudiants pratiquent ou ont pratiqué trois langues et que seuls 15 % pratiquent quatre langues et plus. Au Sénégal, la situation la plus fréquente est la pratique de trois ou quatre langues et 30% des étudiants pratiquent quatre langues ou plus. 
+
+
+### Mobilité internationale 
+
+L'expérience du Monde des étudiants a pu être évaluée par deux questions, l'une portant sur les pays où ils ont séjourné plus de mois (migrations) et l'autre sur les six derniers pays qu'ils ont visité même si ce n'est que pour quelques jours à l'occasion de vacances ou voyages d'étude (mobilités). 
+
+#### Migrations
+
+
+```{r}
+tab<-table(don$cit, don$nbmig)
+lprop(tab)
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Migrations internationales", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" ,las = 1, ylab ="Nb.séjours > 6 mois")
+```
+
+Il n'existe pas de différences significatives entre les étudianst français et sénégalais pour le critère des séjours de plus de six mois à l'étranger. Dans les deux cas, la très grande majorité des étudiants (84 à 87%) n'a pas effectué de séjour de plus de six mois dans un autre pays. 
+
+#### Mobilités
+
+
+```{r}
+tab<-table(don$cit, don$nbvis)
+lprop(tab)
+mypal=rainbow(15)
+mosaicplot(tab,col =mypal,main = "Mobilités internationales", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" ,las = 1, ylab ="Nb. visites (max. 5")
+```
+
+On trouve en revanche une différence entre les deux pays dans le cas des séjours de courte durée. La majorité des étudiants français ont cité le maximum de pays proposé dans la réponse alors qu'à l'inverse la majorité des étudiants sénégalais n'en ont coté aucun
+
+### Religion
+
+Cette question délicate a été posée en deux temps dans le questionnaire EuroBroadMap en demandant d'abord aux étudiants s'ils avaient une religion ou une croyance de type religieux. Puis en leur faisant préciser celle-ci s'ils en étaient d'accord. On notera qu'on a regroupé les non réponses et les refus de répondre avec la déclaration d'absence de pratique religieuse. 
+
+
+#### Croyance religieuse
+
+
+```{r}
+don$rel <- as.factor(don$rel)
+levels(don$rel) <- c("Non ou refus","Oui")
+tab<-table(don$cit, don$rel)
+lprop(tab)
+mosaicplot(tab, col=c("lightgreen","lightyellow"),main = "Déclaration d'une croyance religieuse", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" )
+```
+
+
+Seuls 36% des étudiants français ont déclaré une croyance religieuse contre 88% des étudiants sénégalais. Même si cette question ne recoupe pas exactement la pratique elle témoigne d'une différence fondamentale entre les deux échantillons observés.
+
+#### Religions déclarées
+
+
+```{r}
+relsen <- sen %>% filter(rel == "Yes") %>%
+                   group_by(rel_name) %>% 
+                   summarise(n= n())  %>%
+                   mutate(rang = rank(-n),
+                              pct = 100*n/sum(n)) %>%
+                   select(rang, rel_name, n, pct) %>%
+                   arrange(rang)
+
+kable(relsen, digits = c(0,0,0,1),col.names = c("rang","Langue","nb. réponses", "%"),
+      caption = "Religions décalérées des étudiants sénégalais")
+```
+
+Dans le cas du Sénégal, les étudiants qui ont déclaré une religion ont opté à 76% pour la religion musulmane et à 21% pour la religion chrétienne (en général) ou catholique (en particulier). 
+
+```{r}
+relfra <- fra %>% filter(rel == "Yes") %>%
+                   group_by(rel_name) %>% 
+                   summarise(n= n())  %>%
+                   mutate(rang = rank(-n),
+                              pct = 100*n/sum(n)) %>%
+                   select(rang, rel_name, n, pct) %>%
+                   arrange(rang)
+
+kable(relfra, digits = c(0,0,0,1),col.names = c("rang","Langue","nb. réponses", "%"),
+      caption = "Religions décalérées des étudiants français")
+```
+
+Dans le cas français on trouve beaucoup moins de réponses (la plupart des étudiants n'ayant pas déclaré de sentiment religieux) avec une majorité de catholiques (50%) ou chrétiens (23%) mais aussi musulmans (10%) ou juifs (7%). 
+
+
+## 3. Echelles d'appartenance
+
+La questions n'a sans doute pas été posée de la façon la plus satisfaisante mais on peut néanmoins en tirer quelques enseignements. On se limitera ici à l'analyse de la réponse fournie en premier, tout en notant les cas de réponses multiples.
+
+### Différences entre Paris et Dakar
+
+```{r}
+sel <- don %>% filter(is.na(lev)==F)
+sel$lev2<-as.factor(sel$lev)
+
+levels(sel$lev2)<-c("5.Global","2.Infranational","1.Local","3.National","4.Supranational")
+sel$lev2<-as.factor(as.character(sel$lev2))
+tab<-table(sel$cit, sel$lev2)
+lprop(tab)
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Echelle d'appartenance principale", sub = "Source : Timera M.B., Grasland C., 2009, Enquête Eurobroadmap" ,las = 1, ylab ="Réponses")
+```
+
+On voit que les niveaux intermédiaires correspondant aux régions d'un pays (infranational) ou aux régions du Monde (supranational) ont été peu mobilisés dans les deux pays. L'appartenance à l'Europe ou l'Afrique ne semble donc pas privilégiée par les étudiants, tout comme celle à des parties du pays (e.g. Bretagne en France ou Casamance au Sénégal). Les niveaux dominants sont le niveau local au Sénégal (53% des réponses) et le niveau national en France (52% des réponses). Quant au niveau global; il représente 12% des réponses au Sénégal et 16% en France. Nous proposons donc dans les analyses suivantes de regrouper les réponqes en trois classes en fusionnant les réponses 1-2 d'une part  et 4-5 d'autre part.
+
+```{r}
+sel <- don %>% filter(is.na(lev)==F)
+sel$lev3<-as.factor(sel$lev)
+levels(sel$lev3) <- c("Sup","Inf","Inf","Nat","Sup")
+sel$lev3 <-as.factor(as.character(sel$lev3))
+sen <- sel %>% filter(sta=="Sénégal")
+fra <- sel %>% filter(sta=="France")
+
+```
+
+
+
+
+
+### Echelle d'appartenance et sexe
+
+Y-a-t-il des différences significative entre les hommes et les femmes en matière d'échelle d'appartenance dans l'un ou l'autre des deux échantillons. 
+
+```{r}
+par(mfrow=c(1,2), mar=c(3,0,3,0))
+
+## Sénégal
+tab<-table(sen$sex,sen$lev3)
+lprop(tab)
+test<-chisq.test(tab)
+texttest<-paste("chi2 =",round(test$statistic,2), " - p-value = ", round(test$p.value,3))
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Dakar", sub = texttest ,las = 1)
+
+## France
+tab<-table(fra$sex,fra$lev3)
+lprop(tab)
+test<-chisq.test(tab)
+texttest<-paste("chi2 =",round(test$statistic,2), " - p-value = ", round(test$p.value,3))
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Paris", sub = texttest ,las = 1)
+
+```
+
+La réponse est négative dans les deux cas. Tout au plus peut-on observer que les hommes déclarent plus fréquemment l'échelle nationale comme niveau privilégiée d'appartenance en France alors que c'est l'inverse au Sénégal. Mais dans les deux cas, l'échantillonne permet pas de conclure à une relation significative. 
+
+
+
+### Echelle d'appartenance et mobilité internationale
+
+Les étudiants qui ont effectué une mobilité internationale de plus de six mois ont-il des échelles d'appartenance plus globale que ceux qui n'ont jamais séjourné plus de 6 mois dans un pays étranger ?
+
+```{r}
+par(mfrow=c(1,2), mar=c(3,0,3,0))
+
+## Sénégal
+sen$mig <- as.factor(sen$nbmig>0)
+levels(sen$mig) <- c("Non","Oui")
+tab<-table(sen$mig,sen$lev3)
+lprop(tab)
+test<-chisq.test(tab)
+texttest<-paste("chi2 =",round(test$statistic,2), " - p-value = ", round(test$p.value,3))
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Dakar", sub = texttest ,las = 1)
+
+## France
+fra$mig <- as.factor(fra$nbmig>0)
+levels(fra$mig) <- c("Non","Oui")
+tab<-table(fra$mig,fra$lev3)
+lprop(tab)
+test<-chisq.test(tab)
+texttest<-paste("chi2 =",round(test$statistic,2), " - p-value = ", round(test$p.value,3))
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Paris", sub = texttest ,las = 1)
+
+```
+
+Les graphiques suggèrent qu'il semble bien exister une relation dans les deux pays d'enquête. Les étudiants ayant effectué un séjour de 6 mois à l'étranger ont davantage tendance à déclarer des appartenances globales ou supranationales et moins à déclarer des appartenances locales ou nationales. Mais l'échantillon d'étudiants ayant effectués des mobilités internationale est trop faible pour conclure à l'existence d'une relation significative. 
+
+## 4. Lieux attractifs et répulsifs
+
+### Ville
+
+
+
+
+### Pays
+
+(à faire)
+
+
+## 5. Cartes mentales
+
+
+
+(à faire)
+
+
+
+
