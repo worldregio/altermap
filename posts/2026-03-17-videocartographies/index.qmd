@@ -1,0 +1,30 @@
+---
+title: "Vidéocartographies, un dispositif de cartographie filmée"
+description: "Dans Videocartographies : Aïda, Palestine (2009), Till Roeskens met en place un dispositif de cartographie filmée où les habitants du camp d’Aïda dessinent et racontent leur territoire, transformant la carte en un outil narratif"
+author:
+  - name: Nicolas Lambert
+    url: https://altermap.github.io/
+    orcid: 0000-0003-4976-6560
+    affiliation: Ingénieur de recherche CNRS / Centre pour l'analyse spatiale et la géovisualisation (RIATE)
+    affiliation-url: https://riate.cnrs.fr
+date: 2026-03-17
+categories: [Cartes mentales, Subjective, Vidéo, Documentaire] # self-defined categories
+citation: 
+  url: https://altermap.github.io/fr/2026-03-17-videocartographies/ 
+image: videocartographies.webp
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+**Vidéocartographies : Aïda, Palestine. Un documentaire réalisé par Till Roeskens (2009)**
+
+La carte mentale constitue une méthode qualitative de recueil d’informations spatiales sur un territoire donné. Introduite en Angleterre dans les années 1970, d’abord dans le champ des études urbaines, elle vise à saisir les « connaissances » spatiales individuelles, autrement dit la manière dont les individus perçoivent, organisent et hiérarchisent l’espace. Concrètement, la personne enquêtée est invitée à dessiner, à main levée, sa propre représentation de l’espace géographique sur une feuille blanche. On parle alors de *sketch maps* (« cartes-croquis » ou « cartes-esquisses »).
+
+Peut-on pour autant qualifier ces productions de « cartes » ? La question mérite d’être posée. Si elles s’écartent des standards de la cartographie conventionnelle (i.e. positions géographiques précises, codification graphique, etc.), elles n’en demeurent pas moins des dispositifs puissants de récit spatial. Un exemple particulièrement éclairant est proposé par le cinéaste Till Roeskens dans le documentaire [Vidéocartographies : Aïda, Palestine](https://documentsdartistes.org/artistes/roeskens/repro3-8.html), réalisé en 2009. Le dispositif repose sur une idée simple : demander aux habitants du camp de réfugiés d’Aïda Camp, situé à Bethléem en Cisjordanie, au sud de Jérusalem, de dessiner les lieux qu’ils ont traversés ou vécus, afin d’en restituer l’expérience.
+
+Sur le plan technique, le protocole est simple. Une grande feuille est disposée verticalement, face à la caméra. Le dessin apparaît progressivement, au fil du tracé, tandis que la parole accompagne le geste. Les cartes se construisent en temps réel, sous les yeux du spectateur. Les visages restent hors champ. Seule la mise en forme graphique du récit est donnée à voir. Certains tracés sont élémentaires, presque enfantins ; d’autres témoignent d’une structuration spatiale plus élaborée. Mais toutes ont en commun d’exprimer une expérience sociale située, incarnée, de l’espace. Moins « exactes » que des cartes issues de systèmes d’information géographique, elles apparaissent en revanche moins abstraites, et sans doute plus aptes à rendre compte de la dimension vécue des territoires.
+
+Au-delà de leur dimension méthodologique, ces cartes donnent à voir des rapports de pouvoir inscrits dans l’espace. À travers les récits, se dessinent en creux les contraintes de circulation, les logiques de contrôle territorial et les effets de la colonisation dans un contexte marqué par un régime frontalier dissymétrique. Les *sketch maps* deviennent ainsi des supports d’expression politique autant que des outils d’enquête.
+
+Le film rassemble au total six récits, d’une grande intensité, pour une durée d’environ 45 minutes. Il constitue à la fois une expérimentation formelle et une contribution stimulante à la réflexion sur les méthodes qualitatives en géographie et en cartographie critique.
+
+{{< video https://vimeo.com/64089801 >}}
