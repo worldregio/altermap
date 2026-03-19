@@ -371,67 +371,18 @@
     "text": "Publications\n\n\nBodian A, Dacosta H, Diouf RN, Ndiaye EHO, Mendy A. 2016. Contribution à la connaissance de l’aléa pluvial au sénégal grâce à la valorisation des données pluviographiques historiques. Climatologie 13: 38–46\n\n\nDos Santos S, Aholou C, Bon B, Cartier S, Cornou C, Dotsou Y, Duminil J, Feltran G, Gaté R, Gurgel H, et al. 2023. A shared fieldwork area: Fertile ground for interdisciplinary research into cities in the global south. Sustainability science: understand, co-construct, transform (volume 2): 100–103\n\n\nMendy A. 2023. Variabilité des pluies au xxe siècle à dakar, sénégal. Norois 268269: 109–127\n\n\nSantos S dos, Artadji A, Sow PG, Mendy A, Wade CS. 2025. Inondations à dakar: Un défi pour les pouvoirs publics\n\n\nThiaw I, Mendy A, Dacosta H, Sow AA. 2025. La migration de retour à niomré: Défis, opportunités, et perspectives de réintégration. Revue Sociologie, Anthropologie, Psychologie 1"
   },
   {
-    "objectID": "posts/2026-02-24-sketchmap/index.html",
-    "href": "posts/2026-02-24-sketchmap/index.html",
-    "title": "Sketch Map Tool",
+    "objectID": "posts/2026-03-19-polaire/indeq.html",
+    "href": "posts/2026-03-19-polaire/indeq.html",
+    "title": "La projection polaire",
     "section": "",
-    "text": "Comment construire un formulaire d’enquête inccluant des cartes mentales et comment ensuite les numériser pour les utiliser dans un SIG ? Telle est la question à laquelle une équipe allemande a tenté d’apporter une réponse avec l’outil Sketch Map Tool"
+    "text": "La projection polaire est une projection azimutale centrée sur le pôle Nord, dans laquelle la surface de la Terre est projetée sur un plan tangent au pôle. Dans sa version équivalente, elle conserve les surfaces, ce qui permet de comparer correctement les étendues des continents et des océans. En revanche, cette propriété se fait au prix de fortes déformations des formes et des angles à mesure que l’on s’éloigne du centre. Ainsi, des territoires comme l’Australie peuvent apparaître très déformés. Avec cette projection à la forme circulaire, la carte peut être tournée sans forcément privilégier une orientation particulière. Ainsi, cette projection cartographique ne définit ni haut ni bas, mais propose une organisation de l’espace centrée sur le pôle, ce qui rompt avec les représentations plus familières du monde.\n\n\n\n\nLa projection polaire\n\n\n\nQuelques éléments historiques\nDans le contexte des années 1940, marqué par ce que le géographe français Emmanuel de Martonne qualifie d’« ère de la géographie aérienne », les modes de représentation du monde connaissent un profond renouvellement, en lien avec le développement de l’aviation et une vision plus globale des conflits. La projection polaire apparait alors comme un outil particulièrement pertinent. Un exemple emblématique est la carte « One World, One War », réalisée en 1942 par Richard E. Harrison et publiée dans le magazine Fortune (Harrison 1942). En adoptant cette projection particulière, sa carte met en évidence la dimension véritablement mondiale de la Seconde Guerre mondiale, en montrant la proximité relative des continents et la continuité des théâtres d’opérations. Elle rompt ainsi avec les représentations classiques héritées des projections cylindriques, en soulignant qu’il s’agit d’un conflit global, se déroulant à l’échelle de l’ensemble de la planète.\n\n\n\n\nOne World, One War, carte en projection azimutale polaire conçue par Richard Edes Harrison, publiée comme supplément du numéro de mars 1942 de Fortune Magazine.\n\n\n\nUne fois la guerre finie, cette manière de représenter le monde dans sa globalité infuse progressivement dans les milieux diplomatiques. Lors de la création de l’Organisation des Nations unies en 1945, la question d’un emblème universel se pose rapidement. Une première proposition est alors élaborée par l’équipe de graphistes dirigée par Oliver Lincoln Lundquist, au sein des services américains liés à l’ancêtre de la Central Intelligence Agency. Le choix se porte sur une carte du monde en projection polaire, entourée de rameaux d’olivier symbolisant la paix. Le but : donner l’image d’un monde uni et équitable. Et en plus, la forme ronde de cette projection rentre parfaitement des les badges prévus pour l’occasion (Capdepuy 2018).\nDans cette première version, les États-Unis occupent une position sur l’axe Nord-Sud, légèrement en dessous du centre de la carte. Les pays de l’hémisphère Sud sont, quant à eux, placés dans la partie supérieure (à l’exception de l’Amérique du Sud), séparés de ceux du Nord par une ligne horizontale centrale, tandis que la représentation s’interrompt au-delà de 40° de latitude Sud. En 1946, une version révisée corrige en partie ces déséquilibres en étendant la carte vers le Sud et en modifiant son orientation.\n\n\n\n\nLe Logo des Nations Unies (Bahoken and Lambert 2025)\n\n\n\nAdopté officiellement en 1947 par l’Assemblée générale, cet emblème devient le drapeau d’une organisation qui se veut universelle : une carte du monde entourée de rameaux d’olivier sur fond bleu, symbole d’un idéal de paix partagé à l’échelle planétaire.\n\n\n\n\n\nReferences\n\nBahoken, Françoise, and Nicolas Lambert. 2025. Cartographia : Comment Les géographes (Re)dessinent Le Monde. Paris, France: Armand Colin.\n\n\nCapdepuy, Vincent. 2018. 50 Histoires de Mondialisations : De Néandertal à Wikipédia. Paris, France: Alma éditeur.\n\n\nHarrison, Richard Edes. 1942. “One World, One War.” Carte, projection azimutale polaire.\n\nCitationBibTeX citation:@online{lambert2026,\n  author = {Lambert, Nicolas},\n  title = {La Projection Polaire},\n  date = {2026-03-19},\n  url = {https://altermap.github.io/fr/posts/2026-03-19-polaire/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nLambert, Nicolas. 2026. “La Projection Polaire.” March 19,\n2026. https://altermap.github.io/fr/posts/2026-03-19-polaire/."
   },
   {
-    "objectID": "posts/2026-02-24-sketchmap/index.html#en-bref",
-    "href": "posts/2026-02-24-sketchmap/index.html#en-bref",
-    "title": "Sketch Map Tool",
-    "section": "En bref",
-    "text": "En bref\n\nNous traduisons ici le résumé de l’article rédigé par les auteurs de l’application Sketch Map Tools Klonner et al. (2021).\n\nL’augmentation mondiale du nombre de personnes et de zones touchées par des catastrophes a conduit à la multiplication des approches axées sur l’intégration des connaissances locales dans les processus de réduction des risques de catastrophe. La présente étude montre une méthode permettant de formaliser ces connaissances locales à l’aide de croquis cartographiques dans le contexte des inondations. L’outil Sketch Map Tool permet non seulement de visualiser ces connaissances locales et d’analyser la qualité des données OpenStreetMap, mais aussi de communiquer les résultats de ces analyses de manière compréhensible. Comme cet outil sera open source et que plusieurs analyses sont effectuées automatiquement, il offre également une méthode aux collectivités locales dans les zones où les données historiques ou les moyens financiers pour atténuer les effets des inondations sont limités. Des exemples d’analyses pour deux villes du Brésil montrent les fonctionnalités de l’outil et permettent d’évaluer son applicabilité. Les résultats montrent que l’analyse de l’adéquation des données OpenStreetMap révèle des résultats prometteurs pour déterminer si l’approche de la carte schématique peut être utilisée dans une certaine zone ou si les citoyens pourraient avoir des difficultés à marquer leurs expériences d’inondation. De cette manière, une analyse de la qualité intrinsèque est intégrée dans une approche cartographique participative. De plus, les différents formats de papier proposés pour l’impression permettent non seulement la cartographie individuelle, mais aussi la cartographie de groupe. Les travaux futurs se concentreront sur l’automatisation de toutes les étapes de l’outil afin de permettre aux membres des administrations locales ne disposant pas de connaissances techniques spécifiques d’utiliser l’outil Sketch Map Tool pour leurs propres zones d’étude.\n\nTraduit avec DeepL.com (version gratuite)"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ALTERMAP",
+    "objectID": "equipe.html",
+    "href": "equipe.html",
+    "title": "Equipe",
     "section": "",
-    "text": "Première rencontre des partenaires franco-sénégalais du projet Altermap à Dakar en Février 2026. Photo prise par Adrien Doron (dont la place est vide …)\n  \n\n  \n  \nLe projet ALTERMAP vise à développer l’innovation pédagogique dans le domaine des imaginaires géographiques et des représentations de l’altérité spatiale. Il portera plus précisément sur le rôle des cartes mentales dans l’enseignement de géographie en licence et l’initiation à la recherche en master.\nAssociant des enseignants-chercheurs de l’Université Paris Cité et de l’Université Cheikh Anta Diop ainsi que d’autres universités du Sénégal, il prendra la forme originale de la co-construction d’un questionnaire et de la réalisation d’entretiens sur les représentations de l’Europe en Afrique et de l’Afrique en France. Dans chaque pays le questionnaire sera administré par les étudiants de master ou de doctorat auprès des étudiants de licence et fera l’objet de restitution des résultats dans les enseignements thématiques (géographie sociale, géographie des Nords et des Suds, structure du Monde actuel, mobilités et migrations…) et d’utilisation comme exemple dans les enseignements méthodologiques (méthodes qualitatives, statistiques, cartographie, géomatique …).\nLe projet se clôturera par une école d’été associant les enseignants-chercheurs des deux pays ainsi que des doctorants intéressés pour consolider les acquis de l’enquête en termes méthodologiques. Cette école d’été permettra un partage des expériences réalisées en matière par exemple d’analyse textuelle des discours, de cartographie sensible, de visualisation des espaces attractifs et répulsifs, de modélisation statistique des facteurs déterminants les perceptions de l’altérité.\nIdéalement, cette expérience d’innovation pédagogique débouchera sur l’élaboration de thèses en cotutelles et sur un élargissement de l’enquête à d’autres pays du Nord et du Sud dans le cadre de réponse à des appels d’offres internationaux de l’Union Européenne, l’Union Africaine ou la Banque Mondiale.\n\n\n\n\nInstitutions et financement\n\n\n\n\n\n\nLe projet AlterMap est organisé conjointement conjointement par des enseignants-chercheurs français de l’UFR GHES de l’université Paris-Cité et par leurs homologues sénégalais de l’Université Cheikh Anta Diop (UCAD), l’Université du Sine Saloum Elhadj Ibrahima Niass (USSEIN) et l’Université Gaston Berger de Saint-Louis\nLe financement principal est apporté par les crédits de l’IDEX Innovation Pédagogique de l’Université Paris-Cité 2025\nLe projet associé des enseignants-chercheurs des laboratoires de recherche Géographie-cités, CESSMA Prodig, Ladyss ainsi que des ingénieurs des unités de service Riate et Geoteca.\n     \n\n\n\n\n  \n\n\n\n\n\nCoordinateurs\n\n\n\n\n\n\nClaude GRASLAND\nUniversité Paris Cité,\nUMR Géographie-cités\n\nAnne BOUHALI\nUniversité Paris Cité\nUMR CESSMA\n\n\nCheikh BA\nUCAD - Dakar, Sénégal\nInstitut de Gouvernance territoriale.\n\nLabaly TOURE\nUSSEIN – Kaolack, Sénégal\nDépartement de Géomatique"
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Vidéocartographies, un dispositif de cartographie filmée\n\n\n\n\n\n\nCartes mentales\n\n\nSubjective\n\n\nVidéo\n\n\nDocumentaire\n\n\n\nDans Videocartographies : Aïda, Palestine (2009), Till Roeskens met en place un dispositif de cartographie filmée où les habitants du camp d’Aïda dessinent et racontent leur territoire, transformant la carte en un outil narratif\n\n\n\n\n\nMar 17, 2026\n\n\nNicolas Lambert\n\n\n\n\n\n\n\n\n\n\n\n\nSketch Map Tool\n\n\n\n\n\n\nCartes mentales\n\n\nOutil\n\n\nNumérisation\n\n\n\nUn outil intéressant pour la saisie et la numérisation des cartes mentales\n\n\n\n\n\nFeb 24, 2026\n\n\nClaude Grasland\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "axe5.html",
-    "href": "axe5.html",
-    "title": "5. Trajectoires de vie et mobilités des étudiants",
-    "section": "",
-    "text": "Anne BOUHALI\nMouhamad Lamine DIALLO (coord)\nIbrahima Faye DIOUF\nAdrien DORON (coord.)\nAmandine SPIRE"
-  },
-  {
-    "objectID": "axe5.html#participants",
-    "href": "axe5.html#participants",
-    "title": "5. Trajectoires de vie et mobilités des étudiants",
-    "section": "",
-    "text": "Anne BOUHALI\nMouhamad Lamine DIALLO (coord)\nIbrahima Faye DIOUF\nAdrien DORON (coord.)\nAmandine SPIRE"
-  },
-  {
-    "objectID": "axe5.html#objectifs",
-    "href": "axe5.html#objectifs",
-    "title": "5. Trajectoires de vie et mobilités des étudiants",
-    "section": "Objectifs",
-    "text": "Objectifs"
-  },
-  {
-    "objectID": "axe5.html#expériences",
-    "href": "axe5.html#expériences",
-    "title": "5. Trajectoires de vie et mobilités des étudiants",
-    "section": "Expériences",
-    "text": "Expériences"
-  },
-  {
-    "objectID": "axe5.html#résultats",
-    "href": "axe5.html#résultats",
-    "title": "5. Trajectoires de vie et mobilités des étudiants",
-    "section": "Résultats",
-    "text": "Résultats"
+    "text": "Vous trouverez ci-dessous la liste de toutes celles et ceux qui participent ou ont participé d’une manière ou d’une autre au projet Altermap.\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Nom\n        \n         \n          Affiliation(s)\n        \n         \n          Pays\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nNom\n\n\nAffiliation(s)\n\n\nPays\n\n\n\n\n\n\n\n\n\nBA Cheikh Abdoul Ahad Mbacké\n\n\nUniversité Cheikh Anta Diop (UCAD) - Institut de la gouvernance territoriale\n\n\nSénégal\n\n\n\n\n\n\n\nBOUHALI Anne\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nCHARTIER Denis\n\n\nUMR LADYSS, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nDIALLO Mouhamad Lamine\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nDIONGUE Momar\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDIOUF Ibrahima Faye\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDORON Adrien\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nGRASLAND Claude\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nLAMBERT Nicolas\n\n\nUAR RIATE, CNRS\n\n\nFrance\n\n\n\n\n\n\n\nLANNE Jean-Baptiste\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMADELIN Malika\n\n\nUMR PRODIG, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMENDY Anastasie\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nNDAO Aliou\n\n\nUniversité Gaston Berger (UGB) - Laboratoire Leïdi\n\n\nSénégal\n\n\n\n\n\n\n\nPISTRE Pierre\n\n\nUMR Géographie-Cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nSPIRE Amandine\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nTIMERA Mamadou Bouna\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nTOURÉ Labaly\n\n\nUniversité du Sine Saloum El-Hâdj Ibrahima Niass\n\n\nSénégal\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "axe2.html",
@@ -469,11 +420,67 @@
     "text": "Résultats"
   },
   {
-    "objectID": "equipe.html",
-    "href": "equipe.html",
-    "title": "Equipe",
+    "objectID": "axe5.html",
+    "href": "axe5.html",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
     "section": "",
-    "text": "Vous trouverez ci-dessous la liste de toutes celles et ceux qui participent ou ont participé d’une manière ou d’une autre au projet Altermap.\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Nom\n        \n         \n          Affiliation(s)\n        \n         \n          Pays\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nNom\n\n\nAffiliation(s)\n\n\nPays\n\n\n\n\n\n\n\n\n\nBA Cheikh Abdoul Ahad Mbacké\n\n\nUniversité Cheikh Anta Diop (UCAD) - Institut de la gouvernance territoriale\n\n\nSénégal\n\n\n\n\n\n\n\nBOUHALI Anne\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nCHARTIER Denis\n\n\nUMR LADYSS, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nDIALLO Mouhamad Lamine\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nDIONGUE Momar\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDIOUF Ibrahima Faye\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nDORON Adrien\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nGRASLAND Claude\n\n\nUMR Géographie-cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nLAMBERT Nicolas\n\n\nUAR RIATE, CNRS\n\n\nFrance\n\n\n\n\n\n\n\nLANNE Jean-Baptiste\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMADELIN Malika\n\n\nUMR PRODIG, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nMENDY Anastasie\n\n\nUniversité Cheikh Anta Diop (UCAD)\n\n\nSénégal\n\n\n\n\n\n\n\nNDAO Aliou\n\n\nUniversité Gaston Berger (UGB) - Laboratoire Leïdi\n\n\nSénégal\n\n\n\n\n\n\n\nPISTRE Pierre\n\n\nUMR Géographie-Cités, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nSPIRE Amandine\n\n\nUMR CESSMA, Université Paris-Cité\n\n\nFrance\n\n\n\n\n\n\n\nTIMERA Mamadou Bouna\n\n\nUniversité Cheikh Anta Diop (UCAD) - FASTEF\n\n\nSénégal\n\n\n\n\n\n\n\nTOURÉ Labaly\n\n\nUniversité du Sine Saloum El-Hâdj Ibrahima Niass\n\n\nSénégal\n\n\n\n\n\nNo matching items"
+    "text": "Anne BOUHALI\nMouhamad Lamine DIALLO (coord)\nIbrahima Faye DIOUF\nAdrien DORON (coord.)\nAmandine SPIRE"
+  },
+  {
+    "objectID": "axe5.html#participants",
+    "href": "axe5.html#participants",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
+    "section": "",
+    "text": "Anne BOUHALI\nMouhamad Lamine DIALLO (coord)\nIbrahima Faye DIOUF\nAdrien DORON (coord.)\nAmandine SPIRE"
+  },
+  {
+    "objectID": "axe5.html#objectifs",
+    "href": "axe5.html#objectifs",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
+    "section": "Objectifs",
+    "text": "Objectifs"
+  },
+  {
+    "objectID": "axe5.html#expériences",
+    "href": "axe5.html#expériences",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
+    "section": "Expériences",
+    "text": "Expériences"
+  },
+  {
+    "objectID": "axe5.html#résultats",
+    "href": "axe5.html#résultats",
+    "title": "5. Trajectoires de vie et mobilités des étudiants",
+    "section": "Résultats",
+    "text": "Résultats"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "La projection polaire\n\n\n\n\n\n\nProjection\n\n\nONU\n\n\nPolaire\n\n\n\nQuelques éléments techniques et historiques sur la projection polaire\n\n\n\n\n\nMar 19, 2026\n\n\nNicolas Lambert\n\n\n\n\n\n\n\n\n\n\n\n\nVidéocartographies, un dispositif de cartographie filmée\n\n\n\n\n\n\nCartes mentales\n\n\nSubjective\n\n\nVidéo\n\n\nDocumentaire\n\n\n\nDans Videocartographies : Aïda, Palestine (2009), Till Roeskens met en place un dispositif de cartographie filmée où les habitants du camp d’Aïda dessinent et racontent leur territoire, transformant la carte en un outil narratif\n\n\n\n\n\nMar 17, 2026\n\n\nNicolas Lambert\n\n\n\n\n\n\n\n\n\n\n\n\nSketch Map Tool\n\n\n\n\n\n\nCartes mentales\n\n\nOutil\n\n\nNumérisation\n\n\n\nUn outil intéressant pour la saisie et la numérisation des cartes mentales\n\n\n\n\n\nFeb 24, 2026\n\n\nClaude Grasland\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ALTERMAP",
+    "section": "",
+    "text": "Première rencontre des partenaires franco-sénégalais du projet Altermap à Dakar en Février 2026. Photo prise par Adrien Doron (dont la place est vide …)\n  \n\n  \n  \nLe projet ALTERMAP vise à développer l’innovation pédagogique dans le domaine des imaginaires géographiques et des représentations de l’altérité spatiale. Il portera plus précisément sur le rôle des cartes mentales dans l’enseignement de géographie en licence et l’initiation à la recherche en master.\nAssociant des enseignants-chercheurs de l’Université Paris Cité et de l’Université Cheikh Anta Diop ainsi que d’autres universités du Sénégal, il prendra la forme originale de la co-construction d’un questionnaire et de la réalisation d’entretiens sur les représentations de l’Europe en Afrique et de l’Afrique en France. Dans chaque pays le questionnaire sera administré par les étudiants de master ou de doctorat auprès des étudiants de licence et fera l’objet de restitution des résultats dans les enseignements thématiques (géographie sociale, géographie des Nords et des Suds, structure du Monde actuel, mobilités et migrations…) et d’utilisation comme exemple dans les enseignements méthodologiques (méthodes qualitatives, statistiques, cartographie, géomatique …).\nLe projet se clôturera par une école d’été associant les enseignants-chercheurs des deux pays ainsi que des doctorants intéressés pour consolider les acquis de l’enquête en termes méthodologiques. Cette école d’été permettra un partage des expériences réalisées en matière par exemple d’analyse textuelle des discours, de cartographie sensible, de visualisation des espaces attractifs et répulsifs, de modélisation statistique des facteurs déterminants les perceptions de l’altérité.\nIdéalement, cette expérience d’innovation pédagogique débouchera sur l’élaboration de thèses en cotutelles et sur un élargissement de l’enquête à d’autres pays du Nord et du Sud dans le cadre de réponse à des appels d’offres internationaux de l’Union Européenne, l’Union Africaine ou la Banque Mondiale.\n\n\n\n\nInstitutions et financement\n\n\n\n\n\n\nLe projet AlterMap est organisé conjointement conjointement par des enseignants-chercheurs français de l’UFR GHES de l’université Paris-Cité et par leurs homologues sénégalais de l’Université Cheikh Anta Diop (UCAD), l’Université du Sine Saloum Elhadj Ibrahima Niass (USSEIN) et l’Université Gaston Berger de Saint-Louis\nLe financement principal est apporté par les crédits de l’IDEX Innovation Pédagogique de l’Université Paris-Cité 2025\nLe projet associé des enseignants-chercheurs des laboratoires de recherche Géographie-cités, CESSMA Prodig, Ladyss ainsi que des ingénieurs des unités de service Riate et Geoteca.\n     \n\n\n\n\n  \n\n\n\n\n\nCoordinateurs\n\n\n\n\n\n\nClaude GRASLAND\nUniversité Paris Cité,\nUMR Géographie-cités\n\nAnne BOUHALI\nUniversité Paris Cité\nUMR CESSMA\n\n\nCheikh BA\nUCAD - Dakar, Sénégal\nInstitut de Gouvernance territoriale.\n\nLabaly TOURE\nUSSEIN – Kaolack, Sénégal\nDépartement de Géomatique"
+  },
+  {
+    "objectID": "posts/2026-02-24-sketchmap/index.html",
+    "href": "posts/2026-02-24-sketchmap/index.html",
+    "title": "Sketch Map Tool",
+    "section": "",
+    "text": "Comment construire un formulaire d’enquête inccluant des cartes mentales et comment ensuite les numériser pour les utiliser dans un SIG ? Telle est la question à laquelle une équipe allemande a tenté d’apporter une réponse avec l’outil Sketch Map Tool"
+  },
+  {
+    "objectID": "posts/2026-02-24-sketchmap/index.html#en-bref",
+    "href": "posts/2026-02-24-sketchmap/index.html#en-bref",
+    "title": "Sketch Map Tool",
+    "section": "En bref",
+    "text": "En bref\n\nNous traduisons ici le résumé de l’article rédigé par les auteurs de l’application Sketch Map Tools Klonner et al. (2021).\n\nL’augmentation mondiale du nombre de personnes et de zones touchées par des catastrophes a conduit à la multiplication des approches axées sur l’intégration des connaissances locales dans les processus de réduction des risques de catastrophe. La présente étude montre une méthode permettant de formaliser ces connaissances locales à l’aide de croquis cartographiques dans le contexte des inondations. L’outil Sketch Map Tool permet non seulement de visualiser ces connaissances locales et d’analyser la qualité des données OpenStreetMap, mais aussi de communiquer les résultats de ces analyses de manière compréhensible. Comme cet outil sera open source et que plusieurs analyses sont effectuées automatiquement, il offre également une méthode aux collectivités locales dans les zones où les données historiques ou les moyens financiers pour atténuer les effets des inondations sont limités. Des exemples d’analyses pour deux villes du Brésil montrent les fonctionnalités de l’outil et permettent d’évaluer son applicabilité. Les résultats montrent que l’analyse de l’adéquation des données OpenStreetMap révèle des résultats prometteurs pour déterminer si l’approche de la carte schématique peut être utilisée dans une certaine zone ou si les citoyens pourraient avoir des difficultés à marquer leurs expériences d’inondation. De cette manière, une analyse de la qualité intrinsèque est intégrée dans une approche cartographique participative. De plus, les différents formats de papier proposés pour l’impression permettent non seulement la cartographie individuelle, mais aussi la cartographie de groupe. Les travaux futurs se concentreront sur l’automatisation de toutes les étapes de l’outil afin de permettre aux membres des administrations locales ne disposant pas de connaissances techniques spécifiques d’utiliser l’outil Sketch Map Tool pour leurs propres zones d’étude.\n\nTraduit avec DeepL.com (version gratuite)"
   },
   {
     "objectID": "posts/2026-03-17-videocartographies/index.html",

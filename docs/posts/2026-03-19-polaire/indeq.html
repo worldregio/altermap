@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Nicolas Lambert">
+<meta name="dcterms.date" content="2026-03-19">
+<meta name="description" content="Quelques éléments techniques et historiques sur la projection polaire">
 
-<title>Altermap - Blog</title>
+<title>Altermap - La projection polaire</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +23,47 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,77 +91,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Altermap</span>
     </a>
   </div>
@@ -151,11 +114,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">En bref</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./equipe.html"> 
+    <a class="nav-link" href="../../equipe.html"> 
 <span class="menu-text">Equipe</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -164,37 +127,37 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-groupes-de-travail">    
         <li>
-    <a class="dropdown-item" href="./axe0.html">
+    <a class="dropdown-item" href="../../axe0.html">
  <span class="dropdown-text">Objectifs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./axe1.html">
+    <a class="dropdown-item" href="../../axe1.html">
  <span class="dropdown-text">1. Découpages du Monde</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./axe2.html">
+    <a class="dropdown-item" href="../../axe2.html">
  <span class="dropdown-text">2. Limites urbain-rural</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./axe3.html">
+    <a class="dropdown-item" href="../../axe3.html">
  <span class="dropdown-text">3. Changement climatique</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./axe4.html">
+    <a class="dropdown-item" href="../../axe4.html">
  <span class="dropdown-text">4. Maillages territoriaux</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./axe5.html">
+    <a class="dropdown-item" href="../../axe5.html">
  <span class="dropdown-text">5. Trajectoires de vie</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./axe6.html">
+    <a class="dropdown-item" href="../../axe6.html">
  <span class="dropdown-text">6. Habiter la ville</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./posts.html" aria-current="page"> 
+    <a class="nav-link" href="../../posts.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -213,165 +176,122 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">La projection polaire</h1>
+                  <div>
+        <div class="description">
+          Quelques éléments techniques et historiques sur la projection polaire
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Projection</div>
+                <div class="quarto-category">ONU</div>
+                <div class="quarto-category">Polaire</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://altermap.github.io/">Nicolas Lambert</a> <a href="https://orcid.org/0000-0003-4976-6560" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://riate.cnrs.fr">
+              Ingénieur de recherche CNRS / Centre pour l’analyse spatiale et la géovisualisation (RIATE)
+              </a>
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 19, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Cartes mentales">Cartes mentales <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Documentaire">Documentaire <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Numérisation">Numérisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ONU">ONU <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Outil">Outil <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Polaire">Polaire <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Projection">Projection <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Subjective">Subjective <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Vidéo">Vidéo <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Blog</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>La projection polaire est une projection azimutale centrée sur le pôle Nord, dans laquelle la surface de la Terre est projetée sur un plan tangent au pôle. Dans sa version équivalente, elle conserve les surfaces, ce qui permet de comparer correctement les étendues des continents et des océans. En revanche, cette propriété se fait au prix de fortes déformations des formes et des angles à mesure que l’on s’éloigne du centre. Ainsi, des territoires comme l’Australie peuvent apparaître très déformés. Avec cette projection à la forme circulaire, la carte peut être tournée sans forcément privilégier une orientation particulière. Ainsi, cette projection cartographique ne définit ni haut ni bas, mais propose une organisation de l’espace centrée sur le pôle, ce qui rompt avec les représentations plus familières du monde.</p>
+<div style="text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="polar.png" class="img-fluid figure-img"></p>
+<figcaption>La projection polaire</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>Quelques éléments historiques</strong></p>
+<p>Dans le contexte des années 1940, marqué par ce que le géographe français Emmanuel de Martonne qualifie d’« ère de la géographie aérienne », les modes de représentation du monde connaissent un profond renouvellement, en lien avec le développement de l’aviation et une vision plus globale des conflits. La projection polaire apparait alors comme un outil particulièrement pertinent. Un exemple emblématique est la carte « One World, One War », réalisée en 1942 par Richard E. Harrison et publiée dans le magazine Fortune <span class="citation" data-cites="harrison1942oneworld">(<a href="#ref-harrison1942oneworld" role="doc-biblioref">Harrison 1942</a>)</span>. En adoptant cette projection particulière, sa carte met en évidence la dimension véritablement mondiale de la Seconde Guerre mondiale, en montrant la proximité relative des continents et la continuité des théâtres d’opérations. Elle rompt ainsi avec les représentations classiques héritées des projections cylindriques, en soulignant qu’il s’agit d’un conflit global, se déroulant à l’échelle de l’ensemble de la planète.</p>
+<div style="text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="oneworld.jpg" class="img-fluid figure-img"></p>
+<figcaption>One World, One War, carte en projection azimutale polaire conçue par Richard Edes Harrison, publiée comme supplément du numéro de mars 1942 de Fortune Magazine.</figcaption>
+</figure>
+</div>
+</div>
+<p>Une fois la guerre finie, cette manière de représenter le monde dans sa globalité infuse progressivement dans les milieux diplomatiques. Lors de la création de l’Organisation des Nations unies en 1945, la question d’un emblème universel se pose rapidement. Une première proposition est alors élaborée par l’équipe de graphistes dirigée par Oliver Lincoln Lundquist, au sein des services américains liés à l’ancêtre de la Central Intelligence Agency. Le choix se porte sur une carte du monde en projection polaire, entourée de rameaux d’olivier symbolisant la paix. Le but&nbsp;: donner l’image d’un monde uni et équitable. Et en plus, la forme ronde de cette projection rentre parfaitement des les badges prévus pour l’occasion <span class="citation" data-cites="capdepuy2018histoires">(<a href="#ref-capdepuy2018histoires" role="doc-biblioref">Capdepuy 2018</a>)</span>.</p>
+<p>Dans cette première version, les États-Unis occupent une position sur l’axe Nord-Sud, légèrement en dessous du centre de la carte. Les pays de l’hémisphère Sud sont, quant à eux, placés dans la partie supérieure (à l’exception de l’Amérique du Sud), séparés de ceux du Nord par une ligne horizontale centrale, tandis que la représentation s’interrompt au-delà de 40° de latitude Sud. En 1946, une version révisée corrige en partie ces déséquilibres en étendant la carte vers le Sud et en modifiant son orientation.</p>
+<div style="text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="onu.png" class="img-fluid figure-img"></p>
+<figcaption>Le Logo des Nations Unies <span class="citation" data-cites="bahoken2025cartographia">(<a href="#ref-bahoken2025cartographia" role="doc-biblioref">Bahoken and Lambert 2025</a>)</span></figcaption>
+</figure>
+</div>
+</div>
+<p>Adopté officiellement en 1947 par l’Assemblée générale, cet emblème devient le drapeau d’une organisation qui se veut universelle : une carte du monde entourée de rameaux d’olivier sur fond bleu, symbole d’un idéal de paix partagé à l’échelle planétaire.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AC6QhqpXJ8c" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Projection,ONU,Polaire" data-listing-date-sort="1773874800000" data-listing-file-modified-sort="1773913391253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="543">
-<div class="thumbnail">
-<p><a href="./posts/2026-03-19-polaire/indeq.html" class="no-external"></a></p><a href="./posts/2026-03-19-polaire/indeq.html" class="no-external">
-<p><img src="./posts/2026-03-19-polaire/polar.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2026-03-19-polaire/indeq.html" class="no-external"></a></p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bahoken2025cartographia" class="csl-entry" role="listitem">
+Bahoken, Françoise, and Nicolas Lambert. 2025. <em>Cartographia : Comment Les g<span>é</span>ographes (Re)dessinent Le Monde</em>. Paris, France: Armand Colin.
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-03-19-polaire/indeq.html" class="no-external">La projection polaire</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-03-19-polaire/indeq.html" class="no-external"></a>
+<div id="ref-capdepuy2018histoires" class="csl-entry" role="listitem">
+Capdepuy, Vincent. 2018. <em>50 Histoires de Mondialisations : De Néandertal à Wikipédia</em>. Paris, France: Alma éditeur.
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Projection'); return false;">
-Projection
+<div id="ref-harrison1942oneworld" class="csl-entry" role="listitem">
+Harrison, Richard Edes. 1942. <span>“One World, One War.”</span> Carte, projection azimutale polaire.
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('ONU'); return false;">
-ONU
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Polaire'); return false;">
-Polaire
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/2026-03-19-polaire/indeq.html" class="no-external">Quelques éléments techniques et historiques sur la projection polaire</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-03-19-polaire/indeq.html" class="no-external">
-<div class="listing-date">
-Mar 19, 2026
-</div>
-<div class="listing-author">
-Nicolas Lambert
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Cartes mentales,Subjective,Vidéo,Documentaire" data-listing-date-sort="1773702000000" data-listing-file-modified-sort="1773751303023" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="422">
-<div class="thumbnail">
-<p><a href="./posts/2026-03-17-videocartographies/index.html" class="no-external"></a></p><a href="./posts/2026-03-17-videocartographies/index.html" class="no-external">
-<p><img src="./posts/2026-03-17-videocartographies/videocartographies.webp" class="thumbnail-image"></p>
-</a><p><a href="./posts/2026-03-17-videocartographies/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-03-17-videocartographies/index.html" class="no-external">Vidéocartographies, un dispositif de cartographie filmée</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-03-17-videocartographies/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Cartes mentales'); return false;">
-Cartes mentales
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Subjective'); return false;">
-Subjective
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Vidéo'); return false;">
-Vidéo
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Documentaire'); return false;">
-Documentaire
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/2026-03-17-videocartographies/index.html" class="no-external">Dans Videocartographies : Aïda, Palestine (2009), Till Roeskens met en place un dispositif de cartographie filmée où les habitants du camp d’Aïda dessinent et racontent leur territoire, transformant la carte en un outil narratif</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-03-17-videocartographies/index.html" class="no-external">
-<div class="listing-date">
-Mar 17, 2026
-</div>
-<div class="listing-author">
-Nicolas Lambert
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Cartes mentales,Outil,Numérisation" data-listing-date-sort="1771887600000" data-listing-file-modified-sort="1773741543532" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="323">
-<div class="thumbnail">
-<p><a href="./posts/2026-02-24-sketchmap/index.html" class="no-external"></a></p><a href="./posts/2026-02-24-sketchmap/index.html" class="no-external">
-<p><img src="./posts/2026-02-24-sketchmap/sketchmap.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2026-02-24-sketchmap/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-02-24-sketchmap/index.html" class="no-external">Sketch Map Tool</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-02-24-sketchmap/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Cartes mentales'); return false;">
-Cartes mentales
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Outil'); return false;">
-Outil
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Numérisation'); return false;">
-Numérisation
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/2026-02-24-sketchmap/index.html" class="no-external">Un outil intéressant pour la saisie et la numérisation des cartes mentales</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-02-24-sketchmap/index.html" class="no-external">
-<div class="listing-date">
-Feb 24, 2026
-</div>
-<div class="listing-author">
-Claude Grasland
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lambert2026,
+  author = {Lambert, Nicolas},
+  title = {La Projection Polaire},
+  date = {2026-03-19},
+  url = {https://altermap.github.io/fr/posts/2026-03-19-polaire/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lambert2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+Lambert, Nicolas. 2026. <span>“La Projection Polaire.”</span> March 19,
+2026. <a href="https://altermap.github.io/fr/posts/2026-03-19-polaire/">https://altermap.github.io/fr/posts/2026-03-19-polaire/</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
