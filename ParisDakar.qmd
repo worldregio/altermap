@@ -1,6 +1,6 @@
 ---
-title: "Paris-Dakar 2009 "
-subtitle: "Exercice n°1 : analyse de questions fermées"
+title: "Paris-Dakar : analyse de l'enquête EuroBrodMap 2009 "
+subtitle: "Exercice pédagogiques de statistiques et cartographie"
 author: "Claude Grasland, Mamadou Bouna Timera, Labaly Toure"
 date: "2026-03-11"
 date-format: iso
@@ -66,9 +66,9 @@ La première partie du questionnaire apportait des données de cadrage sur les i
 
 
 ::: {.callout-tip}
-## Télécharger le jeu de données
--  [Données au format .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.xlsx)
--  [Données au format .RDS ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.RDS)
+## Télécharger le jeu de données n°1
+-  [Données d'enquête au format .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.xlsx)
+-  [Données d'enquête au format .RDS ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.RDS)
 
 :::
 
@@ -437,10 +437,10 @@ L'exercice proposé ici aux étudiants va les amener à combiner statistique et 
 
 ::: {.callout-tip}
 ## Télécharger le jeu de données n°2
--  [Données au format .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.xlsx)
--  [Données au format .RDS ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.RDS)
-- -  [Fonds de carte au format .geojson ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.RDS)
--  [Fonds de carte au fomat .RDS ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/ebmsurvey2009.RDS)
+-  [Données sur les pays cités au format .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/tabstates.xlsx)
+-  [Données sur les pays cités au format .RDS ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/tabstates.RDS)
+- -  [Fonds de carte des pays au format .geojson ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/mapstates.geojson)
+-  [Fonds de carte des pays au fomat .RDS ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/parisdakar/mapstates.RDS)
 :::
 
 ```{r}
