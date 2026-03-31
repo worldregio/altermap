@@ -426,7 +426,7 @@ Ce que montrent bien les analyses précédentes est le fait que l'appréciation 
 
 $Saillance_i = 100\times \frac{Pos_i + Neg_i}{n}$
 
-- **la polarisation** est le positionnement d'un individu et par la suite d'un groupe d'individu sur une échelle de jugement allant du négatif au positif. Elle ne peut exister que si le pays est déjà connu par l'individu et - dans le cas d'un groupe - possède une saillance suffisante. Pour reprendre les exemples précédents, on peut affirmer qu'en 2007 les étudiants avaient une opinion sur la Guinée alors que ce n'était pas le cas des étudiants français. Inversement, les étudiants français avaient une opinion sur la Chine mais pas les étudiants sénégalais qui la citaient à peine. On mesure classiquement la polarisation sur une- intervalle allant de -1 (tous les avis sont positifs) à +1 (tous les avis sont négatifs).
+- **la polarisation** est le positionnement d'un individu et par la suite d'un groupe d'individu sur une échelle de jugement allant du négatif au positif. Elle ne peut exister que si le pays est déjà connu par l'individu et - dans le cas d'un groupe - possède une saillance suffisante. On mesure classiquement la polarisation sur un intervalle allant de -1 (tous les avis sont positifs) à +1 (tous les avis sont négatifs).
 
 $Polarisation_i = \frac{Pos_i-Neg_i}{Pos_i+Neg_i}$
 
@@ -445,7 +445,7 @@ syntfra <- donpol %>% filter(is.na(iso3)==F) %>%
                               saillance = 100*tot/nbetud,
                               polarisation=(pos-neg)/(pos+neg)) %>%
                       arrange(-saillance) %>%
-                      filter(tot>=6)
+                      filter(tot>=7)
 
 kable(syntfra[1:20,],caption ="Synthèse des perceptions des pays du monde des étudiants parisiens en 2008", col.names = c("Code","Nom", "Négatif", "Positif", "Total", "Saillance (%)","Polarisation"), digits=c(0,0,0,0,0,1,2))
 
@@ -465,6 +465,42 @@ ggplot(syntfra, aes(x=saillance, y = polarisation)) +
 
 - **Commentaire** : Grâce à la normalisation des indices de polarisation et de saillance, il est possible de comparer les positions des pays dans les deux graphiques de synthèse des étudiants français et sénégalais. On peut ainsi voir que la situation la plus favorable (forte saillance et polarisation positive) ne se limite pas aux USA et au Canda comme dans le cas sénégalais mais inclue aussi des pays européens comme l'Italie, l'Espagne et le Royaume-Uni. On remrarque aussi l'absence frappante des pays africains sur le graphique puisque seules l'Afrique du Sud et l'Algérie atteignent un niveau de saillance de 5% et y figurent. La carte mentale des étudiants français oppose fondamentalement des pays européens ou nord-américains (appréciés positivement ) à des pays asiatiques auxquels s'ajoute la Russie (appréciés négativement) 
 
+## B.3 Europe-Méditerranée-Afrique
+
+Quels sont les mots associés par les étudiants de géographie à ces trois territoires qui forment une région verticale reliant pays du Nord et du Sud ? Il est utile ici de préciser que l'enquête intervenait après trois séances de cours d'Adrien Doron sur la lecture transnationale du Monde par les flux et les circulations commerciales ou migratoires. Et que la dernière séance portait plus précisément sur les espaces d'interface que constituent les Méditerranées situées en tre les deux Amériques, entre l'Europe et l'Afrique ou entre l'Asie et l'Océanie. Plus généralement, les étudiants de licence de géographie de l'Université Paris Cité ont normalement été formés aux questions de développement, de pouvoir, de mobilité ... et suivi des cours sur la "géographie des Nords" et la "géographie des Suds". 
+
+Le choix des mots est donc fortement biaisé par le domaine de spécialisation de ces étudiants et il sera ultérieurement intéressant de comparer les résultats avec ceux d'étudiants d'autres disciplines que la géographie n'ayant pas eu de cours sur le sujet.
+
+### Quelles méthodes d'analyse ?
+
+Sur le plan méthodologique, l'exploitation des résultats peut se faire selon au moins trois types de méthodes dont une seule, la plus simple, sera présentée ici : 
+
+1. **Comptage des mots les plus fréquents et visualisation sous la forme de nuages de mots**. Cette technique rapide - mais imparfaite - est bien adaptée à une première exploration du corpus. Elle peut être facilement réalisée avec des outils en ligne comme [wordart](https://wordart.com)
+
+2. **Analyse textuelle à l'aide d'outils de lemmatisation ou racinisation**. Cette technique plus exigeante implique l'emploi de logiciels spécialisés disponibles à travers des packages comme Iramuteq, Spacyr, Quanteda,  Udpipe, ... qui suppose une maîtrise des langages R ou Python. Ou bien d'interfaces en ligne, plus simples d'utilisation, mais qui implique en tout état de cause une formation aux concepts et méthodes de l'analyse textuelle.
+
+3. **Codage manuel de catégories en fonction d'une problématique**. Cette méthode relève davantage des approches qualitatives utilisées par exemple dans les études du contenu des journaux. Pour être menée de façon rigoureuse, elle suppose l'établissement d'une grille de codage (e.g. on va chercher les mots relevant du thème de la violence) puis d'un test de comparaison des résultats de deux codeurs appliquant la grille afin de vérifier si leurs résultats sont convergents (test du Kappa de Cohen).
+
+En se limitant ici à la première méthode, voyons rapidement les résultats obtenus.
+
+### Les mots de l'Europe
+
+![Altermap 2026 - Les mots associés à Europe par 61 étudiants de géographie parisiens](img/SMA_Europe.jpg){width=800}
+- **Commentaire : **
 
 
+
+
+### Les mots de la Méditerranée
+
+![Altermap 2026 - Les mots associés à Méditerranée par 61 étudiants de géographie parisiens](img/SMA_Medit.jpg){width=800}
+- **Commentaire** : 
+
+
+
+### Les mots de l'Europe
+
+![Altermap 2026 - Les mots associés à Afrique par 61 étudiants de géographie parisiens](img/SMA_Afrique.jpg){width=800}
+
+- **Commentaire** : 
 
