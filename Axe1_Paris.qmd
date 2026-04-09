@@ -486,7 +486,9 @@ En se limitant ici à la première méthode, voyons rapidement les résultats ob
 ### Les mots de l'Europe
 
 ![Altermap 2026 - Les mots associés à Europe par 61 étudiants de géographie parisiens](img/SMA_Europe.jpg){width=800}
-- **Commentaire : **
+
+- **Commentaire : ** Les mots relatifs à l’Europe renvoient à plusieurs dimensions sémantiques. La plus centrale concerne l’intégration européenne avec les mentions ‘UE’ en premier, puis ‘euro’ ou encore ‘Schengen’. Cela témoigne d’une tendance à assimiler l’entité régionale européenne à l’entité politique et économique de l’Union européenne.
+Trois autres registres ressortent : celui du **développement**, avec les termes de ‘puissance’, ‘richesse’, ‘développé’, ‘riche’, ‘argent’ ; le registre de la **domination**, avec les termes de ‘puissance’ également, de colonisation, de guerre ; enfin un registre **culturel** large autour de représentations occidentales, de vieux continent, avec les termes d’’occident’, ‘blanc’, ‘culture’, ‘vieux’. 
 
 
 
@@ -494,13 +496,15 @@ En se limitant ici à la première méthode, voyons rapidement les résultats ob
 ### Les mots de la Méditerranée
 
 ![Altermap 2026 - Les mots associés à Méditerranée par 61 étudiants de géographie parisiens](img/SMA_Medit.jpg){width=800}
-- **Commentaire** : 
+
+- **Commentaire** : Les mots relatifs à la Méditerranée renvoient en premier lieu à la **dimension maritime**, avec les mentions de ‘mer’, ‘pêche’, ‘eau’, ‘bateau’, ‘côte’. Trois autres registres ressortent : le registre du **tourisme** et du ludique avec les termes de ‘tourisme’, ‘vacances’, ‘croisières’, ‘soleil’ ; le registre **commercia**l avec les termes de ‘commerce’, ‘échange’, ‘flux’ ; et enfin le registre des **migrations** avec les termes de ‘migration’, ‘migrant’, ‘flux’, ‘mort’, noyade’.  On note une opposition frontale entre la dimension touristique et la dimension migratoire.
+On observe peu de mentions terrestres (excepté olive), avec une appréhension essentiellement maritime de cet espace, et finalement peu de mise en lien de l’Europe et de l’Afrique comme entités régionales (la notion étant pourtant intercalée entre les deux), même si cet espace est appréhendé comme une interface via le commerce et les migrations
 
 
 
-### Les mots de l'Europe
+### Les mots de l'Afrique
 
 ![Altermap 2026 - Les mots associés à Afrique par 61 étudiants de géographie parisiens](img/SMA_Afrique.jpg){width=800}
 
-- **Commentaire** : 
+- **Commentaire** : La première dimension qui apparait dans les mots relatifs à l’Afrique renvoie au registre de **domination**, avec les termes de ‘colonisation’, ‘conflit’, ‘guerre’, voire ‘pauvreté’. Trois autres registres ressortent : celui du **développement** avec les mentions de ‘richesse’, ‘pauvreté’, ‘développement’, ‘ressource’, ‘Sud’ ; le registre de l**environnement** et du **climat** avec les mentions de ‘soleil’, ‘chaleur’, ‘ressource’, ‘nature’, ‘désert’, ‘Sahara’ ; et enfin un registre **culture** au sein duquel on peut intégrer les manifestations sportives, avec les mentions de ‘culture’, ‘diversité’, ‘richesse’, ‘CAN’, ‘histoire’, ‘langues’.
 
