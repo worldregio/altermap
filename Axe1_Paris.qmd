@@ -678,7 +678,7 @@ tabreg<-st_transform(tabreg, st_crs(states))
 ## Morceaux choisis
 
 
-### 6 continents et ... le Moyen-Orient
+### Etudiant UPC, L3 Géographie,  21 ans, Groupe 4, père né en Côte d'Ivoire
 
 ```{r}
 etu <- "046"
@@ -707,7 +707,7 @@ mf_layout(title = paste("Carte ",etu, ": Six continents et ... le Moyen-Orient")
 
 
 
-### L'Occident face à la Russie
+### Etudiant UPC, L3 Géographie,  21 ans, Groupe 4, né au Kosovo
 
 ```{r}
 etu <- "048"
@@ -735,7 +735,7 @@ mf_layout(title = paste("Carte ",etu, ": L'Occident face à la Russie"),
 ```
 
 
-### Qui aime bien découpe bien ...
+###  Etudiant UPC, L3 Géographie,  25 ans, Groupe 4
 
 ```{r}
 etu <- "034"
@@ -763,7 +763,7 @@ mf_layout(title = paste("Carte ",etu, ": Qui aime bien découpe bien ..."),
 ```
 
 
-#### Méditerranées et régions transcontinetales ?
+### Etudiant UPC, L3 Géographie,  21 ans, Groupe 4, père né au Canada
 
 ```{r}
 etu <- "033"
@@ -792,7 +792,7 @@ mf_layout(title = paste("Carte ",etu, ": Méditerranées et régions transcontin
 
 
 
-#### N'oublions pas les océans (et le Groënland)...
+### Etudiant UPC, L3 Géographie,  21 ans, Groupe 4
 
 ```{r}
 etu <- "047"
@@ -820,7 +820,7 @@ mf_layout(title = paste("Carte ",etu, ": N'oublions pas les océans (et le Groë
 ```
 
 
-#### Zones climatiques
+### Etudiant UPC, L3 Géographie,  21 ans, Groupe 4
 
 ```{r}
 etu <- "040"
@@ -848,7 +848,7 @@ mf_layout(title = paste("Carte ",etu, ": Zones climatiques"),
 ```
 
 
-### One world !
+### Etudiant UPC, L3 Géographie,  21 ans, Groupe 4
 
 ```{r}
 etu <- "039"
@@ -913,7 +913,7 @@ mf_layout(title = "La Méditerranée américiane",
 
 
 
-### La Méditerranée asiatique
+### La Méditerranée pacifico-asiatique
 
 ```{r}
 loc<-map %>% filter(iso3 %in% c("CHN","AUS"))
@@ -921,7 +921,7 @@ loc<-map %>% filter(iso3 %in% c("CHN","AUS"))
 mf_init(loc, expandBB = c(0,0,0,0))
 mf_map(map, type="base", col="lightyellow",add=T)
 mf_map(tabreg, type="base", col=NA, add=T, border="red",alpha=0.03,lwd=2)
-mf_layout(title = "La Méditerranée américiane",
+mf_layout(title = "La Méditerranée pacifico-asiatique",
           credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
 
 ```
@@ -944,7 +944,7 @@ mf_layout(title = "La Méditerranée euro-africaine",
 
 
 
-### Où est l'Europe
+### Où est l'Europe ?
 
 ```{r}
 sel <- tabreg %>% filter(namereg=="Europe")
@@ -959,7 +959,7 @@ mf_layout(title = "Où est l'Europe ?",
 ```
 
 
-### Où est l'Amérique du Nord
+### Où est l'Amérique du Nord ?
 
 ```{r}
 sel <- tabreg %>% filter(namereg=="Amérique du Nord")
