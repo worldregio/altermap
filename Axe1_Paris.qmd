@@ -508,3 +508,466 @@ On observe peu de mentions terrestres (excepté olive), avec une appréhension e
 
 - **Commentaire** : La première dimension qui apparait dans les mots relatifs à l’Afrique renvoie au registre de **domination**, avec les termes de ‘colonisation’, ‘conflit’, ‘guerre’, voire ‘pauvreté’. Trois autres registres ressortent : celui du **développement** avec les mentions de ‘richesse’, ‘pauvreté’, ‘développement’, ‘ressource’, ‘Sud’ ; le registre de l**environnement** et du **climat** avec les mentions de ‘soleil’, ‘chaleur’, ‘ressource’, ‘nature’, ‘désert’, ‘Sahara’ ; et enfin un registre **culture** au sein duquel on peut intégrer les manifestations sportives, avec les mentions de ‘culture’, ‘diversité’, ‘richesse’, ‘CAN’, ‘histoire’, ‘langues’.
 
+# C. DECOUPAGES DU MONDE
+
+Cette question dont le but était de faire découper le Monde aux étudiants a été posée de deux façons légèrement différentes aux étudiants : 
+
+:::: {.columns}
+
+::: {.column width="50%" .r-fit-text}
+
+- **(1) Fonds de carte avec frontières **
+
+![Fonds de carte administré aux groupes de TD 1, 2 et 3](img/Altermap_axe1_partieC.jpg){height=400}
+:::
+
+::: {.column width="50%" .r-fit-text}
+
+- **(2) Fonds de carte sans frontières**
+
+![Fonds de carte administré aux groupes de TD 4](img/Altermap_axe1_partieC_blank.jpg){height=400}
+:::
+
+::::
+
+
+
+
+```{r, eval=FALSE, echo=FALSE}
+
+
+#### PROGRAMME POURRI A REFAIRE ####
+### Recolle les géométries
+donlab<-donlab %>% arrange(`N° de questionnaire`)
+
+## (1) Prépare les données
+names(donlab)
+x<-donlab[,79:116]
+seq(1,37,2)
+x1 <-x[,seq(1,37,2)]
+x2 <-x[,seq(2,38,2)]
+d<-dim(x1)
+n<-d[1]
+p<-d[2]
+
+for(i in 1:n){
+  for(j in 1:p){
+    if (is.na(x1[i,j])==F){
+      if (x1[i,j]=="Autre"){x1[i,j]<-x2[i,j]}
+    }
+  }
+}
+
+#x<-cbind(don,x1)
+x1$id<-donlab$`N° de questionnaire`
+t<-x1 %>% pivot_longer(cols = 1:19)
+#t$id <-substr(t$id,9,11)
+
+t$numreg <-as.numeric(gsub("Région ","",t$name))
+t$namereg<-t$value
+t<-t[,-c(2:3)]
+
+
+## (2) Prépare les géométries
+listgeo<-list.files("data/axe1/maps")
+n<-length(listgeo)
+reg<-st_read(paste0("data/axe1/maps/",listgeo[1]))
+reg$numreg<-reg$id
+reg$id<-substr(listgeo[1],4,6)
+for (i in 2:n){
+  reg2<-st_read(paste0("data/axe1/maps/",listgeo[i]))
+  reg2$numreg<-reg2$id
+  reg2$id<-substr(listgeo[i],4,6)
+  reg<-rbind(reg,reg2)
+}
+
+reg <- reg %>% group_by(id,numreg) %>% summarise()
+
+## (3) Assemble
+
+tabreg <- t %>%left_join(reg) %>% st_as_sf()
+class(tabreg)
+w<-st_crs(map)
+w
+tabreg<-st_transform(tabreg,w) %>% st_as_sf()
+
+
+mf_map(map, type="base", col="lightyellow")
+mf_map(tabreg, type="base", col="blue", add=T, border="red",alpha=0.03)
+
+
+saveRDS(tabreg,"data/axe1/maps/sma_tabreg.RDS")
+```
+
+
+
+## Combien de régions ?
+
+La consigne donné aux étudians consistait à découper le monde en 2 à 15 régions de leur choix. On pensait que la majorité d'entre eux découperait le Monde en 4 à 6 régions, selon le modèle des continents. Mais en réalité les résultats ont été beaucoup plus dispersés et beaucoup d'étudiants ont utiliseé le maximum de région proposé (15) voire davantage ...
+
+```{r}
+tabreg<-readRDS("data/axe1/maps/sma_tabreg.RDS")
+
+tabnbreg<- tabreg %>% filter(is.na(namereg)==F) %>% st_drop_geometry() %>% group_by(id) %>% count() %>% ungroup()
+t<-table(tabnbreg$n)
+t
+barplot(t,
+     col= rainbow(n = 20,start = 0.03),
+     xlab = "Nombre de régions",
+     ylab = "Nombre d'étudiants",
+     main = "Découpages du Monde en région",
+     sub = "61 étudiants de L3 géographie, UPC, 2026")
+grid()
+
+```
+
+- **Commentaire** : le choix le plus fréquent (11 étudiants sur 61) correspondau découpage en 15 régions. Mais on trouve ensuite beaucoup d'étudiants ayant fait 7 ou 8 régions. Pourquoi y-a-t-il deux modes ? Est-ce lié au choix du fonds de carte ?
+
+
+
+
+```{r}
+don$id<-substr(don$id,9,11)
+don <- don %>%left_join(tabnbreg)
+don$test<-as.factor(don$grp)
+levels(don$test) <-c("Oui","Oui","Oui","Non")
+library(beanplot)
+beanplot(don$n~don$test, horizontal=T, col=c("lightyellow","red"),
+     xlab = "Nombre de régions",
+     ylab = "Carte comprtant les frontières des pays",
+     main = "Influence du fonds de carte sur le découpage",
+     sub = "61 étudiants de L3 géographie, UPC, 2026")
+t.test(don$n~don$test)
+```
+
+- **Commentaire** : La présence de ces deux pics de découpage semble en fait s'expliquer par le choix du fonds de carte proposé. Les étudiants du groupe 4 qui disposaient d'un fonds de carte sans frontières ont découpe le monde en beaucoup moins de régions que ceux des  groupes 1,2, et 3 qui disposaient des frontières de pays. Les étudiants qui ont découpé un monde sans frontière ont fait en moyenne 8 régions alors que ceux qui disposaient des frontières en ont fait en moyenne 11.75. Malgré la faiblesse de l'échantillon, la différence est statistiquement très significative (p <0.01)
+
+### Quels noms de région ?
+
+Quels noms reviennent le plus souvent dans les découpages des étudiants ? 
+
+
+```{r}
+tabnom<-tabreg %>% filter(is.na(namereg)==F) %>%
+  st_drop_geometry() %>%
+  group_by(namereg) %>% 
+  count() %>% 
+  arrange(-n) %>% 
+  mutate(pct = 100*n/61) %>%
+  select(namereg, n, pct )
+kable(tabnom[1:20,],digits = c(0,0,1),row.names = T)
+```
+
+
+- **Commentaire** : les régions les plus fréquemment cités par les étudiants sont l'Amérique du Nord (75%) et l'Amérique du Sud (71%), éventuellement complétées par une Amérique centrale (43%). Le découpage du Nouveau Monde semble donc assez consensusel malgré des variantes possibles avec les Caraïbes (16%) et l'Amérique Latine (11%). L'Océanie est également fréquemment utilisée (57%), même si elle peut laisser la place à l'Australie éventuellement combinée à la Nouvelle Zélande. 
+L'Europe n'est citées en tant qu'entité que par 54% des étudiants, à égalité avec le Moyen-Orient. Il arrive en effet fréquemment qu'elle soit subdivisée et beaucoup d'étudiants isolent l'Europe de l'Ouest (15%) et l'Europe de l'Est (20%) ainsi que, plus rarement, l'Europe  du Nord ou du Sud. Il en va de même pour l'Afrique qu n'apparaît seule que dans 38% des découpages et se présente le plus souvent fractionnée en Afrique de l'Ouest, Centrale, de l'Est, du Nord ou du Sud. Le Maghreb est fréquement utilisé (33%) de préférence à l'Afrique du Nord.  L'Asie  n'apparaît seule que dans 35% des découpages et est souvent découpée en Asie du Sud-est et du Sud. Enfin, la Russie pose beaucoup de difficultés aux étudiants qui ont souvent tendance à l'isoler (21%) plutôt que la rattacher à l'Europe ou l'Asie et lui consacre beaucoup d'appellations (ex-URSS, pays communistes, etc...)
+
+## Quelles limites ?
+
+Indépendamment des noms donnés aux régions, quelles limites sont tracées le plus fréquemment ? Quels points du globe constituent des passages obligés pour le tracer des lignes séparant les régions du Monde ?
+
+```{r}
+frame <- st_read("data/axe1/worldmaps/WORLD30.shp")
+states <- st_read("data/axe1/worldmaps/WORLD_WUTS5.shp")
+tabreg<-readRDS("data/axe1/maps/sma_tabreg.RDS")
+tabreg<-st_transform(tabreg, st_crs(states))
+
+```
+
+
+## Morceaux choisis
+
+
+### 6 continents et ... le Moyen-Orient
+
+```{r}
+etu <- "046"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": Six continents et ... le Moyen-Orient"),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+
+### L'Occident face à la Russie
+
+```{r}
+etu <- "048"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": L'Occident face à la Russie"),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+### Qui aime bien découpe bien ...
+
+```{r}
+etu <- "034"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": Qui aime bien découpe bien ..."),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+#### Méditerranées et régions transcontinetales ?
+
+```{r}
+etu <- "033"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": Méditerranées et régions transcontinentales"),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+
+#### N'oublions pas les océans (et le Groënland)...
+
+```{r}
+etu <- "047"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": N'oublions pas les océans (et le Groënland)..."),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+#### Zones climatiques
+
+```{r}
+etu <- "040"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": Zones climatiques"),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+### One world !
+
+```{r}
+etu <- "039"
+
+sel <- tabreg %>% filter(id==etu)  %>% filter(is.na(namereg)==F)
+sel$rnkname <- substr(paste((sel$numreg+100),sel$namereg),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Carte ",etu, ": One World !"),
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+
+
+
+
+## Synthèse provisoire 
+
+En se limitant pour l'instant aux 15 étudiants du groupe 4 : 
+
+### Superposition de tous les découpages
+
+```{r}
+mf_init(frame, expandBB = c(0,0,0,0))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(tabreg, type="base", col=NA, add=T, border="red",alpha=0.03,lwd=1)
+mf_layout(title = "Découpages des étudiants du groupe 4 / Enxemble",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+### La Méditerranée américaine
+
+```{r}
+loc<-map %>% filter(iso3 %in% c("MEX","VEN"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(map, type="base", col="lightyellow",add=T)
+mf_map(tabreg, type="base", col=NA, add=T, border="red",alpha=0.03,lwd=2)
+mf_layout(title = "La Méditerranée américiane",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+
+
+### La Méditerranée asiatique
+
+```{r}
+loc<-map %>% filter(iso3 %in% c("CHN","AUS"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(map, type="base", col="lightyellow",add=T)
+mf_map(tabreg, type="base", col=NA, add=T, border="red",alpha=0.03,lwd=2)
+mf_layout(title = "La Méditerranée américiane",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+### La Méditerranée euro-africaine
+
+```{r}
+loc<-map %>% filter(iso3 %in% c("ESP","DZA","TUN","LBY","TUR"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(map, type="base", col="lightyellow",add=T)
+mf_map(tabreg, type="base", col=NA, add=T, border="red",alpha=0.03,lwd=2)
+mf_layout(title = "La Méditerranée euro-africaine",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+
+
+
+### Où est l'Europe
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Europe")
+loc<-map %>% filter(iso3 %in% c("ISL","UKR","SWE","IRN","GRL","EGY"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(map, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.1,lwd=1)
+mf_layout(title = "Où est l'Europe ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+### Où est l'Amérique du Nord
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Amérique du Nord")
+loc<-map %>% filter(iso3 %in% c("CAN","MEX", "ISL"))
+
+mf_init(loc, expandBB = c(0.2,0.0,0.3,0.1))
+mf_map(map, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.1,lwd=1)
+mf_layout(title = "Où est l'Amérique du Nord ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+```
