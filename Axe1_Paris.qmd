@@ -593,7 +593,7 @@ tabreg<-st_transform(tabreg,w) %>% st_as_sf()
 
 
 mf_map(map, type="base", col="lightyellow")
-mf_map(tabreg, type="base", col="blue", add=T, border="red",alpha=0.03)
+mf_map(tabreg, type="base", col="blue", add=T, border="red",alpha=0.01)
 
 
 saveRDS(tabreg,"data/axe1/maps/sma_tabreg.RDS")
@@ -877,22 +877,24 @@ mf_layout(title = paste("Carte ",etu, ": One World !"),
 
 
 
-## Synthèse provisoire 
+## Superpositions des limites
 
-En se limitant pour l'instant aux 15 étudiants du groupe 4 : 
+Voici les résultats pour les 60 étudiants de L3 géographie d'UPC : 
 
-#### Superposition de tous les découpages
+
 
 ```{r}
 mf_init(frame, expandBB = c(0,0,0,0))
 mf_map(frame, type="base",col="gray95",lty=3, add=T)
 mf_map(states, type="base",col="gray80", add=T)
 mf_map(tabreg, type="base", col=NA, add=T, border="red",alpha=0.03,lwd=1)
-mf_layout(title = "Découpages des étudiants du groupe 4 / Enxemble",
+mf_layout(title = "Découpages de 60 étudiants français",
           credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
 
 ```
 
+
+### Les trois méditerranées
 
 #### La Méditerranée américaine
 
@@ -924,7 +926,7 @@ mf_layout(title = "La Méditerranée pacifico-asiatique",
 ```
 
 
-### La Méditerranée euro-africaine
+#### La Méditerranée euro-africaine
 
 ```{r}
 loc<-states %>% filter(CODE_ISO3 %in% c("ESP","DZA","TUN","LBY","TUR"))
@@ -938,10 +940,9 @@ mf_layout(title = "La Méditerranée euro-africaine",
 ```
 
 
+### L'Europe et les régions voisines
 
-
-
-### Où est l'Europe ?
+#### Où est l'Europe ?
 
 ```{r}
 sel <- tabreg %>% filter(namereg=="Europe")
@@ -949,14 +950,104 @@ loc<-states %>% filter(CODE_ISO3 %in% c("ISL","UKR","SWE","IRN","GRL","EGY"))
 
 mf_init(loc, expandBB = c(0,0,0,0))
 mf_map(states, type="base", col="white",add=T)
-mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.1,lwd=1)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.02,lwd=1)
 mf_layout(title = "Où est l'Europe ?",
           credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
 
 ```
 
 
-### Où est l'Amérique du Nord ?
+#### Où est la Russie ?
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Russie")
+loc<-states %>% filter(CODE_ISO3 %in% c("RUS","JPN"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(states, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.02,lwd=1)
+mf_layout(title = "Où est la Russie ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+
+#### Où est la Méditerranée ?
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Mediterranee")
+loc<-states %>% filter(CODE_ISO3 %in% c("ESP","EGY","SEN","DEU"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(states, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.05,lwd=1)
+mf_layout(title = "Où est la Méditerranée ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+#### Où est le Moyen-Orient ?
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Moyen-Orient")
+loc<-states %>% filter(CODE_ISO3 %in% c("TUR","AFG","IRN","YEM"))
+
+mf_init(loc, expandBB = c(0,0,0,0))
+mf_map(states, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.02,lwd=1)
+mf_layout(title = "Où est le Moyen-Orient ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+
+```
+
+
+#### Où est l'Afrique ?
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Afrique")
+loc<-states %>% filter(CODE_ISO3 %in% c("EGY","ZAF", "SEN"))
+
+mf_init(loc, expandBB = c(0.2,0.0,0.3,0.1))
+mf_map(states, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.03,lwd=1)
+mf_layout(title = "Où est l'Afrique ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+```
+
+
+
+#### Où est l'Afrique du Nord?
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Afrique du Nord")
+loc<-states %>% filter(CODE_ISO3 %in% c("TUN","EGY","SEN", "YEM"))
+
+mf_init(loc, expandBB = c(0.2,0.0,0.3,0.1))
+mf_map(states, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.03,lwd=1)
+mf_layout(title = "Où est l'Afrique du Nord ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+```
+
+
+
+#### Où est l'Afrique de l'Ouest ?
+
+```{r}
+sel <- tabreg %>% filter(namereg=="Afrique de l'Ouest")
+loc<-states %>% filter(CODE_ISO3 %in% c("COG","NER", "SEN"))
+
+mf_init(loc, expandBB = c(0.2,0.0,0.3,0.1))
+mf_map(states, type="base", col="white",add=T)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.03,lwd=1)
+mf_layout(title = "Où est l'Amérique du Nord ?",
+          credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
+```
+
+
+
+#### Où est l'Amérique du Nord ?
 
 ```{r}
 sel <- tabreg %>% filter(namereg=="Amérique du Nord")
@@ -964,7 +1055,7 @@ loc<-states %>% filter(CODE_ISO3 %in% c("CAN","MEX", "ISL"))
 
 mf_init(loc, expandBB = c(0.2,0.0,0.3,0.1))
 mf_map(states, type="base", col="white",add=T)
-mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.1,lwd=1)
+mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.02,lwd=1)
 mf_layout(title = "Où est l'Amérique du Nord ?",
           credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
 ```
