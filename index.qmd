@@ -5,12 +5,12 @@ toc: false
 about:
   id: hero-heading
   template: trestles  
-  image-width: 17em
-  image-shape: round
-  image: img/ucad2026b.jpg
-  image-alt: "Carte sensible du Monde"
+  image-width: 25em
+  image-shape: rectangle
+  image: img/World_sma2026.jpg
+  image-alt: "Découpage du monde en régions par 60 étudiants de L3 géographie de l'Université Paris Cité en avril 2026"
   links:
-    - text: Première rencontre des partenaires franco-sénégalais du projet Altermap à Dakar en Février 2026. Photo prise par Adrien Doron (dont la place est vide ...)
+    - text: Découpage du monde en régions par 60 étudiants de L3 géographie de l'Université Paris Cité en avril 2026
 ---
 
 

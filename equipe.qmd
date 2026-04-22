@@ -10,7 +10,7 @@ listing:
   sort-ui: [name, affiliation, pays]
   type: table
   categories: true
-  image-height: 100px
+  image-height: 200px
   table-hover: true
   field-links: ["name"]
   image-placeholder: img/wip.jpg
