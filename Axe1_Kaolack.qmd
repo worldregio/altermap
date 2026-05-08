@@ -1,0 +1,469 @@
+---
+title: "Altermap 2026 : COMMENT VOYEZ-VOUS LE MONDE ?"
+subtitle: "Analyse des réponses de 61 étudiants sénégalais au questionnaire pilote administré en avril 2026"
+author: "Labaly Touré, Claude Grasland"
+date: "2026-05-08"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: yeti
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: custom.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggrepel)
+library(labelled)
+library(readxl)
+library(questionr)
+library(sf)
+library(mapsf)
+library(readxl)
+
+```
+
+
+## Introduction 
+
+
+
+
+
+
+
+
+# A. QUELQUES QUESTIONS SUR VOUS
+
+La première partie du questionnaire apportait des données de cadrage sur les individus (âge, sexe), sur la perception du niveau de revenu de la famille et les études des parents, ainsi que l'expérience international de la mobilité.
+
+
+![Altermap 2026 - Questionnaire -  Partie 1](img/Altermap_axe1_partieA.jpg){width=800}
+
+
+
+::: {.callout-tip}
+## Télécharger le jeu de données issues de Kobo Toolbox
+-  [Données d'enquête issus de kobo au format label .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_labels_V2.xlsx)
+-  [Données d'enquêteissus de kobo  au format code .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/maindata/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_codes_V2.xlsx)
+
+:::
+
+
+
+
+
+On commence par charger les questionnaires issus de Kobo Toolbox en format "label" (texte complet) ou en format "codes" (codes) pour constituer notre tableau de données. Selon le cas on utilisera l'un ou l'autre tableau pour nos analyses. On va ensuite construire à partir de ces deux fichiers notre tableau de donnée de référence
+
+```{r}
+donlab <- read_xlsx("data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_labels_V2.xlsx",na = "NA")
+donlab<- donlab[donlab[,7]=="USSEIN - Kaolack - Sénégal",]
+
+         
+ 
+doncod <- read_xlsx("data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_codes_V2.xlsx", na = "NA")
+doncod<- doncod[doncod[,7]=="USSEIN",]
+don<-data.frame(id=paste(doncod$Unit_d_enseignement_concern,doncod$N_de_questionnaire))
+```
+
+
+
+On se propose dans cette première analyse d'étudier les réponses des étudiants de licence SIG de l'Université de USSEIN à Kaolack (Sénégal)
+
+
+##  A.1 Echantillonage
+
+
+
+
+### Sexe
+
+```{r}
+par(mfrow=c(1,1))
+don$sex <-as.factor(donlab$`A.1 : Sexe`)
+tab<-table(don$sex)
+freq(tab,valid = F, total = T)
+
+```
+
+
+
+### Âge
+
+
+```{r}
+don$age<-2026 - doncod$A2_Year
+hist(don$age, main="Âge approximatif des étudiants", xlab = "2026 - année de naissance", ylab = "Effectif")
+
+```
+
+
+
+
+## A.2 Variables de cadrage
+
+### Niveau économique familial
+
+L'autoévaluation du niveau économique a été faite sur une échelle graphique comportant quatre cases. Mais les étudiants ont souvent coché des cases situées sur les lignes séparant les cases, ce qui aboutissait à 8 ou 9 réponses possibles que l'on a ramené à 5 classes  
+
+```{r}
+don$rich <- as.factor(donlab$`A.10 Revenu familial`)
+don$rich<-as.factor(don$rich)
+levels(don$rich)<-c("1 très bas","2.bas","2.bas","3.moyen","4.haut","5.très haut")
+tab<-table(don$sex,don$rich)
+lprop(tab)
+mypal=rainbow(12)
+mosaicplot(tab,,col =mypal,main = "Autoévaluation de la richesse familiale", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
+
+
+```
+
+En croisant les réponses à cette question avec le sexe on remarque des différences significatives d'appréciation. Les femmes sont-elles réellement issues de niveaux sociaux plus faible ? ou bien plus modestes que les hommes dans leurs réponses ?
+
+
+### Niveau d'éducation des parents
+
+On analyse ensuite le niveau d'éducation des parents : 
+
+```{r}
+don$edu_mere <- as.factor(donlab$`A.11 Niveau d'étude de votre mère`)
+levels(don$edu_mere)<-c("1 très bas","2.bas","2.bas","3.moyen","4.haut","5.très haut")
+tab<-table(don$sex,don$edu_mere)
+lprop(tab)
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Niveau d'éducation de la mère (déclaré)", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
+```
+
+```{r}
+don$edu_pere <- as.factor(donlab$`A.12 Niveau d'étude de lvotre père`)
+levels(don$edu_pere)<-c("1 très bas","2.bas","3.moyen","4.haut","5.très haut")
+tab<-table(don$sex,don$edu_pere)
+lprop(tab)
+mypal=rainbow(10)
+mosaicplot(tab,col =mypal,main = "Niveau d'éducation du père (déclaré)", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
+```
+
+On ne retrouve pas cette-fois-ci de différence entre les hommes et les femmes.
+
+
+## A.3 Expérience internationale 
+
+L'expérience du Monde des étudiants a pu être évaluée par deux questions, l'une portant sur les pays où ils ont séjourné plus de mois (migrations) et l'autre sur les six derniers pays qu'ils ont visité même si ce n'est que pour quelques jours à l'occasion de vacances ou voyages d'étude (mobilités). 
+
+### Séjours de plus de 6 mois 
+
+
+```{r}
+don$mig<-as.factor(doncod$A6_migration)
+
+tab<-table(don$sex, don$mig)
+lprop(tab)
+mypal=rainbow(2)
+mosaicplot(tab,col =mypal,main = "A toujours vécu dans le même pays ?", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
+```
+
+Très peu d'étudiants interrogés ont vécu à l'étranger plus de 6 mois.
+
+### Mobilités de courte durée
+
+On examine le nombre de pays visités quels que soit la durée du séjour, le maximum de réponse étant limité à 4.
+
+```{r}
+don$mob<-paste(doncod$A9_mob1, doncod$A9_mob2, doncod$A9_mob3, doncod$A9_mob4)
+don$mob <- gsub(" NA "," ", don$mob)
+don$mob <- gsub(" NA "," ", don$mob)
+don$mob <- gsub(" NA "," ", don$mob)
+don$mob <- gsub(" NA","", don$mob)
+don$mob <- gsub("NA","", don$mob)
+
+don$nbmob <- round(as.numeric(lapply(don$mob, nchar))/4)
+
+tab<-table(don$sex, don$nbmob)
+lprop(tab)
+mypal=rainbow(15)
+mosaicplot(tab,col =mypal,main = "Mobilités internationales", sub = "Source : Enquête Altermap 2026, UPC" ,las = 1, ylab ="Nb. pays visités (max. 4)")
+```
+
+La plupart des étudiants interrogés n'ont cité aucun pays étranger, même pour des visites de courte durée...
+
+```{r}
+x <- c(doncod$A9_mob1, doncod$A9_mob2, doncod$A9_mob3, doncod$A9_mob4)
+tab <-table(x)
+sta <- data.frame(iso3=names(tab), nbvis = as.numeric(tab)) %>% arrange(-nbvis)
+map<-readRDS("data/ebm/geom/ebm_states.RDS")
+map <- left_join(map, sta)
+
+mf_map(map, type="base", col="lightyellow")
+mf_map(map, type="prop", var="nbvis",col="red", inches=0.1, 
+       leg_pos = "topleft",
+       leg_title = "nb. réponses")
+mf_graticule(map,add = T, lty=2, lwd=0.5)
+mf_layout("Pays visités : étudiants de Kaolack, SIG, 2026", frame=T, arrow=F, scale = F, credits="Source : Enquête Altermap 2026, Kaolack")
+
+```
+
+
+- **Commentaire** : ...
+
+
+# B. VOTRE VISION DU MONDE
+
+La seconde partie du questionnaire visait à analyser certains éléments de la vision du Monde des étudiants en utilisant trois entrées différentes : les échelles d'appartenance, les pays attractifs et répulsifs, les mots associés à certains espaces. 
+
+![Altermap 2026 - Questionnaire - Partie B](img/Altermap_axe1_partieB.jpg){width=800}
+
+
+## B.1 Echelles d'appartenance 
+
+La questions n'a sans doute pas été formulée de façon satisfaisante car beaucoup d'étudiants ont répondu d'une façon différente de celle qui avait été anticipée par les enquêteurs.
+
+On attendait en effet des étudiants qu'ils choisissent parmi les niveaux proposés les trois échelle territoriale auxquelles ils s'identifient le plus en les ordonnant. Soit une réponse du type suivant  :  
+
+![Altermap 2026 - Question B1 - Réponse attendue](img/repB1A_correcte.jpg){width=800}
+
+Mais certains étudiant  ont compris la question différemment et ont plutôt indiqué les lieux correspondant à leurs échelles d'appartenance territoriale, sans les hiérarchiser, aboutissant à des réponses du type suivant : 
+
+
+![Altermap 2026 - Question B1 - Réponse inattendue](img/repB1A_incorrecte.jpg){width=800}
+
+Il est donc clair que la question doit être construite différemment dans les enquêtes futures et relève peut-être d'ailleurs plus d'un entretiens qualitatif où l'on poserait la question *"D'où êtes-vous ?"* sans préjuger du résultat mais en relançant la personne interrogée pour détecter l'existence de niveaux multiples. Il n'est d'ailleurs pas certain que l'idée d'ordonner les échelles soit pertinente. La réponse à la question peut en effet varier selon le contexte où elle est posée. Un sénégalais interrogé sur ses orignes dans un pays très éloigné pourra répondre qu'il vient du Sénégal ou d'Afrique. Le même individu interrogé par un habitant de son pays répondra plutôt qu'il vient de Casmance ou de Saint-Louis ... 
+
+Peut-on néanmoins tirer quelques enseignements des réponses obtenues ?
+
+
+### Echelles multiples
+
+On peut tout d'abord examiner quelles échelles ont été les plus mobilisées par les étudiants, que ce soit pour les ordonner ou leur attribuer un exemple.
+
+```{r}
+tab<-doncod[,42:47]
+n<-apply(tab,2,sum, na.rm=T)
+pct <- 100*n/61
+niveau <- c("Local","Infranational","National","Supranational","Global","Autre")
+tab<-data.frame(niveau,n, pct)
+kable(tab, row.names=F, digits=c(0,0,1))
+table(donlab$`B1 : Sentiment d'appartenance :  autre`)
+
+```
+
+
+ 
+
+
+### Echelle principale
+
+
+Si on se limite aux  étudiants s qui ont fourni un classement des échelles, on peut construire un tableau donnant l'échelle principale d'appartenance i.e. celle qui a été classée en première place :
+
+
+
+```{r}
+don$lev<-doncod$A13a_level
+sel <- don %>% filter(is.na(lev)==F)
+sel$lev2<-as.factor(sel$lev)
+levels(sel$lev2)<-c("Local","Infranational","National","Autre")
+#sel$lev2<-as.factor(as.character(sel$lev2))
+tab<-table(sel$sex, sel$lev2)
+
+kable(addmargins(tab))
+
+```
+
+
+Ce résultat confirme la prédominance des échelles locales et infranationales ...
+
+## B.2 Pays attractifs et répulsifs
+
+
+Une manière efficace de mettre à jour les représentations du Monde des étudiants a consisté à leur demander les pays où ils souhaiteraient vivre ou ne pas vivre dans un futur proche. Cela suppose une petite préparation des données pour créer un tableau ou chaque ligne correspond à une réponse sur les pays attractifs ou répulsifs. En d'autres termes les réponses de chaque étudiant correspondront à 10 lignes, 5 pour les pays cités positivement et 5 pour les pays cités négativement.On accompagnera ces réponses des informations que l'on juge utile sur les étudiants afin de pouvoir ensuite faire des regroupements. 
+
+A titre d'exemple, voici la forme que prendront les réponses d'une personnes enquêtée dont on a conservé comme variables explicaives le sexe, l'âge,le niveau de richesse et les pays visités : 
+
+```{r}
+pos <-doncod[,50:54]
+names(pos)<-c("pos1","pos2","pos3","pos4","pos5")
+donpos <- cbind(don,pos) %>% pivot_longer(cols = 11:15)
+neg <-doncod[,55:59]
+names(neg)<-c("neg1","neg2","neg3","neg4","neg5")
+donneg <- cbind(don,neg) %>% pivot_longer(cols = 11:15)
+donpol <-rbind(donpos, donneg) 
+donpol$opi<-substr(donpol$name,1,3)
+donpol$rnk <-substr(donpol$name,4,4)
+donpol$iso3<-donpol$value
+donpol<-donpol[,-c(11:12)] %>% arrange(id,opi,rnk)
+
+
+codgeo <- map %>% st_drop_geometry() %>% select(iso3,nom=name) %>% filter(nom !="West Bank") 
+codgeo$nom[codgeo$iso3=="GBR"] <- "U.K"
+codgeo$nom[codgeo$iso3=="USA"] <- "U.S.A."
+codgeo$nom[codgeo$iso3=="RUS"] <- "Russia"
+codgeo$nom[codgeo$iso3=="ARE"] <- "Emirates"
+codgeo$nom[codgeo$iso3=="PRK"] <- "North Korea"
+codgeo$nom[codgeo$iso3=="LIB"] <- "Libya"
+codgeo$nom[codgeo$iso3=="IRN"] <- "Iran"
+donpol <- donpol %>% left_join(codgeo)
+
+exemple <- donpol %>% filter(id=="SIG-L2 74")
+
+kable(exemple[,c(1,2:4,8,11:14)])
+```
+
+-**Commentaire :** L'étudiant SIG-L2 74 est un homme de 25 ans, qui estime sont revenu familial bas et n'a effectué aucune mobilité. Il ne souhaiterait pas vivre en France, Italie, Mali, Gambie ou Sénégal. Il aimerait bien vivre en Chine, au Canada, en Afrique du Sud, au Japon ou en Corée du Nord. 
+
+
+### Pays attractifs
+
+Si on ne tient pas compte du rang des pays cités positivement, on peut établir un tableau de fréquence indiquant le nombre de fois ou un pays a été cité positivement par l'un des 61 étudiants de notre réchantillon.
+
+
+```{r}
+nbetud<-dim(don)[1]
+topfra <- donpol %>% filter(opi=="pos",is.na(iso3)==F) %>% 
+  group_by(iso3, nom) %>%
+  count() %>%
+  ungroup() %>% 
+  mutate ( nb=n, rnk = rank(-n), sal=100*n/nbetud) %>%
+  select(rnk, iso3, nom,nb, sal) %>%
+  arrange(rnk)
+
+
+kable(topfra[1:15,],caption ="Pays les plus attractifs pour les étudiants de L3 SIG à USSEIN en avril 2026", col.names = c("Rang","Code","Nom", "Nb. réponses", "% étudiants"), digits=c(0,0,0,0,1,1))
+
+```
+
+
+
+```{r}
+map2 <- left_join(map,topfra)
+mf_map(map2, type="base", col="lightyellow")
+mf_map(map2, type="prop", var="sal",col="red", inches=0.1, 
+       leg_pos = "topleft",
+       leg_title = "% étudiants")
+mf_graticule(map,add = T, lty=2, lwd=0.5)
+mf_layout("Pays attractifs : étudiants Kaolack Avril 2026", frame=T, arrow=F, scale = F, credits="Source : Enquête Altermap réalisée en avril 2026, Cours L3 SIG - USSEIN")
+```
+
+- **Commentaire** : 
+
+
+### Pays répulsifs
+
+
+
+```{r}
+nbetud<-61
+topfra <- donpol %>% filter(opi=="neg",is.na(iso3)==F) %>% 
+  group_by(iso3, nom) %>%
+  count() %>%
+  ungroup() %>% 
+  mutate ( nb=n, rnk = rank(-n), sal=100*n/nbetud) %>%
+  select(rnk, iso3, nom,nb, sal) %>%
+  arrange(rnk)
+
+
+kable(topfra[1:15,],caption ="Pays les plus répulsifs pour les étudiants de L3 SIG à USSEIN en avril 2026", col.names = c("Rang","Code","Nom", "Nb. réponses", "% étudiants"), digits=c(0,0,0,0,1,1))
+
+```
+
+
+```{r}
+map2 <- left_join(map,topfra)
+mf_map(map2, type="base", col="lightyellow")
+mf_map(map2, type="prop", var="sal",col="blue", inches=0.1, 
+       leg_pos = "topleft",
+       leg_title = "% étudiants")
+mf_layout("Pays répulsifs : étudiants Kaolack Avril 2026", frame=T, arrow=F, scale = F, credits="Source : Enquête Altermap réalisée en avril 2026, Cours L3 SIG - USSEIN")
+```
+
+- **Commentaire** : 
+
+
+
+### Synthèse
+
+Ce que montrent bien les analyses précédentes est le fait que l'appréciation que les étudiants donnent d'un pays doit être envisagé selon deux dimensions complémentaires, la saillance et l'opinion
+
+- **la saillance** (en anglais *salience*) est le fait qu'un pays se présente à l'esprit dun étudiant lorsqu'on lui demande de porter un jugement. Peu importe  que le jugement soit positif ou négatif, si un pays est cité par l'étudiant c'est qu'il possède des informations sur lui, qu'il en a reçu et à choisi de les retenir. Bref, la saillance manifeste une reconnaissance de l'exsitence d'un pays et signale sa présence dans la carte mentale de la personne. On la définira donc comme le % des étudiants qui ont cité un pays positivement ou négativement et on la mesurera sur une échelle de 0 à 100
+
+$Saillance_i = 100\times \frac{Pos_i + Neg_i}{n}$
+
+- **la polarisation** est le positionnement d'un individu et par la suite d'un groupe d'individu sur une échelle de jugement allant du négatif au positif. Elle ne peut exister que si le pays est déjà connu par l'individu et - dans le cas d'un groupe - possède une saillance suffisante. On mesure classiquement la polarisation sur un intervalle allant de -1 (tous les avis sont positifs) à +1 (tous les avis sont négatifs).
+
+$Polarisation_i = \frac{Pos_i-Neg_i}{Pos_i+Neg_i}$
+
+
+On ne retient que les pays ayant été cités par au moins 6 étudiants sénégalais pour calculer les indicateurs de saillance et de polarisation.
+
+```{r}
+
+syntfra <- donpol %>% filter(is.na(iso3)==F) %>%
+                     group_by(iso3,nom,opi) %>% 
+                      count() %>%
+                      pivot_wider(names_from = opi,
+                                  values_from = n,
+                                  values_fill = 0) %>%
+                       mutate(tot=neg+pos,
+                              saillance = 100*tot/nbetud,
+                              polarisation=(pos-neg)/(pos+neg)) %>%
+                      arrange(-saillance) %>%
+                      filter(tot>=7)
+
+kable(syntfra[1:20,],caption ="Synthèse des perceptions des pays du monde des étudiants de L3-SIG de Kaolack en avril 2026", col.names = c("Code","Nom", "Négatif", "Positif", "Total", "Saillance (%)","Polarisation"), digits=c(0,0,0,0,0,1,2))
+
+```
+
+
+```{r}
+ggplot(syntfra, aes(x=saillance, y = polarisation)) + 
+        geom_point() + 
+        geom_text_repel(aes(label = nom))+
+        scale_x_log10()+
+        ggtitle(label = "Attraction-Répulsion des étudiants de Kaolack en 2026" ,
+                subtitle = "Source : Enquête Altermap, Cours L3 SIG - USSEIN") +
+         theme_light()
+       
+```
+
+- **Commentaire** : 
+
+## B.3 Europe-Méditerranée-Afrique
+
+Quels sont les mots associés par les étudiants de géographie à ces trois territoires qui forment une région verticale reliant pays du Nord et du Sud ? 
+
+### Quelles méthodes d'analyse ?
+
+Sur le plan méthodologique, l'exploitation des résultats peut se faire selon au moins trois types de méthodes dont une seule, la plus simple, sera présentée ici : 
+
+1. **Comptage des mots les plus fréquents et visualisation sous la forme de nuages de mots**. Cette technique rapide - mais imparfaite - est bien adaptée à une première exploration du corpus. Elle peut être facilement réalisée avec des outils en ligne comme [wordart](https://wordart.com)
+
+2. **Analyse textuelle à l'aide d'outils de lemmatisation ou racinisation**. Cette technique plus exigeante implique l'emploi de logiciels spécialisés disponibles à travers des packages comme Iramuteq, Spacyr, Quanteda,  Udpipe, ... qui suppose une maîtrise des langages R ou Python. Ou bien d'interfaces en ligne, plus simples d'utilisation, mais qui implique en tout état de cause une formation aux concepts et méthodes de l'analyse textuelle.
+
+3. **Codage manuel de catégories en fonction d'une problématique**. Cette méthode relève davantage des approches qualitatives utilisées par exemple dans les études du contenu des journaux. Pour être menée de façon rigoureuse, elle suppose l'établissement d'une grille de codage (e.g. on va chercher les mots relevant du thème de la violence) puis d'un test de comparaison des résultats de deux codeurs appliquant la grille afin de vérifier si leurs résultats sont convergents (test du Kappa de Cohen).
+
+En se limitant ici à la première méthode, voyons rapidement les résultats obtenus.
+
+

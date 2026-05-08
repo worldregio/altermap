@@ -1059,3 +1059,64 @@ mf_map(sel, type="base", col="red", add=T, border="blue",alpha=0.02,lwd=1)
 mf_layout(title = "Où est l'Amérique du Nord ?",
           credits = "Source : Enquête Altermap 2026 -Etudiants de L3 géographie - Université Paris Cité", frame=T, arrow=F, scale=F)
 ```
+
+
+
+## Analyse sur grille
+
+
+### Pleins et vides
+
+```{r}
+library(sf)
+library(dplyr)
+library(RColorBrewer)
+library(mapsf)
+
+## Select a grid centered on Africa
+grid <- st_read("data/axe1/worldmaps/GRID_MONDE_150km.shp")
+myproj<-st_crs(grid)
+
+## select student maps
+tabreg<-readRDS("data/axe1/maps/sma_tabreg.RDS")
+tabreg<-st_transform(tabreg,myproj)
+tabreg<-tabreg %>% group_by(id, numreg)%>% summarise()
+
+## select states
+states<-st_read("data/axe1/worldmaps/WORLD_WUTS5.shp")
+
+
+coo<-st_coordinates(st_centroid(grid))
+grid$X<-coo[,1]
+grid$Y<-coo[,2]
+sel <- grid %>% filter(Y< -1000000, Y > -20000000,X>-3500000, X <10000000)
+statessel<-st_crop(states, sel)
+
+## Interesect grid with maps and compute probability
+selctr<-st_centroid(sel)
+nb <- st_intersects(selctr, tabreg,sparse = F)
+m<-as.matrix(nb)
+q <- 100*apply(m,1,sum)/60
+summary(q)
+
+## Map probablity
+sel$prob<-q
+#statessel<-st_crop(states, sel)
+mypal<-rev(brewer.pal(n=10, name = "RdYlBu"))
+mybreaks<-c(0,10, 20, 30,40, 50,60,70, 80,90, max(q))
+mf_map(sel,
+       type="choro",
+       var="prob", 
+       border=NA,
+       breaks=mybreaks,
+       alpha = 0.8,
+       leg_title = "Probabilité (%)",
+       leg_val_rnd = 0,
+       pal=mypal)
+mf_map(statessel, type="base",col=NA, add=T, border="black")
+mf_layout(title = "Probabilité d'inclusion dans une région",
+          frame=T, arrow=F, scale=F,       credits = "Source : Enquête EuroBroadmap 2026")
+
+
+
+```
