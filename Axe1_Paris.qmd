@@ -44,6 +44,11 @@ library(questionr)
 library(sf)
 library(mapsf)
 library(readxl)
+library(quanteda)
+library(wordcloud)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(RColorBrewer)
 
 ```
 
@@ -137,20 +142,26 @@ La majorité des étudiants sont âgés de 20 ou 21 ans ce qui correspond à leu
 
 ### Niveau économique familial
 
-L'autoévaluation du niveau économique a été faite sur une échelle graphique comportant quatre cases. Mais les étudiants ont souvent coché des cases situées sur les lignes séparant les cases, ce qui aboutissait à 8 ou 9 réponses possibles que l'on a ramené aux 4 prévues initialement.
+L'autoévaluation du niveau économique a été faite sur une échelle graphique comportant quatre cases. Mais les étudiants ont souvent coché des cases situées sur les lignes séparant les cases, ce qui aboutissait à  9 réponses possibles que l'on a ramené à 5 réponses
 
 ```{r}
 don$rich <- as.factor(donlab$`A.10 Revenu familial`)
-#table(don$rev)
-don$rich<-as.factor(don$rich)
-levels(don$rich)<-c("1 très bas","1 très bas","2.bas","2.bas","3.haut","3.haut","4.très haut","4.très haut")
-tab<-table(don$grp,don$rich)
+don$rich <- case_when(don$rich==0 ~ "1. très bas",
+                      don$rich==1 ~ "1. très bas",
+                      don$rich==2 ~ "2. bas",
+                      don$rich==3 ~ "2. bas",
+                      don$rich==4 ~ "3. moyen",
+                      don$rich==5 ~ "4. haut",
+                      don$rich==6 ~ "4. haut",  
+                      .default = "5. très haut"                   
+                      )
+tab<-table(don$sex,don$rich)
+tab
 lprop(tab)
-mypal=rainbow(10)
+mypal=rainbow(12)
 mosaicplot(tab,,col =mypal,main = "Autoévaluation de la richesse familiale", sub = "Source : Enquête Altermap 2026, UPC" ,las = 1)
 ```
 
-En croisant les réponses à cette question avec les groupes de TD, on remarque une originalité du groupe de TD3 qui déclare des niveaux sensiblement plus élevés. Cela pourrait peut-être s'expliquer par le fait qu'il correspond à des étudiants suivant une double licence écononomie-géographie alors que les trois autres groupes sont des étudiants en licence unique de géographie
 
 
 ### Niveau d'éducation des parents
@@ -159,22 +170,38 @@ On analyse ensuite le niveau d'éducation des parents :
 
 ```{r}
 don$edu_mere <- as.factor(donlab$`A.11 Niveau d'étude de votre mère`)
-levels(don$edu_mere)
-don$edu_mere<-as.factor(don$edu_mere)
-levels(don$edu_mere)<-c("1 très bas","1 très bas","2.bas","2.bas","3.haut","3.haut","4.très haut","4.très haut")
-tab<-table(don$grp,don$edu_mere)
+don$edu_mere <- case_when(don$edu_mere==0 ~ "1. très bas",
+                      don$edu_mere==1 ~ "1. très bas",
+                      don$edu_mere==2 ~ "2. bas",
+                      don$edu_mere==3 ~ "2. bas",
+                      don$edu_mere==4 ~ "3. moyen",
+                      don$edu_mere==5 ~ "4. haut",
+                      don$edu_mere==6 ~ "4. haut",  
+                      .default = "5. très haut"                   
+                      )
+tab<-table(don$sex,don$edu_mere)
+tab
 lprop(tab)
-mypal=rainbow(10)
+mypal=rainbow(12)
 mosaicplot(tab,col =mypal,main = "Niveau d'éducation de la mère (déclaré)", sub = "Source : Enquête Altermap 2026, UPC" ,las = 1)
 ```
 
 ```{r}
 don$edu_pere <- as.factor(donlab$`A.12 Niveau d'étude de lvotre père`)
-don$edu_pere<-as.factor(don$edu_pere)
-levels(don$edu_pere)<-c("1 très bas","1 très bas","2.bas","2.bas","3.haut","3.haut","4.très haut","4.très haut")
-tab<-table(don$grp,don$edu_pere)
+don$edu_pere <- case_when(don$edu_pere==0 ~ "1. très bas",
+                      don$edu_pere==1 ~ "1. très bas",
+                      don$edu_pere==2 ~ "2. bas",
+                      don$edu_pere==3 ~ "2. bas",
+                      don$edu_pere==4 ~ "3. moyen",
+                      don$edu_pere==5 ~ "4. haut",
+                      don$edu_pere==6 ~ "4. haut",  
+                      .default = "5. très haut"                   
+                      )
+
+tab<-table(don$sex,don$edu_pere)
+tab
 lprop(tab)
-mypal=rainbow(10)
+mypal=rainbow(12)
 mosaicplot(tab,col =mypal,main = "Niveau d'éducation du père (déclaré)", sub = "Source : Enquête Altermap 2026, UPC" ,las = 1)
 ```
 
@@ -481,11 +508,54 @@ Sur le plan méthodologique, l'exploitation des résultats peut se faire selon a
 
 3. **Codage manuel de catégories en fonction d'une problématique**. Cette méthode relève davantage des approches qualitatives utilisées par exemple dans les études du contenu des journaux. Pour être menée de façon rigoureuse, elle suppose l'établissement d'une grille de codage (e.g. on va chercher les mots relevant du thème de la violence) puis d'un test de comparaison des résultats de deux codeurs appliquant la grille afin de vérifier si leurs résultats sont convergents (test du Kappa de Cohen).
 
-En se limitant ici à la première méthode, voyons rapidement les résultats obtenus.
+On utilisera ici une combinaison des méthodes 1 et 2 où l'on va recoder manuellement les mots ou groupes de mots avant de les visualiser avec le package quanteda de R.
 
 ### Les mots de l'Europe
 
-![Altermap 2026 - Les mots associés à Europe par 61 étudiants de géographie parisiens](img/SMA_Europe.jpg){width=800}
+```{r}
+don$eur <- paste(donlab$`Europe 1`, 
+                 donlab$`Europe 2`,
+                 donlab$`Europe 3`,
+                 donlab$`Europe 4`,
+                 donlab$`Europe 5`, sep=", ")
+don$eur<-gsub(", NA","",don$eur)
+don$eur<-gsub("UE","union_européenne",don$eur)
+don$eur<-tolower(don$eur)
+don$eur<-gsub("niveau de vie","niveau_de_vie",don$eur)
+don$eur<-gsub("main d'oeuvre","main_d_oeuvre",don$eur)
+don$eur<-gsub("union européenne","union_européenne",don$eur)
+don$eur<-gsub("richesse","riche",don$eur)
+don$eur<-gsub("richesses","riche",don$eur)
+don$eur<-gsub("riche","richesse",don$eur)
+don$eur<- gsub("vieillissement","vieux",don$eur)
+don$eur<- gsub("vieillissant","vieux",don$eur)
+
+
+
+corp<-corpus(x=don,text_field = "eur",docid_field = "id")
+toks<- tokens(corp,remove_punct = T)
+toks<-tokens_remove(toks,c("des","les","pas","le","la","les","et","de"))
+dfmat<-dfm(toks)
+tstat_freq <- textstat_frequency(dfmat, n = 20)
+par(mfrow=c(1,1))
+
+ggplot(tstat_freq, aes(x = frequency, y = reorder(feature, frequency))) +
+    geom_point() + 
+    labs(x = "Frequence", y = "Mot") +
+     ggtitle("Les 20 mots les plus asssociés à 'Europe'",
+             subtitle = "Source : Enquête Altermap, Cours L3 SMA - UPC")
+
+
+```
+
+```{r, fig.width=8, fig.height=8}
+par(bg="white")
+mypal=brewer.pal(name="Blues",n = 9)[3:9]
+wordcloud(toks,min.freq = 2,scale = c(3,1),rot.per = 0,
+          col=mypal)
+title("Les mots les plus asssociés à 'Europe'",
+      sub ="Source : Enquête Altermap, Cours L3 SMA - UPC" )
+```
 
 - **Commentaire : ** Les mots relatifs à l’Europe renvoient à plusieurs dimensions sémantiques. La plus centrale concerne l’intégration européenne avec les mentions ‘UE’ en premier, puis ‘euro’ ou encore ‘Schengen’. Cela témoigne d’une tendance à assimiler l’entité régionale européenne à l’entité politique et économique de l’Union européenne.
 Trois autres registres ressortent : celui du **développement**, avec les termes de ‘puissance’, ‘richesse’, ‘développé’, ‘riche’, ‘argent’ ; le registre de la **domination**, avec les termes de ‘puissance’ également, de colonisation, de guerre ; enfin un registre **culturel** large autour de représentations occidentales, de vieux continent, avec les termes d’’occident’, ‘blanc’, ‘culture’, ‘vieux’. 
@@ -495,7 +565,51 @@ Trois autres registres ressortent : celui du **développement**, avec les termes
 
 ### Les mots de la Méditerranée
 
-![Altermap 2026 - Les mots associés à Méditerranée par 61 étudiants de géographie parisiens](img/SMA_Medit.jpg){width=800}
+```{r}
+don$med <- paste(donlab$`Méditerranée 1`, 
+                 donlab$`Méditerranée 2`,
+                 donlab$`Méditerranée 3`,
+                 donlab$`Méditerranée 4`,
+                 donlab$`Méditerranée 5`, sep=", ")
+don$med<-gsub(", NA","",don$med)
+don$med<-gsub("NA","",don$med)
+don$med<-tolower(don$med)
+don$med<-gsub("migrant","migration",don$med)
+don$med<-gsub("migrants","migration",don$med)
+don$med<-gsub("migrations","migration",don$med)
+don$med<-gsub("immigration","migration",don$med)
+don$med<-gsub("oliviers","olivier",don$med)
+don$med<-gsub("méditerranée","",don$med)
+don$med<-gsub("commerciaux","commerce",don$med)
+don$med<-gsub("ressources","ressource",don$med)
+don$med<-gsub("echanges","echange",don$med)
+
+corp<-corpus(x=don,text_field = "med",docid_field = "id")
+toks<- tokens(corp,remove_punct = T)
+toks<-tokens_remove(toks,c("des","les","pas","le","la","les","et","de","mer"))
+dfmat<-dfm(toks)
+tstat_freq <- textstat_frequency(dfmat, n = 20)
+par(mfrow=c(1,1))
+
+ggplot(tstat_freq, aes(x = frequency, y = reorder(feature, frequency))) +
+    geom_point() + 
+    labs(x = "Frequence", y = "Mot") +
+     ggtitle("Les 20 mots les plus asssociés à 'Méditerranée' (en excluant  mer)'",
+             subtitle = "Source : Enquête Altermap, Cours L3 SMA - UPC")
+
+
+```
+
+
+```{r, fig.width=8, fig.height=8}
+par(bg="white")
+mypal=brewer.pal(name="Oranges",n = 9)[3:9]
+wordcloud(toks,min.freq = 2,scale = c(3,1),rot.per = 0,
+          col=mypal)
+title("Les mots les plus asssociés à 'Méditerranée' (sauf 'mer')",
+      sub ="Source : Enquête Altermap, Cours L3 SMA - UPC" )
+```
+
 
 - **Commentaire** : Les mots relatifs à la Méditerranée renvoient en premier lieu à la **dimension maritime**, avec les mentions de ‘mer’, ‘pêche’, ‘eau’, ‘bateau’, ‘côte’. Trois autres registres ressortent : le registre du **tourisme** et du ludique avec les termes de ‘tourisme’, ‘vacances’, ‘croisières’, ‘soleil’ ; le registre **commercia**l avec les termes de ‘commerce’, ‘échange’, ‘flux’ ; et enfin le registre des **migrations** avec les termes de ‘migration’, ‘migrant’, ‘flux’, ‘mort’, noyade’.  On note une opposition frontale entre la dimension touristique et la dimension migratoire.
 On observe peu de mentions terrestres (excepté olive), avec une appréhension essentiellement maritime de cet espace, et finalement peu de mise en lien de l’Europe et de l’Afrique comme entités régionales (la notion étant pourtant intercalée entre les deux), même si cet espace est appréhendé comme une interface via le commerce et les migrations
@@ -504,7 +618,65 @@ On observe peu de mentions terrestres (excepté olive), avec une appréhension e
 
 ### Les mots de l'Afrique
 
-![Altermap 2026 - Les mots associés à Afrique par 61 étudiants de géographie parisiens](img/SMA_Afrique.jpg){width=800}
+
+```{r}
+don$afr <- paste(donlab$`Afrique 1`, 
+                 donlab$`Afrique 2`,
+                 donlab$`Afrique 3`,
+                 donlab$`Afrique 4`,
+                 donlab$`Afrique 5`, sep=", ")
+don$afr<-gsub(", NA","",don$afr)
+don$afr<-gsub("NA","",don$afr)
+don$afr<-tolower(don$afr)
+  don$afr<-gsub("ressources naturelles","ressources_naturelles",don$afr)
+  don$afr<-gsub("richesses naturelles","ressources_naturelles",don$afr)
+  don$afr<-gsub("richesse naturelle","ressources_naturelles",don$afr)
+  
+   don$afr<-gsub("sous développement","sous_développement",don$afr)
+    don$afr<-gsub("sous-développement","sous_développement",don$afr)  
+    
+      don$afr<-gsub("berceau de l'humanité","berceau_humanité",don$afr)  
+      
+       don$afr<-gsub("noires","noir",don$afr)  
+    don$afr<-gsub("noirs","noir",don$afr) 
+    
+ don$afr<-gsub("pauvreté","pauvre",don$afr) 
+don$afr<-gsub("pauvres","pauvre",don$afr) 
+don$afr<-gsub("pauvre","pauvreté",don$afr) 
+
+don$afr<-gsub("afrique","",don$afr)  
+
+don$afr<-gsub("jeunesse","jeune",don$afr)  
+don$afr<-gsub("jeunes","jeune",don$afr)
+don$afr<-gsub("jeune","jeunesse",don$afr)
+
+corp<-corpus(x=don,text_field = "afr",docid_field = "id")
+toks<- tokens(corp,remove_punct = T)
+toks<-tokens_remove(toks,c("des","les","pas","le","la","les","et","de"))
+dfmat<-dfm(toks)
+tstat_freq <- textstat_frequency(dfmat, n = 20)
+par(mfrow=c(1,1))
+
+ggplot(tstat_freq, aes(x = frequency, y = reorder(feature, frequency))) +
+    geom_point() + 
+    labs(x = "Frequence", y = "Mot") +
+     ggtitle("Les 20 mots les plus asssociés à 'Afrique'",
+             subtitle = "Source : Enquête Altermap, Cours L3 SMA - UPC")
+
+
+
+
+```
+
+
+```{r, fig.width=8, fig.height=8}
+par(bg="white")
+mypal=brewer.pal(name="Greens",n = 9)[3:9]
+wordcloud(toks,min.freq = 3,scale = c(3,1),rot.per = 0,
+          col=mypal)
+title("Les mots les plus asssociés à 'Afrique'",
+      sub ="Source : Enquête Altermap, Cours L3 SMA - UPC" )
+```
 
 - **Commentaire** : La première dimension qui apparait dans les mots relatifs à l’Afrique renvoie au registre de **domination**, avec les termes de ‘colonisation’, ‘conflit’, ‘guerre’, voire ‘pauvreté’. Trois autres registres ressortent : celui du **développement** avec les mentions de ‘richesse’, ‘pauvreté’, ‘développement’, ‘ressource’, ‘Sud’ ; le registre de l**environnement** et du **climat** avec les mentions de ‘soleil’, ‘chaleur’, ‘ressource’, ‘nature’, ‘désert’, ‘Sahara’ ; et enfin un registre **culture** au sein duquel on peut intégrer les manifestations sportives, avec les mentions de ‘culture’, ‘diversité’, ‘richesse’, ‘CAN’, ‘histoire’, ‘langues’.
 

@@ -25,7 +25,15 @@ website:
           - href: axe5.qmd  
             text: "5. Trajectoires de vie"
           - href: axe6.qmd  
-            text: "6. Habiter la ville"             
+            text: "6. Habiter la ville" 
+      - text: Premiers résultats
+        menu: 
+          - href: Axe1_Paris.qmd  
+            text: "Le Monde vu par les étudiants L3 de Paris (axe 1)"
+          - href: Axe1_Kaolack.qmd 
+            text: "Le Monde vu par les étudiants L3 de Kaolack (axe 1)" 
+          - href: Axe1_Paris_Kaolack.qmd 
+            text: "Le Monde vu de Kaolack et Paris (axe 1)"             
       - posts.qmd
     right: 
       - icon: github # add icons as navbar buttons

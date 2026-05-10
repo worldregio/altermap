@@ -1,6 +1,6 @@
 ---
 title: "Altermap 2026 : COMMENT VOYEZ-VOUS LE MONDE ?"
-subtitle: "Analyse des réponses de 61 étudiants sénégalais au questionnaire pilote administré en avril 2026"
+subtitle: "Analyse des réponses de 82 étudiants sénégalais au questionnaire pilote administré en avril 2026"
 author: "Labaly Touré, Claude Grasland"
 date: "2026-05-08"
 date-format: iso
@@ -44,17 +44,16 @@ library(questionr)
 library(sf)
 library(mapsf)
 library(readxl)
+library(quanteda)
+library(wordcloud)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(RColorBrewer)
 
 ```
 
 
 ## Introduction 
-
-
-
-
-
-
 
 
 # A. QUELQUES QUESTIONS SUR VOUS
@@ -68,8 +67,8 @@ La première partie du questionnaire apportait des données de cadrage sur les i
 
 ::: {.callout-tip}
 ## Télécharger le jeu de données issues de Kobo Toolbox
--  [Données d'enquête issus de kobo au format label .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_labels_V2.xlsx)
--  [Données d'enquêteissus de kobo  au format code .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/maindata/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_codes_V2.xlsx)
+-  [Données d'enquête issus de kobo au format label .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_labels_V3.xlsx)
+-  [Données d'enquêteissus de kobo  au format code .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/maindata/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_codes_V3.xlsx)
 
 :::
 
@@ -80,12 +79,12 @@ La première partie du questionnaire apportait des données de cadrage sur les i
 On commence par charger les questionnaires issus de Kobo Toolbox en format "label" (texte complet) ou en format "codes" (codes) pour constituer notre tableau de données. Selon le cas on utilisera l'un ou l'autre tableau pour nos analyses. On va ensuite construire à partir de ces deux fichiers notre tableau de donnée de référence
 
 ```{r}
-donlab <- read_xlsx("data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_labels_V2.xlsx",na = "NA")
+donlab <- read_xlsx("data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_labels_V3.xlsx",na = "NA")
 donlab<- donlab[donlab[,7]=="USSEIN - Kaolack - Sénégal",]
 
          
  
-doncod <- read_xlsx("data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_codes_V2.xlsx", na = "NA")
+doncod <- read_xlsx("data/axe1/ALTERMAP_2026_Vision_du_Monde_SMA_codes_V3.xlsx", na = "NA")
 doncod<- doncod[doncod[,7]=="USSEIN",]
 don<-data.frame(id=paste(doncod$Unit_d_enseignement_concern,doncod$N_de_questionnaire))
 ```
@@ -132,9 +131,17 @@ L'autoévaluation du niveau économique a été faite sur une échelle graphique
 
 ```{r}
 don$rich <- as.factor(donlab$`A.10 Revenu familial`)
-don$rich<-as.factor(don$rich)
-levels(don$rich)<-c("1 très bas","2.bas","2.bas","3.moyen","4.haut","5.très haut")
+don$rich <- case_when(don$rich==0 ~ "1. très bas",
+                      don$rich==1 ~ "1. très bas",
+                      don$rich==2 ~ "2. bas",
+                      don$rich==3 ~ "2. bas",
+                      don$rich==4 ~ "3. moyen",
+                      don$rich==5 ~ "4. haut",
+                      don$rich==6 ~ "4. haut",  
+                      .default = "5. très haut"                   
+                      )
 tab<-table(don$sex,don$rich)
+tab
 lprop(tab)
 mypal=rainbow(12)
 mosaicplot(tab,,col =mypal,main = "Autoévaluation de la richesse familiale", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
@@ -151,19 +158,38 @@ On analyse ensuite le niveau d'éducation des parents :
 
 ```{r}
 don$edu_mere <- as.factor(donlab$`A.11 Niveau d'étude de votre mère`)
-levels(don$edu_mere)<-c("1 très bas","2.bas","2.bas","3.moyen","4.haut","5.très haut")
+don$edu_mere <- case_when(don$edu_mere==0 ~ "1. très bas",
+                      don$edu_mere==1 ~ "1. très bas",
+                      don$edu_mere==2 ~ "2. bas",
+                      don$edu_mere==3 ~ "2. bas",
+                      don$edu_mere==4 ~ "3. moyen",
+                      don$edu_mere==5 ~ "4. haut",
+                      don$edu_mere==6 ~ "4. haut",  
+                      .default = "5. très haut"                   
+                      )
 tab<-table(don$sex,don$edu_mere)
+tab
 lprop(tab)
-mypal=rainbow(10)
+mypal=rainbow(12)
 mosaicplot(tab,col =mypal,main = "Niveau d'éducation de la mère (déclaré)", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
 ```
 
 ```{r}
 don$edu_pere <- as.factor(donlab$`A.12 Niveau d'étude de lvotre père`)
-levels(don$edu_pere)<-c("1 très bas","2.bas","3.moyen","4.haut","5.très haut")
+don$edu_pere <- case_when(don$edu_pere==0 ~ "1. très bas",
+                      don$edu_pere==1 ~ "1. très bas",
+                      don$edu_pere==2 ~ "2. bas",
+                      don$edu_pere==3 ~ "2. bas",
+                      don$edu_pere==4 ~ "3. moyen",
+                      don$edu_pere==5 ~ "4. haut",
+                      don$edu_pere==6 ~ "4. haut",  
+                      .default = "5. très haut"                   
+                      )
+
 tab<-table(don$sex,don$edu_pere)
+tab
 lprop(tab)
-mypal=rainbow(10)
+mypal=rainbow(12)
 mosaicplot(tab,col =mypal,main = "Niveau d'éducation du père (déclaré)", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
 ```
 
@@ -181,6 +207,7 @@ L'expérience du Monde des étudiants a pu être évaluée par deux questions, l
 don$mig<-as.factor(doncod$A6_migration)
 
 tab<-table(don$sex, don$mig)
+tab
 lprop(tab)
 mypal=rainbow(2)
 mosaicplot(tab,col =mypal,main = "A toujours vécu dans le même pays ?", sub = "Source : Enquête Altermap 2026, USSEIN" ,las = 1)
@@ -214,6 +241,7 @@ La plupart des étudiants interrogés n'ont cité aucun pays étranger, même po
 x <- c(doncod$A9_mob1, doncod$A9_mob2, doncod$A9_mob3, doncod$A9_mob4)
 tab <-table(x)
 sta <- data.frame(iso3=names(tab), nbvis = as.numeric(tab)) %>% arrange(-nbvis)
+
 map<-readRDS("data/ebm/geom/ebm_states.RDS")
 map <- left_join(map, sta)
 
@@ -332,12 +360,12 @@ exemple <- donpol %>% filter(id=="SIG-L2 74")
 kable(exemple[,c(1,2:4,8,11:14)])
 ```
 
--**Commentaire :** L'étudiant SIG-L2 74 est un homme de 25 ans, qui estime sont revenu familial bas et n'a effectué aucune mobilité. Il ne souhaiterait pas vivre en France, Italie, Mali, Gambie ou Sénégal. Il aimerait bien vivre en Chine, au Canada, en Afrique du Sud, au Japon ou en Corée du Nord. 
+-**Commentaire :** L'étudiant SIG-L2 74 est un homme de 25 ans, qui estime sont revenu familial bas et n'a effectué aucune mobilité. Il ne souhaiterait pas vivre en France, Italie, Mali, Gambie ou Australie. Il aimerait bien vivre en Chine, au Canada, en Afrique du Sud, au Japon ou en Corée du Nord. 
 
 
 ### Pays attractifs
 
-Si on ne tient pas compte du rang des pays cités positivement, on peut établir un tableau de fréquence indiquant le nombre de fois ou un pays a été cité positivement par l'un des 61 étudiants de notre réchantillon.
+Si on ne tient pas compte du rang des pays cités positivement, on peut établir un tableau de fréquence indiquant le nombre de fois ou un pays a été cité positivement par l'un des 61 étudiants de notre échantillon.
 
 
 ```{r}
@@ -375,7 +403,7 @@ mf_layout("Pays attractifs : étudiants Kaolack Avril 2026", frame=T, arrow=F, s
 
 
 ```{r}
-nbetud<-61
+nbetud<-dim(don)[1]
 topfra <- donpol %>% filter(opi=="neg",is.na(iso3)==F) %>% 
   group_by(iso3, nom) %>%
   count() %>%
@@ -456,7 +484,7 @@ Quels sont les mots associés par les étudiants de géographie à ces trois ter
 
 ### Quelles méthodes d'analyse ?
 
-Sur le plan méthodologique, l'exploitation des résultats peut se faire selon au moins trois types de méthodes dont une seule, la plus simple, sera présentée ici : 
+Sur le plan méthodologique, l'exploitation des résultats peut se faire selon au moins trois types de méthodes : 
 
 1. **Comptage des mots les plus fréquents et visualisation sous la forme de nuages de mots**. Cette technique rapide - mais imparfaite - est bien adaptée à une première exploration du corpus. Elle peut être facilement réalisée avec des outils en ligne comme [wordart](https://wordart.com)
 
@@ -464,6 +492,173 @@ Sur le plan méthodologique, l'exploitation des résultats peut se faire selon a
 
 3. **Codage manuel de catégories en fonction d'une problématique**. Cette méthode relève davantage des approches qualitatives utilisées par exemple dans les études du contenu des journaux. Pour être menée de façon rigoureuse, elle suppose l'établissement d'une grille de codage (e.g. on va chercher les mots relevant du thème de la violence) puis d'un test de comparaison des résultats de deux codeurs appliquant la grille afin de vérifier si leurs résultats sont convergents (test du Kappa de Cohen).
 
-En se limitant ici à la première méthode, voyons rapidement les résultats obtenus.
+On utilisera ici une combinaison des méthodes 1 et 2 où l'on va recoder manuellement les mots ou groupes de mots avant de les visualiser avec le package quanteda de R.
 
+
+### Les mots de l'Europe
+
+
+```{r}
+don$eur <- paste(donlab$`Europe 1`, 
+                 donlab$`Europe 2`,
+                 donlab$`Europe 3`,
+                 donlab$`Europe 4`,
+                 donlab$`Europe 5`, sep=", ")
+don$eur<-gsub(", NA","",don$eur)
+don$eur<-gsub("UE","union_européenne",don$eur)
+don$eur<-tolower(don$eur)
+don$eur<-gsub("niveau de vie","niveau_de_vie",don$eur)
+don$eur<-gsub("main d'oeuvre","main_d_oeuvre",don$eur)
+don$eur<-gsub("union européenne","union_européenne",don$eur)
+don$eur<-gsub("richesse","riche",don$eur)
+don$eur<-gsub("richesses","riche",don$eur)
+don$eur<-gsub("riche","richesse",don$eur)
+don$eur<- gsub("vieillissement","vieux",don$eur)
+don$eur<- gsub("vieillissant","vieux",don$eur)
+
+
+
+corp<-corpus(x=don,text_field = "eur",docid_field = "id")
+toks<- tokens(corp,remove_punct = T)
+toks<-tokens_remove(toks,c("des","les","pas","le","la","les","et","de"))
+dfmat<-dfm(toks)
+tstat_freq <- textstat_frequency(dfmat, n = 20)
+par(mfrow=c(1,1))
+
+ggplot(tstat_freq, aes(x = frequency, y = reorder(feature, frequency))) +
+    geom_point() + 
+    labs(x = "Frequence", y = "Mot") +
+     ggtitle("Les 20 mots les plus asssociés à 'Europe'",
+             subtitle = "Source : Enquête Altermap, Cours L3 SIG - USSEIN")
+
+
+```
+
+```{r, fig.width=8, fig.height=8}
+par(bg="white")
+mypal=brewer.pal(name="Blues",n = 9)[3:9]
+wordcloud(toks,min.freq = 3,scale = c(3,1),rot.per = 0,
+          col=mypal)
+title("Les mots les plus asssociés à 'Europe'",
+      sub ="Source : Enquête Altermap, Cours L3 SIG - USSEIN" )
+```
+
+- **Commentaire** : 
+
+### Les mots de la Méditerranée
+
+
+```{r}
+don$med <- paste(donlab$`Méditerranée 1`, 
+                 donlab$`Méditerranée 2`,
+                 donlab$`Méditerranée 3`,
+                 donlab$`Méditerranée 4`,
+                 donlab$`Méditerranée 5`, sep=", ")
+don$med<-gsub(", NA","",don$med)
+don$med<-gsub("NA","",don$med)
+don$med<-tolower(don$med)
+don$med<-gsub("migrant","migration",don$med)
+don$med<-gsub("migrants","migration",don$med)
+don$med<-gsub("migrations","migration",don$med)
+don$med<-gsub("immigration","migration",don$med)
+don$med<-gsub("oliviers","olivier",don$med)
+don$med<-gsub("méditerranée","",don$med)
+don$med<-gsub("commerciaux","commerce",don$med)
+don$med<-gsub("ressources","ressource",don$med)
+don$med<-gsub("echanges","echange",don$med)
+
+corp<-corpus(x=don,text_field = "med",docid_field = "id")
+toks<- tokens(corp,remove_punct = T)
+toks<-tokens_remove(toks,c("des","les","pas","le","la","les","et","de","mer"))
+dfmat<-dfm(toks)
+tstat_freq <- textstat_frequency(dfmat, n = 20)
+par(mfrow=c(1,1))
+
+ggplot(tstat_freq, aes(x = frequency, y = reorder(feature, frequency))) +
+    geom_point() + 
+    labs(x = "Frequence", y = "Mot") +
+     ggtitle("Les 20 mots les plus asssociés à 'Méditerranée' (en excluant  mer)'",
+             subtitle = "Source : Enquête Altermap, Cours L3 SIG - USSEIN")
+
+
+```
+
+
+```{r, fig.width=8, fig.height=8}
+par(bg="white")
+mypal=brewer.pal(name="Oranges",n = 9)[3:9]
+wordcloud(toks,min.freq = 3,scale = c(3,1),rot.per = 0,
+          col=mypal)
+title("Les mots les plus asssociés à 'Méditerranée' (sauf 'mer')",
+      sub ="Source : Enquête Altermap, Cours L3 SIG - USSEIN" )
+```
+
+
+- **Commentaire** : 
+
+
+
+### Les mots de l'Afrique
+
+
+```{r}
+don$afr <- paste(donlab$`Afrique 1`, 
+                 donlab$`Afrique 2`,
+                 donlab$`Afrique 3`,
+                 donlab$`Afrique 4`,
+                 donlab$`Afrique 5`, sep=", ")
+don$afr<-gsub(", NA","",don$afr)
+don$afr<-gsub("NA","",don$afr)
+don$afr<-tolower(don$afr)
+  don$afr<-gsub("ressources naturelles","ressources_naturelles",don$afr)
+  don$afr<-gsub("richesses naturelles","ressources_naturelles",don$afr)
+  don$afr<-gsub("richesse naturelle","ressources_naturelles",don$afr)
+  
+   don$afr<-gsub("sous développement","sous_développement",don$afr)
+    don$afr<-gsub("sous-développement","sous_développement",don$afr)  
+    
+      don$afr<-gsub("berceau de l'humanité","berceau_humanité",don$afr)  
+      
+       don$afr<-gsub("noires","noir",don$afr)  
+    don$afr<-gsub("noirs","noir",don$afr) 
+    
+ don$afr<-gsub("pauvreté","pauvre",don$afr) 
+don$afr<-gsub("pauvres","pauvre",don$afr) 
+don$afr<-gsub("pauvre","pauvreté",don$afr) 
+
+don$afr<-gsub("afrique","",don$afr)  
+
+don$afr<-gsub("jeunesse","jeune",don$afr)  
+don$afr<-gsub("jeunes","jeune",don$afr)
+don$afr<-gsub("jeune","jeunesse",don$afr)
+
+corp<-corpus(x=don,text_field = "afr",docid_field = "id")
+toks<- tokens(corp,remove_punct = T)
+toks<-tokens_remove(toks,c("des","les","pas","le","la","les","et","de"))
+dfmat<-dfm(toks)
+tstat_freq <- textstat_frequency(dfmat, n = 20)
+par(mfrow=c(1,1))
+
+ggplot(tstat_freq, aes(x = frequency, y = reorder(feature, frequency))) +
+    geom_point() + 
+    labs(x = "Frequence", y = "Mot") +
+     ggtitle("Les 20 mots les plus asssociés à 'Afrique'",
+             subtitle = "Source : Enquête Altermap, Cours L3 SIG - USSEIN")
+
+
+
+
+```
+
+
+```{r, fig.width=8, fig.height=8}
+par(bg="white")
+mypal=brewer.pal(name="Greens",n = 9)[3:9]
+wordcloud(toks,min.freq = 3,scale = c(3,1),rot.per = 0,
+          col=mypal)
+title("Les mots les plus asssociés à 'Afrique'",
+      sub ="Source : Enquête Altermap, Cours L3 SIG - USSEIN" )
+```
+
+- **Commentaire** : 
 
