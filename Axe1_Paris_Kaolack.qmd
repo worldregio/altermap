@@ -1,6 +1,6 @@
 ---
 title: "Altermap 2026 : COMMENT VOYEZ-VOUS LE MONDE ?"
-subtitle: "Analyse des réponses de 61 étudiants français et 82 étudiants sénégalais de licence 3 au questionnaire pilote administré en mars-avril 2026"
+subtitle: "Analyse des réponses de 61 étudiants français et 87 étudiants sénégalais de licence 3 au questionnaire pilote administré en mars-avril 2026"
 author: "Labaly Touré, Claude Grasland"
 date: "2026-05-08"
 date-format: iso
