@@ -261,7 +261,7 @@ x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
 don$ech1 <- as.character(x)
 
 x <- as.factor(donlab$`2nd choice`)
-x<-case_when(x=="Continent (Afrique)" ~ "5. continent",
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
              x== "Monde" ~ "7. Monde",
              x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
              x== "Pays (Sénégal)" ~ "4. Pays",
@@ -274,7 +274,7 @@ x<-case_when(x=="Continent (Afrique)" ~ "5. continent",
 don$ech2 <- as.character(x)
 
 x<- as.factor(donlab$`3rd choice`)
-x<-case_when(x=="Continent (Afrique)" ~ "5. continent",
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
              x== "Monde" ~ "7. Monde",
              x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
              x== "Pays (Sénégal)" ~ "4. Pays",
