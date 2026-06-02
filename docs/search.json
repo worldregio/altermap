@@ -1237,5 +1237,33 @@
     "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
     "section": "B.5 Mots associés aux royaumes",
     "text": "B.5 Mots associés aux royaumes\nOn ne retient que les 20 mots les plus fréquents cités au moins trois fois pour construire les nuages de mots ci-dessous.\nN.B. Il faudra procéder à un recodage manuel pour regrouper les variantes d’un même mot.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_decoupages.html",
+    "href": "Axe4_decoupages.html",
+    "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
+    "section": "",
+    "text": "Linking to GEOS 3.13.0, GDAL 3.8.5, PROJ 9.5.1; sf_use_s2() is TRUE\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union"
+  },
+  {
+    "objectID": "Axe4_decoupages.html#fonds-de-carte-fourni-aux-étudiants",
+    "href": "Axe4_decoupages.html#fonds-de-carte-fourni-aux-étudiants",
+    "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
+    "section": "Fonds de carte fourni aux étudiants",
+    "text": "Fonds de carte fourni aux étudiants\nLes étudiants disposaient d’un fonds ce carte noir et blanc comportant un minumum d’information. Il s’agit du jeu de tuile leaflet appelé “Stadia.StamenTonerLite”. Ce fonds comportait toutefois plusieurs éléments visuels qui ont été mis à profit par les étudiants dans leur tracé :\n\nles principales villes du pays : elles ont souvent servi de points frontière entre plusieurs régions, en particulier Tambacounda.\nles principales routes = elles ont souvent été utilisées dans le tracé des frontières, notamment la route Dakar-Louga ou la route Tambacounda-Kayes\nles frontières des régions offcielles : elles étaient volontairement peu visibles mais pouvaient être devinées grâce à leur tracé en pointillé. Elles ont été beaucoup utilisées par les étudiants de L2 mais peu par ceux de L1. Est-ce lié à la qualité des photocopies, avec des frontières visibles dans le premier cas et pas le second ?"
+  },
+  {
+    "objectID": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l1-géographie",
+    "href": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l1-géographie",
+    "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
+    "section": "Superposition des découpages des étudants de L1 géographie",
+    "text": "Superposition des découpages des étudants de L1 géographie\n\n\n\n\n\n\n\nCommentaire : Les tracés sont assez variables et traversent le pays dans tous les sens. Mais on repère des regroupements de traits le long des principales routes qui ont visiblement souvent guidé le tracé."
+  },
+  {
+    "objectID": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l2-ugtd",
+    "href": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l2-ugtd",
+    "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
+    "section": "Superposition des découpages des étudants de L2 UGTD",
+    "text": "Superposition des découpages des étudants de L2 UGTD\n\n\n\n\n\n\n\nCommentaire : Les tracés sont beaucoup moins variables et utilisent beaucoup plus les limites régionales en pointillé que les étudiants de L1. On retouve toutefois également une utilisation des routes notamment celles qui partent de Tambacounda."
   }
 ]
