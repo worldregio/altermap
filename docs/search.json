@@ -1243,7 +1243,7 @@
     "href": "Axe4_decoupages.html",
     "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
     "section": "",
-    "text": "Linking to GEOS 3.13.0, GDAL 3.8.5, PROJ 9.5.1; sf_use_s2() is TRUE\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union"
+    "text": "Linking to GEOS 3.13.0, GDAL 3.8.5, PROJ 9.5.1; sf_use_s2() is TRUE"
   },
   {
     "objectID": "Axe4_decoupages.html#fonds-de-carte-fourni-aux-étudiants",
@@ -1257,13 +1257,20 @@
     "href": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l1-géographie",
     "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
     "section": "Superposition des découpages des étudants de L1 géographie",
-    "text": "Superposition des découpages des étudants de L1 géographie\n\n\n\n\n\n\n\nCommentaire : Les tracés sont assez variables et traversent le pays dans tous les sens. Mais on repère des regroupements de traits le long des principales routes qui ont visiblement souvent guidé le tracé."
+    "text": "Superposition des découpages des étudants de L1 géographie\n\n\nCommentaire : Les tracés sont assez variables et traversent le pays dans tous les sens. Mais on repère des regroupements de traits le long des principales routes qui ont visiblement souvent guidé le tracé."
   },
   {
     "objectID": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l2-ugtd",
     "href": "Axe4_decoupages.html#superposition-des-découpages-des-étudants-de-l2-ugtd",
     "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
     "section": "Superposition des découpages des étudants de L2 UGTD",
-    "text": "Superposition des découpages des étudants de L2 UGTD\n\n\n\n\n\n\n\nCommentaire : Les tracés sont beaucoup moins variables et utilisent beaucoup plus les limites régionales en pointillé que les étudiants de L1. On retouve toutefois également une utilisation des routes notamment celles qui partent de Tambacounda."
+    "text": "Superposition des découpages des étudants de L2 UGTD\n\n\nCommentaire : Les tracés sont beaucoup moins variables et utilisent beaucoup plus les limites régionales en pointillé que les étudiants de L1. On retouve toutefois également une utilisation des routes notamment celles qui partent de Tambacounda."
+  },
+  {
+    "objectID": "Axe4_decoupages.html#superposition-des-découpages-des-étudiants-de-l2-ugtd",
+    "href": "Axe4_decoupages.html#superposition-des-découpages-des-étudiants-de-l2-ugtd",
+    "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
+    "section": "Superposition des découpages des étudiants de L2 UGTD",
+    "text": "Superposition des découpages des étudiants de L2 UGTD\n\n\nCommentaire : Les tracés sont beaucoup moins variables et utilisent beaucoup plus les limites régionales en pointillé que les étudiants de L1. On retouve toutefois également une utilisation des routes notamment celles qui partent de Tambacounda."
   }
 ]
