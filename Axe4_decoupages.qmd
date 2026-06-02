@@ -1,6 +1,6 @@
 ---
 title: "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats"
-author: "Cheikh BA, Momar Diongue, Claude Grasland, Aliou Ndao"
+author: "C. Ba, M. Diongue, C. Grasland, A. Ndao"
 format: 
   html:
     embed-resources: true
