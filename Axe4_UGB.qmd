@@ -1,0 +1,670 @@
+---
+title: "Altermap 2026 : perception des maillages territoriaux au Sénégal"
+subtitle: "Analyse des réponses de 21 (?) étudiants de l'UGB au questionnaire pilote administré en mai 2026"
+author: "Aliou NDAO"
+date: "2026-06-06"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: yeti
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: custom.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggrepel)
+library(labelled)
+library(readxl)
+library(questionr)
+library(sf)
+library(mapsf)
+library(readxl)
+library(quanteda)
+library(wordcloud)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(RColorBrewer)
+
+```
+
+
+## Introduction 
+
+Nous proposons ici un premier dépouillement des réponses au questionnaire-test administré par Aliou Ndao à 21 (?)  étudiants de licence 3 de géographie à l'UGB de Saint-Louis le (?) mai 2026. Les calculs ont été effectués par C. Grasland à l'aide d'un programme R de statistiques et cartographie qui pourra être relancé au fur et à mesure que l'échantillon sera plus étoffé ou sur d'autres échantillons.
+
+
+# A. QUELQUES QUESTIONS SUR VOUS
+
+La première partie du questionnaire apportait des données de cadrage sur les individus (âge, sexe) et sur l'origine géographique et les trajectoires de mobilité des étudiants.
+
+
+
+::: {.callout-tip}
+## Télécharger le jeu de données issues de Kobo Toolbox
+-  [Données d'enquête issus de kobo au format label .xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/axe4/ALTERMAP_2026_Gouvernance_Sénégal_V3.xlsx)
+:::
+
+
+
+On commence par charger les questionnaires issus de Kobo Toolbox en format "label" (texte complet)
+
+```{r}
+# Tableau brut
+donlab <- read_xlsx("data/axe4/ALTERMAP_2026_Gouvernance_Sénégal_V3.xlsx")
+donlab <- donlab %>% arrange(`G.0 : Code questionnaire`) %>% 
+            filter(substr(`G.0 : Code questionnaire`,1,2)=="L3")
+
+
+# Tableau propre
+don<-data.frame(id=donlab$`G.0 : Code questionnaire`, 
+                vil= donlab$`G.1 : Lieu d'enquête`,
+                ins = donlab$`G.2 : Institution`,
+                niv = donlab$`G.3 : Niveau d'étude`)
+
+# Harmonise
+don$loc<-"Saint-Louis"
+don$ins<-"UGB"
+don$niv<-"L3"
+
+
+# Trie
+mysource <- "Source : Altermap 2026, axe 4, Enquête UGB-Saint-Louis (Aliou Ndao)"
+
+```
+
+
+
+
+
+
+## A.1 Sexe
+
+```{r}
+par(mfrow=c(1,1))
+don$sex <-as.factor(donlab$`A.1 : Sexe`)
+tab<-table(don$sex)
+freq(tab,valid = F, total = T)
+
+```
+
+- **Commentaire** : 
+
+## A.2 Âge
+
+
+```{r}
+don$age<-2026 - donlab$`A.2 : Année de naissance`
+don$age[don$age <0]<-20
+tab<-table(don$age)
+freq(tab,valid = F, total = T)
+
+```
+
+- **Commentaire** : 
+
+
+## Nationalité
+
+
+
+### A.3.1 Pays de naissance de l'individu
+
+```{r}
+don$ori<-donlab$`A.3 Pays de naissance`
+tab<-table(don$ori,useNA="always")
+freq(tab,valid = F, total = T)
+```
+
+### A.3.2 Pays de naissance de son père
+
+```{r}
+don$ori_pere<-donlab$`A.3.2  Pays de naissance de votre père`
+tab<-table(don$ori_pere,useNA="always")
+freq(tab,valid = F, total = T)
+```
+
+### A.3.3 Pays de naissance de sa mère
+
+```{r}
+don$ori_mere<-donlab$`A.3.2: Pays de naissance de votre mère`
+tab<-table(don$ori_mere,useNA="always")
+freq(tab,valid = F, total = T)
+```
+
+- **Commentaire** : 
+
+
+## A.4 Département de naissance de l'individu
+
+N.B. 11 étudiants n'ont pas répondu
+
+```{r}
+# Tableau
+
+don$dep_nais<-donlab$`A.3.1 Département de naissance`
+tab<-table(don$dep_nais,useNA="always")
+freq(tab,valid = F, total = T)
+
+```
+
+
+```{r}
+# Carte
+mapdep<-readRDS("data/axe4/geom/SEN2_map_OK.RDS")
+mapreg<-readRDS("data/axe4/geom/SEN1_map_OK.RDS")
+
+# Agrégation
+tab<-don %>% group_by(dep_nais) %>% 
+              count() %>% 
+              filter(is.na(dep_nais)==F) %>%
+  rename(NAME_2 = dep_nais)
+  
+
+# Jointure
+mapdep2 <- mapdep %>% full_join(tab)
+mapdep2$n[is.na(mapdep2$n)]<-0
+mapdep2$OK <- mapdep2$n > 0
+
+
+# Carte
+par(mfrow=c(1,1))
+mf_map(mapdep2, var="OK", type="typo", leg_pos = NA, pal=c("gray90", "lightyellow"))
+mf_map(mapreg, type="base", col=NA, lwd=2, add=T)
+mf_map(mapdep2, var="n", type="prop", col="red", inches=0.2, leg_title = "Nombre d'étudiants")
+mf_label(mapreg, var="NAME_1",cex = 0.8,overlap = F, col="blue", halo = T)
+mf_layout(title = "Origine des étudiants enquêtés",
+          credits = mysource,
+          frame=T,
+          arrow=F)
+
+
+```
+
+- **Commentaire** : 
+
+
+## A.5 Mobilité interne et trajectoires
+
+
+### Changement de communes
+
+Réponses à la question des mobilités internes au pays.
+
+```{r}
+don$mob<-as.factor(donlab$`A.4 : Avez vous toujours vécu dans la même commune / localité au Sénégal`)
+#levels(don$mob)
+levels(don$mob)<-c("Non","Non","Oui")
+
+tab<-table(don$mob)
+freq(tab,valid = F, total = T) 
+```
+
+
+### Trajectoires
+
+On ne traitera pas ici les parcours qui nécessitent un recodage long des réponses. On affiche juste le tableau des trajectoires des étudiants déclarant avoir changé de commune.
+
+```{r}
+don$traj<-donlab$`A.5.1 : Indiquez le liste des autres communes du Sénégal où vous avez vécu plus de six mois`
+sel<-don %>% filter(don$mob=="Non") %>% select("id","sex","dep_nais","traj")
+kable(sel, caption = "Trajectoire des étudiants ayant changé de commune")
+```
+
+
+- **Commentaire** : 
+
+
+# B. SENTIMENT D'APPARTENANCE TERRITORIALE
+
+## B.1 Echelle d'appartenance
+
+
+```{r}
+x <- as.factor(donlab$`1st choice`)
+
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
+             x== "Monde" ~ "7. Monde",
+             x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
+             x== "Pays (Sénégal)" ~ "4. Pays",
+            x==  "Quartier/Village/Commune" ~ "1. Local",
+             x==   "Région administrative" ~ "3. Région",
+             x== "Sous-région (Afrique de l'Ouest)" ~ "5. sous-continent",
+            x=="Autre"~ "8. Autre",
+            .default = NA )   
+
+
+
+don$ech1 <- as.character(x)
+
+x <- as.factor(donlab$`2nd choice`)
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
+             x== "Monde" ~ "7. Monde",
+             x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
+             x== "Pays (Sénégal)" ~ "4. Pays",
+            x==  "Quartier/Village/Commune" ~ "1. Local",
+             x==   "Région administrative" ~ "3. Région",
+             x== "Sous-région (Afrique de l'Ouest)" ~ "5. sous-continent",
+            x=="Autre"~ "8. Autre",
+            .default = NA )   
+
+don$ech2 <- as.character(x)
+
+x<- as.factor(donlab$`3rd choice`)
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
+             x== "Monde" ~ "7. Monde",
+             x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
+             x== "Pays (Sénégal)" ~ "4. Pays",
+            x==  "Quartier/Village/Commune" ~ "1. Local",
+             x==   "Région administrative" ~ "3. Région",
+             x== "Sous-région (Afrique de l'Ouest)" ~ "5. sous-continent",
+            x=="Autre"~ "8. Autre",
+            .default = NA ) 
+don$ech3 <- as.character(x)
+```
+
+
+### Echelles citées 
+
+On peut tout d'abord examiner quelles échelles ont été les plus mobilisées par les étudiants sans distinguer l'ordre
+
+```{r}
+col<-don[,c("ech1","ech2","ech3")] %>% pivot_longer(cols= 1:3)
+
+tab<-table(col$value)
+freq(tab,valid = F, total = T) 
+
+
+
+par(mar=c(5,5,3,1))
+barplot(tab,horiz = T, 
+        las=1,
+        col=rainbow(13),cex.names = 0.6,
+        xlab="nombre d' étudiants ayant cité cette échelle",
+        main="Echelles d'appartenance mentionnées",
+        sub = mysource,
+        cex.sub=0.6)
+```
+
+
+### Echelle citée en premier
+
+On peut ensuite se focaliser sur le premier choix
+
+```{r}
+
+x <-don$ech1
+
+tab<-table(x)
+freq(tab,valid = F, total = T) 
+
+par(mar=c(5,5,3,1))
+barplot(tab,horiz = T, 
+        las=1,
+        col=rainbow(13),cex.names = 0.6,
+        xlab="nombre d' étudiants citant cette échelle en premier",
+        main="Echelles d'appartenance privilégiée",
+        sub = mysource,
+        cex.sub=0.6)
+
+```
+
+- **Commentaire** : 
+
+### Autres échelles
+
+Inventaire des réponses "autres" : 
+
+```{r}
+table(donlab$`B.1.2 : Si vous avez indiquez "Autre", précisez`)
+```
+
+
+
+
+## B.2 Sentiment d'appartenance à des régions non officielles
+
+Cette question interrogeait les étudiants sur leur sentiment d'apprtenance à des espaces non officiels.
+
+
+```{r}
+
+sel<-as.matrix(donlab[,27:33])
+colnames(sel) <- c("Cayor","Baol","Sine Saloum","Gabu","Boundou","Casamance","Autre")
+don<-cbind(don,sel)
+
+```
+
+### Nombre de réponses
+
+Plusieurs étudiants  ont déclaré des appartenances à plusieurs régions.
+
+```{r}
+x<-apply(sel,1,sum)
+tab<-table(x)
+freq(tab,valid = F, total = T) 
+```
+
+### Réponses les plus fréquentes
+
+On évalue les régions les plus fréquemment citées.
+
+```{r}
+
+x<-apply(sel,2,sum, na.rm=T)
+res <- data.frame(region = names(x), n=x, pct=100*x/sum(x)) %>% arrange(-n)
+kable(res, row.names=F, digits=c(0,0,1))
+```
+
+### Autres réponses
+
+On détaille les réponses "*Autre*" qui ont été proposées par certains étudiants : 
+
+```{r}
+don$Autre_rep<-donlab$`B.2.2Autres espaces d'appartenance`
+table(don$Autre_rep)
+```
+
+- **Commentaire** : 
+
+
+
+## B.3 Régions attractives et répulsives
+
+
+Une manière simple mais efficace de mettre à jour les représentations du Sénégal des étudiants a consisté à leur demander de citer trois régions pays où ils souhaiteraient vivre ou ne pas vivre dans un futur proche. Cela suppose une petite transformation des données pour créer un tableau ou chaque ligne correspond à une réponse sur les pays attractifs ou répulsifs. En d'autres termes les réponses de chaque étudiant correspondront à 6 lignes, 3 pour les régions cités positivement et 3 pour les régions cités négativement.On accompagnera ces réponses des informations que l'on juge utile sur les étudiants afin de pouvoir ensuite faire des regroupements. 
+
+```{r}
+pos1<-donlab$`Aimerait vivre : 1er choix`
+pos2<-donlab$`Aimerait vivre : 2e choix`
+pos3<-donlab$`Aimerait vivre : 3e choix`
+pos <-cbind(pos1,pos2,pos3)
+donpos <- cbind(don,pos) %>% pivot_longer(cols = c("pos1","pos2","pos3"))
+
+neg1<-donlab$`N'aimerait pas vivre : 1er choix`
+neg2<-donlab$`N'aimerait pas vivre : 2e choix`
+neg3<-donlab$`N'aimerait pas vivre : 3e choix`
+neg<-cbind(neg1,neg2,neg3)
+donneg <- cbind(don,neg) %>% pivot_longer(cols = c("neg1","neg2","neg3"))
+donpol <-rbind(donpos, donneg) 
+donpol$opi<-substr(donpol$name,1,3)
+donpol$rnk <-substr(donpol$name,4,4)
+donpol$NAME_1<-donpol$value
+donpol<-donpol %>% select(-c("name","value")) %>% arrange(id,opi,rnk)
+
+## Corrige les noms de régions !!!
+donpol$NAME_1[donpol$NAME_1=="Kaloack"]<-"Kaolack"
+donpol$NAME_1[donpol$NAME_1=="Zinguichor"]<-"Ziguinchor"
+donpol$NAME_1[donpol$NAME_1=="Falick"]<-"Fatick"
+
+
+```
+
+A titre d'exemple, voici la forme que prennent les réponses d'un étudiant :
+
+```{r}
+exemple <- donpol %>% filter(id=="L3006")
+kable(exemple[,c("id","sex","age","dep_nais", "ech1","opi","rnk","NAME_1")])
+```
+
+-**Commentaire :** L'étudiante L3006 est une femme de 22 ans, née dans le département de Mbour et qui déclare en premier le niveau national d'appartenance. Elle déclare qu'elle ne souhaiterait pas vivre dans les régions de  Dakar, Tambacounda et Matam. Mais elle aimerait vivre dans les régions de Ziguinchor, Thiès ou Saint-Louis. 
+
+
+
+### Régions attractives
+
+Si on ne tient pas compte du rang des régions cités positivement, on peut établir un tableau de fréquence indiquant le nombre de fois ou une région a été cité positivement par l'un des étudiants de notre échantillon.
+
+
+```{r}
+nbetud<-dim(don)[1]
+toppos <- donpol %>% filter(opi=="pos",is.na(NAME_1)==F) %>% 
+  group_by(NAME_1) %>%
+  count() %>%
+  ungroup() %>% 
+  mutate ( nb=n, rnk = rank(-n), sal=100*n/nbetud) %>%
+  select(rnk, NAME_1, nb, sal) %>%
+  arrange(rnk)
+
+
+kable(toppos,caption ="Régions les plus attractives pour les étudiants", col.names = c("Rang","Nom", "Nb. réponses", "% étudiants"), digits=c(0,0,0,1))
+
+```
+
+
+
+```{r}
+map2 <- left_join(mapreg,toppos)
+par(mfrow=c(1,1))
+mf_map(map2, type="base", col="lightyellow")
+mf_map(map2, type="prop", var="nb",col="red", inches=0.3, 
+       leg_pos = "topleft",
+       leg_title = "Nombre d'étudiants ayant cité positivement la région")
+#mf_label(map2,var="NAME_1",overlap = F, halo=T, col="blue",cex=0.5)
+#mf_graticule(map2,add = T, lty=2, lwd=0.5)
+mf_layout("Régions les plus attractives pour les étudiants", frame=T, arrow=F, scale = F, 
+          credits=mysource)
+```
+
+- **Commentaire** : 
+
+
+### Régions répulsives
+
+
+
+```{r}
+nbetud<-dim(don)[1]
+topneg <- donpol %>% filter(opi=="neg",is.na(NAME_1)==F) %>% 
+  group_by(NAME_1) %>%
+  count() %>%
+  ungroup() %>% 
+  mutate ( nb=n, rnk = rank(-n), sal=100*n/nbetud) %>%
+  select(rnk, NAME_1, nb, sal) %>%
+  arrange(rnk)
+
+
+kable(topneg,caption ="Régions les plus répulsives pour les étudiants", col.names = c("Rang","Nom", "Nb. réponses", "% étudiants"), digits=c(0,0,0,1))
+
+```
+
+
+```{r}
+map2 <- left_join(mapreg,topneg)
+par(mfrow=c(1,1))
+mf_map(map2, type="base", col="lightyellow")
+mf_map(map2, type="prop", var="nb",col="blue", inches=0.3, 
+       leg_pos = "topleft",
+       leg_title = "Nombre d'étudiants ayant cité négativement la région")
+#mf_label(map2,var="NAME_1",overlap = F, halo=T, col="blue",cex=0.5)
+#mf_graticule(map2,add = T, lty=2, lwd=0.5)
+mf_layout("Régions les plus répulsives pour les étudiants", frame=T, arrow=F, scale = F, 
+          credits=mysource)
+```
+
+- **Commentaire** : 
+
+
+
+### Synthèse
+
+L'appréciation que les étudiants donnent d'une région doit être envisagé selon deux dimensions complémentaires, la saillance et l'opinion
+
+- **la saillance** (en anglais *salience*) est le fait qu'une régionse présente à l'esprit dun étudiant lorsqu'on lui demande de porter un jugement. Peu importe  que le jugement soit positif ou négatif, si une région est citée par l'étudiant c'est qu'il possède des informations sur elle, qu'il en a reçu et à choisi de les retenir. Bref, la saillance manifeste une reconnaissance de l'existence d'une région et signale sa présence dans la carte mentale de la personne. On la définira donc comme le % des étudiants qui ont cité une région, positivement ou négativement, peu importe, et on la mesurera sur une échelle de 0 (jamais citée) à 100 (toujours citée) : 
+
+$Saillance_i = 100\times \frac{Pos_i + Neg_i}{n}$
+
+- **la polarisation** est le positionnement d'un individu et par la suite d'un groupe d'individu sur une échelle de jugement allant du négatif au positif. Elle ne peut exister que si la région est déjà connue par l'individu et - dans le cas d'un groupe - possède une saillance suffisante. On mesure classiquement la polarisation sur un intervalle allant de -1 (tous les avis sont positifs) à +1 (tous les avis sont négatifs).
+
+$Polarisation_i = \frac{Pos_i-Neg_i}{Pos_i+Neg_i}$
+
+### Tableau de synthèse
+
+```{r}
+
+synt <- donpol %>% filter(is.na(NAME_1)==F) %>%
+                     group_by(NAME_1,opi) %>% 
+                      count() %>%
+                      pivot_wider(names_from = opi,
+                                  values_from = n,
+                                  values_fill = 0) %>%
+                       mutate(tot=neg+pos,
+                              saillance = 100*tot/nbetud,
+                              polarisation=(pos-neg)/(pos+neg)) %>%
+                      arrange(-saillance) 
+
+kable(synt,caption ="Saillance et attractivité des régions du Sénégal", col.names = c("Nom", "Négatif", "Positif", "Total", "Saillance (%)","Polarisation"), digits=c(0,0,0,0,1,2))
+
+```
+
+
+### Graphique de synthèse
+
+
+
+```{r}
+ggplot(synt, aes(x=saillance, y = polarisation)) + 
+        geom_point() + 
+        geom_text_repel(aes(label = NAME_1))+
+        scale_x_log10()+
+        ggtitle(label = "Saillance et attractivité des régions du Sénégal" ,
+                subtitle =mysource) +
+         theme_light()
+       
+```
+
+
+### Cartogramme
+
+On déforme la surface des régions pour leur donner une superficie prportionnelle à leur saillance, c'est-à-dire au nombre de fois où ils ont été cités. Puis on les colorie en fonction de la valeur de l'indice de polarisation , de rouge foncé pour les régions les plus répulsives à bleu foncé pour les plus attractives, en passant par jaune clair pour les régions neutres qui ont autant d'avis positis que négatifs.
+
+```{r}
+
+map2 <- left_join(mapreg,synt)
+library(cartogramR)
+map2 <-st_transform(map2,31028)
+map2$saillance[is.na(map2$saillance)]<-0.2
+x<-cartogramR(data=map2, count="saillance")
+mapres <- x$cartogram
+
+mypal = brewer.pal(5,"RdYlBu")
+mf_map(mapres, type="choro", var="polarisation", breaks=c(-1,-0.6,-0.2,0.2,0.6,1), pal=mypal)
+mf_label(mapres,var="NAME_1",halo=T)
+mf_layout("Saillance et attractivité des régions sénégalaises",
+          credits=mysource,
+          frame=T,scale=F)
+
+```
+
+
+- **Commentaire** : 
+
+
+## B.4 Royaume et entités historiques précoloniales
+
+
+### Connaissance
+
+```{r}
+don$hist<-donlab$`B.4  Connaissez-vous le royaume ou l'entité historique précoloniale dans lequel se situait votre lieu de niassance`
+tab<-table(don$hist)
+freq(tab,total = T,valid = F)
+
+```
+
+### Nom
+
+```{r}
+don$hist_nom<-donlab$`B.4.1 Précisez son nom`
+tab<-table(don$hist_nom)
+freq(tab,total = T,valid = F)
+```
+
+- **Commentaire** : 
+
+
+## B.5 Mots associés aux royaumes
+
+On ne retient que les 20 mots les plus fréquents cités au moins trois fois pour construire les nuages de mots ci-dessous.
+
+N.B. Il faudra procéder à un recodage manuel pour regrouper les variantes d'un même mot.
+
+```{r}
+par(mfrow=c(1,1))
+#  Cayor
+df<-donlab[,49:51]
+x <-apply(df, 1, paste, collapse=", ")
+don$mots_cayor<-x
+toks <- tokens(tolower(x),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Cayor")
+
+#  Baol
+df<-donlab[,53:55]
+x <-apply(df, 1, paste, collapse=", ")
+don$mots_baol<-x
+toks <- tokens(tolower(x),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Baol")
+
+#  Fouta Toro
+df<-donlab[,57:59]
+x <-apply(df, 1, paste, collapse=", ")
+don$mots_fouta_toro<-x
+toks <- tokens(tolower(x),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Fouta Toro")
+
+
+#  Sine-Saloun
+df<-donlab[,61:63]
+x <-apply(df, 1, paste, collapse=", ")
+don$mots_sine_saloun<-x
+toks <- tokens(tolower(x),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Sine-Saloun")
+
+#  Casamance
+df<-donlab[,65:67]
+x <-apply(df, 1, paste, collapse=", ")
+don$mots_casamance<-x
+toks <- tokens(tolower(x),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Casamance")
+
+#  Gabu / Boundou
+df<-donlab[,69:71]
+x <-apply(df, 1, paste, collapse=", ")
+don$mots_gabu_boundou<-x
+toks <- tokens(tolower(x),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Gabu / Boundou")
+
+```
+
+- **Commentaire** : 
+

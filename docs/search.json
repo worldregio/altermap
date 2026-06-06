@@ -1272,5 +1272,89 @@
     "title": "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats",
     "section": "Superposition des découpages des étudiants de L2 UGTD",
     "text": "Superposition des découpages des étudiants de L2 UGTD\n\n\nCommentaire : Les tracés sont beaucoup moins variables et utilisent beaucoup plus les limites régionales en pointillé que les étudiants de L1. On retouve toutefois également une utilisation des routes notamment celles qui partent de Tambacounda."
+  },
+  {
+    "objectID": "Axe4_UGB.html",
+    "href": "Axe4_UGB.html",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "",
+    "text": "Nous proposons ici un premier dépouillement des réponses au questionnaire-test administré par Aliou Ndao à 21 (?) étudiants de licence 3 de géographie à l’UGB de Saint-Louis le (?) mai 2026. Les calculs ont été effectués par C. Grasland à l’aide d’un programme R de statistiques et cartographie qui pourra être relancé au fur et à mesure que l’échantillon sera plus étoffé ou sur d’autres échantillons."
+  },
+  {
+    "objectID": "Axe4_UGB.html#introduction",
+    "href": "Axe4_UGB.html#introduction",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "",
+    "text": "Nous proposons ici un premier dépouillement des réponses au questionnaire-test administré par Aliou Ndao à 21 (?) étudiants de licence 3 de géographie à l’UGB de Saint-Louis le (?) mai 2026. Les calculs ont été effectués par C. Grasland à l’aide d’un programme R de statistiques et cartographie qui pourra être relancé au fur et à mesure que l’échantillon sera plus étoffé ou sur d’autres échantillons."
+  },
+  {
+    "objectID": "Axe4_UGB.html#a.1-sexe",
+    "href": "Axe4_UGB.html#a.1-sexe",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "A.1 Sexe",
+    "text": "A.1 Sexe\n\n\n           n     %\nUn homme  15  71.4\nUne femme  6  28.6\nTotal     21 100.0\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#a.2-âge",
+    "href": "Axe4_UGB.html#a.2-âge",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "A.2 Âge",
+    "text": "A.2 Âge\n\n\n       n     %\n20     4  19.0\n22     5  23.8\n23     5  23.8\n24     2   9.5\n25     1   4.8\n28     1   4.8\n29     1   4.8\n43     1   4.8\n56     1   4.8\nTotal 21 100.0\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#nationalité",
+    "href": "Axe4_UGB.html#nationalité",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "Nationalité",
+    "text": "Nationalité\n\nA.3.1 Pays de naissance de l’individu\n\n\n         n     %\nSénégal 12  57.1\nNA       9  42.9\nTotal   21 100.0\n\n\n\n\nA.3.2 Pays de naissance de son père\n\n\n         n     %\nMali     1   4.8\nSénégal 12  57.1\nNA       8  38.1\nTotal   21 100.0\n\n\n\n\nA.3.3 Pays de naissance de sa mère\n\n\n         n     %\nGuinée   1   4.8\nSénégal 13  61.9\nNA       7  33.3\nTotal   21 100.0\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#a.4-département-de-naissance-de-lindividu",
+    "href": "Axe4_UGB.html#a.4-département-de-naissance-de-lindividu",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "A.4 Département de naissance de l’individu",
+    "text": "A.4 Département de naissance de l’individu\nN.B. 11 étudiants n’ont pas répondu\n\n\n                   n     %\nBignona            1   4.8\nDagana             1   4.8\nFatick             1   4.8\nFoundiougne        1   4.8\nLinguère           1   4.8\nLouga              1   4.8\nMbour              3  14.3\nMédina Yoro Foula  1   4.8\nPikine             1   4.8\nPodor              3  14.3\nSaint-Louis        3  14.3\nNA                 4  19.0\nTotal             21 100.0\n\n\n\n\n\n\n\n\n\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#a.5-mobilité-interne-et-trajectoires",
+    "href": "Axe4_UGB.html#a.5-mobilité-interne-et-trajectoires",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "A.5 Mobilité interne et trajectoires",
+    "text": "A.5 Mobilité interne et trajectoires\n\nChangement de communes\nRéponses à la question des mobilités internes au pays.\n\n\n       n     %\nNon    3  14.3\nOui   18  85.7\nTotal 21 100.0\n\n\n\n\nTrajectoires\nOn ne traitera pas ici les parcours qui nécessitent un recodage long des réponses. On affiche juste le tableau des trajectoires des étudiants déclarant avoir changé de commune.\n\n\n\nTrajectoire des étudiants ayant changé de commune\n\n\nid\nsex\ndep_nais\ntraj\n\n\n\n\nL3024\nUne femme\nFoundiougne\nKaolack-saint Louis\n\n\nL3024bis\nUn homme\nNA\nGossas\n\n\nL3029\nUn homme\nNA\nNA\n\n\n\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#b.1-echelle-dappartenance",
+    "href": "Axe4_UGB.html#b.1-echelle-dappartenance",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "B.1 Echelle d’appartenance",
+    "text": "B.1 Echelle d’appartenance\n\nEchelles citées\nOn peut tout d’abord examiner quelles échelles ont été les plus mobilisées par les étudiants sans distinguer l’ordre\n\n\n                   n     %\n1. Local          16  25.4\n2. Arrdt-Dept     10  15.9\n3. Région          8  12.7\n4. Pays           14  22.2\n5. sous-continent  8  12.7\n6. continent       6   9.5\n8. Autre           1   1.6\nTotal             63 100.0\n\n\n\n\n\n\n\n\n\n\n\nEchelle citée en premier\nOn peut ensuite se focaliser sur le premier choix\n\n\n               n     %\n1. Local       7  33.3\n2. Arrdt-Dept  3  14.3\n3. Région      1   4.8\n4. Pays        6  28.6\n6. continent   4  19.0\nTotal         21 100.0\n\n\n\n\n\n\n\n\n\n\nCommentaire :\n\n\n\nAutres échelles\nInventaire des réponses “autres” :\n\n\n\n           Canada           Kebemer Maison paternelle       Saint-Louis \n                1                 1                 1                 1"
+  },
+  {
+    "objectID": "Axe4_UGB.html#b.2-sentiment-dappartenance-à-des-régions-non-officielles",
+    "href": "Axe4_UGB.html#b.2-sentiment-dappartenance-à-des-régions-non-officielles",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "B.2 Sentiment d’appartenance à des régions non officielles",
+    "text": "B.2 Sentiment d’appartenance à des régions non officielles\nCette question interrogeait les étudiants sur leur sentiment d’apprtenance à des espaces non officiels.\n\nNombre de réponses\nPlusieurs étudiants ont déclaré des appartenances à plusieurs régions.\n\n\n       n   %\n1     14  70\n2      3  15\n3      2  10\n4      1   5\nTotal 20 100\n\n\n\n\nRéponses les plus fréquentes\nOn évalue les régions les plus fréquemment citées.\n\n\n\n\n\nregion\nn\npct\n\n\n\n\nAutre\n8\n26.7\n\n\nBaol\n7\n23.3\n\n\nSine Saloum\n4\n13.3\n\n\nCasamance\n4\n13.3\n\n\nBoundou\n3\n10.0\n\n\nCayor\n2\n6.7\n\n\nGabu\n2\n6.7\n\n\n\n\n\n\n\nAutres réponses\nOn détaille les réponses “Autre” qui ont été proposées par certains étudiants :\n\n\n\n     Fouta Fouta-Toro    Gandiol       Walo \n         2          1          3          1 \n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#b.3-régions-attractives-et-répulsives",
+    "href": "Axe4_UGB.html#b.3-régions-attractives-et-répulsives",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "B.3 Régions attractives et répulsives",
+    "text": "B.3 Régions attractives et répulsives\nUne manière simple mais efficace de mettre à jour les représentations du Sénégal des étudiants a consisté à leur demander de citer trois régions pays où ils souhaiteraient vivre ou ne pas vivre dans un futur proche. Cela suppose une petite transformation des données pour créer un tableau ou chaque ligne correspond à une réponse sur les pays attractifs ou répulsifs. En d’autres termes les réponses de chaque étudiant correspondront à 6 lignes, 3 pour les régions cités positivement et 3 pour les régions cités négativement.On accompagnera ces réponses des informations que l’on juge utile sur les étudiants afin de pouvoir ensuite faire des regroupements.\nA titre d’exemple, voici la forme que prennent les réponses d’un étudiant :\n\n\n\n\n\nid\nsex\nage\ndep_nais\nech1\nopi\nrnk\nNAME_1\n\n\n\n\nL3006\nUne femme\n22\nMbour\n4. Pays\nneg\n1\nDakar\n\n\nL3006\nUne femme\n22\nMbour\n4. Pays\nneg\n2\nTambacounda\n\n\nL3006\nUne femme\n22\nMbour\n4. Pays\nneg\n3\nMatam\n\n\nL3006\nUne femme\n22\nMbour\n4. Pays\npos\n1\nZiguinchor\n\n\nL3006\nUne femme\n22\nMbour\n4. Pays\npos\n2\nThiès\n\n\nL3006\nUne femme\n22\nMbour\n4. Pays\npos\n3\nSaint-Louis\n\n\n\n\n\n-Commentaire : L’étudiante L3006 est une femme de 22 ans, née dans le département de Mbour et qui déclare en premier le niveau national d’appartenance. Elle déclare qu’elle ne souhaiterait pas vivre dans les régions de Dakar, Tambacounda et Matam. Mais elle aimerait vivre dans les régions de Ziguinchor, Thiès ou Saint-Louis.\n\nRégions attractives\nSi on ne tient pas compte du rang des régions cités positivement, on peut établir un tableau de fréquence indiquant le nombre de fois ou une région a été cité positivement par l’un des étudiants de notre échantillon.\n\n\n\nRégions les plus attractives pour les étudiants\n\n\nRang\nNom\nNb. réponses\n% étudiants\n\n\n\n\n1\nSaint-Louis\n18\n85.7\n\n\n2\nThiès\n11\n52.4\n\n\n3\nZiguinchor\n10\n47.6\n\n\n4\nDakar\n9\n42.9\n\n\n5\nLouga\n5\n23.8\n\n\n7\nDiourbel\n2\n9.5\n\n\n7\nKolda\n2\n9.5\n\n\n7\nMatam\n2\n9.5\n\n\n10\nFatick\n1\n4.8\n\n\n10\nKaolack\n1\n4.8\n\n\n10\nSédhiou\n1\n4.8\n\n\n10\nTambacounda\n1\n4.8\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommentaire :\n\n\n\nRégions répulsives\n\n\n\nRégions les plus répulsives pour les étudiants\n\n\nRang\nNom\nNb. réponses\n% étudiants\n\n\n\n\n1\nTambacounda\n12\n57.1\n\n\n2\nMatam\n8\n38.1\n\n\n4\nDakar\n7\n33.3\n\n\n4\nFatick\n7\n33.3\n\n\n6\nKédougou\n6\n28.6\n\n\n6\nSédhiou\n6\n28.6\n\n\n7\nKolda\n5\n23.8\n\n\n8\nKaolack\n4\n19.0\n\n\n10\nKaffrine\n3\n14.3\n\n\n10\nZiguinchor\n3\n14.3\n\n\n12\nDiourbel\n1\n4.8\n\n\n12\nLouga\n1\n4.8\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommentaire :\n\n\n\nSynthèse\nL’appréciation que les étudiants donnent d’une région doit être envisagé selon deux dimensions complémentaires, la saillance et l’opinion\n\nla saillance (en anglais salience) est le fait qu’une régionse présente à l’esprit dun étudiant lorsqu’on lui demande de porter un jugement. Peu importe que le jugement soit positif ou négatif, si une région est citée par l’étudiant c’est qu’il possède des informations sur elle, qu’il en a reçu et à choisi de les retenir. Bref, la saillance manifeste une reconnaissance de l’existence d’une région et signale sa présence dans la carte mentale de la personne. On la définira donc comme le % des étudiants qui ont cité une région, positivement ou négativement, peu importe, et on la mesurera sur une échelle de 0 (jamais citée) à 100 (toujours citée) :\n\n\\(Saillance_i = 100\\times \\frac{Pos_i + Neg_i}{n}\\)\n\nla polarisation est le positionnement d’un individu et par la suite d’un groupe d’individu sur une échelle de jugement allant du négatif au positif. Elle ne peut exister que si la région est déjà connue par l’individu et - dans le cas d’un groupe - possède une saillance suffisante. On mesure classiquement la polarisation sur un intervalle allant de -1 (tous les avis sont positifs) à +1 (tous les avis sont négatifs).\n\n\\(Polarisation_i = \\frac{Pos_i-Neg_i}{Pos_i+Neg_i}\\)\n\n\nTableau de synthèse\n\n\n\nSaillance et attractivité des régions du Sénégal\n\n\nNom\nNégatif\nPositif\nTotal\nSaillance (%)\nPolarisation\n\n\n\n\nSaint-Louis\n0\n18\n18\n85.7\n1.00\n\n\nDakar\n7\n9\n16\n76.2\n0.12\n\n\nTambacounda\n12\n1\n13\n61.9\n-0.85\n\n\nZiguinchor\n3\n10\n13\n61.9\n0.54\n\n\nThiès\n0\n11\n11\n52.4\n1.00\n\n\nMatam\n8\n2\n10\n47.6\n-0.60\n\n\nFatick\n7\n1\n8\n38.1\n-0.75\n\n\nKolda\n5\n2\n7\n33.3\n-0.43\n\n\nSédhiou\n6\n1\n7\n33.3\n-0.71\n\n\nKédougou\n6\n0\n6\n28.6\n-1.00\n\n\nLouga\n1\n5\n6\n28.6\n0.67\n\n\nKaolack\n4\n1\n5\n23.8\n-0.60\n\n\nDiourbel\n1\n2\n3\n14.3\n0.33\n\n\nKaffrine\n3\n0\n3\n14.3\n-1.00\n\n\n\n\n\n\n\nGraphique de synthèse\n\n\n\n\n\n\n\n\n\n\n\nCartogramme\nOn déforme la surface des régions pour leur donner une superficie prportionnelle à leur saillance, c’est-à-dire au nombre de fois où ils ont été cités. Puis on les colorie en fonction de la valeur de l’indice de polarisation , de rouge foncé pour les régions les plus répulsives à bleu foncé pour les plus attractives, en passant par jaune clair pour les régions neutres qui ont autant d’avis positis que négatifs.\n\n\n\n\n\n\n\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#b.4-royaume-et-entités-historiques-précoloniales",
+    "href": "Axe4_UGB.html#b.4-royaume-et-entités-historiques-précoloniales",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "B.4 Royaume et entités historiques précoloniales",
+    "text": "B.4 Royaume et entités historiques précoloniales\n\nConnaissance\n\n\n       n     %\nNon    6  28.6\nOui   15  71.4\nTotal 21 100.0\n\n\n\n\nNom\n\n\n                                                 n     %\n1er capitale de l’Afrique occidentale française  1   6.7\nCayor                                            1   6.7\nD’une saloum                                     1   6.7\nDjolof                                           1   6.7\nGabu                                             1   6.7\nLe royaume du Fouta-Toro                         1   6.7\nLe royaume du Sine                               1   6.7\nLe Sine                                          1   6.7\nNDiambour , royaume de kayor                     1   6.7\nSine Saloum                                      2  13.3\nTekrour                                          1   6.7\nTouldé Dimath                                    1   6.7\nWalo                                             1   6.7\nWALO                                             1   6.7\nTotal                                           15 100.0\n\n\n\nCommentaire :"
+  },
+  {
+    "objectID": "Axe4_UGB.html#b.5-mots-associés-aux-royaumes",
+    "href": "Axe4_UGB.html#b.5-mots-associés-aux-royaumes",
+    "title": "Altermap 2026 : perception des maillages territoriaux au Sénégal",
+    "section": "B.5 Mots associés aux royaumes",
+    "text": "B.5 Mots associés aux royaumes\nOn ne retient que les 20 mots les plus fréquents cités au moins trois fois pour construire les nuages de mots ci-dessous.\nN.B. Il faudra procéder à un recodage manuel pour regrouper les variantes d’un même mot.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommentaire :"
   }
 ]
