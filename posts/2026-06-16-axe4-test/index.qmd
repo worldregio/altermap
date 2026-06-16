@@ -11,7 +11,7 @@ author:
   - name: Claude GRASLAND
     affiliation: UPC, Paris 
 date: 2026-04-17
-categories: [Carte mentale, Monde, Entretien] # self-defined categories
+categories: [Carte mentale, Sénégal, questionnaire, régionalisation, gouvernance] # self-defined categories
 citation: 
   url: https://altermap.github.io/fr/posts/2026-06-16-axe4-test/ 
 image: decoupage.jpg
