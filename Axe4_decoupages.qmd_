@@ -1,0 +1,285 @@
+---
+title: "Altermap Axe 4 : Découpages du Sénégal - Premiers résultats"
+author: "C. Ba, M. Diongue, C. Grasland, A. Ndao"
+format: 
+  html:
+    embed-resources: true
+    echo: false
+---
+
+```{r}
+library(sf,quietly = T, verbose=F, warn.conflicts = F,)
+library(dplyr,quietly = T, verbose=F,warn.conflicts = F)
+library(mapsf)
+library(leaflet)
+library(stringr)
+maps <- readRDS("data/axe4/geom/maps_axe4.RDS") 
+reg<-readRDS("data/axe4/geom/SEN1_map_OK.RDS")
+sen<-reg %>% summarise()
+```
+
+# DECOUPAGE GLOBAL
+
+## Fonds de carte fourni aux étudiants
+
+Les étudiants disposaient d'un fonds ce carte noir et blanc comportant un minumum d'information. Il s'agit du jeu de tuile leaflet appelé "*Stadia.StamenTonerLite*". Ce fonds comportait toutefois plusieurs éléments visuels qui ont été mis à profit par les étudiants dans leur tracé :
+
+- **les principales villes du pays** : elles ont souvent servi de points frontière entre plusieurs régions, en particulier Tambacounda.
+- **les principales routes** = elles ont souvent été utilisées dans le tracé des frontières, notamment la route Dakar-Louga ou la route Tambacounda-Kayes
+- **les frontières des régions offcielles** : elles étaient volontairement peu visibles mais pouvaient être devinées grâce à leur tracé en pointillé. Elles ont été beaucoup utilisées par les étudiants de L2 mais peu par ceux de L1. Est-ce lié à la qualité des photocopies, avec des frontières visibles dans le premier cas et pas le second ?
+
+```{r, eval=FALSE}
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% addPolygons(fillOpacity = 0,stroke = "red",weight = 1)
+```
+
+![](data/axe4/geom/regmaps0.jpg){width=700}
+
+
+## Superposition des découpages des étudants de L1 géographie
+
+
+```{r, eval=F}
+sel <- maps %>% filter(substr(id,1,2)=="L1")
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0.1,
+              stroke = "red",
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 0, 
+              color = "red",stroke = TRUE,
+              weight=1)
+```
+![](data/axe4/geom/regmaps1.jpg){width=700}
+
+
+
+- **Commentaire :** Les tracés sont assez variables et traversent le pays dans tous les sens. Mais on repère des regroupements de traits le long des principales routes qui ont visiblement souvent guidé le tracé.
+
+
+## Superposition des découpages des étudiants de L2 UGTD
+
+
+
+```{r, eval=F}
+sel <- maps %>% filter(substr(id,1,2)=="L2")
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0.1,
+              stroke = "red",
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 0, 
+              color = "red",stroke = TRUE,
+              weight=1)
+```
+![](data/axe4/geom/regmaps2.jpg){width=700}
+
+- **Commentaire :** Les tracés sont beaucoup moins variables et utilisent beaucoup plus les limites régionales en pointillé que les étudiants de L1. On retouve toutefois également une utilisation des routes notamment celles qui partent de Tambacounda.
+
+
+
+# REGIONS RECURRENTES
+
+
+```{r}
+#table(maps$nom_reg)
+```
+
+
+## Fouta Toro (16 étudiants)
+
+```{r}
+
+maps$fouta <- str_detect(tolower(maps$nom_reg),"fouta")
+sel <-maps %>% filter(fouta==1)
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = "red",
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = "red",stroke = TRUE,
+              weight=1)
+```
+
+
+## région de Saint-Louis (17)
+
+```{r}
+
+maps$louis<- str_detect(tolower(maps$nom_reg),"louis")
+mycol<-"red"
+
+sel <-maps %>% filter(louis==1)
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE,
+              weight=1)
+```
+
+
+## région du fleuve (12)
+
+```{r}
+
+maps$fleuve<- str_detect(tolower(maps$nom_reg),"fleuv")
+mycol<-"red"
+
+sel <-maps %>% filter(fleuve==1)
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE,
+              weight=1)
+```
+
+
+
+
+## Bassin arachidier (21 étudiants)
+
+```{r}
+
+maps$arach<- str_detect(tolower(maps$nom_reg),"arach")
+mycol<-"orange"
+
+sel <-maps %>% filter(arach==1)
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE,
+              weight=1)
+```
+
+
+## Sine Saloun (16 étudiants)
+
+```{r}
+
+maps$sine<- str_detect(tolower(maps$nom_reg),"sine")
+maps$salou <-str_detect(tolower(maps$nom_reg),"salou")
+maps$sine_saloun <- maps$sine | maps$salou
+mycol<-"orange"
+
+sel <-maps %>% filter(sine_saloun==1, id !="L1029_4")
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE,label = ~id,
+              weight=1)
+```
+
+## région de Kaolack (8)
+
+```{r}
+
+maps$kaola<- str_detect(tolower(maps$nom_reg),"kaola")
+mycol<-"orange"
+
+sel <-maps %>% filter(kaola==1, id != "L1020_5", id != "L1010_3")
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE, label = ~id,
+              weight=1)
+```
+
+
+
+
+## région de Dakar / Cap-Vert  (26)
+
+```{r}
+
+maps$daka<- str_detect(tolower(maps$nom_reg),"daka")
+maps$capver <-str_detect(tolower(maps$nom_reg),"cap vert")
+maps$dakar_cv <- maps$daka | maps$capver
+mycol<-"blue"
+
+sel <-maps %>% filter(dakar_cv==1)
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE, label = ~id,
+              weight=1)
+```
+
+## Région de Casamance (31)
+
+```{r}
+
+maps$casa<- str_detect(tolower(maps$nom_reg),"casa")
+mycol<-"darkgreen"
+
+sel <-maps %>% filter(casa==1, id != "L2008_6", id != "L1025_3")
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE, 
+              label = ~id,highlightOptions = T,
+              weight=1)
+```
+
+## Région orientale / du Sud Est (23)
+
+```{r}
+
+maps$orient<- str_detect(tolower(maps$nom_reg),"orient")
+maps$se1<- str_detect(tolower(maps$nom_reg),"sud-est")
+maps$se2<- str_detect(tolower(maps$nom_reg),"sud est")
+maps$orient_se <- maps$orient | maps$se1 | maps$se2
+mycol<-"purple"
+
+sel <-maps %>% filter(orient_se==1, id != "L2026_5")
+n<-dim(sel)[1]
+
+leaflet(sen) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0,
+              stroke = mycol,
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 1/n, 
+              color = mycol,stroke = TRUE, 
+              label = ~id,highlightOptions = T,
+              weight=1)
+```

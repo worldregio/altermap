@@ -1,0 +1,2042 @@
+---
+title: "Altermap : Axe 4 perception des maillages territoriaux au Sénégal"
+subtitle: "Analyse des réponses de 92 étudiants sénégalais au questionnaire pilote administré en avril-mai 2026"
+author: "Cheikh Ba, Momar Diongue, Aliou Ndao, Claude Grasland"
+date: "2026-06-12"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    theme: 
+      light: minty    
+      dark: solar
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 2
+    toc-title: "."
+    css: styles.css
+    crossrefs-hover: false
+execute:
+  warning: false
+  message: false 
+  cache: false   
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggrepel)
+library(labelled)
+library(readxl)
+library(questionr)
+library(sf)
+library(mapsf)
+library(readxl)
+library(quanteda)
+library(wordcloud)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(RColorBrewer)
+library(beanplot)
+
+```
+
+## Introduction
+
+Nous proposons ici un premier dépouillement des réponses au
+questionnaire-test administré en mai-juin 2026.
+
+# A. CADRAGE
+
+La première partie du questionnaire apportait des données de cadrage sur
+les individus (âge, sexe) et sur l'origine géographique et les
+trajectoires de mobilité des étudiants.
+
+::: callout-tip
+## Télécharger le jeu de données issues de Kobo Toolbox
+
+-   [Données d'enquête issus de kobo au format label
+    .xlsx](https://github.com/worldregio/altermap/raw/refs/heads/main/data/Axe4_final/data/survey_regions_senegal_VF.xlsx)
+:::
+
+
+```{r}
+
+# Tableau principal
+don<-readRDS("data/Axe4_final/data/survey_regions_senegal_VF.RDS")
+levels(don$lieu)<-c("UCAD","IGTD","UGB")
+don$ech<-paste(don$niveau,don$lieu, sep="-")
+
+# Sous_tableaux
+don1 <- don %>% filter(don$niveau=="L1")
+don2 <- don %>% filter(don$niveau=="L2")
+don3 <- don %>% filter(don$niveau=="L3")
+
+# Trie
+mysource <- "Source : Altermap 2026, axe 4, Enquête UCAD-IGTD-UGB (Ba C., Diongue M., Ndao A.)"
+mysource1 <- "Source : Altermap 2026, axe 4, Enquête L1  UCAD (Diongue Momar)"
+mysource2 <- "Source : Altermap 2026, axe 4, Enquête L2  IGTD (Ba Cheikh)"
+mysource3 <- "Source : Altermap 2026, axe 4, Enquête L3 UGB (Ndao Aliou)"
+```
+
+## A.1 Echantillons
+
+```{r}
+par(mfrow=c(1,1))
+tab<-table(don$ech)
+kable(freq(tab,valid = F, total = T))
+barplot(tab, col=c("#00853F", "#FDEF42","#E31B23"), main="Effectif des échantillons collectés en avril-mai 2026", sub= mysource, xlab="Institution", ylab= "Nombre de réponses")
+```
+
+-   **Commentaire** : L'échantillon total se compose de 92 étudiants
+    dont 40 de L1 géographie à l'Université Cheikh Anta Diop de Dakar
+    (UCAD), 27 de L2 à l'Institut de Gouvernance Territoriale de Dakar
+    (IGTD) et 25 de L3 géographie à l'Université Gaston Berger de
+    Saint-Louis (UGB). Ces échantillons ont été collectés respectivement
+    par Momar Diongue, Cheikh Ba et Aliou Ndao au cours des mois d'avril
+    et mai 2026
+
+## A.2 Sexe
+
+```{r}
+par(mfrow=c(1,1))
+tab<-table(don$ech, don$sexe)
+kable(lprop(tab,valid = F, total = T), digits=1)
+mosaicplot(tab, col=c("orange", "lightgreen"),
+           main = "Distribution par sexe",
+           sub=mysource,)
+
+```
+
+-   **Commentaire** : La répartition homme-femme est globalement
+    équilibrée mais les hommes sont sensiblement plus nombreux dans
+    l'échantillon de L3 à l'UGB.
+
+## A.3 Âge
+
+```{r}
+tapply(don$age, don$niveau, summary)
+beanplot(don$age~don$niveau, horizontal=T, log = "",ylim = c(18,26), col=c("lightyellow","red"),main = "Age des étudiants", sub=mysource,beanlines = "median")
+
+```
+
+-   **Commentaire** : L'âge médian augmente logiquement avec le niveau
+    d'étude et passe de 20 ans en L1 à 21 ans en L2 puis 23 ans en L3.
+
+## A.3 Origines
+
+Beaucoup d'étudiants n'ont pas répondu à la question de leur pays de
+naissance, mais on peut déduire des réponses à la question sur le
+département de naissance qu'une pétite partie d'entre eux est née en
+dehors du Sénégal.
+
+```{r}
+# Carte
+mapdep<-readRDS("data/axe4/geom/SEN2_map_OK.RDS")
+mapreg<-readRDS("data/axe4/geom/SEN1_map_OK.RDS")
+
+# Agrégation
+tab<-don %>% group_by(nais_dept) %>% 
+              count() %>% 
+              filter(is.na(nais_dept)==F) %>%
+  rename(HASC_2 = nais_dept)
+  
+
+# Jointure
+mapdep2 <- mapdep %>% left_join(tab)
+mapdep2$n[is.na(mapdep2$n)]<-0
+mapdep2$OK <- mapdep2$n > 0
+
+mapdep3 <- mapdep2 %>% filter(n >2)
+# Carte
+par(mfrow=c(1,1))
+mf_map(mapdep2, var="OK", type="typo", leg_pos = NA, pal=c("gray90", "lightyellow"))
+mf_map(mapreg, type="base", col=NA, lwd=2, add=T)
+mf_map(mapdep2, var="n", type="prop", col="red", inches=0.2, leg_title = "Nombre d'étudiants")
+mf_label(mapdep3, var="NAME_2",cex = 0.6,overlap = F, col="blue", halo = T)
+mf_layout(title = "Département de naissance des étudiants",
+          credits = mysource,
+          frame=T,
+          arrow=F)
+
+
+```
+
+```{r, fig.width=9, fig.height=4}
+par(mfrow=c(1,3))
+### L1###
+# Carte
+mapdep<-readRDS("data/axe4/geom/SEN2_map_OK.RDS")
+# Agrégation
+tab<-don1 %>% group_by(nais_dept) %>% 
+              count() %>% 
+              filter(is.na(nais_dept)==F) %>%
+  rename(HASC_2 = nais_dept)
+# Jointure
+mapdep2 <- mapdep %>% left_join(tab)
+mapdep2$n[is.na(mapdep2$n)]<-0
+mapdep2$OK <- mapdep2$n > 0
+# Carte
+mf_map(mapdep2, var="OK", type="typo", leg_pos = NA, pal=c("gray90", "lightyellow"))
+mf_map(mapreg, type="base", col=NA, lwd=2, add=T)
+mf_map(mapdep2, var="n", type="prop", col="red", inches=0.08, leg_title = "Nombre d'étudiants")
+
+mf_layout(title = "Etudiants de L1",
+          credits = mysource1,
+          frame=T,
+          arrow=F)
+
+
+### L2###
+# Carte
+mapdep<-readRDS("data/axe4/geom/SEN2_map_OK.RDS")
+# Agrégation
+tab<-don2 %>% group_by(nais_dept) %>% 
+              count() %>% 
+              filter(is.na(nais_dept)==F) %>%
+  rename(HASC_2 = nais_dept)
+# Jointure
+mapdep2 <- mapdep %>% left_join(tab)
+mapdep2$n[is.na(mapdep2$n)]<-0
+mapdep2$OK <- mapdep2$n > 0
+# Carte
+mf_map(mapdep2, var="OK", type="typo", leg_pos = NA, pal=c("gray90", "lightyellow"))
+mf_map(mapreg, type="base", col=NA, lwd=2, add=T)
+mf_map(mapdep2, var="n", type="prop", col="red", inches=0.08, leg_title = "Nombre d'étudiants")
+
+mf_layout(title = "Etudiants de L2",
+          credits = mysource2,
+          frame=T,
+          arrow=F)
+
+
+
+### L3###
+# Carte
+mapdep<-readRDS("data/axe4/geom/SEN2_map_OK.RDS")
+# Agrégation
+tab<-don3 %>% group_by(nais_dept) %>% 
+              count() %>% 
+              filter(is.na(nais_dept)==F) %>%
+  rename(HASC_2 = nais_dept)
+# Jointure
+mapdep2 <- mapdep %>% left_join(tab)
+mapdep2$n[is.na(mapdep2$n)]<-0
+mapdep2$OK <- mapdep2$n > 0
+# Carte
+mf_map(mapdep2, var="OK", type="typo", leg_pos = NA, pal=c("gray90", "lightyellow"))
+mf_map(mapreg, type="base", col=NA, lwd=2, add=T)
+mf_map(mapdep2, var="n", type="prop", col="red", inches=0.08, leg_title = "Nombre d'étudiants")
+
+mf_layout(title = "Etudiants de L3",
+          credits = mysource3,
+          frame=T,
+          arrow=F)
+```
+
+-   **Commentaire** : 14 étudiants n'ont pas répondu à cette question,
+    soit par oubli, soit parce qu'ils sont nés à l'étranger. La carte
+    montre une forte concentration des lieux de naissance dans le nord
+    (Saint-Louis, Podor, Matam) ainsi que dns la région du Cap-Vert et
+    son arrière-pays (Dakar, Pikine, Rufisque, Tivaouane, Mbour,
+    Fatick). On trouve ensuite quelques étudiants dde Casamance mais
+    très peu du sud-est.la ventilation par niveau met en valeur la
+    concentration relative des étudiants de L2 à proximité de Dakar.
+
+## A.5 Mobilités
+
+```{r}
+don$mobi2 <- as.factor(don$mobil)
+levels(don$mobi2) <- c("Oui","Oui","Non")
+par(mfrow=c(1,1))
+tab<-table(don$ech, don$mobi2)
+kable(lprop(tab,valid = F, total = T), digits=1)
+mosaicplot(tab, col=c("orange", "lightgreen"),
+           main = "Changement de commune depuis la naissance",
+           sub=mysource,)
+
+```
+
+-   **Commentaire** : la plupart des étudiants (77%) déclarent avoir  toujours vécu dans la même commune. Mais les étudiants de L2 de  l'IGTD sont significativement (p < 0.01) plus nombreux (44%) a avoir déclaré un changement de résidence, comparativement aux étudiants de L1 (12%)  et de L3 (23%).
+
+# B. ECHELLES 
+
+Les étudiants devaient répondre à la question suivante :
+
+> "*À quel échelle d'espace ou territoire avez-vous le plus le sentiment de vous identifier ?(Si quelqu'un vous demande « D'où êtes-vous ? », vous répondez…) Indiquez jusqu'à 3 réponses (1, 2, 3) par ordre de priorité."*. 
+
+Ils pouvaient choisir entre 8 réponses formulées de la façon suivante
+
+- "Quartier/Village/Commune"
+- "Département/Arrondissement"
+- "Région administrative"
+- "Pays (Sénégal)"
+- "Sous-région (Afrique de l'Ouest)"
+- "Continent (Afrique)"
+- "Monde"
+- "Autre (précisez)"
+
+
+
+
+```{r}
+# réordonne les modalités
+x <- as.factor(don$ech1)
+
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
+             x== "Monde" ~ "7. Monde",
+             x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
+             x== "Pays (Sénégal)" ~ "4. Pays",
+            x==  "Quartier/Village/Commune" ~ "1. Local",
+             x==   "Région administrative" ~ "3. Région",
+             x== "Sous-région (Afrique de l'Ouest)" ~ "5. sous-continent",
+            x=="Autre"~ "8. Autre",
+            .default = NA )   
+
+
+
+don$ech1 <- as.character(x)
+
+x <- as.factor(don$ech2)
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
+             x== "Monde" ~ "7. Monde",
+             x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
+             x== "Pays (Sénégal)" ~ "4. Pays",
+            x==  "Quartier/Village/Commune" ~ "1. Local",
+             x==   "Région administrative" ~ "3. Région",
+             x== "Sous-région (Afrique de l'Ouest)" ~ "5. sous-continent",
+            x=="Autre"~ "8. Autre",
+            .default = NA )   
+
+don$ech2 <- as.character(x)
+
+x<- as.factor(don$ech3)
+x<-case_when(x=="Continent (Afrique)" ~ "6. continent",
+             x== "Monde" ~ "7. Monde",
+             x== "Département/Arrondissement" ~ "2. Arrdt-Dept",
+             x== "Pays (Sénégal)" ~ "4. Pays",
+            x==  "Quartier/Village/Commune" ~ "1. Local",
+             x==   "Région administrative" ~ "3. Région",
+             x== "Sous-région (Afrique de l'Ouest)" ~ "5. sous-continent",
+            x=="Autre"~ "8. Autre",
+            .default = NA ) 
+don$ech3 <- as.character(x)
+```
+
+## Echelles citées
+
+On peut tout d'abord examiner quelles échelles ont été les plus mobilisées par les étudiants sans distinguer l'ordre des réponses : 
+
+```{r}
+
+col<-don[,c("niveau","ech1","ech2","ech3")] %>% pivot_longer(cols= 2:4)
+
+tab<-table(col$value)
+kable(freq(tab,valid = F, total = T))
+
+par(mar=c(5,5,3,1))
+barplot(tab,horiz = T, 
+        las=1,
+        col=rainbow(13),cex.names = 0.6,
+        xlab="nombre d' étudiants ayant cité cette échelle",
+        main="Echelles d'appartenance citées ",
+        sub = mysource,
+        cex.sub=0.6)
+```
+
+```{r}
+tab<-table(col$value, col$niveau)
+kable(cprop(tab), digits=1,)
+mosaicplot(t(tab), las=1,  col=rainbow(13), 
+           main="Echelles d'appartenance selon les échantillons", sub=mysource)
+```
+
+- **Commentaire** : L'échelle la plus cité est l'échelle locale (village, quartier), suivie de l'échelle nationale et les échelles intermédiaires des arrondissements, départements ou régions. Très peu d'étudiants citent les échelles de niveaux supranational (Afrique de l'ouest, Afrique, Monde). L'examen des résultats en fonction des échantillons d'étudiants interrogés en L1, L2 ou L3 ne révèle aucune différence significative (p=0.11).
+
+
+## Echelle citée en premier
+
+On peut ensuite examiner l'échelle qui a été citée en premier par les étudiants 
+
+```{r}
+
+col<-don[,c("niveau","ech1")] 
+
+tab<-table(col$ech1)
+kable(freq(tab,valid = F, total = T))
+
+par(mar=c(5,5,3,1))
+barplot(tab,horiz = T, 
+        las=1,
+        col=rainbow(13),cex.names = 0.6,
+        xlab="nombre d' étudiants ayant cité cette échelle",
+        main="Echelle principale ",
+        sub = mysource,
+        cex.sub=0.6)
+```
+
+```{r}
+tab<-table(col$ech1, col$niveau)
+kable(cprop(tab), digits=1,)
+mosaicplot(t(tab), las=1,  col=rainbow(13), 
+           main="Echelle principale selon les échantillons", sub=mysource)
+
+```
+
+- **Commentaire** : L'échelle la plus citée en premier est l'échelle locale (village, quartier) que l'on trouve dans environ la moitié des réponses (51%). Mais le niveau national est également cité en premier par environ un étudiant sur cinq (21%). On trouve ensuite de façon secondaire les échelles infranationales (15%) et supranationales (12%). Comme précédemment, l'examen des résultats en fonction des échantillons d'étudiants interrogés en L1, L2 ou L3 ne révèle aucune différence significative (p=0.27).
+
+# C. POLARISATION
+
+Les étudiants devaient répondre à la question suivante :
+
+
+> *B.3 Citez les trois régions du Sénégal où vous souhaiteriez le plus vivre et les trois où vous aimeriez le moins vivre dans la liste ci dessous*
+
+Un menu déroulant leur proposait de choisir dans une liste comportant les 14 régions administratives du Sénégal classées par ordre alphabétique de Dakar à Ziguinchor.
+
+```{r}
+
+## Prépare les données
+pos1<-don$att1
+pos2<-don$att2
+pos3<-don$att3
+pos <-cbind(pos1,pos2,pos3)
+donpos <- cbind(don,pos) %>% pivot_longer(cols = c("pos1","pos2","pos3"))
+
+neg1<-don$rep1
+neg2<-don$rep2
+neg3<-don$rep3
+neg<-cbind(neg1,neg2,neg3)
+donneg <- cbind(don,neg) %>% pivot_longer(cols = c("neg1","neg2","neg3"))
+
+donpol <-rbind(donpos, donneg) 
+donpol$opi<-substr(donpol$name,1,3)
+donpol$rnk <-substr(donpol$name,4,4)
+donpol$NAME_1<-donpol$value
+donpol<-donpol %>% arrange(code,opi,rnk)
+
+## Corrige les noms de régions !!!
+donpol$NAME_1[donpol$NAME_1=="Kaloack"]<-"Kaolack"
+donpol$NAME_1[donpol$NAME_1=="Zinguichor"]<-"Ziguinchor"
+donpol$NAME_1[donpol$NAME_1=="Falick"]<-"Fatick"
+
+
+```
+
+
+## Régions attractives
+
+Si on ne tient pas compte du rang des régions cités positivement, on peut établir un tableau de fréquence indiquant le nombre de fois ou une région a été cité positivement par l'un des étudiants de notre échantillon.
+
+
+```{r}
+nbetud<-dim(don)[1]
+toppos <- donpol %>% filter(opi=="pos",is.na(NAME_1)==F) %>% 
+  group_by(NAME_1) %>%
+  count() %>%
+  ungroup() %>% 
+  mutate ( nb=n, rnk = rank(-n), sal=100*n/nbetud) %>%
+  select(rnk, NAME_1, nb, sal) %>%
+  arrange(rnk)
+
+
+kable(toppos,caption ="Régions les plus attractives pour les étudiants", col.names = c("Rang","Nom", "Nb. réponses", "% étudiants"), digits=c(0,0,0,1))
+
+```
+
+
+
+```{r}
+map2 <- left_join(mapreg,toppos)
+par(mfrow=c(1,1))
+mf_map(map2, type="base", col="lightyellow")
+mf_map(map2, type="prop", var="nb",col="red", inches=0.3, 
+       leg_pos = "topleft",
+       leg_title = "Nombre d'étudiants ayant cité positivement la région")
+mf_label(map2,var="NAME_1",overlap = F, halo=T, col="black",cex=0.5)
+#mf_graticule(map2,add = T, lty=2, lwd=0.5)
+mf_layout("Régions les plus attractives pour les étudiants", frame=T, arrow=F, scale = F, 
+          credits=mysource)
+```
+
+- **Commentaire** : 
+
+## Régions répulsives
+
+
+
+```{r}
+nbetud<-dim(don)[1]
+topneg <- donpol %>% filter(opi=="neg",is.na(NAME_1)==F) %>% 
+  group_by(NAME_1) %>%
+  count() %>%
+  ungroup() %>% 
+  mutate ( nb=n, rnk = rank(-n), sal=100*n/nbetud) %>%
+  select(rnk, NAME_1, nb, sal) %>%
+  arrange(rnk)
+
+
+kable(topneg,caption ="Régions les plus répulsives pour les étudiants", col.names = c("Rang","Nom", "Nb. réponses", "% étudiants"), digits=c(0,0,0,1))
+
+```
+
+
+```{r}
+map2 <- left_join(mapreg,topneg)
+par(mfrow=c(1,1))
+mf_map(map2, type="base", col="lightyellow")
+mf_map(map2, type="prop", var="nb",col="blue", inches=0.3, 
+       leg_pos = "topleft",
+       leg_title = "Nombre d'étudiants ayant cité négativement la région")
+mf_label(map2,var="NAME_1",overlap = F, halo=T, col="black",cex=0.5)
+#mf_graticule(map2,add = T, lty=2, lwd=0.5)
+mf_layout("Régions les plus répulsives pour les étudiants", frame=T, arrow=F, scale = F, 
+          credits=mysource)
+```
+
+- **Commentaire** : 
+
+
+## Synthèse
+
+L'appréciation que les étudiants donnent d'une région doit être envisagé selon deux dimensions complémentaires, la saillance et l'opinion
+
+- **la saillance** (en anglais *salience*) est le fait qu'une régionse présente à l'esprit dun étudiant lorsqu'on lui demande de porter un jugement. Peu importe  que le jugement soit positif ou négatif, si une région est citée par l'étudiant c'est qu'il possède des informations sur elle, qu'il en a reçu et à choisi de les retenir. Bref, la saillance manifeste une reconnaissance de l'existence d'une région et signale sa présence dans la carte mentale de la personne. On la définira donc comme le % des étudiants qui ont cité une région, positivement ou négativement, peu importe, et on la mesurera sur une échelle de 0 (jamais citée) à 100 (toujours citée) : 
+
+$Saillance_i = 100\times \frac{Pos_i + Neg_i}{n}$
+
+- **la polarisation** est le positionnement d'un individu et par la suite d'un groupe d'individu sur une échelle de jugement allant du négatif au positif. Elle ne peut exister que si la région est déjà connue par l'individu et - dans le cas d'un groupe - possède une saillance suffisante. On mesure classiquement la polarisation sur un intervalle allant de -1 (tous les avis sont positifs) à +1 (tous les avis sont négatifs).
+
+$Polarisation_i = \frac{Pos_i-Neg_i}{Pos_i+Neg_i}$
+
+### Tableau de synthèse
+
+```{r}
+
+synt <- donpol %>% filter(is.na(NAME_1)==F) %>%
+                     group_by(NAME_1,opi) %>% 
+                      count() %>%
+                      pivot_wider(names_from = opi,
+                                  values_from = n,
+                                  values_fill = 0) %>%
+                       mutate(tot=neg+pos,
+                              saillance = 100*tot/nbetud,
+                              polarisation=(pos-neg)/(pos+neg)) %>%
+                      arrange(-saillance) 
+
+kable(synt,caption ="Saillance et attractivité des régions du Sénégal", col.names = c("Nom", "Négatif", "Positif", "Total", "Saillance (%)","Polarisation"), digits=c(0,0,0,0,1,2))
+
+```
+
+
+### Graphique de synthèse
+
+
+
+```{r}
+ggplot(synt, aes(x=saillance, y = polarisation)) + 
+        geom_point() + 
+        geom_text_repel(aes(label = NAME_1))+
+        scale_x_log10()+
+        ggtitle(label = "Saillance et attractivité des régions du Sénégal" ,
+                subtitle =mysource) +
+         theme_light()
+       
+```
+
+
+### Cartogramme
+
+On déforme la surface des régions pour leur donner une superficie proportionnelle à leur saillance, c'est-à-dire au nombre de fois où ils ont été cités. Puis on les colorie en fonction de la valeur de l'indice de polarisation , de rouge foncé pour les régions les plus répulsives à bleu foncé pour les plus attractives, en passant par jaune clair pour les régions neutres qui ont autant d'avis positis que négatifs.
+
+```{r}
+
+map2 <- left_join(mapreg,synt)
+library(cartogramR)
+map2 <-st_transform(map2,31028)
+map2$saillance[is.na(map2$saillance)]<-0.2
+x<-cartogramR(data=map2, count="saillance")
+mapres <- x$cartogram
+
+mypal = brewer.pal(5,"RdYlBu")
+mf_map(mapres, type="choro", var="polarisation", breaks=c(-1,-0.6,-0.2,0.2,0.6,1), pal=mypal)
+mf_label(mapres,var="NAME_1",halo=T)
+mf_layout("Saillance et attractivité des régions sénégalaises",
+          credits=mysource,
+          frame=T,scale=F)
+
+```
+
+
+- **Commentaire** : 
+
+## Influence du lieu de naissance
+
+Les résultats précédents sont sans doute influencés par les lieux d'origine des étudiants. Il est intéressant d'examiner les préférences des étudiants de quelques régions minoritaires dans l'échantillon.
+
+### Etudiants nés à Ziguinchor
+
+```{r}
+sel <- donpol %>% filter(substr(nais_dept,4,5) %in% c("ZG")) %>% select(code, sexe, age,nais_dept,att1,att2,att3, rep1,rep2,rep3) %>% unique
+kable(sel, caption="Attraction-répulsion des étudiants nés à Ziguinchor")
+```
+
+- **Commentaire** : les 4 étudiants nés à Ziguinchor déclarent tous vouloir vivre en premier dans cette région, puis en second lieu à Saint-Louis ou Thiès et plus rarement à Dakar. En revanche is ne souhaitent pas vivre à Tambacounda ou Kaolack
+
+### Etudiants nés à Sedhiou
+
+```{r}
+sel <- donpol %>% filter(substr(nais_dept,4,5) %in% c("SD")) %>% select(code, sexe, age,nais_dept,att1,att2,att3, rep1,rep2,rep3) %>% unique
+kable(sel, caption="Attraction-répulsion des étudiants nés à Sedhiou")
+```
+
+- **Commentaire** : les 3 étudiants nés à Sedhiou indiquent comme région la plus attractive Ziguinchor ou Sedhiou et seulement ensuite Saint-Louis, Thiès ou Dakar. Ils rejettent en revanche Kolda, Kedougou ou Matam.
+
+
+### Etudiants nés à Matam
+
+```{r}
+sel <- donpol %>% filter(substr(nais_dept,4,5) %in% c("MT")) %>% select(code, sexe, age,nais_dept,att1,att2,att3, rep1,rep2,rep3) %>% unique
+kable(sel, caption="Attraction-répulsion des étudiants nés à Tambaocounda")
+```
+
+- **Commentaire** : les 4 étudiants nés à Matam déclarent tous vouloir vivre à Dakar ou Matam dans leurs deux premiers choix, puis en troisième lieu à Saint-Louis ou Thiès. En revanche ils rejettent tous en premier Tambacounda puis d'autres régions de l'Est et du Sud. 
+
+
+### Etudiants nés à Kaolack
+
+```{r}
+sel <- donpol %>% filter(substr(nais_dept,4,5) %in% c("KC")) %>% select(code, sexe, age,nais_dept,att1,att2,att3, rep1,rep2,rep3) %>% unique
+kable(sel, caption="Attraction-répulsion des étudiants nés à Kaolack")
+```
+
+- **Commentaire** : les 3 étudiants nés à Kaolack  déclarent tous vouloir vivre en premier lieu dans leur région d'orige puis à Dakar. Ils rejettent Kédougou, Matam ou Sedhiou.  
+
+### Conclusion
+
+Il faut donc nuancer les résultats tirés de l'analyse d'ensemble des étudiants en rappelant l'attachement fort aux régions d'origine. Si la carte des attractions-répulsions apparaît si favorable aux régions du Nord et de l'Ouest, c'est en partie parce que ce sont les régions d'origine de la majorité des étudiants enquêtés. 
+
+# D. HERITAGES
+
+Plusieurs questions posées aux étudiants concernaient leur rapport aux anciens royaume et espaces historiques de la période coloniale : 
+
+> *B.2 Cochez les espaces auxquels vous vous sentez appartenir, même en dehors des frontières officielles : (Cayor, Baol, Sine Saloum, Gabu, Boundou, Casamance historique, Autre (précisez)*
+
+>*B.4 Connaissez-vous le royaume ou l'entité historique précoloniale dans lequel se situait votre lieu de naissance ?*
+
+>*B.5 Associez 3 mots à chacun des espaces historiques suivants (Cayor, Baol, Fouta Toro, Sine-Saloun, Casamance, Gabu-Boudou)*
+
+
+## Connaissance de la région historique de naissance
+
+```{r}
+par(mfrow=c(1,1))
+tab<-table(don$ech, don$royaume_connait)
+kable(lprop(tab,valid = F, total = T), digits=1)
+mosaicplot(tab, col=c("orange", "lightgreen"),
+           main = "Connaissance de sa région historique de naisance",
+           sub=mysource,)
+
+```
+
+- **Commentaire** : Dans l'ensemble de l'échantillon 50% des étudiants déclarent connaître le royaume ou l'entité historique précoloniale dans lequel se situait leur lieu de naissance. Mais cette proportion est significativelment plus élevé chez les étudiants de L3 de l'UGB (76%) par rapport aux étudiants de L1 de l'UCAD (42% ou de L2 de l'IGTD (37%).
+
+## Nombre d'appartenances
+
+Quelles sont les appartenances déclarées par les étudiants à une liste d'entités historiques précoloniales. 
+
+```{r}
+mat <- don %>% mutate(Autre = as.numeric(is.na(app_autre)==F)) %>%
+  select(Cayor = app_cayor, Baol = app_baol, Gabu = app_gabu, Boundou=app_boundou, `Sine-Saloun`= app_sinesaloun, Casamance = app_casamance, Autre) 
+mat <- as.matrix(mat)
+mat[is.na(mat)]<-0
+w<- apply(mat,1,sum)
+kable(freq(w,valid = F, total = T), caption = "Nombre d'appartenances aux régions historiques")
+barplot(table(w), col=rainbow(12), main= "Nombre d'appartenances aux régions historiques", ylab = "nombre d'étudiants", sub=mysource)
+```
+
+- **Commentaire** : 62 étudiants ont déclaré une appartenance une seule des régions historiques mais 15 ont déclaré appartenir à deux régions, 11 à trois régions et 1 à quatre régions. Seuls trois étudiants n'ont cité aucune région historique.
+
+## Autres appartenances
+
+
+Quelles réponses ont été apportées dansla catégorie "Autre" ?
+
+```{r}
+kable(table(don$app_autre))
+```
+
+- **Commentaire** : Le questionnaire mériterait d'être complété avec la région du Fouta Toro qui a ét souvent présente dans les réponses autres. La région du Walo et celle de Saint-Louis ont été également citées
+
+## Appartenances croisées
+
+La matrice ci-dessous présente la fréquence d'apparition de chaque région historique sur la diagonale et le nombre d'associations observées avec d'autres régions : 
+
+```{r}
+
+mat2 <- t(mat) %*% mat
+kable(addmargins(mat2), caption = "Sentiments d'appartenance mulitiples", sub = mysource)
+```
+
+
+- **Commentaire** : Les deux régions les plus cités par les étudiants sont la Casamance (28) et le Sine-Saloun (29). Elles ont été associées ensemble par 9 étudiants. Le Cayor a été cité 21 fois et associé quatre fois avec le Baol et quatre fois avec le Sine-Saloun. Le Baol a été cité 19 fois dont 7 en assocations avec le Sine-Saloun et 5 avec la Casamance. Le Boundou (6) et le Gabu (3) ont été les régions les moins citées. On notera que le Fouta-Toro qui ne faisait pas partie de la liste des choix proposés a été souvent ajouté dans la catégorie "Autre". 
+
+
+## Stereotypes
+
+
+On examine les mots associés par les étudiants à chacune des régions historiques et on ne retient que les 20 mots les plus fréquents  pour construire les nuages de mots ci-dessous.
+
+N.B. Il faudra procéder à un recodage manuel pour regrouper les variantes d'un même mot.
+
+### Baol 
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(don$mots_baol),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Baol")
+```
+
+### Cayor
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(don$mots_cayol),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Cayor")
+```
+
+
+### Casamance
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(don$mots_casamance),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Casamance")
+```
+
+
+### Fouta Toro
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(don$mots_foutatoro),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Fouta Toro")
+```
+
+### Gabu/Boundou
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(don$mots_gabuboundou),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Gabu/Boundou")
+```
+
+### Sine-Saloun
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(don$mots_sinesaloun),remove_punct = T,)
+wordcloud(toks, max.words=20, rot.per=0,min.freq = 3)
+title("Sine-Saloun")
+```
+
+
+# E. DECOUPAGES
+
+
+
+```{r}
+stu <- readRDS("data/Axe4_final/geom/student_maps_3857.RDS")
+reg <- readRDS("data/Axe4_final/geom/Senegal_regions_3857.RDS")
+gri <- readRDS("data/Axe4_final/geom/Senegal_grille_3857.RDS")
+mask <-readRDS("data/Axe4_final/geom/Senegal_mask_3857.RDS")
+library(sf)
+library(mapsf)
+library(leaflet)
+```
+
+
+Les étudiants disposaient d'un fonds ce carte noir et blanc comportant un minumum d'information. Il s'agit du jeu de tuile leaflet appelé "*Stadia.StamenTonerLite*". Ce fonds comportait toutefois plusieurs éléments visuels qui ont été mis à profit par les étudiants dans leur tracé :
+
+- **les principales villes du pays** : elles ont souvent servi de points frontière entre plusieurs régions, en particulier Tambacounda.
+- **les principales routes** = elles ont souvent été utilisées dans le tracé des frontières, notamment la route Dakar-Louga ou la route Tambacounda-Kayes
+- **les frontières des régions offcielles** : elles étaient volontairement peu visibles mais pouvaient être devinées grâce à leur tracé en pointillé. Elles ont été beaucoup utilisées par les étudiants de L2 mais peu par ceux de L1. Est-ce lié à la qualité des photocopies, avec des frontières visibles dans le premier cas et pas le second ?
+
+```{r, eval=FALSE}
+mask2 <- st_transform(mask, 4326)
+leaflet(mask2) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% addPolygons(color = NA,fillColor = NA)
+```
+
+![](img/altermap_axe4_map0.jpg){width=700}
+
+Sur les 92 étudiants ayant répondu au questionnaire nous avons pu récupérer 78 cartes de découpage du Sénégal. Les 14 cartes manquantes correspondent à en général à des problèmes de codage (impossibilté de relier la carte à l'étudiant) et plus rarement à des découpages incohérents impossibles à numériser.
+
+## Combien de régions ?
+
+Combien les étudiants ont-il tracé de régions, sachant que la limite maximale qui leur était imposée était de 10 ?
+
+```{r}
+donmap <- don %>% filter(numerisation=="Oui")
+summary(don$nbreg)
+barplot(table(don$nbreg),col=rainbow(13),las=1, main = "Nombre de régions",
+     sub=mysource  )
+
+```
+
+
+- **Commentaire** : La distribution d'ensemble des étudiants montre deux pics dans le choix du nombre de régions. Un pic principal à 10 correspondant à des étudiants qui ont souhaité découper au maximum le territoire. Un pic secondaire à 6 qui semble constituer pour d'autres étudiants un optimum. 
+
+
+```{r}
+tapply(donmap$nbreg, donmap$ech, summary)
+tab <- table(donmap$ech, donmap$nbreg)
+plot(tab, col=rainbow(13), las=1, main = "Nombre de régions",
+     sub=mysource, cex.=0.4)
+```
+
+- **Commentaire** :Les étudiants de L2 de l'IGTD sont très clairement ceux qui ont le plus privilégié un découpage du pays en 6 régions. Les étudiants géographes  de L1 et surtout de L3 ont nettement privilégié de leur côté le découpage en 10 régions et secondairement en 5. 
+
+
+
+## Quelles frontières ?
+
+Une première exploration des découpages des étudiants consiste très simplement à les superposer pour voir s'il existe des frontières récurrentes et, au contraire, des espaces qui ne sont jamais découpés. 
+
+
+### Etudants L1 géographie UCAD
+
+
+```{r, eval=F}
+
+
+sel <- stu %>% filter(substr(code,1,2)=="L1") %>% st_transform(4326)
+
+
+leaflet(mask2) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0.1,
+              stroke = "red",
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 0, 
+              color = "red",stroke = TRUE,
+              weight=1)
+```
+
+![](img/altermap_axe4_map_L1.jpg){width=700}
+
+
+### Etudants L2 gouvernance IGTD
+
+
+```{r, eval=F}
+
+
+sel <- stu %>% filter(substr(code,1,2)=="L2") %>% st_transform(4326)
+
+
+leaflet(mask2) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0.1,
+              stroke = "red",
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 0, 
+              color = "red",stroke = TRUE,
+              weight=1)
+```
+
+![](img/altermap_axe4_map_L2.jpg){width=700}
+
+### Etudants L3 géographie UGB
+
+
+```{r, eval=F}
+
+
+sel <- stu %>% filter(substr(code,1,2)=="L3") %>% st_transform(4326)
+
+
+leaflet(mask2) %>% addProviderTiles(provider = "Stadia.StamenTonerLite") %>% 
+  addPolygons(fillOpacity = 0.1,
+              stroke = "red",
+              weight = 1) %>% 
+  addPolygons(data=sel, 
+              fillOpacity = 0, 
+              color = "red",stroke = TRUE,
+              weight=1)
+```
+
+![](img/altermap_axe4_map_L3.jpg){width=700}
+
+-**Commentaire** : On note une singularité des étudiants de L1 par rapport à ceux de L2 et L3. Les étudiants de L1 ont en effet peu utilisés les limites administratives officielles qui figuraient en pointillé sur le fonds de carte. Celles-ci étaient-elles peu visible sur la photocopie qui leur a été fournier ? Ou bien est-ce lié à une maturité moins grande et une plus faible connaissance de la géographie du pays ? Les étudiants de L2 et L3 ont de leur côté utilisé les tracés de régions administratives officielles mais de façon sélective. Tout comme les étudiants de L1, ils ont également utilisé les points de repère constitués par les routes ou villes figurant sur le fonds de carte. 
+
+## Quels critères ?
+
+
+Les étudiants étaient incités à préciser les critères qu'ils ont utilisé pour réaliser leurs découpages. Qeuls sont les plus fréquents parmi ceux qui leur ont été proposés, en excluant les critères personnels ?
+
+### Nombre de critères
+
+```{r}
+
+mat <- donmap %>% 
+  select( geographie= reg_geophys,  economie = reg_economie, langue=reg_langue, admin. = reg_officielle, histoire=reg_histoire,  religion = reg_religion,
+         famille=reg_famille,perso = reg_perso, autre=reg_autre)
+      
+mat <- as.matrix(mat)
+mat[is.na(mat)]<-0
+w<- apply(mat,1,sum)
+kable(freq(w,valid = F, total = T), caption = "Nombre de critères de régionalisation")
+barplot(table(w), col=rainbow(12), main= "Nombre de critères de régionalisation", ylab = "nombre d'étudiants", sub=mysource)
+```
+
+- **Commentaire** : 28 étudiants déclarent n'avoir utilisé qu'un seul critère de régionalisation tandis que 15 en ont utilisé deux, 14 en ont utilisé trois, 13 en ont utilisé quatre et 8 ont utilisé 5 critères ou plus. Les étudiants ont doncune vision complexe de la régionalisation
+
+### Combinaisons de critères
+
+La matrice ci-dessous présente la fréquence d'apparition de chaque critère de régionalisation sur la diagonale et le nombre d'associations observées avec d'autres critères: 
+
+```{r}
+
+mat2 <- t(mat) %*% mat
+kable(addmargins(mat2), caption = "Critères de régionalisation mulitiples", sub = mysource)
+```
+
+- **Commentaire** : les trois critères les plus utilisés par les étudiants sont la géographie (55), suivi de l'économie (38) et la langue (31). Viennent ensuite l'histoire (20),  l'administration (16), le ressenti personnel (13), la famille (12) et la religion (12).  Il faut toutefois prendre en compte la complexité des choix opérés et le croisement très fréquent de critères les uns avec les autres. 
+
+
+## Explications
+
+Bien que l'on n'ait pas procédé à des entretiens, les étudiants étaient invités à expliquer leurs découpages dans un champ de texte libre. Certains l'on fait très brièvement alors que d'autres ont donné des explications plus détaillées. 
+
+```{r}
+donmap$reg_commentaire_size <- nchar(donmap$reg_commentaire)
+x<- donmap %>% select(code,commentaire = reg_commentaire, nchar= reg_commentaire_size) %>% arrange(-nchar)
+kable(head(x,30))
+mystud<-x$code
+
+```
+
+
+- **N.B. : Ces 30 cartes sont reprises en annexe**
+
+
+```{r}
+stu <- readRDS("data/Axe4_final/geom/student_maps_3857.RDS")
+reg <- readRDS("data/Axe4_final/geom/Senegal_regions_3857.RDS")
+mask <-readRDS("data/Axe4_final/geom/Senegal_mask_3857.RDS")
+```
+
+
+
+# F. DENOMINATIONS
+
+Lorsque l'on croise les découpages de l'ensemble de étudiants, on voit revenir des de façon récurrente des noms de régions historiques, économiques ou géographiques. Mais avec des géométries parfois très différente. Il est donc intéressant de procéder à des superpositions pour voir l'extension spatiale de ces toponymes et d'en distinguer les coeurs (inclus par tous les étudiants)  et les marges (incluses seulement par quelques étudiants).
+
+
+```{r}
+par(mfrow=c(1,1))
+toks <- tokens(tolower(stu$nom_reg),remove_punct = T,)
+toks<-gsub("région","", toks)
+wordcloud(toks, max.words=50, rot.per=0,min.freq = 3)
+title("Mots")
+```
+
+
+
+## Fouta Toro (16 étudiants)
+
+```{r}
+library(stringr)
+stu$kw <- str_detect(tolower(stu$nom_reg),"fout")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant Fouta* (16 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+## Saint-Louis (19 étudiants)
+
+```{r}
+library(stringr)
+stu$kw <- str_detect(tolower(stu$nom_reg),"louis")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant louis* (19 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+## Fleuve (20 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"fleuv")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant louis* (19 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+## Arachide (25 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"arach")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant arach* (25 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+
+## Cayor (8 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"cayo")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant cayo* (6 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+## Baol (16 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"baol")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant baol* (16 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+## Ferlo (16 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"ferlo")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant ferlo* (16 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+## Dakar (27 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"daka")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant daka* (27 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+##  Cap-Vert (10 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"cap vert|cap-vert")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant Cap Vert (10 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+## Niayes (8 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"niay")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant niay* (8 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+##  Sine Saloun (20 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"sine|saloun")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant Sine ou Saloun (20 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+##  Casamance (43 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"casa")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant casa (47 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+## Sénégal "oriental" (31 étudiants)
+
+```{r}
+library(stringr)
+stu$kw<- str_detect(tolower(stu$nom_reg),"orient")
+sel <-stu %>% filter(kw==1)
+k<-length(sel)
+
+## Check
+mf_map(reg, col="lightyellow")
+mf_map(sel, 
+       col="blue",
+       alpha=0.6/k, 
+       border="red",
+       add=T)
+plot(mask$geometry,add=T, col="white", border="white")
+mf_map(reg, col=NA, border="black", add=T)
+mf_label(reg, var="NAME_1",halo=T)
+mf_layout(title = "Noms de région comprenant orient* (31 étudiants)",
+          credits="Altermap 2026 - Axe 4",
+          frame=T,
+          scale=T,
+          arrow=T)
+```
+
+
+
+
+# ANNEXE : CARTES COMMENTEES
+
+```{r}
+
+i<-1
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-2
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-3
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-4
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-5
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+
+```{r}
+
+i<-6
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-7
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-8
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-9
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-10
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+
+```{r}
+
+i<-11
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-12
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-13
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-14
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-15
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+
+```{r}
+
+i<-16
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-17
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-18
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-19
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-20
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+
+
+```{r}
+
+i<-21
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-22
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-23
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-24
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-25
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+
+```{r}
+
+i<-26
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-27
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
+```{r}
+
+i<-28
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-29
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+```{r}
+
+i<-30
+  
+ mycode <- mystud[i]
+sel <- stu %>% filter(code==mycode)
+
+
+mf_map(reg)
+mf_map(sel, type="typo", var="nom_reg", 
+       pal=rainbow(10),  add=T,alpha=0.2,
+       leg_pos = NA)
+mf_label(sel, var="nom_reg", halo=T)
+
+mf_layout(title = paste("Etudiant", mycode), 
+          frame=T,
+          scale=T, 
+          credits=mysource1,
+          arrow=F)
+
+kable(x[i,])
+
+```
+
+
