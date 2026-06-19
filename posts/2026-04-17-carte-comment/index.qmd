@@ -3,14 +3,14 @@ title: "Une carte mentale commentée"
 description: "Apport d'un enregistrement vocal ou video permettant de suivre l'ordre dans lequel un étudiant découpe le Monde et explique ses choix"
 author:
   - name: Claude Grasland
-    url: https://altermap.github.io/
+    url: https://worldregio.github.io/altermap/equipe/grasland2.html
     orcid: 0000-0003-1504-4965
     affiliation: Professeur de géographie, Université Paris Cité, UMR Géographie-cités
     affiliation-url: https://geographie-cites.cnrs.fr/
 date: 2026-04-17
 categories: [Carte mentale, Monde, Entretien] # self-defined categories
 citation: 
-  url: https://altermap.github.io/fr/posts/2026-04-17-carte-comment/ 
+  url: https://worldregio.github.io/altermap/posts/2026-04-17-carte-comment/
 image: XXX-062.jpg
 draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 bibliography: references.bib

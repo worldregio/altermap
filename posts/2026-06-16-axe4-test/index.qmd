@@ -4,16 +4,20 @@ description: "Analyse des réponses de 92 étudiants sénégalais au questionnai
 author:
   - name: Cheikh BA
     affiliation: IGTD, Dakar
+    url: https://worldregio.github.io/altermap/equipe/ba2.html
   - name: Momar DIONGUE
     affiliation: UCAD, Dakar
-  - name: Alou NDAO,
+    url: https://worldregio.github.io/altermap/equipe/diongue.html
+  - name: Aliou NDAO,
     affiliation: UGB, Saint-Louis
+    url: https://worldregio.github.io/altermap/equipe/ndao2.html
   - name: Claude GRASLAND
     affiliation: UPC, Paris 
+    url: https://worldregio.github.io/altermap/equipe/grasland2.html
 date: 2026-04-17
 categories: [Carte mentale, Sénégal, questionnaire, régionalisation, gouvernance] # self-defined categories
 citation: 
-  url: https://altermap.github.io/fr/posts/2026-06-16-axe4-test/ 
+  url: https://worldregio.github.io/altermap/posts/2026-06-16-axe4-test/ 
 image: decoupage.jpg
 draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 bibliography: references.bib

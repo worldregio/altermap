@@ -3,14 +3,14 @@ title: "Sketch Map Tool"
 description: "Un outil intéressant pour la saisie et la numérisation des cartes mentales"
 author:
   - name: Claude Grasland
-    url: https://altermap.github.io/
+    url: https://worldregio.github.io/altermap/equipe/grasland2.html
     orcid: 0000-0003-1504-4965
     affiliation: Professeur de géographie, Université Paris Cité, UMR Géographie-cités
     affiliation-url: https://geographie-cites.cnrs.fr/
 date: 2026-02-24
 categories: [Cartes mentales, Outil, Numérisation] # self-defined categories
 citation: 
-  url: https://altermap.github.io/fr/posts/2026-02-24-sketchmap/ 
+  url: https://worldregio.github.io/altermap/posts/2026-02-24-sketchmap/ 
 image: sketchmap.jpg
 draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 bibliography: references.bib
