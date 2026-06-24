@@ -767,10 +767,9 @@ mf_layout("Le monde des étudiants de L3 géographie d'UPC en 2026", frame=T, ar
 
 Au final, on est frappé par les grandes ressemblances entre les cartes du Monde des étudiants des deux universités. Même s'il existe de nombreuses différences dans le détail, les points communs l'emportent largement !
 
-# D. VERTICALE (Afrique-Méditerranée-Europe)
+# D. STEREOTYPES NORD-SUD
 
 
-## Enjeux 
 
 Quels sont les mots associés par les étudiants de géographie à l'Afrique, la Méditerranée et l'Europe s qui forment une région verticale reliant pays du Nord et du Sud ? Il est utile ici de préciser les différences de contexte entre les deux échantillons observés :
 
@@ -779,9 +778,6 @@ Quels sont les mots associés par les étudiants de géographie à l'Afrique, la
 - **En L3 SIG de l'Université de Kaolack** ...[*à compléter par Labaly*]
 
 
-
-
-## Méthode
 
 Sur le plan méthodologique, l'exploitation des résultats peut se faire selon au moins trois types de méthodes dont une seule, la plus simple, sera présentée ici : 
 
@@ -795,49 +791,93 @@ On utilisera ici une combinaison des méthodes 1 et 2 où l'on va recoder manuel
 
 
 
-## Les mots de l'Afrique
+## Afrique
 
+### Ensemble des étudiants
+
+La première étape de l'analyse consiste à étudier les associations les plus fréquentes de mots dans les deux échantillons. On a regroupé certains mots autour d'une même racine (richesse, nature, culture, développement) et supprimé certaines variations lexicales.
 
 ```{r}
-don$afr <- don$mots_afr
-don$afr<-gsub(", NA","",don$afr)
-don$afr<-gsub("NA","",don$afr)
-don$afr<-tolower(don$afr)
-  don$afr<-gsub("ressources naturelles","ressources",don$afr)
-  don$afr<-gsub("richesses naturelles","ressourcess",don$afr)
-  don$afr<-gsub("richesse naturelle","ressources",don$afr)
-  
-   don$afr<-gsub("sous développement","sous_développement",don$afr)
-    don$afr<-gsub("sous-développement","sous_développement",don$afr)  
-    
-      don$afr<-gsub("berceau de l'humanité","berceau_humanité",don$afr)  
-      
-       don$afr<-gsub("noires","noir",don$afr)  
-    don$afr<-gsub("noirs","noir",don$afr) 
-    
- don$afr<-gsub("pauvreté","pauvre",don$afr) 
-don$afr<-gsub("pauvres","pauvre",don$afr) 
-don$afr<-gsub("pauvre","pauvreté",don$afr) 
+don$wrd <- don$mots_afr
+don$wrd<-tolower(don$wrd)
+don$wrd<-gsub(", NA","",don$wrd)
+don$wrd<-gsub("NA","",don$wrd)
+don$wrd<-gsub("ressources","ressource",don$wrd)
+don$wrd<-gsub("naturelles","nature",don$wrd)
+don$wrd<-gsub("naturelle","nature",don$wrd)
+don$wrd<-gsub("richesse","riche",don$wrd)
+don$wrd<-gsub("richesses","riche",don$wrd)
+don$wrd<-gsub("riches","riche",don$wrd)
+don$wrd<-gsub("riche","richesse",don$wrd)
+don$wrd<-gsub("culturelle","culture",don$wrd)
+don$wrd<-gsub("culturelles","culture",don$wrd)
+don$wrd<-gsub("culturel","culture",don$wrd)
+don$wrd<-gsub("cultures","culture",don$wrd)
+don$wrd<-gsub("culturels","culture",don$wrd)
+don$wrd<-gsub("noires","noir",don$wrd)  
+don$wrd<-gsub("noirs","noir",don$wrd) 
+don$wrd<-gsub("sous développement","sous-développement",don$wrd) 
+don$wrd<-gsub("afrique","",don$wrd) 
+don$wrd<-gsub("pauvreté","pauvre",don$wrd) 
+don$wrd<-gsub("pauvre","pauvreté",don$wrd) 
+don$wrd<-gsub("l'humanité","humanité",don$wrd) 
 
-don$afr<-gsub("afrique","",don$afr)  
+# corpus
+corp<-corpus(x=don,text_field = "wrd")
 
-don$afr<-gsub("jeunesse","jeune",don$afr)  
-don$afr<-gsub("jeunes","jeune",don$afr)
-don$afr<-gsub("jeune","jeunesse",don$afr)
+# Create a fcm 
+k=40
+dfmat <- tokens(corp, remove_punct = TRUE) |>
+  tokens_remove(stopwords("french")) |>
+  dfm() 
+top<-names(topfeatures(dfmat,k))
+dfmat2 <- dfm_select(dfmat, pattern=top)
+
+fcmat<-fcm(dfmat2,count = "frequency")
+
+
+size <- rowSums(fcmat)
+size<-size[1:k]
+size <-(size-min(size,na.rm=T)) / (min(size, na.rm=T)+max(size, na.rm=T))
+size<-2*(2+size)
+
+textplot_network(x = fcmat,
+              #      min_freq = 0.4,
+                     vertex_labelsize = size,
+                     vertex_size = size/2,
+                     vertex_labelcolor = "red",
+                    edge_color = "gray60",
+                      main="test"
+                     )
+
+
+
+
+```
+
+- **Commentaire** : Sur l'ensemble des étudiants de Paris et Kaolack, les mots dominants qui constituent le coeur des représentations sont *culture, pauvreté, ressource, richesse, développement*. Le mot *nature* est très souvent associé aux mots richesse et ressource (richesses naturelles, ressources naturelles) mais il peut également l'être à des éléments paysagers comme la *savane* ou le *désert*. Le développement est souvent formulé somme *sous-développement*,  et associés à la *corruption*, au *chômage* au *manque*, et par extension à l'*instabilité*, la *guerre*, la *famine*, voire les *génocides* ou les *conflits*. A cette vision négative s'oppose une vision positive de l'Afrique comme terre d'*histoire* et de *diversité culturelle*, mais marquée par la *colonisation*. Enfin, on note un large registre *démographique* décrivant l'Afrique comme une *population* *jeune* et en *croissance*. De façon plus anecdotique, quelques étudiants font de l'Afrique un *grand* *continent* faisant parie du *Sud*,  ajoutent l'adjectif *noir* et mentionnent la coupe d'Afrique des Nations (*CAN*).
+
+
+### Différences Paris-Kaolack
+
+Les conclusions sont-elles les mêmes si on analyse séparément les deux échantillons ? Existen-ils des mots plus spécifiques aux étudiants de Paris ou de Kaolack.
+
+```{r}
+
 
 ## USSEIN
-corp1<-corpus(x=don[don$lieu=="USSEIN - Kaolack - Sénégal",],text_field = "afr")
+corp1<-corpus(x=don[don$lieu=="USSEIN - Kaolack - Sénégal",],text_field = "wrd")
 toks1<- tokens(corp1,remove_punct = T)
 toks1<-tokens_remove(toks1,c("des","les","pas","le","la","les","et","de"))
-dfmat1<-dfm(toks1)
-tstat_freq1 <- textstat_frequency(dfmat1, n = 20)
+dfmat1<-dfm(toks1) 
+tstat_freq1 <- textstat_frequency(dfmat1, n = 20, force=T)
 
 ## PARIS
-corp2<-corpus(x=don[don$lieu=="UPC - Paris - France",],text_field = "afr")
+corp2<-corpus(x=don[don$lieu=="UPC - Paris - France",],text_field = "wrd")
 toks2<- tokens(corp2,remove_punct = T)
 toks2<-tokens_remove(toks2,c("des","les","pas","le","la","les","et","de"))
-dfmat2<-dfm(toks2)
-tstat_freq2 <- textstat_frequency(dfmat2, n = 20)
+dfmat2<-dfm(toks2) 
+tstat_freq2 <- textstat_frequency(dfmat2, n = 20, force=T)
 
 par(mfrow=c(1,2), mar=c(0,0,2,0))
 
@@ -859,7 +899,7 @@ title("L'Afrique vue de Paris",
 
 ```{r}
 # corpus
-corp<-corpus(x=don,text_field = "afr")
+corp<-corpus(x=don,text_field = "wrd")
 
 # Create a dfm grouped 
 dfmat <- tokens(corp, remove_punct = TRUE) |>
@@ -868,87 +908,153 @@ dfmat <- tokens(corp, remove_punct = TRUE) |>
   dfm()
 
 # Calculate keyness and determine Kaolack as target group
-tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal") %>% filter(chi2 < -2.71 | chi2 > 2.71)
+#tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal") %>% filter(chi2 < -2.71 | chi2 > 2.71)
+
+tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal",measure = "lr") %>% filter(p < 0.10)
 
 # Plot estimated word keyness
 textplot_keyness(tstat_keyness,margin = 0.2,color = c("orange","blue"))  + 
-  ggtitle("Spécificités des mots associés à 'Afrique' par les étudiants de Kaolack et Paris",
-          subtitle = "Source : Enquête Altermap 2026")
+  ggtitle("Spécificité des mots associés à 'Afrique' à Paris et Kolack",
+          subtitle = mysource)
 
 
 x<-don %>% select(lieu,mots_afr)
 ```
 
 - **Commentaire** : 
+  + **Les étudiants parisiens** sont nettement plus nombreux à associer l'Afrique à la colonisation ou au développement et à mentionner sa grande taille, son appartenance au Sud (global ?) et à citer la CAN. Cela s'explique dans une large mesure par les enseignements dispensés au cours de leurs années de licence et de l'année de L3 en particulier. 
+  + **Les étudiants de Kaolack** ont davantage que les parisiens parlé de pauvreté, de jeunesse, de nature et de culture.
 
 
 
+## Méditerranée
 
+### Ensemble des étudiants
 
-
-
-## Les mots de la Méditerranée
-
-On reture de l'analyse le mot "*mer*" qui a été le plus cité par les deux groupes d'étudiants et ne crée pas de différence significative entre eux.
+Comme pour l'Afrique, on commence par recoder les mots et reprérer les associations les plus fréquentes dans les réponses. On retire le mot "mer" de l'analyse car il est présent dans presque toutes les réponses et apporte peu d'information.
 
 ```{r}
-don$med <- don$mots_med
-don$med<-tolower(don$med)
-don$med<-gsub(", NA","",don$med)
-don$med<-gsub("NA","",don$med)
-don$med<-tolower(don$med)
-don$med<-gsub("migrant","migration",don$med)
-don$med<-gsub("migrants","migration",don$med)
-don$med<-gsub("migrations","migration",don$med)
-don$med<-gsub("immigration","migration",don$med)
-don$med<-gsub("oliviers","olive",don$med)
-don$med<-gsub("d'olive","olive",don$med)
-don$med<-gsub("olivier","olive",don$med)
-don$med<-gsub("méditerranée","",don$med)
-don$med<-gsub("échanges","commerce",don$med)
-don$med<-gsub("commerciaux","commerce",don$med)
-don$med<-gsub("commerces","commerce",don$med)
-don$med<-gsub("ressources","ressource",don$med)
-don$med<-gsub("échange","commerce",don$med)
-don$med<-gsub("echange","commerce",don$med)
-don$med<-gsub("developpement","développement",don$med)
-don$med<-gsub("chaud","chaleur",don$med)
+don$wrd <- don$mots_med
+don$wrd<-tolower(don$wrd)
+don$wrd<-gsub(", NA","",don$wrd)
+don$wrd<-gsub("NA","",don$wrd)
+don$wrd<-gsub("ressources","ressource",don$wrd)
+don$wrd<-gsub("naturelles","nature",don$wrd)
+don$wrd<-gsub("naturelle","nature",don$wrd)
+don$wrd<-gsub("richesse","riche",don$wrd)
+don$wrd<-gsub("richesses","riche",don$wrd)
+don$wrd<-gsub("riches","riche",don$wrd)
+don$wrd<-gsub("riche","richesse",don$wrd)
+don$wrd<-gsub("culturelle","culture",don$wrd)
+don$wrd<-gsub("culturelles","culture",don$wrd)
+don$wrd<-gsub("culturel","culture",don$wrd)
+don$wrd<-gsub("cultures","culture",don$wrd)
+don$wrd<-gsub("culturels","culture",don$wrd)
+don$wrd<-gsub("noires","noir",don$wrd)  
+don$wrd<-gsub("noirs","noir",don$wrd) 
+don$wrd<-gsub("sous développement","sous-développement",don$wrd) 
+don$wrd<-gsub("pauvreté","pauvre",don$wrd) 
+don$wrd<-gsub("pauvre","pauvreté",don$wrd) 
+don$wrd<-gsub("l'humanité","humanité",don$wrd) 
 
-#table(don$lieu)
+don$wrd<-gsub("migrant","migration",don$wrd)
+don$wrd<-gsub("migrants","migration",don$wrd)
+don$wrd<-gsub("migrations","migration",don$wrd)
+don$wrd<-gsub("immigration","migration",don$wrd)
+don$wrd<-gsub("oliviers","olive",don$wrd)
+don$wrd<-gsub("d'olive","olive",don$wrd)
+don$wrd<-gsub("olivier","olive",don$wrd)
+don$wrd<-gsub("méditerranée","",don$wrd)
+don$wrd<-gsub("échanges","échange",don$wrd)
+don$wrd<-gsub("commerciaux","commerce",don$wrd)
+don$wrd<-gsub("commerces","commerce",don$wrd)
+#don$wrd<-gsub("échange","commerce",don$wrd)
+don$wrd<-gsub("echange","échange",don$wrd)
+don$wrd<-gsub("developpement","développement",don$wrd)
+don$wrd<-gsub("chaud","chaleur",don$wrd)
+don$wrd<-gsub("mer ","",don$wrd)
+don$wrd<-gsub("mer, ","",don$wrd)
+don$wrd<-gsub(", mer","",don$wrd)
+
+
+# corpus
+corp<-corpus(x=don,text_field = "wrd")
+
+# Create a fcm 
+k=40
+dfmat <- tokens(corp, remove_punct = TRUE) |>
+  tokens_remove(stopwords("french")) |>
+  dfm() 
+top<-names(topfeatures(dfmat,k))
+dfmat2 <- dfm_select(dfmat, pattern=top)
+
+fcmat<-fcm(dfmat2,count = "frequency")
+
+
+size <- rowSums(fcmat)
+size<-size[1:k]
+size <-(size-min(size,na.rm=T)) / (min(size, na.rm=T)+max(size, na.rm=T))
+size<-2*(2+size)
+
+textplot_network(x = fcmat,
+              #      min_freq = 0.4,
+                     vertex_labelsize = size,
+                     vertex_size = size/2,
+                     vertex_labelcolor = "red",
+                    edge_color = "gray60",
+                      main="test"
+                     )
+
+
+
+
+```
+
+- **Commentaire** : Sur l'ensemble des étudiants de Paris et Kaolack, les mots dominants qui constituent le coeur des représentations sont *commerce* et *migration* ainsi qu'un groupe de mots associés aux loisirs : *tourisme*, *soleil*, *vacances*, *plages*. Autour de ce noyau central apparaissent d'autres thématiques pouvant relever de l'économie (*richesse, ressources, pétrole, développement*), de la géographie (*olive poisson, climat, côte*) ou de l'histoire (*empire, civilisation*). La question des décès de migrants en Méditerranée est présente mais de façon assez discrète (*mort, bâteau*) et c'est avant tout le rôle de *carrefour* et de lieu d'*échange* qui domine dans les réponses. 
+
+
+### Différences Paris-Kaolack
+
+Les conclusions sont-elles les mêmes si on analyse séparément les deux échantillons ? Existen-ils des mots plus spécifiques aux étudiants de Paris ou de Kaolack.
+
+```{r}
+
+
 ## USSEIN
-corp1<-corpus(x=don[don$lieu=="USSEIN - Kaolack - Sénégal",],text_field = "med")
+corp1<-corpus(x=don[don$lieu=="USSEIN - Kaolack - Sénégal",],text_field = "wrd")
 toks1<- tokens(corp1,remove_punct = T)
-toks1<-tokens_remove(toks1,c("des","les","pas","le","la","les","et","de","mer"))
-dfmat1<-dfm(toks1)
-tstat_freq1 <- textstat_frequency(dfmat1, n = 40)
+toks1<-tokens_remove(toks1,c("des","les","pas","le","la","les","et","de"))
+dfmat1<-dfm(toks1) 
+tstat_freq1 <- textstat_frequency(dfmat1, n = 20, force=T)
 
 ## PARIS
-corp2<-corpus(x=don[don$lieu=="UPC - Paris - France",],text_field = "med")
+corp2<-corpus(x=don[don$lieu=="UPC - Paris - France",],text_field = "wrd")
 toks2<- tokens(corp2,remove_punct = T)
-toks2<-tokens_remove(toks2,c("des","les","pas","le","la","les","et","de","mer"))
-dfmat2<-dfm(toks2)
-tstat_freq2 <- textstat_frequency(dfmat2, n = 40)
+toks2<-tokens_remove(toks2,c("des","les","pas","le","la","les","et","de"))
+dfmat2<-dfm(toks2) 
+tstat_freq2 <- textstat_frequency(dfmat2, n = 20, force=T)
 
 par(mfrow=c(1,2), mar=c(0,0,2,0))
 
-mypal=brewer.pal(name="Blues",n = 9)[3:9]
+mypal=brewer.pal(name="Greens",n = 9)[3:9]
 wordcloud(toks1,min.freq = 3,scale = c(2,0.5),rot.per = 0,
           col=mypal)
 title("La Méditerranée vue de Kaolack",
       sub ="Source : Enquête Altermap, Cours L3 SIG - USSEIN" )
 
-mypal=brewer.pal(name="Blues",n = 9)[3:9]
+mypal=brewer.pal(name="Greens",n = 9)[3:9]
 wordcloud(toks2,min.freq = 3,scale = c(2,0.5),rot.per = 0,
           col=mypal)
-title("L'Europe vue de Paris",
+title("La Méditerranée vue de Paris",
       sub ="Source : Enquête Altermap, Cours L3 GEO - UPC")
 
 
 ```
 
+
 ```{r}
 # corpus
-corp<-corpus(x=don,text_field = "med")
+corp<-corpus(x=don,text_field = "wrd")
 
 # Create a dfm grouped 
 dfmat <- tokens(corp, remove_punct = TRUE) |>
@@ -957,63 +1063,157 @@ dfmat <- tokens(corp, remove_punct = TRUE) |>
   dfm()
 
 # Calculate keyness and determine Kaolack as target group
-tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal",measure = "chi2") %>% filter(chi2 < -2.71 | chi2 > 2.71)
+tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal",measure = "lr") %>% filter(p < 0.1)
 
 # Plot estimated word keyness
-textplot_keyness(tstat_keyness,margin = 0.3,color = c("orange","blue"),)  + 
-  ggtitle("Spécificités des mots associés à 'Méditerranée' par les étudiants de Kaolack et Paris",
+textplot_keyness(tstat_keyness,margin = 0.2,color = c("orange","blue"))  + 
+  ggtitle("Spécificité des mots associés à 'Méditerranée' à Paris et Kolack",
           subtitle = mysource)
+
+
 
 ```
 
-- **Commentaire** :
+- **Commentaire** : 
+  + **Les étudiants parisiens** sont nettement plus nombreux à associer la Méditerranée  à la thématique des migrations et à celles des vacances. Leur perception est donc clairement ambivalente.
+  + **Les étudiants de Kaolack** ont davantage que les parisiens parlé de civilisation, climat, tourisme ou développement. Mais ils n'affichent ps de spécificités aussi nette que les parisiens.
 
 
 
 
-## Les mots de l'Europe
 
+## Europe
+
+### Ensemble des étudiants
+
+On reprend la procédure habituelle de simplification du vocabulaire et d'examen des liaisons les plus fréquentes dans les réponses des étudiants des deux échantillons mélangés.
 
 ```{r}
-don$eur <- don$mots_eur
-don$eur<-tolower(don$eur)
-don$eur<-gsub("niveau de vie","niveau_de_vie",don$eur)
-don$eur<-gsub("main d'oeuvre","travail",don$eur)
-don$eur<-gsub("union européenne","union",don$eur)
-don$eur<-gsub(" ue "," union ",don$eur)
-don$eur<-gsub("richesse","riche",don$eur)
-don$eur<-gsub("richesses","riche",don$eur)
-don$eur<-gsub("argent","riche",don$eur)
-don$eur<-gsub("riche","richesse",don$eur)
-don$eur<- gsub("vieillissement","vieux",don$eur)
-don$eur<- gsub("vieillissant","vieux",don$eur)
-don$eur<- gsub("développé","développement",don$eur)
-don$eur<- gsub("espace schengen","schengen",don$eur)
+don$wrd <- don$mots_eur
+don$wrd<-tolower(don$wrd)
+don$wrd<-gsub(", NA","",don$wrd)
+don$wrd<-gsub("NA","",don$wrd)
+don$wrd<-gsub("ressources","ressource",don$wrd)
+don$wrd<-gsub("naturelles","nature",don$wrd)
+don$wrd<-gsub("naturelle","nature",don$wrd)
+don$wrd<-gsub("richesse","riche",don$wrd)
+don$wrd<-gsub("richesses","riche",don$wrd)
+don$wrd<-gsub("riches","riche",don$wrd)
+don$wrd<-gsub("riche","richesse",don$wrd)
+don$wrd<-gsub("culturelle","culture",don$wrd)
+don$wrd<-gsub("culturelles","culture",don$wrd)
+don$wrd<-gsub("culturel","culture",don$wrd)
+don$wrd<-gsub("cultures","culture",don$wrd)
+don$wrd<-gsub("culturels","culture",don$wrd)
+don$wrd<-gsub("noires","noir",don$wrd)  
+don$wrd<-gsub("noirs","noir",don$wrd) 
+don$wrd<-gsub("sous développement","sous-développement",don$wrd) 
+don$wrd<-gsub("développé","développement",don$wrd) 
+don$wrd<-gsub("pauvreté","pauvre",don$wrd) 
+don$wrd<-gsub("pauvre","pauvreté",don$wrd) 
+don$wrd<-gsub("l'humanité","humanité",don$wrd) 
 
-#table(don$lieu)
+don$wrd<-gsub("migrant","migration",don$wrd)
+don$wrd<-gsub("migrants","migration",don$wrd)
+don$wrd<-gsub("migrations","migration",don$wrd)
+don$wrd<-gsub("immigration","migration",don$wrd)
+don$wrd<-gsub("oliviers","olive",don$wrd)
+don$wrd<-gsub("d'olive","olive",don$wrd)
+don$wrd<-gsub("olivier","olive",don$wrd)
+don$wrd<-gsub("méditerranée","",don$wrd)
+don$wrd<-gsub("échanges","échange",don$wrd)
+don$wrd<-gsub("commerciaux","commerce",don$wrd)
+don$wrd<-gsub("commerces","commerce",don$wrd)
+#don$wrd<-gsub("échange","commerce",don$wrd)
+don$wrd<-gsub("echange","échange",don$wrd)
+don$wrd<-gsub("developpement","développement",don$wrd)
+don$wrd<-gsub("chaud","chaleur",don$wrd)
+don$wrd<-gsub("historique","histoire",don$wrd)
+don$wrd<-gsub("niveau de vie","niveau_de_vie",don$wrd)
+don$wrd<-gsub("main d'oeuvre","travail",don$wrd)
+don$wrd<-gsub("union européenne","U_E",don$wrd)
+don$wrd<-gsub(" ue,"," U_E,",don$wrd)
+don$wrd<-gsub(", ue",", U_E",don$wrd)
+
+
+#don$eur<-gsub("argent","riche",don$eur)
+
+don$wrd<- gsub("vieillissement","vieux",don$wrd)
+don$wrd<- gsub("vieillissant","vieux",don$wrd)
+don$wrd<- gsub("espace schengen","schengen",don$wrd)
+don$wrd<- gsub("droits de l'homme","droits_homme",don$wrd)
+don$wrd<- gsub("droit de l'homme","droits_homme",don$wrd)
+don$wrd<- gsub("libre échange","libre_échange",don$wrd)
+don$wrd<- gsub("U_E","Uni_Eur",don$wrd)
+
+
+
+# corpus
+corp<-corpus(x=don,text_field = "wrd")
+
+# Create a fcm 
+k=40
+dfmat <- tokens(corp, remove_punct = TRUE) |>
+  tokens_remove(stopwords("french")) |>
+  dfm() 
+top<-names(topfeatures(dfmat,k))
+dfmat2 <- dfm_select(dfmat, pattern=top)
+
+fcmat<-fcm(dfmat2,count = "frequency")
+
+
+size <- rowSums(fcmat)
+size<-size[1:k]
+size <-(size-min(size,na.rm=T)) / (min(size, na.rm=T)+max(size, na.rm=T))
+size<-2*(2+size)
+
+textplot_network(x = fcmat,
+              #      min_freq = 0.4,
+                     vertex_labelsize = size,
+                     vertex_size = size/2,
+                     vertex_labelcolor = "red",
+                    edge_color = "gray60",
+                      main="test"
+                     )
+
+
+
+
+```
+
+- **Commentaire** : A la différence des graphes de mots associés à l'Afrique ou la Méditerranée, on observe nettement ici **une nette division du coeur du graphe des mots de l'Europe en deux groupes**. Un premier coeur est centré sur le mot *Union Européenne*, qui est fortement associé à d'autres mots tels que *Schengen, Occident, Histoire, continent* ou *colonisation*. Un second coeur est centré sur les mots *richesse* et *développement*, associés ensuite à *racisme, vieux, travail, technologie,  blanc, froid* ... Un petit nombre de mots sont rattachés à la fois aux deux coeurs comme *puissance* ou *liberté*. Enfin, on trouve un groupe particulier en marge du coeur autour des mots *climat* et *tempéré*
+
+
+### Différences Paris-Kaolack
+
+Les conclusions sont-elles les mêmes si on analyse séparément les deux échantillons ? Existe-t-il des mots plus spécifiques aux étudiants de Paris ou de Kaolack.
+
+```{r}
+
+
 ## USSEIN
-corp1<-corpus(x=don[don$lieu=="USSEIN - Kaolack - Sénégal",],text_field = "eur")
+corp1<-corpus(x=don[don$lieu=="USSEIN - Kaolack - Sénégal",],text_field = "wrd")
 toks1<- tokens(corp1,remove_punct = T)
 toks1<-tokens_remove(toks1,c("des","les","pas","le","la","les","et","de"))
-dfmat1<-dfm(toks1)
-tstat_freq1 <- textstat_frequency(dfmat1, n = 40)
+dfmat1<-dfm(toks1) 
+tstat_freq1 <- textstat_frequency(dfmat1, n = 20, force=T)
 
 ## PARIS
-corp2<-corpus(x=don[don$lieu=="UPC - Paris - France",],text_field = "eur")
+corp2<-corpus(x=don[don$lieu=="UPC - Paris - France",],text_field = "wrd")
 toks2<- tokens(corp2,remove_punct = T)
 toks2<-tokens_remove(toks2,c("des","les","pas","le","la","les","et","de"))
-dfmat2<-dfm(toks2)
-tstat_freq2 <- textstat_frequency(dfmat2, n = 40)
+dfmat2<-dfm(toks2) 
+tstat_freq2 <- textstat_frequency(dfmat2, n = 20, force=T)
 
 par(mfrow=c(1,2), mar=c(0,0,2,0))
 
-mypal=brewer.pal(name="Blues",n = 9)[3:9]
+mypal=brewer.pal(name="Greens",n = 9)[3:9]
 wordcloud(toks1,min.freq = 3,scale = c(2,0.5),rot.per = 0,
           col=mypal)
 title("L'Europe vue de Kaolack",
       sub ="Source : Enquête Altermap, Cours L3 SIG - USSEIN" )
 
-mypal=brewer.pal(name="Blues",n = 9)[3:9]
+mypal=brewer.pal(name="Greens",n = 9)[3:9]
 wordcloud(toks2,min.freq = 3,scale = c(2,0.5),rot.per = 0,
           col=mypal)
 title("L'Europe vue de Paris",
@@ -1022,9 +1222,10 @@ title("L'Europe vue de Paris",
 
 ```
 
+
 ```{r}
 # corpus
-corp<-corpus(x=don,text_field = "eur")
+corp<-corpus(x=don,text_field = "wrd")
 
 # Create a dfm grouped 
 dfmat <- tokens(corp, remove_punct = TRUE) |>
@@ -1033,15 +1234,25 @@ dfmat <- tokens(corp, remove_punct = TRUE) |>
   dfm()
 
 # Calculate keyness and determine Kaolack as target group
-tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal",measure = "chi2") %>% filter(chi2 < -2.71 | chi2 > 2.71)
+#tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal") %>% filter(chi2 < -2.71 | chi2 > 2.71)
+
+tstat_keyness <- textstat_keyness(dfmat, target = "USSEIN - Kaolack - Sénégal",measure = "lr") %>% filter(p < 0.10)
 
 # Plot estimated word keyness
-textplot_keyness(tstat_keyness,margin = 0.3,color = c("orange","blue"),)  + 
-  ggtitle("Spécificités des mots associés à 'Europe' par les étudiants de Kaolack et Paris",
+textplot_keyness(tstat_keyness,margin = 0.2,color = c("orange","blue"))  + 
+  ggtitle("Spécificité des mots associés à 'Europe' à Paris et Kolack",
           subtitle = mysource)
 
+
+x<-don %>% select(lieu,mots_afr)
 ```
 
-- **Commentaire** :
+- **Commentaire** : comme le laissait deviner la scission du coeur du graphe rassemblant l'ensemble des étudiants, il existe une nette opposition entre les représentations de l'Europe des étudiants français et sénégalais
+  + **Les étudiants parisiens** assimilent clairement l'Europe à l'*Union Européenne* ou l'espace *Schengen* et la rattachent souvent à l'*Occident* et parfois au *Nord*. Ils sont nombreux à citer des attributs économiques tels que la monnaie (*euro, argent*) et le commerce (*libre_échange*). Ils sont également nombreux à citer la *France* et l'*Allemagne* comme pays emblématiques de cet espace. 
+  + **Les étudiants de Kaolack** ont une vision radicalement différente avec une citation beaucoup plus fréquente que les étudiants parisiens du mot *racisme*, mais en associations avec l'idée de ressources (*travail, technologie, développement*) et des valeurs tels que la *démocratie*. l'originalité du *climat tempéré* est également pointée.
+
+
+
+
 
 
