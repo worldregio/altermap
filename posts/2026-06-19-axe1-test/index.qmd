@@ -1252,7 +1252,508 @@ x<-don %>% select(lieu,mots_afr)
   + **Les étudiants de Kaolack** ont une vision radicalement différente avec une citation beaucoup plus fréquente que les étudiants parisiens du mot *racisme*, mais en associations avec l'idée de ressources (*travail, technologie, développement*) et des valeurs tels que la *démocratie*. l'originalité du *climat tempéré* est également pointée.
 
 
+# E. DECOUPAGES
+
+
+Cette question dont le but était de faire découper le Monde aux étudiants a été posée de deux façons légèrement différentes aux étudiants : 
+
+:::: {.columns}
+
+::: {.column width="50%" .r-fit-text}
+
+- **(1) Fonds de carte avec frontières **
+
+![Fonds de carte administré aux groupes de TD 1, 2 et 3](../../img/Altermap_axe1_partieC.jpg){height=400}
+:::
+
+::: {.column width="50%" .r-fit-text}
+
+- **(2) Fonds de carte sans frontières**
+
+![Fonds de carte administré aux groupes de TD 4](../../img/Altermap_axe1_partieC_blank.jpg){height=400}
+:::
+
+::::
+
+
+La première solution (avec frontières des pays) a été utilisée auprès des étudiants de Kaolack et de la majorité des étudiants de Paris. Mais un groupe d'étudiants parisien a reçu le fonds de carte sans frontières à titre expérimental.
+
+```{r}
+## Charge les géométries
+
+geom <- readRDS("../../data/Axe1_final/data/map_reg.RDS")
+geom$reg_nom[geom$reg_nom=="Afrique du Sud (= Afrique australe)"]<- "Afrique australe"
+tabgeom <- geom %>% group_by(code) %>% summarise(nbreg = n())
+```
+
+
+## Combien de régions ?
+
+La consigne donné aux étudians consistait à découper le monde en 2 à 15 régions de leur choix. On pensait que la majorité d'entre eux découperait le Monde en 4 à 6 régions, selon le modèle des continents. Mais en réalité les résultats ont été beaucoup plus dispersés et beaucoup d'étudiants ont utiliseé le maximum de région proposé (15) voire davantage ...
+
+```{r}
+summary(tabgeom$nbreg)
+t<-table(tabgeom$nbreg)
+barplot(t,
+     col= rainbow(n = 27,start = 0.03),
+     xlab = "Nombre de régions",
+     ylab = "Nombre d'étudiants",
+     main = "Découpages du Monde en région",
+     sub = mysource,
+cex.axis=0.6)
+grid()
+
+```
+
+- **Commentaire** : Il existe une grande dispersion du nombre de régions choisies par les étudiants pour découper le Monde. La moyenne et la médiane sont approximativement de 10 et les quartiles indiquent que 50% des étudiants ont opté pourun découpage en 7 à 13 régions. Le mode principal se situe à 15 soit le nombre maximal indiqué. Mais on trouve aussi des modes secondaires plus ou moins nets pour les découpages en 5, 8, 11 et 13 régions.
+
+```{r}
+info <- don %>% select(code,lieu,sexe)
+tabgeom <- tabgeom %>% left_join(info) 
+tabgeom$loc<-as.factor(tabgeom$lieu)
+levels(tabgeom$loc) <- c("Paris","Kaolack")
+
+
+
+beanplot(tabgeom$nbreg~tabgeom$loc, 
+         horizontal=T,
+         las=1, 
+         ylim=c(1,20),
+         col=c( "lightyellow", "red"),
+         main=" Différence entre étudiants de Paris et Kaolack",
+         sub=mysource)
+grid()
+t.test(tabgeom$nbreg~tabgeom$loc)
+```
+
+- **Commentaire** : D'une manière générale, les étudiants français utilisent un plus grand nombre de régions que les étudiants sénégalais avec des moyennes respectives de 11 et 9. La différence qui est significative (p < 0.05) serait encore plus marqué si l'on avait retiré les étudiants français qui ont utilise un fonds de carte sans limite d'états ce qui les a conduit à beaucoup moins découper le monde. 
+
+
+## Quels noms de régions ?
+
+Quels noms reviennent le plus souvent dans les découpages des étudiants ? On ne retient ici que les cartes numérisées 
+
+
+```{r}
+tabtot<-geom %>% st_drop_geometry %>% filter(is.na(reg_nom)==F) %>%
+  group_by(reg_nom) %>% 
+  count() %>% 
+  arrange(-n) %>% 
+  mutate(pct = 100*n/94) %>%
+  select(reg_nom, n, pct )
+
+
+tabfra<-geom %>% st_drop_geometry %>% 
+  filter(is.na(reg_nom)==F,
+         lieu == "UPC - Paris - France") %>%
+  group_by(reg_nom) %>% 
+  count() %>% 
+  arrange(-n) %>% 
+  mutate(pct = 100*n/60) %>%
+  select(reg_nom, n_fra=n, pct_fra=pct )
+
+tabsen<-geom %>% st_drop_geometry %>% 
+  filter(is.na(reg_nom)==F,
+         lieu == "USSEIN - Kaolack - Sénégal") %>%
+  group_by(reg_nom) %>% 
+  count() %>% 
+  arrange(-n) %>% 
+  mutate(pct = 100*n/34) %>%
+  select(reg_nom, n_sen=n, pct_sen=pct )
+
+tab<- tabtot %>% left_join(tabfra) %>% left_join(tabsen) %>% 
+  select(reg_nom, n,n_fra, n_sen, pct, pct_fra, pct_sen)
+
+
+kable(tab[1:20,],digits = c(0,0, 0,0,1,1,1),row.names = T,
+      col.names = c("Nom de la région", "Nb régions", "Nb Paris", "Nb Kaolack",
+          "% étudiants", "% Paris", "% Kaolack") )
+```
+
+- **Commentaire** : 
+  + les régions les plus fréquemment cités par les étudiants sont l'Amérique du Nord (71%) et l'Amérique du Sud (64%), éventuellement complétées par une Amérique centrale (32%). Le découpage du Nouveau Monde semble donc assez consensusel malgré des variantes possibles avec les Caraïbes et l'Amérique Latine chez les étduiants français. 
+  + L'Océanie est également fréquemment utilisée (42%), mais davantage par les étudaiants français (53%) que sénégalais (21%) 
+  + L'Europe est citées en tant qu'entité continentale unique par 53% des étudiants en France comme au Sénégal. Elle est assez peu découpée par les étudiants sénégalais, davantage par les étudiants français qui identifient parfois une Europe de l'Est (13%), une Europe de l'Ouest , une Europe du Nord.
+  + L'Afrique de l'Ouest est citée très fréquemment au Sénégal (47%) mais aussi en France (42%) tout comme les autres régions d'Afrique (centrale, australe, orientale). En tant que continent unique elle n'est citée que par 35% des étudiants français et 27% des sénégalais. La partie Nord du continent est appelée tantôt Maghreb, tantôt Afrique du Nord, la première appellation étant surtout mobilisée par les étudiants français.
+  + L'Asie est traité comme continent unique par 36% des étudiants, plus fréquemment au Sénégal (41%) qu'en France car les étudiants parisiens ont tendance à ajouter des subdivsions de l'Asie (centrale, de l'est, du sud-est, ...) qui sont rares voire absentes chez les étudiants de Kaolack.
+  + Le Moyen Orient (que l'on a fusionné avec le Proche Orient) est très présent dans les réponses des étudiants français (55%) mais pratiquement absent des réponses des étudiants sénégalais (6%). 
+  + La Russie est quant-à elle déclarée région du monde par 20% des étudiants contre seulement 12% des étudiants sénégalais.
+
+
+## Types de découpage
+
+La liste des noms de régions les plus fréquents pourrait laisser supposer une grande homogénéité des découpages en continent et sous-continents. Mais en réalité il existe une grande diversité de proposition, dont certaines sont particulièrement originales. Nous proposons donc une galerie de découpages classiques et moins classiques avant de tenter d'en effectuer une synthèse.
+
+
+```{r}
+frame <- st_read("../../data/axe1/worldmaps/WORLD30.shp")
+states <- st_read("../../data/axe1/worldmaps/WORLD_WUTS5.shp")
+tabreg<-geom
+tabreg<-st_transform(tabreg, st_crs(states))
+
+```
+### Carte en 1 région 
+
+```{r}
+etu <- "039"
+ori <- "UPC"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 0.9,
+       leg_val_cex = 0.8,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": un seul Monde !"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+- **Auteur** : Etudiant UPC, L3 Géographie,  21 ans
+- **Commentaire**: Le seul étudiant à avoir refusé la consigne pour constituer une seule région nommée "Monde.
+
+
+
+### Cartes en 2 ou 3 régions 
+
+```{r}
+etu <- "056"
+ori <- "UPC"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 0.9,
+       leg_val_cex = 0.8,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Nords et Suds"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+- **Auteur** : Etudiant UPC, L3 Géographie,  21 ans, ayant séjourné dans plusieurs pays d'Amérique centrale
+- **Commentaire**: Le seul étudiant à avoir découpé le Monde en deux régions selon la ligne de clivage entre les Nords et les Suds. On notera que la Chine et la Russie sont rattachées aux Nords mais pas le Japon ou la Corée du Sud.
+
+
+```{r}
+etu <- "116"
+ori <- "USSEIN"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Découpage entre riches et pauvres"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+
+- **Auteur** : Etudiant USSEIN, L3 SIG, âgé de 23 ans
+- **Commentaire**: L'étudiant procède à un découpage entre "riches" et "pauvres", mais introduit entre les deux une zone de conflits et de crises qui courre de l'Afrique du Nord à l'Inde en passant par le Proche et le Moyen Orient.
+
+
+
+```{r}
+etu <- "082"
+ori <- "USSEIN"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Découpage entre riches et pauvres"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+### Cartes "continentales" en 5-7 régions
+
+```{r}
+etu <- "046"
+ori <- "UPC"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Six continents et ... le Moyen-Orient"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+- **Auteur** : Etudiant UPC, L3 Géographie,  21 ans, Groupe 4, père né en Côte d'Ivoire
+- **Commentaire**: Le découpage en continents semble assez classique pour ne pas dire "scolaire". Mais on note des choix intéressants comme le fait de rattacher le Mexique et les Caraïbes à l'Amérique du Sud ou le Groënland à l'Europe. On remarque également l'identification du Moyen o
+Orient comme région à part entière.
+
+
+```{r}
+etu <- "076"
+ori <- "USSEIN"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Une Afrique unie face à un monde divisé"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+- **Auteur** : Etudiante USSEIN, L3 SIG, âgée de 24 ans, ayant déclaré un sentiment d'appartenance à l'échelle locale mais aussi l'échelle nationale et continentale.
+- **Commentaire**: Il y a des erreurs de localisation volonataires ou involontaires. Mais une certitude concernant l'Afrique qui est bien délimitée dont l'unité qui est clairement revendiquée.
+
+### Cartes en 15 régions et plus 
+
+
+```{r}
+etu <- "049"
+ori <- "UPC"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 0.9,
+       leg_val_cex = 0.8,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Mélange de pays et de sous-continents "),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+- **Auteur** : Etudiant UPC, L3 Géographie,  21 ans, ayant voyagé au Canada et aux USA
+- **Commentaire**: Le découpage est poussé à l'extrême en 17 régions alors que la consigne imposait une limite théorique à 15. Les continents sont tous découpés en sous-continents mais l'étudiant y ajoute en tant que région des entités spécifiques (Maghreb, Moyen-Orient), des pays (Russie, USA) ainsi qu'une région transatlantique regroupant Canada et Europe de l'Ouest qu'il nomme "démocraties des Nord" en excluant d'un côté les USA, de l'autre des pays d'Europe centrale et orientale.
 
 
 
 
+```{r}
+etu <- "098"
+ori <- "USSEIN"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Découpage à deux niveaux hiérarchisés"),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+
+- **Auteur** : Etudiant USSEIN, L3 SIG, âgé de 27 ans, ayant déclaré un sentiment d'appartenance à toutes les échelles
+- **Commentaire**: L'étudiant procède à un premier découpage primaire en grandes régions de type continents, qu'il subdivise ensuite en sous-région. Il attribue à l'Europe l'ensemble de l'Eurasie et localise l'Asie en Océanie. 
+
+
+
+
+### Carte morphologiques et climatiques
+
+
+```{r}
+etu <- "082"
+ori <- "USSEIN"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Entre terres et mers ..."),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+
+- **Auteur** : Etudiant USSEIN, L3 SIG, âgé de 25 ans
+- **Commentaire**: L'étudiant procède à un découpage simultané des étendues terretres et maritimes pour aboutir à une couverture intégrale du globe
+
+
+
+```{r}
+etu <- "040"
+ori <- "UPC"
+
+
+par(mfrow=c(1,1))
+
+## USSEIN
+sel <- tabreg %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(frame, expandBB = c(0,0,0,-0.4))
+mf_map(frame, type="base",col="gray95",lty=3, add=T)
+mf_map(states, type="base",col="gray80", add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 0.9,
+       leg_val_cex = 0.8,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste(ori,"-",etu, ": Zones climatiques "),
+          credits = mysource, 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+- **Auteur** : Etudiant UPC, L3 Géographie,  21 ans
+- **Commentaire**: Le découpage en zone climatique est particulièrement difficile dans le cas d'une projection polaire mais l'étudiant réussit à le faire, au moins de façon approximative.
