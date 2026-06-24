@@ -767,7 +767,7 @@ mf_layout("Le monde des étudiants de L3 géographie d'UPC en 2026", frame=T, ar
 
 Au final, on est frappé par les grandes ressemblances entre les cartes du Monde des étudiants des deux universités. Même s'il existe de nombreuses différences dans le détail, les points communs l'emportent largement !
 
-# D. STEREOTYPES NORD-SUD
+# D. STEREOTYPES
 
 
 
