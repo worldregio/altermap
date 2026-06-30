@@ -67,8 +67,8 @@ trajectoires de mobilité des étudiants.
 ::: callout-tip
 ## Télécharger le jeu de données issues de Kobo Toolbox
 
--   [Données d'enquête issus de kobo au format label
-    .xlsx](https://github.com/worldregio/altermap/raw/refs/heads/main/data/Axe4_final/data/survey_regions_senegal_VF.xlsx)
+-   [Données d'enquête issus de kobo au format xlsx](https://github.com/worldregio/altermap/raw/refs/heads/main/data/Axe4_final/data/survey_regions_senegal_VF.xlsx)
+- [Découpages du Sénégal au format .geojson ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/Axe4_final/data/maps_region_senegal_VF.geojson)
 :::
 
 
