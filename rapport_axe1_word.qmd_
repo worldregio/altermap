@@ -9,18 +9,13 @@ author:
     affiliation: UPC, Paris 
     url: https://worldregio.github.io/altermap/equipe/grasland2.html
 date: 2026-06-19
-categories: [Carte mentale, Monde, questionnaire, régionalisation] # self-defined categories
-citation: 
-  url: https://worldregio.github.io/altermap/posts/2026-06-19-axe1-test/ 
-image: worldmap_kaolack.jpg
-draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
-bibliography: references.bib
+format: docx
 echo: false
 warning: false
 message: false
 ---
 
-- **L'objectif de ce billet est de présenter les premiers résultats de la phase test du questionnaire sur les représentations et découpages du Monde.**
+- **L'objectif de ce billet est de présenter les premiers résultats de la phase test du questionnaire sur les représentatons et découpages du Monde.**
 
 
 
@@ -57,10 +52,10 @@ library(explor, warn.conflicts = F, quietly=T, verbose=F)
 
 # A. CADRAGE
 
-La première partie du questionnaire apportait des données de cadrage sur les individus (âge, sexe), sur la perception du niveau de revenu de la famille et les niveaux études des parents, ainsi que l'expérience internationale de la mobilité.
+La première partie du questionnaire apportait des données de cadrage sur les individus (âge, sexe), sur la perception du niveau de revenu de la famille et les études des parents, ainsi que l'expérience international de la mobilité.
 
 
-![Altermap 2026 - Questionnaire -  Partie 1](../../img/Altermap_axe1_partieA.jpg){width=800}
+![Altermap 2026 - Questionnaire -  Partie 1](img/Altermap_axe1_partieA.jpg){width=800}
 
 
 
@@ -78,7 +73,7 @@ La première partie du questionnaire apportait des données de cadrage sur les i
 On commence par charger les questionnaires issus de Kobo Toolbox en format "label" (texte complet) ou en format "codes" (codes) pour constituer notre tableau de données. Selon le cas on utilisera l'un ou l'autre tableau pour nos analyses. On va ensuite construire à partir de ces deux fichiers notre tableau de donnée de référence
 
 ```{r}
-don<- read_xlsx("../../data/Axe1_final/data/survey.xlsx",na = "NA")
+don<- read_xlsx("data/Axe1_final/data/survey.xlsx",na = "NA")
 don_fra<-don %>% filter(lieu=="UPC - Paris - France")
 don_sen<-don %>% filter(lieu=="USSEIN - Kaolack - Sénégal")
 
@@ -120,7 +115,7 @@ mosaicplot(tab,col = c("lightyellow","orange","red"),main = "Comparaison des eff
 chisq.test(tab)
 ```
 
-- **Commentaire** :  Bien que situés au même niveau d’étude (licence 3 de Geomatique et Climatologie), les étudiants sénégalais sont en moyenne nettement plus âgés que les étudiants français. Ceci s’explique par le fait le cursus scolaire est plus long que celui français mais aussi par une entrée plus tardive dans les études universitaires et un fort taux de redoublement en classe de Terminale.
+- **Commentaire** : Bien que situés au même niveau d'étude (licence 3 de géographie ou de SIG), les étudiants sénégalais sont en moyenne nettement plus âgés que les étudiants français.Ceci s'explique par une entrée plus tardive dans les études universitaires et un plus fort taux de redoublement au cours de la licence. 
 
 
 ## Niveau social
@@ -129,7 +124,7 @@ chisq.test(tab)
 
 L'autoévaluation du niveau économique a été faite sur une échelle graphique comportant quatre cases. Mais les étudiants ont souvent coché des cases situées sur les lignes séparant les cases, ce qui aboutissait à 9 réponses possibles
 
-![](../../img/scale.png)
+![](img/scale.png)
 
 On a choisi de se ramener à 5 classes en regroupant les niveaux 1-2, 3-4, 5, 6-7 et 8-9.
 
@@ -199,7 +194,8 @@ mosaicplot(tab,col =mypal,main = "Perception du niveau d'éducation du père", s
 chisq.test(tab,simulate.p.value = T)
 ```
 
-- **Commentaire** : Une différence intéressante apparaît dans les évaluations respectives des pères et des mères des étudiants. Dans le cas des étudiants de Paris Cité, le niveau d’éducation de la mère et du père est jugé sensiblement égal voire légèrement plus élevé pour les mères. Au contraire, dans le cas des étudiants de Kaolack, le niveau d’éducation des pères est jugé beaucoup plus élevé que celui des mères par les étudiants. Cela peut s’expliquer , pendant tres longtemps , le taux de scolarisation des filles est très faible et peu d’entre elles accèdent aux études supérieurs  en raison des réalités sociales(mariage, aides ménagères,… Cependant, cette tendance aussi commence à bouger avec une politique qui promet l’éducation des filles mais aussi les programmes pour accompagner les femmes a faire de longues études.  Ce résultat est intéressant mais difficile à interpréter car on ignore s’il relève d’appréciations objectives ou subjectives.
+- **Commentaire** : Une différence intéressante apparaît dans les évaluations respectives des pères et des mères des étudiants. Dans le cas des étudiants de Paris Cité, le niveau d'éducation de la mère et du père est jugé sensiblement égal voire légèrement plus élevé pour les mères. Au contraire, dans le cas des étudiants de Kaolack, le niveau d'éducation des pères est jugé beaucoup plus élevé que celui des mères par les étudiants. Ce résultat est intéressant mais difficile à interpréter car on ignore s'il relève d'appréciations objectives ou subjectives. 
+
 
 ## Mobilités 
 
@@ -221,7 +217,7 @@ mosaicplot(tab,col = c("lightblue","lightyellow"),main = "Expérience internatio
 chisq.test(tab)
 ```
 
-- **Commentaire**: Dans les deux échantillons, Très peu d’étudiants interrogés ont vécu à l’étranger plus de 6 mois mais cette proportion est tout de même plus élevée pour les étudiants français (23%) que pour les étudiants sénégalais (5%). Les étudiants sénégalais, la plupart, n’ont pas voyagé hors du pays.  Cela peut s’expliquer par le fait que l’accès a l’université est obligatoire mais aussi le cout élevé des études a l’étranger.    Aussi, la notion de vacances en famille a l’étranger  n ;est pas très développée au Sénégal..
+- **Commentaire**: Dans les deux échantillons, Très peu d'étudiants interrogés ont vécu à l'étranger plus de 6 mois mais cette proportion est tout de même plus élevée pour les étudiants français (23%) que pour les étudiants sénégalais (5%).
 
 ### Mobilités de courte durée
 
@@ -250,7 +246,7 @@ x <- c(don_sen$mob1, don_sen$mob2,don_sen$mob3,don_sen$mob4)
 tab <-table(x)
 sta <- data.frame(iso3=names(tab), nbvis = as.numeric(tab)) %>% arrange(-nbvis)
 
-map<-readRDS("../../data/ebm/geom/ebm_states.RDS")
+map<-readRDS("data/ebm/geom/ebm_states.RDS")
 map <- left_join(map, sta)
 map$OK <-as.factor(is.na(map$nbvis)==F)
 levels(map$OK) <- c("Oui","Non")
@@ -268,7 +264,7 @@ x <- c(don_fra$mob1, don_fra$mob2,don_fra$mob3,don_fra$mob4)
 tab <-table(x)
 sta <- data.frame(iso3=names(tab), nbvis = as.numeric(tab)) %>% arrange(-nbvis)
 
-map<-readRDS("../../data/ebm/geom/ebm_states.RDS")
+map<-readRDS("data/ebm/geom/ebm_states.RDS")
 map <- left_join(map, sta)
 map$OK <-as.factor(is.na(map$nbvis)==F)
 levels(map$OK) <- c("Oui","Non")
@@ -285,29 +281,29 @@ mf_layout("Etudiants L3 Géographie, Paris", frame=T, arrow=F, scale = F, credit
 ```
 
 
-- **Commentaire** : L'effet de proximité est très présent dans les deux échantillons, la plupart des mobilités de courte durée se concentrant sur les pays voisins dans les deux cas. Mais on trouve dans le cas parisien un nombre élevé d'étudiants ayant voyagé dans des pays plus éloignés tels que les USA, le Japon ou la Thaïlande. Et également des étudiants ayant séjourné dans les pays d'Afrique, sans doute parce qu'ils en sont originaires et font leurs études à Paris Cité.
+- **Commentaire** : L'effet de proximité est très présent dans les deux échantillons, la plupart des mobilités de courte durée se concentrant sur les pays voisins dans les deux cas. Mais on trouve dans le cas parisien un nombre élevé d'étudiants ayant voyagé dans des pays plus éloignés tels que les USA, le Japon ou la Thaïlande. Et également des pays ayant séjourné dans les pays d'Afrique, sans doute parce qu'ils en sont originaires et font leurs études à Paris Cité.
 
 
 # B. ECHELLES
 
 La seconde partie du questionnaire visait à analyser certains éléments de la vision du Monde des étudiants en utilisant trois entrées différentes : les échelles d'appartenance, les pays attractifs et répulsifs, les mots associés à certains espaces. 
 
-![Altermap 2026 - Questionnaire - Partie B](../../img/Altermap_axe1_partieB.jpg){width=800}
+![Altermap 2026 - Questionnaire - Partie B](img/Altermap_axe1_partieB.jpg){width=800}
 
 
 
-La question sur les échelles d'appartenance n'a sans doute pas été formulée de façon satisfaisante car beaucoup d'étudiants ont répondu d'une façon différente de celle qui avait été anticipée par les enquêteurs.
+La questions sur les échelles d'appartenance n'a sans doute pas été formulée de façon satisfaisante car beaucoup d'étudiants ont répondu d'une façon différente de celle qui avait été anticipée par les enquêteurs.
 
-On attendait en effet des étudiants qu'ils choisissent parmi les niveaux proposés les trois échelles territoriales auxquelles ils s'identifient le plus en les ordonnant. Soit une réponse du type suivant  :  
+On attendait en effet des étudiants qu'ils choisissent parmi les niveaux proposés les trois échelle territoriale auxquelles ils s'identifient le plus en les ordonnant. Soit une réponse du type suivant  :  
 
-![Altermap 2026 - Question B1 - Réponse attendue](../../img/repB1A_correcte.jpg){width=800}
+![Altermap 2026 - Question B1 - Réponse attendue](img/repB1A_correcte.jpg){width=800}
 
 Mais certains étudiant  ont compris la question différemment et ont plutôt indiqué les lieux correspondant à leurs échelles d'appartenance territoriale, sans les hiérarchiser, aboutissant à des réponses du type suivant : 
 
 
-![Altermap 2026 - Question B1 - Réponse inattendue](../../img/repB1A_incorrecte.jpg){width=800}
+![Altermap 2026 - Question B1 - Réponse inattendue](img/repB1A_incorrecte.jpg){width=800}
 
-Il est donc clair que la question doit être construite différemment dans les enquêtes futures et relève peut-être d’ailleurs plus d’un entretien qualitatif où l’on poserait la question *“D’où êtes-vous ?”* sans préjuger du résultat mais en relançant la personne interrogée pour détecter l’existence de niveaux multiples. Il n’est d’ailleurs pas certain que l’idée d’ordonner les échelles soit pertinente. La réponse à la question peut en effet varier selon le contexte où elle est posée. Un sénégalais interrogé sur ses origines dans un pays très éloigné pourra répondre qu’il vient du Sénégal ou d’Afrique. Le même individu interrogé par un habitant de son pays répondra plutôt qu’il vient de Casamance ou de Saint-Louis …
+Il est donc clair que la question doit être construite différemment dans les enquêtes futures et relève peut-être d'ailleurs plus d'un entretiens qualitatif où l'on poserait la question *"D'où êtes-vous ?"* sans préjuger du résultat mais en relançant la personne interrogée pour détecter l'existence de niveaux multiples. Il n'est d'ailleurs pas certain que l'idée d'ordonner les échelles soit pertinente. La réponse à la question peut en effet varier selon le contexte où elle est posée. Un sénégalais interrogé sur ses orignes dans un pays très éloigné pourra répondre qu'il vient du Sénégal ou d'Afrique. Le même individu interrogé par un habitant de son pays répondra plutôt qu'il vient de Casmance ou de Saint-Louis ... 
 
 Peut-on néanmoins tirer quelques enseignements des réponses obtenues ?
 
@@ -380,12 +376,12 @@ barplot(x,
 ```
 
 
-- **Commentaire** : Les deux profils sont désormais beaucoup plus ressemblants. Dans les deux échantillons, plus de 80% des étudiants ont mentionné le niveau local, infranational ou national dans leurs réponses. Mais on observe une propension nettement plus élevé des étudiants de Kaolack à déclarer des appartenance au niveau supranational par rapport aux étudiants parisiens. 
+- **Commentaire** : Les deux profils sont désormais beaucoup plus ressemblants. Dans les deux échantillons, plus de 80% des étudiants ont mentionné le niveau local, infrnational ou national dans leurs réponses. Mais on observe une propension nettement plus élevé des étudiants de Kaolack à déclarer des appartenance au niveau supranational par rapport aux étudiants parisiens. 
 
 
 ## Ouverture au monde
 
-On rassemble les étudiants qui ont déclaré un niveau continental ou mondial dans leurs réponses afin d'examiner s'il existe une différence entre les deux échantillons.
+On rassemble les étudiants qui ont déclaré un niveau continental ou mondial dans leur réponses afin d'examiner s'il existe une différence entre les deux échantillons.
 
 
 ```{r}
@@ -403,7 +399,7 @@ chisq.test(tab)
 ```
 
 
-- **Commentaire** : les étudiants sénégalais sont significativement (p < 0.05) plus nombreux que les étudiants français à déclarer un sentiment d'appartenance à un niveau supranational (Afrique de l'Ouest, Afrique, Monde) que les étudiants français (Europe de l'Ouest, Europe, Monde). Cela montre que si l'attachement au local se retrouve dans les deux échantillons, les étudiants sénégalais semblent avoir davantage tendance que les étudiants français à déclarer des appartenances à des échelles dépassant les frontières de leur pays.
+- **Commentaire** : les étudiants sénégalais sont significativement (p < 0.05) plus nombreux que les étudiants français a déclarer un sentiment d'appartenance à un niveau supranational (Afrique de l'Ouest, Afrique, Monde) que les étudiants français (Europe de l'Ouest, Europe, Monde). Cela montre que si l'attachement au local se retrouve dans les deux échantillons, les étudiants sénégalais semblent avoir davantage tendance que les étudiants français à déclare des appartenances à des échelles dépassant les frontières de leur pays.
 
 # C. POLARISATION
 
@@ -577,7 +573,7 @@ mf_layout("Etudiants L3 Géographie, Paris", frame=T, arrow=F, scale = F, credit
 
 Ce que montrent bien les analyses précédentes est le fait que l'appréciation que les étudiants donnent d'un pays doit être envisagé selon deux dimensions complémentaires, la saillance et l'opinion
 
-- **la saillance** (en anglais *salience*) est le fait qu'un pays se présente à l'esprit d'un étudiant lorsqu'on lui demande de porter un jugement. Peu importe  que le jugement soit positif ou négatif, si un pays est cité par l'étudiant c'est qu'il possède des informations sur lui, qu'il en a reçu et a choisi de les retenir. Bref, la saillance manifeste une reconnaissance de l'existence d'un pays et signale sa présence dans la carte mentale de la personne. On la définira donc comme le % des étudiants qui ont cité un pays positivement ou négativement et on la mesurera sur une échelle de 0 à 100
+- **la saillance** (en anglais *salience*) est le fait qu'un pays se présente à l'esprit dun étudiant lorsqu'on lui demande de porter un jugement. Peu importe  que le jugement soit positif ou négatif, si un pays est cité par l'étudiant c'est qu'il possède des informations sur lui, qu'il en a reçu et à choisi de les retenir. Bref, la saillance manifeste une reconnaissance de l'exsitence d'un pays et signale sa présence dans la carte mentale de la personne. On la définira donc comme le % des étudiants qui ont cité un pays positivement ou négativement et on la mesurera sur une échelle de 0 à 100
 
 $Saillance_i = 100\times \frac{Pos_i + Neg_i}{n}$
 
@@ -646,7 +642,7 @@ On déforme la surface des régions pour leur donner une superficie proportionne
 
 #### PREPARE LES DONNEES POOUR L'ANAMORPHOSE ####
 
-map <- st_read("../../data/Axe1_final/numerisateur/world_209.geojson") %>%
+map <- st_read("data/Axe1_final/numerisateur/world_209.geojson") %>%
   select(iso3=ISO3,NAMEen, NAMEfr, geometry) %>% filter(iso3 !="ATA")
 
 
@@ -723,7 +719,7 @@ saveRDS(wc,"worldmap_paris.RDS")
 #### Le monde vu par les étudiants de Kaolack
 
 ```{r}
-wc<-readRDS("worldmap_kaolack.RDS")
+wc<-readRDS("posts/2026-06-19-axe1-test/worldmap_kaolack.RDS")
 wc$NAMEfr[wc$iso3=="USA"]<-"USA"
 wctop <- wc %>% filter(sail > 10)
 ref <- wc %>% filter(iso3=="SEN")
@@ -739,14 +735,14 @@ mf_label(wctop,var="NAMEfr",halo=T, overlap=F)
 mf_layout("Le Monde des étudiants de L3 SIG d'USSEIN en 2026", frame=T, arrow=F, credits=mysource, scale=F)
 ```
 
-- **Commentaire** : Les territoires connus et attractifs forment deux pôles principaux constitués de l'Europe de l'Ouest et de l'Amérique du Nord. Mais à l'intérieur de ceux-ci on observe des nuances importantes : les USA sont moins attractifs que le Canada, la France, l'Italie et l'Allemagne sont moins attractives que l'Espagne, le Royaume-Uni, la Belgique ou la Suisse. On trouve également des pays attractifs isolés comme l'Afrique du Sud, la Turquie, la Chine, le Japon, l'Arabie Saoudite et ... les îles du Cap vert. Les territoires connus et répulsifs sont la plupart des autres pays d'Afrique et du Proche ou Moyen-orient. Mais là encore avec des nuances puisque certains pays sont tout de même jugés attractifs par quelques étudiants comme la Côte d'Ivoire, l'Algérie ou la Tunisie. La plupart des pays latino-américain sont peu mentionnés mais surtout négativement, à l'exception du Brésil. Celui-ci fait partie des pays "neutres" sur lesquels les avis des étudiants sont partagés. Il en va de même pour le Maroc, la Russie, Madagascar, le Portugal ou l'Indonésie 
+- **Commentaire** : Les territoires connus et attractifs forment deux pôles pricipaux constitués de l'Europe de l'Ouest et de l'Amérique du Nord. Mais à l'intérieur de ceux-ci on observe des nuances importantes : les USA sont moins attractifs que le Canada, la France, l'Italie et l'Allemagne sont moins attractives que l'Espagne, le Royaume-Uni, la Belgique ou la Suisse. On trouve également des pays attractifs isolés comme l'Afrique du Sud, la Turquie, la Chine, le Japon, l'Arabie Saoudite et ... les îles du Cap vert. Les territoires connus et répulsifs sont la plupart des autres pays d'Afrique et du Proche ou Moyen-orient. Mais là encore avec des nuances puisque certains pays sont tout de même jugés attractifs par quelques étudiants comme la Côte d'Ivoire, l'Algérie ou la Tunisie. La plupart des pays latino-américain sont peu mentionnés mais surtout négativement, à l'exception du Brésil. Celui-ci fait partie des pays "neutres" sur lesquels les avis des étudiants sont partagés. Il en va de même pour le Maroc, la Russie, Madagascar, le Portugal ou l'Indonésie 
 
 
 
 #### Le monde vu par les étudiants de Paris Cité
 
 ```{r}
-wc<-readRDS("worldmap_paris.RDS")
+wc<-readRDS("posts/2026-06-19-axe1-test/worldmap_paris.RDS")
 wc$NAMEfr[wc$iso3=="USA"]<-"USA"
 wctop <- wc %>% filter(sail > 10)
 ref <- wc %>% filter(iso3=="FRA")
@@ -764,7 +760,7 @@ mf_layout("Le monde des étudiants de L3 géographie d'UPC en 2026", frame=T, ar
 - **Commentaire** : Pour les étudiants géographes de licence 3 à UPC, les pays les plus attractifs sont des pays voisins d'Europe de l'Ouest et d'Europe du Nord, ainsi que le Japon, la Corée du Sud et le Canada. Les pays dAmérique latine sont peu cités mais généralement positivement, exception faite de la Colombie et du Venezuela. Les pays répulsifs sont en premier lieu les pays du Proche et Moyen_orient ainsi que la Russie, l'Inde, la Corée du Nord et ... les USA. On trouve peu de pays "neutres" en dehors de la Chine, l'Australie, l'Afrique du Sud et la Turquie. Les pays africains sont peu cités mais parfois positivement, sans doute par les étudiants qui en sont originaires (Tunisie, Maroc, Sénégal, Bénin, Cameroun,)
 
 
-Au final, on est frappé par les grandes ressemblances entre les cartes du Monde des étudiants des deux universités. Peut être qu’internet et les réseaux sociaux jouent un rôle dans ces proximités car l’accès à l’information devient universel.  Même s’il existe de nombreuses différences dans le détail, les points communs l’emportent largement !
+Au final, on est frappé par les grandes ressemblances entre les cartes du Monde des étudiants des deux universités. Même s'il existe de nombreuses différences dans le détail, les points communs l'emportent largement !
 
 # D. STEREOTYPES
 
@@ -774,7 +770,7 @@ Quels sont les mots associés par les étudiants de géographie à l'Afrique, la
 
 - **En L3 Géographie de Paris Cité**  l'enquête intervenait après trois séances de cours d'Adrien Doron sur la lecture transnationale du Monde par les flux et les circulations commerciales ou migratoires. Et que la dernière séance portait plus précisément sur les espaces d'interface que constituent les Méditerranées situées en tre les deux Amériques, entre l'Europe et l'Afrique ou entre l'Asie et l'Océanie. Plus généralement, les étudiants de licence de géographie de l'Université Paris Cité ont normalement été formés aux questions de développement, de pouvoir, de mobilité ... et suivi des cours sur la "géographie des Nords" et la "géographie des Suds". 
 
-- **En L3 SIG de l'Université de Kaolack** l’enquête intervenait à la deuxième séance du cours Cartographie thématique. Auparavant, ils ont eu des cours sur la géographie physique du Sénégal, l’aménagement du territoire, la cartographie, les SIG  mais ils n’ont pas de cours sur les questions de mobilité ou de géographie du nord car ils sont sur une licence en Géomatique et Climatologie 
+- **En L3 SIG de l'Université de Kaolack** ...[*à compléter par Labaly*]
 
 
 
@@ -854,7 +850,7 @@ textplot_network(x = fcmat,
 
 ```
 
-- **Commentaire** : Sur l'ensemble des étudiants de Paris et Kaolack, les mots dominants qui constituent le coeur des représentations sont *culture, pauvreté, ressource, richesse, développement*. Le mot *nature* est très souvent associé aux mots richesse et ressource (richesses naturelles, ressources naturelles) mais il peut également l'être à des éléments paysagers comme la *savane*, la *forêt* ou le *désert*. Le développement est souvent formulé somme *sous-développement*,  et associés à la *corruption*, au *chômage* au *manque*, et par extension à l'*instabilité*, la *guerre*, la *famine*, voire les *génocides* ou les *conflits*. A cette vision négative s'oppose une vision positive de l'Afrique comme terre d'*histoire* et de *diversité culturelle*, mais marquée par la *colonisation*. Enfin, on note un large registre *démographique* décrivant l'Afrique comme une *population* *jeune* et en *croissance*. De façon plus anecdotique, quelques étudiants font de l'Afrique un *grand* *continent* faisant partie du *Sud*,  ajoutent l'adjectif *noir* et mentionnent la coupe d'Afrique des Nations (*CAN*).
+- **Commentaire** : Sur l'ensemble des étudiants de Paris et Kaolack, les mots dominants qui constituent le coeur des représentations sont *culture, pauvreté, ressource, richesse, développement*. Le mot *nature* est très souvent associé aux mots richesse et ressource (richesses naturelles, ressources naturelles) mais il peut également l'être à des éléments paysagers comme la *savane* ou le *désert*. Le développement est souvent formulé somme *sous-développement*,  et associés à la *corruption*, au *chômage* au *manque*, et par extension à l'*instabilité*, la *guerre*, la *famine*, voire les *génocides* ou les *conflits*. A cette vision négative s'oppose une vision positive de l'Afrique comme terre d'*histoire* et de *diversité culturelle*, mais marquée par la *colonisation*. Enfin, on note un large registre *démographique* décrivant l'Afrique comme une *population* *jeune* et en *croissance*. De façon plus anecdotique, quelques étudiants font de l'Afrique un *grand* *continent* faisant parie du *Sud*,  ajoutent l'adjectif *noir* et mentionnent la coupe d'Afrique des Nations (*CAN*).
 
 
 ### Différences Paris-Kaolack
@@ -930,7 +926,7 @@ x<-don %>% select(lieu,mots_afr)
 
 ### Ensemble des étudiants
 
-Comme pour l'Afrique, on commence par recoder les mots et repérer les associations les plus fréquentes dans les réponses. On retire le mot "mer" de l'analyse car il est présent dans presque toutes les réponses et apporte peu d'information.
+Comme pour l'Afrique, on commence par recoder les mots et reprérer les associations les plus fréquentes dans les réponses. On retire le mot "mer" de l'analyse car il est présent dans presque toutes les réponses et apporte peu d'information.
 
 ```{r}
 don$wrd <- don$mots_med
@@ -1262,14 +1258,14 @@ Cette question dont le but était de faire découper le Monde aux étudiants a �
 
 - **(1) Fonds de carte avec frontières **
 
-![Fonds de carte administré aux groupes de TD 1, 2 et 3](../../img/Altermap_axe1_partieC.jpg){height=400}
+![Fonds de carte administré aux groupes de TD 1, 2 et 3](img/Altermap_axe1_partieC.jpg){height=400}
 :::
 
 ::: {.column width="50%" .r-fit-text}
 
 - **(2) Fonds de carte sans frontières**
 
-![Fonds de carte administré aux groupes de TD 4](../../img/Altermap_axe1_partieC_blank.jpg){height=400}
+![Fonds de carte administré aux groupes de TD 4](img/Altermap_axe1_partieC_blank.jpg){height=400}
 :::
 
 ::::
@@ -1280,7 +1276,7 @@ La première solution (avec frontières des pays) a été utilisée auprès des 
 ```{r}
 ## Charge les géométries
 
-geom <- readRDS("../../data/Axe1_final/data/map_reg.RDS")
+geom <- readRDS("data/Axe1_final/data/map_reg.RDS")
 geom$reg_nom[geom$reg_nom=="Afrique du Sud (= Afrique australe)"]<- "Afrique australe"
 tabgeom <- geom %>% group_by(code) %>% summarise(nbreg = n())
 ```
@@ -1288,7 +1284,7 @@ tabgeom <- geom %>% group_by(code) %>% summarise(nbreg = n())
 
 ## Combien de régions ?
 
-La consigne donné aux étudianst consistait à découper le monde en 2 à 15 régions de leur choix. On pensait que la majorité d'entre eux découperait le Monde en 4 à 6 régions, selon le modèle des continents. Mais en réalité les résultats ont été beaucoup plus dispersés et beaucoup d'étudiants ont utilisé le maximum de région proposé (15) voire davantage ...
+La consigne donné aux étudians consistait à découper le monde en 2 à 15 régions de leur choix. On pensait que la majorité d'entre eux découperait le Monde en 4 à 6 régions, selon le modèle des continents. Mais en réalité les résultats ont été beaucoup plus dispersés et beaucoup d'étudiants ont utiliseé le maximum de région proposé (15) voire davantage ...
 
 ```{r}
 summary(tabgeom$nbreg)
@@ -1385,8 +1381,8 @@ La liste des noms de régions les plus fréquents pourrait laisser supposer une 
 
 
 ```{r}
-frame <- st_read("../../data/axe1/worldmaps/WORLD30.shp")
-states <- st_read("../../data/axe1/worldmaps/WORLD_WUTS5.shp")
+frame <- st_read("data/axe1/worldmaps/WORLD30.shp")
+states <- st_read("data/axe1/worldmaps/WORLD_WUTS5.shp")
 tabreg<-geom
 tabreg<-st_transform(tabreg, st_crs(states))
 
