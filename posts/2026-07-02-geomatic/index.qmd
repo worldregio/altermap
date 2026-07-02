@@ -1,0 +1,448 @@
+---
+title: "Analyse d'un ensemble de cartes mentales à l'aide d'outils de géomatique et de cartographie (DRAFT VERSION)"
+description: "Application à l'analyse de 94 cartes découpages du monde réalisées par des étudiants de licence 3 à Paris et Kaolack en mars-avril 2026"
+author:
+  - name: Claude GRASLAND
+    affiliation: UPC, Paris 
+    url: https://worldregio.github.io/altermap/equipe/grasland2.html
+  - name: Nicolas LAMBERT
+    affiliation: Ingénieur de recherche CNRS 
+    url: https://worldregio.github.io/altermap/equipe/lambert2.html
+  - name: Labaly TOURE
+    affiliation: USSEIN, Kaolack
+    url: https://worldregio.github.io/altermap/equipe/toure2.html
+date: 2026-07-02
+categories: [Carte mentale, Monde, géomatique] # self-defined categories
+citation: 
+  url: https://worldregio.github.io/altermap/posts/2026-07-02-geomatic/ 
+image: img/medit_border.png
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+bibliography: references.bib
+echo: false
+warning: false
+message: false
+---
+
+- **L'objectif de ce billet est de  discuter des méthodes géomatiques d'analyse des cartes mentales**
+
+
+Comment analyser les découpages d'un espace en régions à l'aide d'un SIG ou d'un outil équivalent tels que R ? Nous proposons ici une série de pistes pour construire des exercices pédagogiques à adapter en fonction du contenu du cours, du niveau et des logiciels connus par les étudiants.
+
+La plupart des méthodes éléments et concepts utilisés sont décrites dans deux articles de référence publiés par C. Didelon, N. Lambert et S. de Ruffray [@didelon2011, @didelon-loiseau2018].
+
+```{r}
+library(sf)
+library(dplyr)
+library(RColorBrewer)
+library(mapsf)
+library(knitr)
+library(ggplot2)
+```
+
+# A.DONNEES
+
+## Données de repérage
+
+On dispose de fichiers en projection polaire correspondant à la carte
+que les étudiants ont eu à déouper :
+
+-   world.geojson : contour du "Monde"
+-   world30.geojson : graticules espacés de 30 degrés de latitude et
+    longitude
+-   states.geojson : contour des états représentés sur la carte
+
+```{r}
+
+world <- st_read("grid/world.geojson", quiet=T)
+world30 <- st_read("grid/world30.geojson",quiet=T)
+states <-  st_read("grid/states.geojson",quiet=T)
+```
+
+On peut donc reconstituer l'image sur laquelle les tracés ont été
+effectués par les étudiants dans sa géométrie projetée :
+
+```{r}
+mf_map(world, col="white", lwd=2)
+mf_map(world30, col=NA, lwd=0.5, lty=3, add=T)
+mf_map(states, col="gray90", lwd=0.5, add=T)
+mf_layout("Fonds de carte ayant servi de support à l'enquête ALtermap 2026", frame=T, credits = "Altermap 2026, Axe 1, Découpages du Monde", arrow=F, scale=F)
+```
+
+## Grille régulière
+
+Reprenant les travaux utilisés dans EuroBroadMap, nous plaçons une
+grille sur le fonds de carte projeté avec une superficie (évidemment
+variable) d'environ 150km sur 150km. Celle ci forme un carroyage
+régulier qui va au delà des limites du "Monde" représenté (pour les
+intrpolations) mais que l"on peut intersecter pour éliminer les zones
+hors du Monde. On peut aussi la converture en point en prenant le centre
+de chaque grille. Soit les fichiers suivants :
+
+```{r}
+grid <- st_read("grid/grid.geojson", quiet=T)
+```
+
+On peut visualiser la taille des carreaux en examinant la zone
+méridienne comprise entre Paris et Dakar :
+
+```{r, fig.width=6, fig.height=6}
+summary(grid$X)
+summary(grid$Y)
+selgrid <- grid %>% filter(X > -3000000, X< 5000000, Y > -10000000, Y< -3000000)
+mf_init(selgrid,expandBB = c(-0.1,-0.1,-0.1,-0.1))
+
+mf_map(world30, col=NA, lwd=0.5, lty=3, add=T)
+mf_map(states, col="gray90", lwd=0.5, add=T)
+mf_map(selgrid, col=NA, border="red",add=T)
+mf_layout("Extrait de la grille d'analyse à 150 km environ", frame=T, credits = "Altermap 2026, Axe 1, Découpages du Monde", arrow=F, scale=T)
+```
+
+## Découpages du Monde
+
+On charge pour finir les découpages du Monde en région produits par les
+étudiants. On dispose initialement d'un minimum d'information sur les
+découpages produits par chaque étudiant (université, noms des régions)
+mais on pourra enrichir si on le souhaite les informations en effectuant
+une jointure avec les autres réponses au questionnaire.
+
+```{r}
+regio <- st_read("grid/stud.geojson", quiet=T) %>% arrange(code, id) 
+kable(head(regio,11))
+```
+
+```{r}
+etu <- "001"
+
+sel <- regio %>% filter(code==etu)  %>% filter(is.na(reg_nom)==F)
+sel$rnkname <- substr(paste((sel$id+100),sel$reg_nom),2,30)
+
+
+mf_init(world, expandBB = c(0,0,0,-0.4))
+mf_map(world, col=NA, lwd=2, lty=1, add=T)
+mf_map(world30, col=NA, lwd=0.5, lty=3, add=T)
+mf_map(states, col="gray90", lwd=0.5, add=T)
+mf_map(sel, type="typo", 
+       var="rnkname",
+       add=T, 
+       alpha=0.3,
+       leg_pos = "topleft",
+       leg_title_cex = 1.3,
+       leg_val_cex = 1,
+       leg_title = "Ordre et Noms")
+mf_layout(title = paste("Exemple de découpage du Monde par l' étudiant 001"),
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+# B. SUPERPOSITIONS
+
+La première famille d'exercices consiste à superposer des découpages géométriques sans s'intéresser aux noms des régions qui sont données par les étudiants. On peut alors s'intéresser :
+
+-   aux espaces inclus et exclus de la régionalisation
+-   aux espaces frontaliers ou non frontaliers
+
+En disposant une grille d'analyse, on pourra définir pour chaque cellule trois possibilités :
+
+-   *exclusion* : la cellule ne fait pas partie d'une région tracée par les étudiants
+-   *coeur* : la cellule est située à l'intérieur d'une région et n'est traversée par aucune frontière
+-   *frontière* : la cellule est au moins partiellement incluse mais est traversée par une frontière
+
+## B.1 Exploration visuelle
+
+Une première étape peut consister simplement à superposer les tracés réalisés par les étudiants en donnant juste une valeur de transparence aux régions ou frontières.
+
+### Vue d'ensemble
+
+```{r}
+mybreaks = c(0,1,5,10,20,40,60, 80, 90, 95,  99, 100)
+mypal = rev(brewer.pal(n=11, name = "RdYlBu"))
+mf_init(grid,expandBB = c(0,0,0,0))
+mf_map(regio, col="blue", alpha=1/94, border="red", add=T, lwd=0.2)
+#mf_map(grid,col=NA, border="white",add=T, lwd=0.1)
+mf_map(states, col=NA, lwd=1, add=T)
+#mf_label(states, var="ISO3", cex=0.5,  col="white")
+mf_layout(title = "Superposition des tracés de régions",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+- **Commentaire** : Cette méthode simple permet de repérer les zones fréquemment incluses dans une région. Nous avons utilisé ici une transparence de 1/94 puisque nous avions 94 étudiants. Du coup, si un lieu est inclu dans toute les cartes il sera en bleu foncé et s'il ne l'est dans aucune en blanc. On ne peut cependant pas introduire de légende directement. Quant aux frontières, elles se déduisent de la superposition des lignes rouges. Mais la méthode ne permet pas de bien voir les effets de lignes superposées. Il peut être alors utile de zoomer.
+
+
+### Zoom sur l'Amérique du Nord
+
+
+```{r}
+
+selgrid <- grid %>% filter(X > -9000000, X< -1000000, Y > -6000000, Y< 6000000)
+#selgrid <- grid2 %>% filter(X > -3500000, X< 6000000, Y > -11000000, Y< -1000000)
+
+
+mybreaks = c(0,1,5,10,20,40,60, 80, 90, 95,  99, 100)
+mypal = rev(brewer.pal(n=11, name = "RdYlBu"))
+mf_init(selgrid,expandBB = c(-0.1,-0.1,-0.1,-0.1))
+mf_map(regio, col="blue", alpha=0.01, border="red", add=T)
+#mf_map(selgrid,col=NA, border="white",add=T, lwd=0.1)
+mf_map(states, col=NA, lwd=1, add=T)
+mf_label(states, var="ISO3", cex=0.5,  col="white")
+mf_layout(title = "Superposition des tracés de régions (Amérique du Nord)",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+**Commentaire** : Le zoom permet ici de montrer que la majorité des étudiants ont inclus l'ensemble des Amériques dans leurs découpages. Mais ils hésitent sur la façon de découper ce continent en deux ou trois parties, certains privilégiant la frontière Etats-Unis/ Mexique,d'autres le canal de Panama. On note également quelques hésitations sur les Caraïbes et leur rattachement.
+
+### Zoom sur la Méditerranée
+```{r}
+
+selgrid <- grid %>% filter(X > -3000000, X< 5000000, Y > -10000000, Y< -3000000)
+#selgrid <- grid2 %>% filter(X > -3500000, X< 6000000, Y > -11000000, Y< -1000000)
+
+
+mybreaks = c(0,1,5,10,20,40,60, 80, 90, 95,  99, 100)
+mypal = rev(brewer.pal(n=11, name = "RdYlBu"))
+mf_init(selgrid,expandBB = c(-0.1,-0.1,-0.1,-0.1))
+mf_map(regio, col="blue", alpha=0.01, border="red", add=T)
+#mf_map(selgrid,col=NA, border="white",add=T, lwd=0.1)
+mf_map(states, col=NA, lwd=1, add=T)
+mf_label(states, var="ISO3", cex=0.5,  col="white")
+mf_layout(title = "Superposition des tracés de régions (Méditerranée)",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+**Commentaire** : Le zoom sur la Méditerranée montre des frontières beaucoup plus nette le long de cette mer avec des points de passage quasi obligés comme Gibraltar, le détroit de Sicile ou le Bosphore. Il y a toutefois un certain nombre d'étudiants qui ont opté pour une limite sur le Sahara, mais mooins fréquemment. On note également que la Méditerranée n'est pas en bleu foncé, ce qui signifie que certains étudiants l'ont placé en dehors de leurs découpages
+
+
+## B.2 Inclusion/Exclusion
+
+Par rapport à l'ensemble du disque qui représente le Monde, quelle est la part des zones qui ont été regroupées par les étudiants par rapport à celles qui ne l'ont pas été ?
+
+La réponse à la question dépend évidemment de la projection. Si on raisonne **visuellement**, on peut dire par exemple que l'étudiant n°1 a regroupé **42%** de la surface du disque qui lui était proposé dans des régions. Si on raisonne par rapport à la surface de la terre, il a entouré en fait 48% de la surface de celle-ci...
+
+### Exercice 1.1.1. Surface incluse par étudiant
+
+Calculez pour chaque étudiant la part visuelle du disque qu'il a inclus dans des régions.
+
+```{r}
+etud <- regio %>% group_by(code,lieu) %>% summarise()
+table(etud$lieu)
+summary(as.factor(etud$lieu))
+etud$sup <- 100*as.numeric(st_area(etud$geometry))/as.numeric(st_area(world))
+etud$sup[etud$sup > 100]<-100
+ggplot(etud) + aes(x=sup) + 
+  geom_histogram(breaks = seq(0,100,5)) +
+  ggtitle("Pourcentage de la surface incluse dans une région",
+          sub= "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde")
+summary(etud$sup)
+```
+
+-   **Réponse** : les étudiants ont inclus en moyenne 42% du disque dans leur découpage régional. Les valeurs les plus fréquentes sont comprises entre 32% (Q1) et 49% (Q3) du disque. Mais certains étudiants n'ont inclus qu'une très petite fraction du disque (5%) alors que cinq étudiants ont découpé intégralement 100% du disque et ont même débordé au delà (ce qui n'est pas absurde puisque le fonds de carte proposé avait oublié l'Antarctique en s'arrêtant au 60e parrallèle Sud).
+
+```{r}
+etud$loc<-as.factor(etud$lieu)
+levels(etud$loc)<-c("Paris (60)", "Kaolack (34)")
+boxplot(etud$sup~etud$loc, 
+        horizontal=T, 
+        las=1,
+        col=c("lightblue","orange"),
+        ylab = "Echantillon",
+        xlab = "% surface incluse",
+        main = "Surface incluse dans les deux échantillons", 
+        sub= "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde")
+```
+
+- **Commentaire** : Les choix effectués par les étudiants parisiens apparaissent très convergents , la majorité incluant de 20 à 60% de la surface du disque avec une concentration forte autour de 40%, ce qui signifie qu'ils ont en général essayé de découper les continents en ajoutant peu d'étendues maritimes. Il n'en va pas de même pour les étudiants de Kaolack qui ont plus fréquemment découpé tout le disque mais ont également été nombreux à ne prendre en compte qu'une partie des masses continentales.
+
+
+
+
+```{r}
+
+# Eliminate grid points outside disk
+grid2<-st_intersection(grid,world)
+grid2ctr<-st_centroid(grid2)
+
+#  Compute the number of intersection with student's maps
+nb<-st_intersects(grid2ctr, etud)
+m<-as.matrix(nb)
+q <- 100*apply(m,1,sum)/95
+grid2$inc<-q
+
+# Compute limits of earth / sea
+earth<-st_union(states)
+
+
+mybreaks = c(0,1,5,10,20,40,60, 80, 90, 95,  99, 100)
+mypal = rev(brewer.pal(n=11, name = "RdYlBu"))
+mf_map(grid2, var="inc", 
+       type="choro", 
+       border=NA, 
+       lwd=0.01,
+       breaks=mybreaks,
+       pal=mypal,
+       leg_val_rnd = 0,
+       leg_title = "Taux d'inclusion (en %)"
+       )
+mf_map(earth, col=NA, lwd=1, add=T)
+mf_map(world, col=NA, lwd=2, add=T)
+mf_layout(title = "Degré d'inclusion dans les découpages du Monde des étudiants",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+-   **Commentaire** : La plupart des terres émergées ont été incluses  dans les découpages du Monde par plus de 80% des étudiants, exception faite de Madascar, l'Australie et l'Asie du sud-est qui ne se retrouvent qua dans 60 à 80% des cartes et de la Nouvelle-Zélande ou des îles d'Océanie qui sont présents dans moins de 60% des découpages. A l'intérieur des masses continentales, on trouve des "coeurs" qui sont inclus par plus de 90% des étudiants, notamment en Amérique du Nord, Amérique du Sud, Afrique, Sibérie ou Chine. A l'inverse, les marges océaniques sont souvent présentes dans plus de 50% des découpages dès lors que les étudiants tracent des zones circulaires ou ellipsoïdes qui ne suiventpas le tracé des côtes. Aucun point du disque n'a été inclus par moins de 10% des étudiants en raison de la présence de découpages intégraux du disque.
+
+
+
+## B.3 Frontières / Coeurs
+
+
+### Frontières récurrentes
+
+```{r}
+par(mfrow=c(1,1))
+border <- st_cast(x = regio, to="MULTILINESTRING")
+```
+
+
+```{r}
+#  Compute the number of intersection with student's maps
+nb<-st_intersects(grid2, border)
+m<-as.matrix(nb)
+q <- 100*apply(m,1,sum)/95
+grid2$bord<-q
+summary(q)
+
+
+mybreaks = c(0,5,10,15,20,25,30, 35,40, 45, 100)
+mypal =rev(brewer.pal(n=10, name = "Spectral"))
+mf_map(grid2, var="bord", 
+       type="choro", 
+       border=NA, 
+       lwd=0.01,
+       breaks=mybreaks,
+       pal=mypal,
+       leg_val_rnd = 0,
+       leg_title = "Probabilité (en %)"
+       )
+mf_map(states, col=NA, lwd=0.5, add=T, border="black")
+mf_map(world, col=NA, lwd=2, add=T)
+mf_layout(title = "Probabilité de présence d'une frontière",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+
+
+```{r}
+#selgrid <- grid2 %>% filter(X > -3500000, X< 6000000, Y > -11000000, Y< -1000000)
+selgrid <- grid %>% filter(X > -3000000, X< 5000000, Y > -10000000, Y< -3000000)
+mybreaks = c(0,5,10,15,20,25,30, 35,40, 45, 100)
+mypal =rev(brewer.pal(n=10, name = "Spectral"))
+mf_init(selgrid,expandBB = c(-0.1,-0.1,-0.1,-0.1))
+mf_map(grid2, var="bord", 
+       type="choro", 
+       border=NA, 
+       lwd=0.01,
+       breaks=mybreaks,
+       pal=mypal,
+       leg_val_rnd = 0,
+       leg_title = "Probabilité (en %)",
+       leg_pos="topleft",
+       leg_bg = "white",leg_frame = T,
+       add=T,
+       )
+mf_map(states, col=NA, lwd=0.5, add=T, border="black")
+mf_label(states, var="ISO3", cex=0.5,  halo=T)
+mf_layout(title = "Probabilité de présence d'une frontière (zoom)",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+### Coeurs régionaux
+
+Les "coeurs sont des espaces fréquemment inclus dans une région sans pour autant être traversés par des frontières. On les définit simplement par la différence entre probabilité d'inclusion probabilité d'être traversé par une frontière
+
+#### Vue d'ensemble
+
+```{r}
+#  Calculate "core"
+
+grid2$core <- grid2$inc-grid2$bord
+grid2$core[grid2$core<0]<-0
+
+mybreaks = seq(0,100,10)
+mypal = rev(brewer.pal(n=10, name = "Spectral"))
+mf_map(grid2, var="core", 
+       type="choro", 
+       border=NA, 
+       lwd=0.01,
+       breaks=mybreaks,
+       pal=mypal,
+       leg_val_rnd = 0,
+       leg_pos="topleft",
+       leg_bg = "white",leg_frame = T,
+       leg_title = "Probabilité (en %)"
+       )
+mf_map(states, col=NA, lwd=0.5, add=T, border="black")
+mf_map(world, col=NA, lwd=2, add=T)
+mf_layout(title = "Localisation des 'coeur' régionaux",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+```
+
+#### Zoom
+
+
+```{r}
+#selgrid <- grid2 %>% filter(X > -3500000, X< 6000000, Y > -11000000, Y< -1000000)
+selgrid <- grid %>% filter(X > -3000000, X< 5000000, Y > -10000000, Y< -3000000)
+mybreaks = c(0,5,10,15,20,25,30, 35,40, 45, 100)
+mypal =rev(brewer.pal(n=10, name = "Spectral"))
+mf_init(selgrid,expandBB = c(-0.1,-0.1,-0.1,-0.1))
+mybreaks = seq(0,100,10)
+mypal = rev(brewer.pal(n=10, name = "Spectral"))
+mf_init(selgrid,expandBB = c(-0.1,-0.1,-0.1,-0.1))
+mf_map(grid2, var="core", 
+       type="choro", 
+       border=NA, 
+       lwd=0.01,
+       breaks=mybreaks,
+       pal=mypal,
+       leg_val_rnd = 0,
+       leg_title = "Probabilité (en %)",
+       leg_pos="topleft",
+       leg_bg = "white",leg_frame = T,
+       add=T
+       )
+mf_map(states, col=NA, lwd=0.5, add=T, border="black")
+mf_map(world, col=NA, lwd=2, add=T)
+mf_layout(title = "Localisation des 'coeur' régionaux",
+          credits = "Source : Enquête Altermap 2026 - Axe 1 : Découpages du monde", 
+          frame=T,
+          scale = F, 
+          arrow=F)
+
+```
+
+
+# C. REGION = NOM + GEOMETRIE
