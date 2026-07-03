@@ -65,7 +65,7 @@ effectués par les étudiants dans sa géométrie projetée :
 mf_map(world, col="white", lwd=2)
 mf_map(world30, col=NA, lwd=0.5, lty=3, add=T)
 mf_map(states, col="gray90", lwd=0.5, add=T)
-mf_layout("Fonds de carte ayant servi de support à l'enquête ALtermap 2026", frame=T, credits = "Altermap 2026, Axe 1, Découpages du Monde", arrow=F, scale=F)
+mf_layout("Fonds de carte ayant servi de support à l'enquête Altermap 2026", frame=T, credits = "Altermap 2026, Axe 1, Découpages du Monde", arrow=F, scale=F)
 ```
 
 ## Grille régulière
