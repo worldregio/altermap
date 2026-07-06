@@ -64,12 +64,6 @@ La première partie du questionnaire apportait des données de cadrage sur les i
 
 
 
-::: {.callout-tip}
-## Télécharger les données issues de la phase test :
-
--  [Données d'enquête issus de kobo au format.xlsx ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/Axe1_final/data/survey.xlsx)
--  [Découpages du Monde des étudiants au format .geojson  ](https://github.com/worldregio/altermap/raw/refs/heads/main/data/Axe1_final/data/map_reg.geojson)
-:::
 
 
 
