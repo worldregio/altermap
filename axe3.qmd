@@ -45,10 +45,11 @@ editor:
 Cet axe propose d'explorer la **perception du climat, du changement
 climatique et des vulnérabilités**, à différentes échelles spatiales (du
 quartier autour de son site universitaire à son pays).\
-Plusieurs expérimentations ont été testées cette année et seront
-améliorées ou abandonnées l'année prochaine, pour la phase principale.
 
 ## Expériences
+
+Plusieurs expérimentations ont été testées cette année et seront
+améliorées ou abandonnées l'année prochaine, pour la phase principale.
 
 #### [**• Question « 1 mot (ou groupe de mots) relatif au(x) climat(s) du Sénégal »**]{style="color: #7bac9c"}
 
@@ -70,5 +71,6 @@ La question a été posée pendant le cours,
 
 #### [**• Questionnaire « La perception du changement climatique et des vulnérabilités »**]{style="color: #7bac9c"}
 
+Les informations collectées dans le cadre de ce questionnaire contribueront à apprécier la compréhension que les étudiant·es (Sénégal et France) ont sur le climat et les ressources en eau et des vulnérabilités hydro-climatiques. Il comprend plusieurs volets : (1) Perceptions des changements hydroclimatiques ; (2) Impacts du changement climatique ; (3) Solutions pour une meilleure résilience. Deux cartographies participatives sont envisagées en complément : l'une pour représenter les zones les plus touchées/vulnérables au changement climatique à l'échelle du pays et du Monde ; l'autre pour la représentation spatiale des problèmes d’eau au Sénégal / en France. 
 
 ## Résultats
