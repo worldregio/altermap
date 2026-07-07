@@ -117,4 +117,7 @@ comparaison avec des données « objectives », des mesures de température)
 ou encore de SIG (valeurs à comparer avec % de végétation, de surfaces
 imperméabilisées, ombrage…).
 
-## Résultats
+#### [**• Analyse comparative des questionnaires Afrobarometer et Eurobarometer**]{style="color: #7bac9c"}
+
+Un travail de comparaison et d’alignement des 2 questionnaires a été mené sur les questions autour du changement climatique (CC). Plusieurs volets peuvent être distingués : (1) "Le CC en tant que problème", où AFRO est au niveau national vs. EURO au niveau mondial, global ; (2) "Les causes du CC", où un certain alignement est possible, même si EURO se concentre davantage sur les activités humaines (considérées comme principales), contrairement à AFRO où les causes naturelles sont davantage mentionnées ; (3) "Les impacts du CC", centré sur les questions de risques, bien que la correspondance entre les deux contextes ne sera pas évidente ; (4) "Sur les coûts, sur l’économie…" dont la comparaison apparaît plus délicate ; (5) "Les acteurs et actrices" ; (6) et enfin les questions assez proches sur "Les connaissances sur le CC".
+
