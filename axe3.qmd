@@ -34,29 +34,41 @@ editor:
 
 ## Participants
 
-- [Denis CHARTIER](/equipe/chartier.html)
-- [Claude GRASLAND](/equipe/grasland2.html)
-- [**Malika MADELIN (coord.)**](/equipe/madelin2.html)
-- [**Anastasie MENDY (coord.)**](/equipe/mendy.html)
-- [Labaly TOURE](/equipe/toure2.html)
+-   [Denis CHARTIER](/equipe/chartier.html)
+-   [Claude GRASLAND](/equipe/grasland2.html)
+-   [**Malika MADELIN (coord.)**](/equipe/madelin2.html)
+-   [**Anastasie MENDY (coord.)**](/equipe/mendy.html)
+-   [Labaly TOURE](/equipe/toure2.html)
 
 ## Objectifs
 
-![](img/wip.jpg){width=300}
+Cet axe propose d'explorer la **perception du climat, du changement
+climatique et des vulnérabilités**, à différentes échelles spatiales (du
+quartier autour de son site universitaire à son pays).\
+Plusieurs expérimentations ont été testées cette année et seront
+améliorées ou abandonnées l'année prochaine, pour la phase principale.
 
 ## Expériences
 
-![](img/wip.jpg){width=300}
+#### [**• Question « 1 mot (ou groupe de mots) relatif au(x) climat(s) du Sénégal »**]{style="color: #7bac9c"}
+
+:::::: columns
+::: {.column width="70%"}
+Un premier test a été réalisé avec des L1 UPC dans le cours de climatologie, lors du tout premier cours magistral (21/1/26). L'objectif était de recueillir les représentations mentales spontanées des étudiant·es à UPC sur les climats du Sénégal : quel mot-clé pour résumer une complexité ? quel stéréotype climatique ? 
+
+La question a été posée pendant le cours,
+*via* l'application *Wooclap* (mise à disposition à UPC) : 75 étudiant·es ont répondu. Les principaux termes mentionnés sont "tropical" (20,0%), "chaud" (17,3%), "aride" (6,7%). Ensuite le terme "CAN" apparaît (nous étions 3 jours après la finale de la CAN, finale controversée) et représente 5,3% des réponses, et les termes autour du foot 16,0%.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="25%"}
+![](images/Altermap_GT3_img1.png){fig-alt="mots les + fréquents, avec des barres en fonction de leur fréquence"}
+:::
+::::::
+
+#### [**• Questionnaire « La perception du changement climatique et des vulnérabilités »**]{style="color: #7bac9c"}
+
 
 ## Résultats
-
-![](img/wip.jpg){width=300}
-
-
-
-
-
-
-
-
-
