@@ -55,10 +55,18 @@ améliorées ou abandonnées l'année prochaine, pour la phase principale.
 
 :::::: columns
 ::: {.column width="70%"}
-Un premier test a été réalisé avec des L1 UPC dans le cours de climatologie, lors du tout premier cours magistral (21/1/26). L'objectif était de recueillir les représentations mentales spontanées des étudiant·es à UPC sur les climats du Sénégal : quel mot-clé pour résumer une complexité ? quel stéréotype climatique ? 
+Un premier test a été réalisé avec des L1 UPC dans le cours de
+climatologie, lors du tout premier cours magistral (21/1/26). L'objectif
+était de recueillir les représentations mentales spontanées des
+étudiant·es à UPC sur les climats du Sénégal : quel mot-clé pour résumer
+une complexité ? quel stéréotype climatique ?
 
-La question a été posée pendant le cours,
-*via* l'application *Wooclap* (mise à disposition à UPC) : 75 étudiant·es ont répondu. Les principaux termes mentionnés sont "tropical" (20,0%), "chaud" (17,3%), "aride" (6,7%). Ensuite le terme "CAN" apparaît (nous étions 3 jours après la finale de la CAN, finale controversée) et représente 5,3% des réponses, et les termes autour du foot 16,0%.
+La question a été posée pendant le cours, *via* l'application *Wooclap*
+(mise à disposition à UPC) : 75 étudiant·es ont répondu. Les principaux
+termes mentionnés sont "tropical" (20,0%), "chaud" (17,3%), "aride"
+(6,7%). Ensuite le terme "CAN" apparaît (nous étions 3 jours après la
+finale de la CAN, finale controversée) et représente 5,3% des réponses,
+et les termes autour du foot 16,0%.
 :::
 
 ::: {.column width="5%"}
@@ -71,6 +79,42 @@ La question a été posée pendant le cours,
 
 #### [**• Questionnaire « La perception du changement climatique et des vulnérabilités »**]{style="color: #7bac9c"}
 
-Les informations collectées dans le cadre de ce questionnaire contribueront à apprécier la compréhension que les étudiant·es (Sénégal et France) ont sur le climat et les ressources en eau et des vulnérabilités hydro-climatiques. Il comprend plusieurs volets : (1) Perceptions des changements hydroclimatiques ; (2) Impacts du changement climatique ; (3) Solutions pour une meilleure résilience. Deux cartographies participatives sont envisagées en complément : l'une pour représenter les zones les plus touchées/vulnérables au changement climatique à l'échelle du pays et du Monde ; l'autre pour la représentation spatiale des problèmes d’eau au Sénégal / en France. 
+Les informations collectées dans le cadre de ce questionnaire
+contribueront à apprécier la compréhension que les étudiant·es (Sénégal
+et France) ont sur le climat et les ressources en eau et des
+vulnérabilités hydro-climatiques. Il comprend plusieurs volets : (1)
+Perceptions des changements hydroclimatiques ; (2) Impacts du changement
+climatique ; (3) Solutions pour une meilleure résilience. Deux
+cartographies participatives sont envisagées en complément : l'une pour
+représenter les zones les plus touchées/vulnérables au changement
+climatique à l'échelle du pays et du Monde ; l'autre pour la
+représentation spatiale des problèmes d’eau au Sénégal / en France.
+
+#### [**• Cartographie participative du confort thermique dans et autour des campus universitaires »**]{style="color: #7bac9c"}
+
+Nous avons invité des étudiant·es de UPC et de UCAD à partager leur
+expérience et leur perception du confort thermique autour de leur fac à
+travers une cartographie participative. Sur l'application Shiny, il
+s'agissait de cliquer sur une carte (avec un fond OpenStreetMap) pour
+placer un ou plusieurs points 🔥 chauds/inconfortables et ❄️
+confortables aux emplacements souhaités et de répondre à 3 questions :
+(i) Pourquoi les lieux 🔥 sont-ils inconfortables lors des journées
+chaudes ? ; (ii) Comment vous adaptez-vous pour éviter que ce soit trop
+désagréable ? (modification d'itinéraire, évitement, heures de
+fréquentation...) ; (iii) Pourquoi les lieux ❄️ sont-ils confortables
+lors des journées chaudes ? L’emprise spatiale du zoom initial des 2
+cartes (autour de UCAD et de UPC) est de l’ordre du kilomètre carré,
+avec (de)zoom possible. Peu ont répondu aux questions associées : est-ce
+lié à un pb de calendrier (la fin des cours, mais pas les fortes
+chaleurs !), à la formulation des questions ou à l'interface sur le
+téléphone (les zones de questions/réponses n'apparaissent pas sur la
+1ère page) ?
+
+![](images/Altermap_GT3_img2.png){fig-alt="Cartographie des points et des réponses"}
+
+Ces données pourront être utilisées dans des cours de climatologie (ex
+comparaison avec des données « objectives », des mesures de température)
+ou encore de SIG (valeurs à comparer avec % de végétation, de surfaces
+imperméabilisées, ombrage…).
 
 ## Résultats
