@@ -73,7 +73,7 @@ et les termes autour du foot 16,0%.
 :::
 
 ::: {.column width="25%"}
-![](images/Altermap_GT3_img1.png){fig-alt="mots les + fréquents, avec des barres en fonction de leur fréquence"}
+![](img/Altermap_GT3_img1.png){fig-alt="mots les + fréquents, avec des barres en fonction de leur fréquence"}
 :::
 ::::::
 
@@ -110,7 +110,7 @@ chaleurs !), à la formulation des questions ou à l'interface sur le
 téléphone (les zones de questions/réponses n'apparaissent pas sur la
 1ère page) ?
 
-![](images/Altermap_GT3_img2.png){fig-alt="Cartographie des points et des réponses"}
+![](img/Altermap_GT3_img2.png){fig-alt="Cartographie des points et des réponses"}
 
 Ces données pourront être utilisées dans des cours de climatologie (ex
 comparaison avec des données « objectives », des mesures de température)
