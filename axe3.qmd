@@ -1,7 +1,7 @@
 ---
 title: "3. La perception du changement climatique et des vulnérabilités"
 subtitle: "Projet Altermap"
-date: "2026-03-01"
+date: "2026-07-07"
 date-format: iso
 lang: fr
 format:
@@ -34,29 +34,90 @@ editor:
 
 ## Participants
 
-- [Denis CHARTIER](/equipe/chartier.html)
-- [Claude GRASLAND](/equipe/grasland2.html)
-- [**Malika MADELIN (coord.)**](/equipe/madelin2.html)
-- [**Anastasie MENDY (coord.)**](/equipe/mendy.html)
-- [Labaly TOURE](/equipe/toure2.html)
+-   [Denis CHARTIER](/equipe/chartier.html)
+-   [Claude GRASLAND](/equipe/grasland2.html)
+-   [**Malika MADELIN (coord.)**](/equipe/madelin2.html)
+-   [**Anastasie MENDY (coord.)**](/equipe/mendy.html)
+-   [Labaly TOURE](/equipe/toure2.html)
 
 ## Objectifs
 
-![](img/wip.jpg){width=300}
+Cet axe propose d'explorer la **perception du climat, du changement
+climatique et des vulnérabilités**, à différentes échelles spatiales (du
+quartier autour de son site universitaire à son pays).\
 
 ## Expériences
 
-![](img/wip.jpg){width=300}
+Plusieurs expérimentations ont été testées cette année et seront
+améliorées ou abandonnées l'année prochaine, pour la phase principale.
 
-## Résultats
+#### [**• Question « 1 mot (ou groupe de mots) relatif au(x) climat(s) du Sénégal »**]{style="color: #7bac9c"}
 
-![](img/wip.jpg){width=300}
+:::::: columns
+::: {.column width="70%"}
+Un premier test a été réalisé avec des L1 UPC dans le cours de
+climatologie, lors du tout premier cours magistral (21/1/26). L'objectif
+était de recueillir les représentations mentales spontanées des
+étudiant·es à UPC sur les climats du Sénégal : quel mot-clé pour résumer
+une complexité ? quel stéréotype climatique ?
 
+La question a été posée pendant le cours, *via* l'application *Wooclap*
+(mise à disposition à UPC) : 75 étudiant·es ont répondu. Les principaux
+termes mentionnés sont "tropical" (20,0%), "chaud" (17,3%), "aride"
+(6,7%). Ensuite le terme "CAN" apparaît (nous étions 3 jours après la
+finale de la CAN, finale controversée) et représente 5,3% des réponses,
+et les termes autour du foot 16,0%.
+:::
 
+::: {.column width="5%"}
+:::
 
+::: {.column width="25%"}
+![](img/Altermap_GT3_img1.png){fig-alt="mots les + fréquents, avec des barres en fonction de leur fréquence"}
+:::
+::::::
 
+#### [**• Questionnaire « La perception du changement climatique et des vulnérabilités »**]{style="color: #7bac9c"}
 
+Les informations collectées dans le cadre de ce questionnaire
+contribueront à apprécier la compréhension que les étudiant·es (Sénégal
+et France) ont sur le climat et les ressources en eau et des
+vulnérabilités hydro-climatiques. Il comprend plusieurs volets : (1)
+Perceptions des changements hydroclimatiques ; (2) Impacts du changement
+climatique ; (3) Solutions pour une meilleure résilience. Deux
+cartographies participatives sont envisagées en complément : l'une pour
+représenter les zones les plus touchées/vulnérables au changement
+climatique à l'échelle du pays et du Monde ; l'autre pour la
+représentation spatiale des problèmes d’eau au Sénégal / en France.
 
+#### [**• Cartographie participative du confort thermique dans et autour des campus universitaires »**]{style="color: #7bac9c"}
 
+Nous avons invité des étudiant·es de UPC et de UCAD à partager leur
+expérience et leur perception du confort thermique autour de leur fac à
+travers une cartographie participative. Sur l'application Shiny, il
+s'agissait de cliquer sur une carte (avec un fond OpenStreetMap) pour
+placer un ou plusieurs points 🔥 chauds/inconfortables et ❄️
+confortables aux emplacements souhaités et de répondre à 3 questions :
+(i) Pourquoi les lieux 🔥 sont-ils inconfortables lors des journées
+chaudes ? ; (ii) Comment vous adaptez-vous pour éviter que ce soit trop
+désagréable ? (modification d'itinéraire, évitement, heures de
+fréquentation...) ; (iii) Pourquoi les lieux ❄️ sont-ils confortables
+lors des journées chaudes ? L’emprise spatiale du zoom initial des 2
+cartes (autour de UCAD et de UPC) est de l’ordre du kilomètre carré,
+avec (de)zoom possible. Peu ont répondu aux questions associées : est-ce
+lié à un pb de calendrier (la fin des cours, mais pas les fortes
+chaleurs !), à la formulation des questions ou à l'interface sur le
+téléphone (les zones de questions/réponses n'apparaissent pas sur la
+1ère page) ?
 
+![](img/Altermap_GT3_img2.png){fig-alt="Cartographie des points et des réponses"}
+
+Ces données pourront être utilisées dans des cours de climatologie (ex
+comparaison avec des données « objectives », des mesures de température)
+ou encore de SIG (valeurs à comparer avec % de végétation, de surfaces
+imperméabilisées, ombrage…).
+
+#### [**• Analyse comparative des questionnaires Afrobarometer et Eurobarometer**]{style="color: #7bac9c"}
+
+Un travail de comparaison et d’alignement des 2 questionnaires a été mené sur les questions autour du changement climatique (CC). Plusieurs volets peuvent être distingués : (1) "Le CC en tant que problème", où AFRO est au niveau national vs. EURO au niveau mondial, global ; (2) "Les causes du CC", où un certain alignement est possible, même si EURO se concentre davantage sur les activités humaines (considérées comme principales), contrairement à AFRO où les causes naturelles sont davantage mentionnées ; (3) "Les impacts du CC", centré sur les questions de risques, bien que la correspondance entre les deux contextes ne sera pas évidente ; (4) "Sur les coûts, sur l’économie…" dont la comparaison apparaît plus délicate ; (5) "Les acteurs et actrices" ; (6) et enfin les questions assez proches sur "Les connaissances sur le CC".
 
