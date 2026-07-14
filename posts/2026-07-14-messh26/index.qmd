@@ -44,10 +44,10 @@ warning: false
 message: false
 ---
 
-- **L'objectif de ce billet est de présente un bilan de la phase test du projet ALtermap et de montrer les résultats qui ont été présentés lors de la conférence MESSH26 à Paris le 9 juillet 2020**
+- **L'objectif de ce billet est de présente un bilan de la phase test du projet ALtermap et de montrer les résultats qui ont été discutées lors des journées Altermap du 6-8 Juillet 2026 puis présentés lors de la conférence MESSH26 à Paris le 9 juillet 2026**
 
 
-
+![](img/Altermap2026.png){width=800}
 
 
 # INTRODUCTION
