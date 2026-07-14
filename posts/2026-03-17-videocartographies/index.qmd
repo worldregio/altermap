@@ -8,7 +8,7 @@ author:
     affiliation: Ingénieur de recherche CNRS / Centre pour l'analyse spatiale et la géovisualisation (RIATE)
     affiliation-url: https://riate.cnrs.fr
 date: 2026-03-17
-categories: [Cartes mentales, Subjective, Vidéo, Documentaire] # self-defined categories
+categories: [Cartes mentale, entretien, film, Axe5, Axe6, Carte sensible] # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-03-17-videocartographies/ 
 image: videocartographies.webp

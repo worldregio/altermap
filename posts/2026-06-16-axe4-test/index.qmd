@@ -15,7 +15,7 @@ author:
     affiliation: UPC, Paris 
     url: https://worldregio.github.io/altermap/equipe/grasland2.html
 date: 2026-04-17
-categories: [Carte mentale, Sénégal, questionnaire, régionalisation, gouvernance] # self-defined categories
+categories: [Carte mentale, Sénégal, questionnaire, découpage, gouvernance, mots, histoire, polarisation, Axe4] # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-06-16-axe4-test/ 
 image: decoupage.jpg

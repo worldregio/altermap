@@ -8,7 +8,7 @@ author:
     affiliation: Professeur de géographie, Université Paris Cité, UMR Géographie-cités
     affiliation-url: https://geographie-cites.cnrs.fr/
 date: 2026-04-17
-categories: [Carte mentale, Monde, Entretien] # self-defined categories
+categories: [Carte mentale, Monde, entretien, découpage, Axe1, film] # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-04-17-carte-comment/
 image: XXX-062.jpg

@@ -8,7 +8,7 @@ author:
     affiliation: Ingénieur de recherche CNRS / Centre pour l'analyse spatiale et la géovisualisation (RIATE)
     affiliation-url: https://riate.cnrs.fr
 date: 2026-03-19
-categories: [Projection, ONU, Polaire] # self-defined categories
+categories: [Carte mentale, Projection, ONU, Polaire, Axe1] # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-03-19-polaire/ 
 image: polar.png

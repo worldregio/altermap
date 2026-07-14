@@ -12,7 +12,7 @@ author:
     affiliation: USSEIN, Kaolack
     url: https://worldregio.github.io/altermap/equipe/toure2.html
 date: 2026-07-02
-categories: [Carte mentale, Monde, géomatique] # self-defined categories
+categories: [Carte mentale, Monde, Sénégal, France, questionnaire, découpage, géomatique, Numérisation, Axe1]  # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-07-02-geomatic/ 
 image: img/medit_border.png

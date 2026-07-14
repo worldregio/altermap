@@ -9,7 +9,7 @@ author:
     affiliation: UPC, Paris 
     url: https://worldregio.github.io/altermap/equipe/grasland2.html
 date: 2026-06-19
-categories: [Carte mentale, Monde, questionnaire, régionalisation] # self-defined categories
+categories: [Carte mentale, Monde, Sénégal, France, questionnaire, découpage, gouvernance, mots,  polarisation, Axe1] # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-06-19-axe1-test/ 
 image: worldmap_kaolack.jpg

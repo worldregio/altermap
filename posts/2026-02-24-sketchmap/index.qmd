@@ -8,7 +8,7 @@ author:
     affiliation: Professeur de géographie, Université Paris Cité, UMR Géographie-cités
     affiliation-url: https://geographie-cites.cnrs.fr/
 date: 2026-02-24
-categories: [Cartes mentales, Outil, Numérisation] # self-defined categories
+categories: [Carte mentale, Outil, Numérisation, Axe3, Axe2] # self-defined categories
 citation: 
   url: https://worldregio.github.io/altermap/posts/2026-02-24-sketchmap/ 
 image: sketchmap.jpg
