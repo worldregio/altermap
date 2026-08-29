@@ -36,7 +36,7 @@ editor:
 ## Participants
 
 - [**Cheik BA (coord.)**](/equipe/ba2.html)
-- [** Anne BOUHALI (coord)**](/equipe/bouhali2.html)
+- [**Anne BOUHALI (coord)**](/equipe/bouhali2.html)
 - [Mouhamad Lamine DIALLO](/equipe/diallo2.html)
 - [Moumar DIONGUE](/equipe/diongue.html)
 - [Claude GRASLAND](/equipe/grasland2.html)
