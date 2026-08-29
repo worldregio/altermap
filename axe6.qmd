@@ -1,7 +1,7 @@
 ---
 title: "6. Condition citadine étudiante : les espaces et temps du quotidien étudiant"
 subtitle: "Projet Altermap"
-date: "2026-03-01"
+date: "2026-08-29"
 date-format: iso
 lang: fr
 format:

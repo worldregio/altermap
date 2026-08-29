@@ -291,14 +291,14 @@
     "href": "axe3.html#objectifs",
     "title": "3. La perception du changement climatique et des vulnérabilités",
     "section": "Objectifs",
-    "text": "Objectifs"
+    "text": "Objectifs\nCet axe propose d’explorer la perception du climat, du changement climatique et des vulnérabilités, à différentes échelles spatiales (du quartier autour de son site universitaire à son pays)."
   },
   {
     "objectID": "axe3.html#expériences",
     "href": "axe3.html#expériences",
     "title": "3. La perception du changement climatique et des vulnérabilités",
     "section": "Expériences",
-    "text": "Expériences"
+    "text": "Expériences\nPlusieurs expérimentations ont été testées cette année et seront améliorées ou abandonnées l’année prochaine, pour la phase principale.\n\n• Question « 1 mot (ou groupe de mots) relatif au(x) climat(s) du Sénégal »\n\n\nUn premier test a été réalisé avec des L1 UPC dans le cours de climatologie, lors du tout premier cours magistral (21/1/26). L’objectif était de recueillir les représentations mentales spontanées des étudiant·es à UPC sur les climats du Sénégal : quel mot-clé pour résumer une complexité ? quel stéréotype climatique ?\nLa question a été posée pendant le cours, via l’application Wooclap (mise à disposition à UPC) : 75 étudiant·es ont répondu. Les principaux termes mentionnés sont “tropical” (20,0%), “chaud” (17,3%), “aride” (6,7%). Ensuite le terme “CAN” apparaît (nous étions 3 jours après la finale de la CAN, finale controversée) et représente 5,3% des réponses, et les termes autour du foot 16,0%.\n\n\n\n\n\n\n\n\n• Questionnaire « La perception du changement climatique et des vulnérabilités »\nLes informations collectées dans le cadre de ce questionnaire contribueront à apprécier la compréhension que les étudiant·es (Sénégal et France) ont sur le climat et les ressources en eau et des vulnérabilités hydro-climatiques. Il comprend plusieurs volets : (1) Perceptions des changements hydroclimatiques ; (2) Impacts du changement climatique ; (3) Solutions pour une meilleure résilience. Deux cartographies participatives sont envisagées en complément : l’une pour représenter les zones les plus touchées/vulnérables au changement climatique à l’échelle du pays et du Monde ; l’autre pour la représentation spatiale des problèmes d’eau au Sénégal / en France.\n\n\n• Cartographie participative du confort thermique dans et autour des campus universitaires »\nNous avons invité des étudiant·es de UPC et de UCAD à partager leur expérience et leur perception du confort thermique autour de leur fac à travers une cartographie participative. Sur l’application Shiny, il s’agissait de cliquer sur une carte (avec un fond OpenStreetMap) pour placer un ou plusieurs points 🔥 chauds/inconfortables et ❄️ confortables aux emplacements souhaités et de répondre à 3 questions : (i) Pourquoi les lieux 🔥 sont-ils inconfortables lors des journées chaudes ? ; (ii) Comment vous adaptez-vous pour éviter que ce soit trop désagréable ? (modification d’itinéraire, évitement, heures de fréquentation…) ; (iii) Pourquoi les lieux ❄️ sont-ils confortables lors des journées chaudes ? L’emprise spatiale du zoom initial des 2 cartes (autour de UCAD et de UPC) est de l’ordre du kilomètre carré, avec (de)zoom possible. Peu ont répondu aux questions associées : est-ce lié à un pb de calendrier (la fin des cours, mais pas les fortes chaleurs !), à la formulation des questions ou à l’interface sur le téléphone (les zones de questions/réponses n’apparaissent pas sur la 1ère page) ?\n\nCes données pourront être utilisées dans des cours de climatologie (ex comparaison avec des données « objectives », des mesures de température) ou encore de SIG (valeurs à comparer avec % de végétation, de surfaces imperméabilisées, ombrage…).\n\n\n• Analyse comparative des questionnaires Afrobarometer et Eurobarometer\nUn travail de comparaison et d’alignement des 2 questionnaires a été mené sur les questions autour du changement climatique (CC). Plusieurs volets peuvent être distingués : (1) “Le CC en tant que problème”, où AFRO est au niveau national vs. EURO au niveau mondial, global ; (2) “Les causes du CC”, où un certain alignement est possible, même si EURO se concentre davantage sur les activités humaines (considérées comme principales), contrairement à AFRO où les causes naturelles sont davantage mentionnées ; (3) “Les impacts du CC”, centré sur les questions de risques, bien que la correspondance entre les deux contextes ne sera pas évidente ; (4) “Sur les coûts, sur l’économie…” dont la comparaison apparaît plus délicate ; (5) “Les acteurs et actrices” ; (6) et enfin les questions assez proches sur “Les connaissances sur le CC”."
   },
   {
     "objectID": "axe3.html#résultats",
@@ -361,21 +361,21 @@
     "href": "axe1.html#objectifs",
     "title": "1. Représentations et découpages du Monde",
     "section": "Objectifs",
-    "text": "Objectifs"
+    "text": "Objectifs\nL’objectif de l’axe 1 du projet Altermap est de comprendre la façon dont les étudiants se représentent le Monde et son découpage en région, en combinant des approches cartographiques et sémantiques, qualitatives et quantitatives. Nous entendons par “région du Monde” le premier niveau de découpage en dessous du niveau global. Il s’agit en général d’ensemble regroupant plusieurs pays (ex. les continents) mais il peut aussi arriver qu’un très grand pays soit considéré à lui seul comme une région du Monde."
   },
   {
     "objectID": "axe1.html#expériences",
     "href": "axe1.html#expériences",
     "title": "1. Représentations et découpages du Monde",
     "section": "Expériences",
-    "text": "Expériences"
+    "text": "Expériences\nLes expériences pédagogiques qui ont été menées dans le cadre de l’axe 1 ont été facilitées par l’expérience acquise dans le projet EuroBroadMap (2007-2012) dont nous nous sommes largement inspirés pour construire le questionnaire Altermap (Beaugitte & al., 2012 ; Didelon-Loiseau & Grasland, 2014). Le fait que ce questionnaire ait été précisément administré à Dakar et Paris en 2008 nous a poussés à reprendre certaines questions à l’identique pour examiner les évolutions temporelles des représentations (e.g. appréciation des Etats-Unis, de la Chine ou de la Russie).\n\nDonnées de cadrage\n\n\n\nVision du Monde\n\n\n\nDécoupage du Monde\n\nMais nous avons aussi décidé de supprimer certaines questions et d’en ajouter d’autres dans la partie questionnaire, et aussi de tester l’intérêt d’une approche plus qualitative sous la forme d’entretiens ou de captation du tracé des cartes mentales sous forme de film."
   },
   {
     "objectID": "axe1.html#résultats",
     "href": "axe1.html#résultats",
     "title": "1. Représentations et découpages du Monde",
     "section": "Résultats",
-    "text": "Résultats"
+    "text": "Résultats\nOn peut résumer brièvement quelques enseignements de la phase test, par ailleurs disponibles de façon plus détaillée dans le billet de blog Altermap : Axe 1 Représentations et découpages du Monde en France et au Sénégal\n\nSaillance et polarisation des pays du Monde\nLes réponses à la double question “citez cinq pays où vous aimeriez vivre et cinq pays où vous n’aimeriez pas vivre dans un futur proche” demeurent particulièrement éclairante pour comprendre les représentations du Monde des étudiants. La saillance, définie comme la part des étudiants qui citent un pays, positivement ou négativement peu importe, permet de repérer les zones d’attention et les “blancs” des cartes mentales. Un pays cité négativement demeure connu voire reconnu, tandis que les pays qui ne sont jamais cités sont placés en quelque sorte “hors du Monde”. Quant à la polarisation, définie comme un indice variant entre -1 (tous les avis sont négatifs) et +1 (tous les avis sont positifs), elle permet de repérer des lieux qui font consensus à l’intérieur d’un groupe et ceux qui suscitent au contraire des clivages ou des débats.\n\n\n\nListe de mots associés à l’Afrique, la Méditerranée et l’Europe\nAlors que le projet EuroBroadMap se limitait à demander aux étudiants de 18 pays du Monde les cinq mots qu’ils associaient à “Europe”, nous avons opté ici pour un dispositif en miroir en demandant aux étudiants français et sénégalais de définir cinq mots qu’ils associaient à “Europe”, “Méditerranée” et “Afrique”. Nous y reviendrons dans la partie de synthèse.\n\n\nDécoupage du Monde en 2 à 15 régions\nCette activité, qui avait été au fondement du projet EuroBroadMap en 2008, est celle qui a suscité le plus de difficultés et a abouti à un échec partiel lors de son administration auprès des étudiants de Kaolack au Sénégal. Le choix d’une projection polaire semble avoir “désorienté” les étudiants, au propre comme au figuré, au point que seul un tiers des cartes de découpages produites à Kaolack ont pu être numérisées et que, parmi celles-ci, beaucoup comportent des incohérences involontaires dans les dénominations."
   },
   {
     "objectID": "axe4.html",
@@ -1173,28 +1173,28 @@
     "href": "axe0.html",
     "title": "Objectif des groupes de travail",
     "section": "",
-    "text": "Le premier séjour des enseignants-chercheurs français à Dakar en janvier 2026 a permis de rencontrer les collègues sénégalais et de proposer six thèmes pouvant se prêter à des expériences pédagogiques dans le domaine des cartes mentales en France et au Sénégal.Ces thèmes ont été ensuite soumis à l’ensemble des participants afin que ceux-ci puissent se positionner sur ceux qui les intéressent le plus. On a demandé également à ceux qui le souhaitaient de se proposer comme coordinateurs. Voici le résultat de la consultation au 1er mars 2026\n\n\n\nParticipants"
+    "text": "Le premier séjour des enseignants-chercheurs français à Dakar en janvier 2026 a permis de rencontrer les collègues sénégalais et de proposer six thèmes pouvant se prêter à des expériences pédagogiques dans le domaine des cartes mentales en France et au Sénégal.Ces thèmes ont été ensuite soumis à l’ensemble des participants afin que ceux-ci puissent se positionner sur ceux qui les intéressent le plus. On a demandé également à ceux qui le souhaitaient de se proposer comme coordinateurs. Voici le résultat de la première consultation effectuée en mars 2026\n\n\n\nParticipants"
   },
   {
     "objectID": "axe0.html#constitution-des-groupes-janvier-février-2026",
     "href": "axe0.html#constitution-des-groupes-janvier-février-2026",
     "title": "Objectif des groupes de travail",
     "section": "",
-    "text": "Le premier séjour des enseignants-chercheurs français à Dakar en janvier 2026 a permis de rencontrer les collègues sénégalais et de proposer six thèmes pouvant se prêter à des expériences pédagogiques dans le domaine des cartes mentales en France et au Sénégal.Ces thèmes ont été ensuite soumis à l’ensemble des participants afin que ceux-ci puissent se positionner sur ceux qui les intéressent le plus. On a demandé également à ceux qui le souhaitaient de se proposer comme coordinateurs. Voici le résultat de la consultation au 1er mars 2026\n\n\n\nParticipants"
+    "text": "Le premier séjour des enseignants-chercheurs français à Dakar en janvier 2026 a permis de rencontrer les collègues sénégalais et de proposer six thèmes pouvant se prêter à des expériences pédagogiques dans le domaine des cartes mentales en France et au Sénégal.Ces thèmes ont été ensuite soumis à l’ensemble des participants afin que ceux-ci puissent se positionner sur ceux qui les intéressent le plus. On a demandé également à ceux qui le souhaitaient de se proposer comme coordinateurs. Voici le résultat de la première consultation effectuée en mars 2026\n\n\n\nParticipants"
   },
   {
     "objectID": "axe0.html#réalisation-dexpériences-pilotes-mars-juin-2026",
     "href": "axe0.html#réalisation-dexpériences-pilotes-mars-juin-2026",
     "title": "Objectif des groupes de travail",
     "section": "Réalisation d’expériences pilotes (Mars-Juin 2026)",
-    "text": "Réalisation d’expériences pilotes (Mars-Juin 2026)\nIl revient maintenant à chaque groupe de travail de se réunir pour échanger des idées d’expériences pilotes à réaliser entre mars et juin 2026 dans le cadre de nos enesignements. Ces expériences seront idéalement conduites en parallèle au Sénégal et en France afin d’en comparer les résultats. On croisera également les résultats des différents groupes de travail afin de mettre à jour des interactions possibles ou des partages d’expériences."
+    "text": "Réalisation d’expériences pilotes (Mars-Juin 2026)\nIl est ensuite revenu à chaque groupe de travail de se réunir pour échanger des idées d’expériences pilotes et les réaliser entre mars et juin 2026 dans le cadre de nos enseignements. Ces expériences devaient idéalement être conduites en parallèle sur des étudiants au Sénégal et en France afin d’en comparer les résultats. Même lorsque les expériences portaient sur les étudiants d’un seul pays, les résultats ont été analysés conjointement par les enseignants des deux pays.\nLes résultats de certaines enquêtes réalisées auprès des étudiants ont été restituées à ces derniers sous la forme de billets de blog qu’ils ont pu consulter et qui ont fait alors l’objet de discussions en cours ou en TD :\n\nAltermap : Axe 1 Représentations et découpages du Monde en France et au Sénégal\nAltermap : Axe 4 perception des maillages territoriaux au Sénégal"
   },
   {
     "objectID": "axe0.html#séminaire-de-paris-6-8-juillet-2026",
     "href": "axe0.html#séminaire-de-paris-6-8-juillet-2026",
     "title": "Objectif des groupes de travail",
     "section": "Séminaire de Paris (6-8 Juillet 2026)",
-    "text": "Séminaire de Paris (6-8 Juillet 2026)\nLe premier séminaire du projet réunira l’ensemble des groupes de travail sur le campus Condorcet à Paris du 6 au 8 juillet 2026. Il permettra de croiser les résultats des expériences obtenues et de définir des priorités et une stratégie pour l’année universitaire 2026-27 où le projet entrera dans sa phase principale. C’est en effet au cours de cette année universitaire que l’on réalisera des expériences à une échelle plus large, mobilisant les étudiants comme sujet mais aussi comme acteurs des études de cartes mentales."
+    "text": "Séminaire de Paris (6-8 Juillet 2026)\nLe premier séminaire du projet a réuni l’ensemble des groupes de travail sur le campus Condorcet à Paris du 6 au 8 juillet 2026. Il a permis de croiser les résultats des expériences obtenues et de définir des priorités et une stratégie pour l’année universitaire 2026-27 où le projet entrera dans sa phase principale. C’est en effet au cours de cette année universitaire que l’on réalisera des expériences à une échelle plus large, mobilisant les étudiants comme sujet mais aussi comme acteurs des études de cartes mentales. A l’issue de ce séminaire, chacun des axes de travail a mis à jour la page consacrée à ses objectifs\nUne synthèse du projet a par ailleurs été proposée le 9 juillet 2026 à l’occasion du colloque MESSH 2026 :\n\n“Combiner méthodes qualitatives et quantitatives pour l’analyse de cartes mentales : retour d’expérience du projet pédagogique franco-sénégalais Altermap”"
   },
   {
     "objectID": "posts.html",
@@ -1671,5 +1671,19 @@
     "title": "6. Condition citadine étudiante : les espaces et temps du quotidien étudiant",
     "section": "Notes de bas de page",
     "text": "Notes de bas de page\n\n\nDans le cadre du cours d’enquêtes qualitatives assuré par A. Doron et J.B. Lanne en Licence 2 géographie en 2025/2026.↩︎"
+  },
+  {
+    "objectID": "axe1.html#a-suivre",
+    "href": "axe1.html#a-suivre",
+    "title": "1. Représentations et découpages du Monde",
+    "section": "A suivre",
+    "text": "A suivre\nAu cours de l’année universitaire 2026-27, nous comptons reprendre le questionnaire sur un échantillon plus large d’étudiants des deux pays en corrigeant la formulation des questions qui ont posé le plus de problèmes. Nous demeurerons sur le niveau L3 pour la population cible des enquêtes mais nous associerons des étudiants de master ou de doctorat dans le traitement des résultats. Deux pistes de travail nouvelles seront lancées.\n\nArticuler les approches statistiques et géomatiques\nPour l’analyse des cartes de découpage du Monde, il est important d’associer des approches statistiques et géomatiques ce qui pourra être fait dans le cadre des cours de master. L’analyse statistique permettra par exemple de repérer les noms de régions du Monde les plus fréquentes tandis que l’approche géomatique permettra d’analyser leurs tracés. Ces analyses pourront être effectuées conjointement avec les logiciel libre R, Qgis et Observable. On trouvera une première esquisse de ces perspectives dans le billet de blog suivant :\n\nAnalyse d’un ensemble de cartes mentales à l’aide d’outils de géomatique et de cartographie\n\n\n\n\nArticuler les approches qualitatives et quantitatives des découpages du Monde\nNous n’avons pas suffisamment hybridé les approches qualitatives et quantitatives ou, plus précisément, les approches par questionnaire et l’entretien semi-directif. Ce qui est dommage, notamment dans le cas du tracé de cartes mentales où l’on peut apprendre beaucoup de choses en filmant le tracé (ordre, minutage, hésitations, …) et en écoutant les explications données par l’enquêté. Une première expérience a été menée auprès d’un étudiant auquel on a demandé de commenter son découpage tout en dessinant, ce qui a permis d’enregistrer les explications et de minuter le temps passé. On a alors pu reconstituer sous forme de bande dessinée les étapes du découpage ce qui a permis d’analyser des moments de certitude ou d’incertitude, des hésitations, des remords. Cette approche, qui rejoint des expériences menées dans le domaine de la cartographie sensible, nous semble particulièrement prometteuse."
+  },
+  {
+    "objectID": "axe1.html#références",
+    "href": "axe1.html#références",
+    "title": "1. Représentations et découpages du Monde",
+    "section": "Références",
+    "text": "Références\n\nBeauguitte, L., Didelon-Loiseau, C., & Grasland, C. (2012). Le projet EuroBroadMap: Visions de l’Europe dans le monde. Politique européenne, 37(2), 156-167.\nDidelon-Loiseau, C., & Grasland, C. (2014). Internal and external perceptions of Europe/the EU in the world through mental maps. In Communicating Europe in times of crisis: External perceptions of the European Union (pp. 65-94). London: Palgrave Macmillan UK.\nMontello, D. R., Friedman, A., & Phillips, D. W. (2014). Vague cognitive regions in geography and geographic information science. International Journal of Geographical Information Science, 28(9), 1802–1820."
   }
 ]
