@@ -1,0 +1,950 @@
+---
+title: "Le changement climatique dans les questionnaires Afrobarometer 2023 & EuroBarometer 2025"
+description: "Test de mise en adéquation des deux bases"
+author:
+  - name: Claude GRASLAND
+    affiliation: UPC, Paris 
+    url: https://worldregio.github.io/altermap/equipe/grasland2.html
+  - name: Malika MADELIN
+    affiliation: UPC, Paris
+    url: https://worldregio.github.io/altermap/equipe/madelin2.html 
+  - name: Anastasie MENDY
+    affiliation: UCAD, Dakar
+    url: https://worldregio.github.io/altermap/equipe/mendy2.html    
+  - name: Denis CHARTIER
+    affiliation: UPC, Paris
+    url: https://worldregio.github.io/altermap/equipe/chartier.html    
+date: 2026-09-06
+categories: [Sénégal, France, questionnaire, Axe3, climat, Eurobarometer, Afrobarometer] # self-defined categories
+citation: 
+  url: https://worldregio.github.io/altermap/posts/2026-09-06-axe3-survey/ 
+image: img/surveys.png
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+bibliography: references.bib
+echo: false
+warning: false
+message: false
+---
+
+
+
+```{r}
+library(tidyverse,quietly = T, verbose=F,warn.conflicts = F)
+library(questionr,quietly = T, verbose=F)
+library(gtsummary,quietly = T, verbose=F)
+library(GGally,quietly = T, verbose=F)
+library(ggstats)
+library(labelled,quietly = T, verbose=F)
+library(haven,quietly = T, verbose=F)
+library(car,quietly = T, verbose=F)
+library(parameters,quietly = T, verbose=F)
+library(knitr)
+library(survey)
+library(sf)
+library(mapsf)
+library(beanplot)
+theme_gtsummary_language(language="fr",decimal.mark = ",",big.mark = "")
+```
+
+
+## Objectif
+
+Dans le cadre de l'axe 3 du projet Altermap on se propose de mettre en relation les deux grands questionnaires Eurobarometer & Afrobarometer en ciblant particulièrment les questions relatives au changement climatique et la perception des risques associés. 
+
+
+# A. IMPORTATION 
+
+
+## A.1 Afrobarometer 2023
+
+Nous avons retenu l'édition la plus récente de données harmonisées entre les différents pays africains de l'Afrobarometer, soit la vague n°9, disponible [ici](https://www.afrobarometer.org/data/merged-data/).
+
+On importe l'ensemble du fichier que l'on convertit en factor, puis on construit un dictionnaire des variables en nous servant des labels.
+
+```{r, eval=FALSE}
+## EXECUTER UNE SEULE FOIS ##
+abm_base <-read_sav("../../data/Axe2_survey/abm2023/abm2023.sav")
+abm_base<-to_factor(abm_base)
+abm_meta<-look_for(abm_base)
+saveRDS(abm_base,"../../data/Axe2_survey/data/abm2023.RDS")
+saveRDS(abm_meta,"../../data/Axe2_survey/data/abm2023_meta.RDS")
+
+```
+
+
+
+
+## A.2 EuroBarometer 2025
+
+Nous avons retenu l'Eurobarometer SP565 (enquête 103.2), spécialement consacré au changement climatique et , disponible [ici](https://data.europa.eu/data/datasets/s3472_103_2_sp565_eng?locale=en). 
+
+
+
+On importe l'ensemble du fichier que l'on convertit en factor, puis on construit un dictionnaire des variables en nous servant des labels.
+
+```{r, eval=FALSE}
+## EXECUTER UNE SEULE FOIS ##
+ebm_base <-read_sav("../../data/Axe2_survey/ebm2025/ZA9127_v1-0-0.sav")
+ebm_base<-to_factor(ebm_base)
+ebm_meta<-look_for(ebm_base)
+
+saveRDS(ebm_meta,"../../data/Axe2_survey/data/ebm2025_meta.RDS")
+saveRDS(ebm_base,"../../data/Axe2_survey/data/ebm2025.RDS")
+
+```
+
+
+
+
+
+# B. VARIABLES EXPLICATIVES
+
+On charge les deux fichiers et leurs métadonnées : 
+
+```{r}
+abm <- readRDS("../../data/Axe2_survey/data/abm2023.RDS")
+abm_meta<-readRDS("../../data/Axe2_survey/data/abm2023_meta.RDS")
+
+ebm <- readRDS("../../data/Axe2_survey/data/ebm2025.RDS")
+ebm_meta<-readRDS("../../data/Axe2_survey/data/ebm2025_meta.RDS")
+```
+
+## B.1 Métadonnées 
+
+On va commencer par créer deux fichiers (un pour chaque enquête) ne contenant que les identifiants, la source, l'année et le pondérant, c'est-à-dire les informations de bases qui doivent figurer dans tout fichier. Ces colonnes permettront notamment l'enrichissement futur de la base grâce à l'identification unique.
+
+```{r}
+a <- abm %>% select(id=RESPNO, 
+                    wgt=withinwt_hh) %>% 
+  mutate(id=as.character(id),
+         wgt=as.numeric(wgt),
+         survey = "Afrobarometer", 
+         year=2023) %>%
+  select(3,4,1,2)
+kable(head(a), caption ="Métadonnées Afrobarometer 2023")
+
+e <- ebm %>% select(id=uniqid, wgt = w1) %>% 
+    mutate(id=as.character(id),
+         wgt=as.numeric(wgt),
+         survey = "Eurobarometer", 
+         year=2025)%>%
+  select(3,4,1,2)
+kable(head(e), caption ="Métadonnées Eurobarometer 2023")
+```
+
+## B.2 Localisation
+
+Il s'agit ici d'informations indispensables pour localiser les personnes enquêtées (pays) mais aussi examiner la stratification spatiale (strates) et produire d'éventuelles analyses cartographiques des résultats.
+
+
+### Pays d'enquête
+
+On extrait le nom des pays (en anglais) et on fusionne au passage les deux Allemagnes séparées dans l'enquête EuroBroadMap.
+
+```{r}
+a$country<-as.character(abm$COUNTRY)
+kable(table(a$country), 
+      col.names = c("Pays","Effectif"),
+      caption= "Pays présents dans l'enquête Afrobarometer 2023",
+      row.names = T)
+
+e$country<-substr(as.character(ebm$country),6,100)
+e$country[e$country=="- Germany - West"]<-"Germany"
+e$country[e$country=="Germany East"]<-"Germany"
+e$country[e$country=="Cyprus (Republic)"]<-"Cyprus"
+e$country[e$country=="The Netherlands"]<-"Netherlands"
+e$country[e$country=="pain"]<-"Spain"
+kable(table(e$country), 
+      col.names = c("Pays","Effectif"),
+      caption= "Pays présents dans l'enquête Afrobarometer 2023",
+      row.names = T)
+```
+
+### Code ISO3
+
+On transforme les noms de pays en code ISO3 afin de pouvoir ultérieurement visualiser cartographiquement les résultats.
+
+```{r}
+a$iso3 <- as.factor(a$country)
+levels(a$iso3)<-c("AGO"       ,         "BEN"          ,       "BWA"           ,   "BFA"    ,     
+"CPV"   ,         "CMR"    ,          "COG" ,    "CIV"        ,
+ "SWZ"      ,        "ETH"     ,         "GAB"              ,   "GMB"               ,
+"GHA"          ,       "GIN"        ,        "KEN"               ,  "LSO"              ,
+"LBR"         ,      "MDG"     ,       "MWI"               , "MDV"                 ,
+"MRT"       ,     "MUS"       ,      "MAR"               ,"MOZ"           ,
+ "NAM"           ,    "NER"            ,     "NGA"              , "STP",
+"SEN"            ,   "SYC"        ,    "SLE"         , "ZAF"         ,
+ "SDN"               ,  "TZA"           ,   "TGO"                 , "TUN"              ,
+"UGA"               , "ZMB"              ,  "ZWE"    )
+
+a$iso3<-as.character(a$iso3)
+
+
+e$iso3 <- as.factor(e$country)
+levels(e$iso3)<-c("AUT",        "BEL"   ,     "BGR",       "HRV",        "CYP",         "CZE",
+"DNK",        "EST"    ,    "FIN" ,       "FRA",         "DEU"    ,    "GRC" ,       
+ "HUN"    ,    "IRL"   ,     "ITA"  ,        "LVA"   ,      "LTU"    ,  "LUX"    ,
+"MLT"    ,      "NLD",    "ESP" ,          "POL"     ,    "PRT"   ,    "ROM"    ,   
+"SVK" ,      "SVN"   ,    "SWE")
+
+e$iso3<-as.character(e$iso3)
+
+
+
+```
+
+
+On représente les 66 pays présents dans la réunion des deux enquêtes : 
+
+
+```{r}
+map<-readRDS("../../data/Axe2_survey/geom/world_riate.RDS")
+grat<-st_read("../../data/Axe2_survey/geom/grat30.geojson")
+map<-st_transform(map, st_crs(grat))
+don <- rbind(a,e)  %>% group_by(ISO3=iso3) %>% count()
+
+mapdon <- inner_join(map,don)
+
+mf_map(mapdon, type="base")
+mf_map(grat, type="base", lty=2, add=T, col="lightblue")
+mf_map(map,type="base",add=T)
+mf_map(mapdon,type="base",add=T,col="lightyellow")
+mf_label(mapdon,var = "ISO3",col = "red",overlap = F, cex=0.4,halo=T)
+mf_layout(title = "Les 66 pays présents dans Afrobarometer 2023 & Eurobarometer 2025", 
+          credits = "Projet Altermap - Axe 3",
+          arrow=F,
+          frame=T
+          )
+```
+
+### Régions infranationale
+
+Les deux enquêtes indiquent unniveau infranational de découpage qui peut être intéressant pour des analyses plus géographiques même si les effectifs sont faibles.  Il faut faire un petit programme dans le cas de l'Eurobaromètre pour fusionner des colonnes ...
+
+```{r}
+a$region <-as.character(abm$REGION)
+
+
+
+# Create regional code
+mat<-ebm[,567:593]
+mat<-as.matrix(mat)
+mat<-gsub("NA","",mat)
+x<-apply(mat,1,paste, collapse="")
+x<-gsub("NA","",x,ignore.case = F)
+
+e$region <-as.character(x)
+```
+
+
+On peut indiquer à titre d'exemple la ventilation des effectifs d'enquête en France et au Sénégal en comparant le nombre de questionnaire et le poids après redressement. Ceci permet de vérifier su la stratification des enquêtes a bien été faite proportionellement à la population réelle des régions.
+
+- **Sénégal** : Il y a très peu de différence entre les effectifs collectés et le poids réell dans la population.
+
+```{r}
+tab1 <- a %>% filter(iso3 =="SEN") %>% group_by(region) %>% summarise(n= n(), w=sum(wgt))
+kable(tab1, caption = "Effectif d'enquête par régions au Sénégal",
+      col.names = c("Région", "Effectif", "Poids"), digits=c(0,0,1))
+```
+
+- **France** : Il y a des écarts plus importants entre les effectifs d'enquête et le poids en termes de population (ex. 9 enquêtes seulement en pays de Loire pour un poids attendu de 45). Cela s'explique sans doute par le fait que les strates n'ont pas été constituées par régions mais dans une maille plus large telle que les ZEAT. Les régions métropolitaines (Ile de France, Rhône-ALpes, PACA) sont toutes sur-représentées.
+
+
+```{r}
+tab1 <- e %>% filter(iso3 =="FRA") %>% group_by(region) %>% summarise(n= n(), w=sum(wgt))
+kable(tab1, caption = "Effectif d'enquête par régions en France",
+      col.names = c("Région", "Effectif", "Poids"), digits=c(0,0,1))
+```
+
+### Urbain-rural
+
+Les deux enquêtes proposent une typologie en trois modalités comme on peut le voir dans les tableau ci-dessous :
+
+- **Typologie Urbain-Rural dans Afrobarometer 2023**
+
+```{r}
+kable(table(abm$URBRUR), col.names = c("modalités","effectif"))
+
+```
+- **Typologie Urbain-Rural dans Eurobarometer 2025**
+
+```{r}
+kable(table(ebm$p6), col.names = c("modalités","effectif"))
+
+```
+
+On décide d'harmoniser en isolant le rural vis à vis des autres modalités urbaine et semi-urbaine que l'on regroupe. On aboutit à un tableau a priori conforme à l'intuition que l'urbanisation est plus importante dans les pays européens que dans les pays africains, ce qui ne serait pas le cas si on avait regroupé la catégorie intermédiaire avec le rural.
+
+- **Variable urbain-rural harmonisée**
+
+```{r}
+a$urbrur<-abm$URBRUR
+levels(a$urbrur) <- c("Urban","Rural","Urban")
+a$urbrur<-as.character(a$urbrur)
+
+e$urbrur<-ebm$p6
+levels(e$urbrur) <- c("Urban","Urban","Rural")
+e$urbrur<-as.character(e$urbrur)
+
+p<-rbind(a,e)
+
+p %>% tbl_summary(include=survey, by=urbrur, percent = "row") %>% add_p()
+
+
+```
+
+
+
+
+## B.3 Individus
+
+
+### Sexe/Genre
+
+l'Afromarometer 2023 emploie le concept de *sexe* (en deux modalités) tandis que  l'Eurobarometer 2025  semble employer le concept de *genre* (en trois modalités). Toutefois l'analyse des deux tableaux montre que l'EuroBarometer est probablement hypocrite dans la mesure où les cas non binaires sont très peu nombreux et surtout mélangés avec les non réponses donc impossible à identifier
+
+- **Variable** ***sexe*** **dans Afrobarometer 2023**
+
+```{r}
+kable(table(abm$Q100), col.names = c("modalités","effectif"))
+
+```
+- **Variable** ***genre*** **dans Eurobarometer 2025**
+
+```{r}
+kable(table(ebm$d10), col.names = c("modalités","effectif"))
+
+```
+
+
+
+On décide donc de passer en non réponses les 34 cas de l'Eurobarometre et d'appeler la variable harmonisée *sexe* : 
+
+```{r}
+a$sex <- abm$Q100
+levels(a$sex)<-c("Man","Woman")
+a$sex<-as.character(a$sex)
+
+e$sex <- ebm$d10
+levels(e$sex)<-c("Man","Woman",NA)
+e$sex<-as.character(e$sex)
+
+p<-rbind(a,e)
+p %>% tbl_summary(include=survey, by=sex, percent = "row") %>% add_p()
+```
+
+
+### Âge 
+
+Cette variable est à manipuler avec précaution dans R car c'est au départ un factor. Et si on convertit en numérique sans passer par le mode caractère il peut arriver qu'un individu de 19 ans (2e modalité) se retouve âge de ... 2 ans ! Il faut faire attention également aux valeurs extrêmes type "-de 15 ans" et "plus de 100 ans". Mais au prix de ces précautions on obtient une variable quantitative donnant l'axe des individus.
+
+```{r}
+a$age <-abm$Q1
+#levels(a$age)
+a$age <- as.numeric(as.character(a$age))
+
+
+
+e$age <-ebm$d11
+#levels(e$age)
+levels(e$age)[1]<-"15"
+levels(e$age)[84]<-"98"
+e$age <- as.numeric(as.character(e$age))
+
+
+```
+
+Nous ne discutions pas immédiatement du problème du choix des classes d'âge mais il convient de souligner tout de suite l'importance différentede structure par âge des deux échantillons. L'âge médian est en effet de **35 ans** pour l'échantillon de l'Afrobarometer 2023 contre **54 ans** pour celui de l'Eurobarometer 2025. Il faudra donc bien réfléchir à ce que l'on entend par "*Jeunes*", "*Adultes*" ou "*Vieux*" dans chacun des deux contextes ..
+
+```{r}
+p<-rbind(a,e)
+  beanplot(p$age~p$survey,ll = 0, main = "Structure par âge des répondants des deux enquêtes",col=list("pink", "lightblue"),overallline = "median")
+```
+
+
+### Génération
+
+La génération, entendue comme l'année de naissance est une variable fondamentale pour l'analyse et l'interprétation des résultats. Elle se déduit approximativement de l'âge par soustraction, faute de disposer d'une information plus précise dans les deux questionnaires. On tient évidemment compte du décalage de deux ans entre les deux enquêtes.
+
+```{r}
+a$gen <- 2023-a$age
+e$gen <- 2025-e$age
+summary(a$gen)
+summary(e$gen)
+```
+
+L'analyse des valeurs médianes nous indique que dans l'échantillon Afrobarometer, 50% des personnes interrogées sont nées après 1985 tandis que dans l'échantillon EuroBarometer 50% sont nées après 1971, soit un décalage de 14 ans.
+
+```{r}
+p<-rbind(a,e)
+  beanplot(p$gen~p$survey,ll = 0, main = "Année de naissance des répondants des deux enquêtes",col=list("pink", "lightblue"),overallline = "median")
+```
+
+
+On ajoute une partitition en 5 classes (gen5) élaborée par les travaux des sociologues Strauss et Howe. Cette typologie est a priori surtout valable dans le monde occidental et sans doute davantage journalistique que scientifique. Mais elle recoupe par certains aspects l'histoire coloniale de l'Afrique.
+
+- 1. Silent (< 1946)
+- 2. Baby Boomers (1946-1964)
+_ 3. Generation X (1965-1980)
+- 4. Generation Y ou 'Millenials' (1981-1996)
+- 5. Generation Z (1997-2012)
+
+
+
+```{r}
+a$gen5 <- cut(a$gen, breaks= c(1910, 1945, 1965, 1981, 1997,2010))
+levels(a$gen5) <- c("1. Ancient (1910-1945)",
+                    "2. Boomers (1946-1964)",
+                    "3. Gen. X  (1965-1980)",
+                    "4. Gen. Y  (1981-1996)",
+                    "5. Gen. Z  (1997-2012)")
+a$gen5 <- as.character(a$gen5)
+
+e$gen5 <- cut(e$gen, breaks= c(1900, 1945, 1965, 1981,1997, 2010))
+levels(e$gen5) <- c("1. Ancient (1910-1945)",
+                    "2. Boomers (1946-1964)",
+                    "3. Gen. X  (1965-1980)",
+                    "4. Gen. Y  (1981-1996)",
+                    "5. Gen. Z  (1997-2012)")
+e$gen5 <- as.character(e$gen5)
+
+p<-rbind(a,e)
+p %>% tbl_summary(include=gen5, by=survey, percent = "column") %>% add_p()
+
+
+```
+Il apparaît en tous les cas très clairement une très forte différence de répartition entre les deux échantillons. Et si on admet que le étudiants  universitaires qui seront ciblés par les travaux d'Altermap se situent plutôt dans la génération Z, alors on voit que l'échantillon sera potentiellement plus important en Afrique qu'en Europe, même si cela est à nuancer par le niveau d'étude ...
+
+
+### Niveau d'éducation
+
+Les choses se corsent un peu avec le niveau d'éducation mais l'harmonisation est possible car les catégories sont détaillées dans chacune des enquêtes :
+
+
+- **Variable** ***niveau d'étude (Q94)*** **dans Afrobarometer 2023**
+
+```{r}
+kable(table(abm$Q94), col.names = c("modalités","effectif"))
+```
+- **Variable** ***niveau d'étude (d9a) *** **dans Eurobarometer 2025**
+
+```{r}
+kable(table(ebm$d9a), col.names = c("modalités","effectif"))
+```
+
+On propose de se ramener à quatre paliers correspondant classiquement aux différents cycles
+
+
+- 0 : aucune scolarisation ou informelle
+- 1 : scolarisation primaire
+- 2 : scolarisation secondaire
+- 3 : scolarisation supérieure
+
+
+
+- **Variable niveau d'étude harmonisée**
+
+```{r}
+a$edu_abm <- abm$Q94 
+a$edu_ebm <- NA
+a$edu <-a$edu_abm
+levels(a$edu) <-c(NA,"0. None/Informal","0. None/Informal","1. Primary","1. Primary","2. Secondary","2. Secondary","3. Superior","3. Superior","3. Superior","3. Superior",NA,NA)
+a$edu<-as.character(a$edu)
+
+e$edu_abm<-NA
+e$edu_ebm <- ebm$d9a
+e$edu<-e$edu_ebm
+levels(e$edu) <-c("0. None/Informal","1. Primary","2. Secondary","2. Secondary","2. Secondary","3. Superior","3. Superior","3. Superior","3. Superior","3. Superior","3. Superior",NA,NA)
+a$edu<-as.character(a$edu)
+
+
+p<-rbind(a,e)
+p %>% tbl_summary(include=survey, by=edu, percent = "row") %>% add_p()
+
+```
+
+
+### étudiant
+
+Plutôt que de chercher à harmoniser la variable occupation dans les deux enquêtes, nous limiterons notre harmonisation au repérage des personnes qui se sont déclarées "*etudiant.e*" afin d'avoir une idée de l'effectif disponible dans l'ensemble des deux enquêtes :
+
+```{r}
+a$stu <- as.factor(abm$Q93B=="Student")
+levels(a$stu) <-c("No","Yes")
+
+e$stu <- as.factor(ebm$d15a=="Student")
+levels(e$stu) <-c("No","Yes")
+
+p<-rbind(a,e)
+p %>% tbl_summary(include=survey, by=stu, percent = "row") %>% add_p()
+
+
+```
+
+Comme on peut le voir l'effectif est très faible mais relativement comparable dans les deux enquêtes: de l'ordre de 7 à 9% des personnes interrogées déclarent un statut d'étudiant.
+
+Nous effectuons un zoom sur la France et le Sénegal pour avoir une idée plus précise de la base dont nous disposerons pour comparer ensuite à nos propres enquêtes à UPC et l'UCAD.
+
+```{r}
+p %>% filter(iso3 %in% c("FRA","SEN")) %>% tbl_summary(include=country, by=stu, percent = "row") %>% add_p()
+```
+
+Nous disposerons donc dans chaque pays d'un petit échantillon de référence d'environ 100 personnes (soit 8 à 9% des personnes enquêtées) qu'on pourra comparer à nos résultats d'enquête.
+
+
+# C. VARIABLES A EXPLIQUER
+
+On part du document de comparaison établi par Malika Madelin et on essaye de créer quelques variables conjointes aux deux enquêtes tout en gardant la trace des variables propres à chaque enquête dans leur forme originale.
+
+## C.1 Connaissance 
+
+Les personnes intrrogées ont-elles entendu parler du changement climatque. Cette question n'est disponible que dans l'Afrobarometer (*Q64 : Have you heard about climate change, or haven’t you had the chance to hear about this yet?*) mais est sans équivalent dans l'Eurobaromètre ce qui est dommage. Et ce qui est sans doute révélateur d'une forme de sentiment de supériorité des enquêteurs européens qui postulent qu le sujet est évident et connu de tous les citoyens de leur continent...
+
+-**Connaisances du changement climatique (Afrobarometer)**
+
+```{r}
+a$clim_know <-abm$Q67A
+kable(table(abm$Q67A), col.names = c("modalités","effectif"))
+
+levels(a$clim_know)<-c(NA,"No","Yes",NA,NA)
+a$clim_know <- as.character(a$clim_know)
+
+```
+
+Comme on peut le constater, près de la moitié des personnes interrogées par Afrobarometer déclarent ne pas connaître le sujet deu changement climatique. Et logiquement, on ne les interrogera pas ensuite sur les effets du changement climatque dans la question suivante, ce qui est cohérent. 
+
+
+
+L'information étant manquant dans l'Eurobarometer on crée juste un champ vide ...
+```{r}
+e$clim_know <- NA
+```
+
+
+
+
+## C.2 Impact 
+
+On cherche à mesurer dans quelle mesure les citoyens (informés ...) évaluent l'impact du changement climatique sur une échelle allant du négatif (impact fort, dommages conséquents, ...) au positive (impact faibles ou nuls, bénéfices éventuels, ...). Il s'agit évidemment d'une formulation imprécise où l'harmonisation est rendue délicate par les différences de formulation dans les deux questionnaires. 
+
+
+### Afrobarometer
+
+La variable qui semble la plus adaptée pour mesuer l'impact est Q67B : *Do you think climate change is making life in [your country] better or worse, or haven’t you heard enough to say?*. Pont important, elle n'est posée que si les personnes ont répondu positivement à la question précédente sur la connaissance du phénomène. Cela réduit donc l'effectif de réponse de moitié puisque toutes les personnes qui ont déclaré ne pas connaîitre le changement climatique ont été exclues et n'ont pas répondu ce qui donnela modalité "*Not Applicable*" à ne pas confondre avec les refus de répondre ou les déclarations d'ignorance.
+
+-**Impact du changement climatique dans l'Afrobarometer (variable brute)**
+
+```{r}
+kable(table(abm$Q67B), col.names = c("modalités","effectif"))
+
+```
+
+Si on élimine les non réponses et les personnes non interrogées, on aboutit à une variable se présentant comme une échelle de Likert à 5 paliers
+
+
+
+-**Impact du changement climatique dans l'Afrobarometer (échelle de Likert à 5 paliers)**
+
+```{r}
+
+a$clim_impact_abm<-abm$Q67B
+kable(table(abm$Q67B), col.names = c("modalités","effectif"))
+levels(a$clim_impact_abm)<-c(NA,"5.Much better","4.Somewhat better", "3.no change","2.Somewhat worse", "1.Much worse", NA, NA,NA)
+a$clim_impact_abm <- as.character(a$clim_impact_abm)
+
+
+# Champ vide
+e$clim_impact_abm <- NA
+
+```
+
+
+### Eurobarometer
+
+la variable la plus proches est QD2. *Dans quelle mesure pensez-vous que le changement climatique est un problème grave en ce moment ?* ce qui est légèrement différent mais tout de même comparable. Même si on est en présence d'une échelle de Liket  à quatre paliers qui exclue les réponses intermédiaires ou neutres.
+
+-**Impact du changement climatique dans l'Eurobarometer (échelle de Likert à 4 paliers)**
+
+```{r}
+
+e$clim_impact_ebm<-ebm$qd2
+kable(table(ebm$qd2), col.names = c("modalités","effectif"))
+levels(e$clim_impact_ebm)<-c("1.A very serious problem"  ,     "2.A fairly serious problem"   , 
+"3.Not a very serious problem" ,  "4.Not a serious problem at all",
+NA)
+e$clim_impact_ebm <- as.character(e$clim_impact_ebm)
+
+
+# Champ vide
+a$clim_impact_ebm <- NA
+
+```
+
+### Harmonisation
+
+En retirant le palier central de l'Eurobarometer, on peut construire une échelle à quatre paliers commune aux deux enquêtes. Comme les libllés sont différents, on adopte une description plus abstraite qui ne reprenne aucune des deux précédentes.
+
+-**Impact du changement climatique harmonisé (échelle de Likert à 4 paliers)**
+
+```{r}
+a$clim_impact <- as.factor(a$clim_impact_abm)
+levels(a$clim_impact) <- c("1. Very negative","2. Negative",NA,"3. Positive","4.Very Positive")
+a$clim_impact<-as.character(a$clim_impact)
+
+
+e$clim_impact <- as.factor(e$clim_impact_ebm)
+levels(e$clim_impact) <-  c("1. Very negative","2. Negative","3. Positive","4.Very Positive")
+e$clim_impact<-as.character(e$clim_impact)
+
+
+p<-rbind(a,e)
+p %>% tbl_summary(include=survey, by=clim_impact, percent = "row") %>% add_p()
+```
+
+
+## C.3 Evolution 
+
+Dans le questionnaire Afrobarometer, on dispose d'une information plus précise sur l'évolution de phénomènes climatique en ciblant des événements précis et la perception de leur évolution depuis 10 ans (soit 2013-2023). Ces données ne sont malheureusement pas disponibles dans le questionnaire Eurobarometer
+
+### Sécheresses 
+
+
+ On va utiliser ici la question Q66A formulée ainsi "*In your experience, over the past 10 years, has there been any change in the severity of the following events in the area where you live? Have they become more severe, less severe, or stayed about the same: drought?*". Comme on peut le voir la question ne supposait pas une connaissance du changement climatique et a pu être posée à l'ensemble de l'échantillon. Elle se présente comme une échelle de Likert à 5 paliers
+
+-**Evolution de l'impact des sécheresses**
+
+```{r}
+kable(table(abm$Q66A), col.names = c("modalités","effectif"))
+
+```
+
+On aligne les réponses sur une échelle allant du plus négatif (1) au plus positif (5)
+
+
+```{r}
+
+a$clim_evol_drought<-abm$Q66A
+levels(a$clim_evol_drought)<-c(NA,
+                             "5. Much more severe",
+                             "4. Somewhat more severe",
+                             "3. Stayed the same",
+                             "2. Somewhat less severe",
+                             "1. Much less severe",
+                             NA, NA, NA)
+
+a$clim_evol_drought <- as.character(a$clim_evol_drought)
+a %>% tbl_summary(include=clim_evol_drought, percent = "column")
+
+# Champ vide
+e$clim_evol_drought <- NA
+
+
+```
+
+
+### Inondations
+
+
+ On va utiliser ici la question Q66B formulée ainsi "*In your experience, over the past 10 years, has there been any change in the severity of the following events in the area where you live? Have they become more severe, less severe, or stayed about the same: flooding?*". Comme on peut le voir la question ne supposait pas une connaissance du changement climatique et a pu être posée à l'ensemble de l'échantillon. Elle se présente comme une échelle de Likert à 5 paliers
+
+-**Responsabilité du changement climatique dans l'Afrobarometer**
+
+```{r}
+kable(table(abm$Q66A), col.names = c("modalités","effectif"))
+
+```
+
+On aligne les réponses sur une échelle allant du plus négatif (1) au plus positif (5)
+
+
+```{r}
+
+a$clim_evol_flooding<-abm$Q66A
+levels(a$clim_evol_flooding)<-c(NA,
+                             "5. Much more severe",
+                             "4. Somewhat more severe",
+                             "3. Stayed the same",
+                             "2. Somewhat less severe",
+                             "1.Much less severe",
+                             NA, NA, NA)
+
+a$clim_evol_flooding <- as.character(a$clim_evol_flooding)
+a %>% tbl_summary(include=clim_evol_flooding, percent = "column")
+# Champ vide
+e$clim_evol_flooding <- NA
+p<-rbind(a,e)
+
+```
+
+
+## C.4 Responsabilité 
+
+Cette variable est disponible dans l'Eurobarometer 2025 mais pas dans la compilation harmonisée de l'Afrobarometer 2023. Elle pourrait néanmoins être trouvée dans des éditions antérieures ou spécifique à des pays. Les personnes interrogées dans l'Eurobarometer ont-répondu à la question suivante (*SD1 : To what extent do you agree with the following statement on climate change? Climate change is caused by human activity*).
+
+
+```{r}
+kable(table(ebm$sd1), col.names = c("modalités","effectif"))
+
+
+```
+On la recode comme échelle de Likert à 4 paliers en partant des personnes en total désaccord (1) pour aller aux personnes en total accord (4)
+
+```{r}
+e$clim_resp <- as.factor(ebm$sd1)
+levels(e$clim_resp) <- c("4. Totally agree" ,
+                         "3.Tend to agree" ,
+                         "2. Tend to disagree" ,
+                         "1. Totally disagree",
+                         NA)
+e$clim_resp <- as.character(e$clim_resp)
+e %>% tbl_summary(include=clim_resp, percent = "column")
+
+a$clim_resp <- NA
+```
+
+## C.5 Action 
+
+Cette variable est posée presque dans les mêmes termes dans les deux enquêtes et on peut raisonnablement proposer une harmonisation.
+
+### Afrobarometer
+
+Cette variable est conditionné par le fait que les personnes enquêtées savent ce qu'est le changement climatique ce qui réduit automatiquement l'échantillon de moitié. Elle est formulée ainsi : "*Q70C : Should the government of your country need to do more to fight climate change*"
+
+```{r}
+a$clim_action_abm<-abm$Q70C
+kable(table(abm$Q70C), col.names = c("modalités","effectif"))
+```
+On recode sur une échelle de Likert numérotée de 1 à 3
+
+```{r}
+a$clim_action_abm<-abm$Q70C
+levels(a$clim_action_abm) <- c(NA, "1. Doing enough", 
+                               "2. Need to do somewhat more",
+                                    "3. Need to do a lot more",
+                               NA,NA,NA)
+a %>% tbl_summary(include=clim_action_abm, percent = "column")
+
+a$clim_action_abm <- as.character(a$clim_action_abm)
+
+e$clim_action_abm <- NA
+```
+
+### Afrobarometer
+
+Cette variable est conditionné par le fait que les personnes enquêtées savent ce qu'est le changement climatique ce qui réduit automatiquement l'échantillon de moitié. Elle est formulée ainsi : "*Q70C : Should the government of your country need to do more to fight climate change*"
+
+```{r}
+kable(table(ebm$qd7), col.names = c("modalités","effectif"))
+```
+On recode sur une échelle de Likert numérotée de 1 à 3
+
+```{r}
+e$clim_action_ebm<-ebm$qd7
+levels(e$clim_action_ebm)
+levels(e$clim_action_ebm) <- c( "2. Enough",
+                                "3. Not enough",
+                                "1. Too much",
+                               NA)
+
+
+e$clim_action_ebm<-as.character(e$clim_action_ebm)
+e %>% tbl_summary(include=clim_action_ebm, percent = "column")
+
+a$clim_action_ebm <- NA
+```
+
+
+### Harmonisation
+
+On décide d'harmoniser en niveau 1, 2, 3, indépendamment du texte car on fait l'hypothèse que les personnes se situent sur l'échelle plutôt que sur les mots
+
+```{r}
+a$clim_action <- as.factor(a$clim_action_abm)
+levels(a$clim_action)<- c("1. Low", "2. Medium","3. High")
+a$clim_action <-as.character(a$clim_action)
+
+e$clim_action <- as.factor(e$clim_action_ebm)
+levels(e$clim_action)
+levels(e$clim_action)<-  c("1. Low", "2. Medium","3. High")
+e$clim_action <-as.character(e$clim_action)
+
+p<-rbind(a,e)
+p %>% tbl_summary(include=survey, by=clim_action, percent = "row") %>% add_p()
+```
+
+N.B. Cette harmonisation est évidemment discutable ...
+
+## C.6 Autres 
+
+Nous procéderons ultérieurement à d'autres essais d'harmonisation, mais on souhaite déjà tester les possibilités d'analyse de la variable clim_impact harmonisée. 
+
+
+# D. ASSEMBLAGE  
+
+
+
+## D.1 Recodage 
+
+On assemble les deux bases et on procède à quelques ajustements des formats de variables. On leur ajoute des labels pour une utilisation plus facile du tableau et on précide lorsque cela est nécessaire la source précise (n° de question).
+
+
+```{r}
+base<-rbind(a,e)
+var_label(base$survey) <- "Organism in charge of survey"
+var_label(base$year) <- "Year of survey"
+var_label(base$id) <- "Unique identificator"
+var_label(base$wgt) <- "Weight"
+var_label(base$country) <- "Country name"
+var_label(base$iso3) <- "Country ISO3 code"
+var_label(base$region) <- "Infranational location"
+
+
+base$urbrur<-as.factor(base$urbrur)
+var_label(base$urbrur) <- "Rural/Urban typology "
+
+base$sex <- as.factor(base$sex)
+var_label(base$sex) <- "Sex"
+
+var_label(base$age) <- "Age"
+
+var_label(base$gen) <- "Generation (year of birth)"
+
+base$gen5<-as.factor(base$gen5)
+var_label(base$gen5) <- "Generation in Strauss-Howe 5 groups "
+
+base$edu_abm<-as.factor(base$edu_abm)
+var_label(base$edu_abm) <- "Level of education (ABM)"
+
+base$edu_ebm <- as.factor(base$edu_ebm)
+var_label(base$edu_ebm) <- "Level of education (EBM)"
+
+base$edu <- as.factor(base$edu)
+var_label(base$edu) <- "Level of education (harmonised)"
+
+base$stu <- as.factor(base$stu)
+var_label(base$stu) <- "Declare 'student' as activity"
+
+base$clim_know <- as.factor(base$clim_know)
+var_label(base$clim_know) <- "Knowledge about climate change (ABM)"
+
+base$clim_impact_abm <- as.factor(base$clim_impact_abm)
+var_label(base$clim_impact_abm) <- "Impact of climate change (ABM)"
+
+base$clim_impact_ebm <- as.factor(base$clim_impact_ebm)
+var_label(base$clim_impact_ebm) <- "Impact of climate change (EBM)"
+
+base$clim_impact <- as.factor(base$clim_impact)
+var_label(base$clim_impact) <- "Impact of climate change (harmonised)"
+
+base$clim_evol_drought <- as.factor(base$clim_evol_drought)
+var_label(base$clim_evol_drought) <- "Evolution of droughts (ABM)"
+
+base$clim_evol_flooding <- as.factor(base$clim_evol_flooding)
+var_label(base$clim_evol_flooding) <- "Evolution of floodings (ABM)"
+
+base$clim_resp <- as.factor(base$clim_resp)
+var_label(base$clim_resp) <- "Human responsability in climate change (EBM)"
+
+base$clim_action_abm <- as.factor(base$clim_action_abm)
+var_label(base$clim_action_abm) <- "Action du gouvernemtn (ABM)"
+
+base$clim_action_ebm <- as.factor(base$clim_action_ebm)
+var_label(base$clim_action_ebm) <- "Action du gouvernement (EBM)"
+
+base$clim_action <- as.factor(base$clim_action)
+var_label(base$clim_action) <- "Action du gouvernement (harmonised)"
+
+kable(head(base), caption = "Aperçu du tableau de données harmonisé")
+
+```
+
+
+
+
+Le tableau final comporte 79752 observations et 27 variables. Certaines variables comportent trois colonnes lorsque l'on estime que l'harmonisation a fait perdre de l'information et qu'on préfère garder les deux variables initiales propre à chaque enquête. 
+
+
+## D.2 Métadonnées
+
+On créer un fichier de métadonnées sur le libellé des variables que l'on sauvegarde.
+
+```{r}
+base_meta <- data.frame(variable= names(base), definition=as.character(var_label(base)))
+kable(base_meta, caption = "Liste des variables de la base de données harmonisée.")
+
+```
+
+
+
+```{r, eval=F}
+saveRDS(base,"../../data/Axe2_survey/data/base.RDS")
+saveRDS(base_meta,"../../data/Axe2_survey/data/base_meta.RDS")
+```
+
+
+# E. RESUMES PAR PAYS
+
+On procède à quelques analyses rapides sur les deux variables harmonisées relatives au changement climatique. On effectue dans les calculs avec pondération pour redresser les échantillons. On utilise les packages `survey` et `gt_summary` pour produire des tableaux de qualité
+
+```{r}
+basew <- svydesign(ids = ~1, data = base, weights = ~ base$wgt)
+```
+
+
+## E.1 Connaissance 
+
+Rappelons que cette question Q67A  n'est disponible que dans l'Afrobarometer et est libellée ainsi  *Have you heard about climate change, or haven’t you had the chance to hear about this yet?* 
+
+
+
+```{r}
+
+basew %>% tbl_svysummary(include=country, by=clim_know,percent="row") %>% add_p() 
+```
+
+
+
+## E.2 Impact 
+
+On utilise la variable harmonisée qui correspond à une échelle de Likert à quatre paliers renvoyant à des définitions légèrement différentes dans les deux enquêtes. 
+
+
+
+```{r}
+basew %>% tbl_svysummary(include=country, by=clim_impact,percent="row") %>% add_p() 
+```
+
+
+## E.3.1 Evolution des sécheresses 
+
+
+
+
+```{r}
+basew %>% tbl_svysummary(include=country, by=clim_evol_drought,percent="row") %>% add_p() 
+```
+
+
+## E.3.2 Evolution des inondations 
+
+
+
+```{r}
+
+basew %>% tbl_svysummary(include=country, by=clim_evol_flooding,percent="row") %>% add_p() 
+```
+
+
+## E.4 Responsabilité humaine 
+
+```{r}
+basew %>% tbl_svysummary(include=country, by=clim_resp,percent="row") %>% add_p() 
+```
+
+
+## E.5 Action du gouvernement
+
+
+```{r}
+basew %>% tbl_svysummary(include=country, by=clim_action,percent="row") %>% add_p() 
+```
