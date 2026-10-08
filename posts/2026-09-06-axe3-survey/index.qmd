@@ -925,7 +925,7 @@ x<-base %>% filter(is.na(Y)==F) %>%
   pivot_wider(values_from = n,names_from = Y) %>%
   mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
 kable(x, digits=c(0,0,0,0,0,1),
-      col.names = c("Code", "Country","Yes","No","Total","% of Yes"),
+      col.names = c("Code", "Country","No","Yes","Total","% of Yes"),
       caption = "Knowledge of climate change (Afrobarometer)"
       )
 ```
