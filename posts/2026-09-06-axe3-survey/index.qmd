@@ -197,26 +197,38 @@ e$iso3<-as.character(e$iso3)
 On représente les 66 pays présents dans la réunion des deux enquêtes: 
 
 
-```{r}
+
+
+```{r, fig.width=5, fig.height=7}
+l1<-names(table(e$iso3))
+l2<-names(table(a$iso3))
+ll<-c(l1,l2)
 map<-readRDS("../../data/Axe2_survey/geom/world_riate.RDS")
-grat<-st_read("../../data/Axe2_survey/geom/grat30.geojson", quiet=T)
+
 map<-st_transform(map, "ESRI:54042")
-grat<-st_transform(grat, "ESRI:54042")
-don <- rbind(a,e)  %>% group_by(ISO3=iso3) %>% count()
 
-mapdon <- inner_join(map,don)
+m2 <- map %>% filter(ISO3 %in% ll, ISO3 !="RUS")
 
-mf_map(mapdon, type="base")
-mf_map(grat, type="base", lty=2, add=T, col="lightblue")
-mf_map(map,type="base",add=T)
-mf_map(mapdon,type="base",add=T,col="lightyellow")
-mf_label(mapdon,var = "ISO3",col = "red",overlap = F, cex=0.4,halo=T)
-mf_layout(title = "Les 66 pays présents dans Afrobarometer 2023 & Eurobarometer 2025", 
-          credits = "Projet Altermap - Axe 3",
-          arrow=F,
-          frame=T
-          )
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023","Afrobarometer 2023", "Eurobarometer 2025")
+m <- m2 %>% filter(ISO3 !="FRA")
+mf_map(m, type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_label(m2,var = "ISO3",col = "red",overlap = F, cex=0.4,halo=T)
+mf_layout(title = "Les 66 pays présents dans les deux enquêtes",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
 ```
+
+
+
+
 
 ### Régions infranationale
 
@@ -1187,7 +1199,6 @@ On regroupe ici les individus qui estiment que l'action du gouvernement face au 
 
 ```{r}
 base$Y<-base$clim_action
-table(base$Y)
 levels(base$Y) <- c("No","No","Yes")
 x<-base %>% filter(is.na(Y)==F) %>% 
   group_by( iso3, country, Y) %>% 
