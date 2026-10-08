@@ -76,7 +76,7 @@ saveRDS(abm_meta,"../../data/Axe2_survey/data/abm2023_meta.RDS")
 
 ## A.2 EuroBarometer 2025
 
-Nous avons retenu l'Eurobarometer SP565 (enquête 103.2), spécialement consacré au changement climatique et , disponible [ici](https://data.europa.eu/data/datasets/s3472_103_2_sp565_eng?locale=en). 
+Nous avons retenu l'Eurobarometer SP565 (enquête 103.2), spécialement consacré au changement climatique qui sont disponible en suivant [ce lien](https://data.europa.eu/data/datasets/s3472_103_2_sp565_eng?locale=en). 
 
 
 
@@ -194,13 +194,14 @@ e$iso3<-as.character(e$iso3)
 ```
 
 
-On représente les 66 pays présents dans la réunion des deux enquêtes : 
+On représente les 66 pays présents dans la réunion des deux enquêtes: 
 
 
 ```{r}
 map<-readRDS("../../data/Axe2_survey/geom/world_riate.RDS")
-grat<-st_read("../../data/Axe2_survey/geom/grat30.geojson")
-map<-st_transform(map, st_crs(grat))
+grat<-st_read("../../data/Axe2_survey/geom/grat30.geojson", quiet=T)
+map<-st_transform(map, "ESRI:54042")
+grat<-st_transform(grat, "ESRI:54042")
 don <- rbind(a,e)  %>% group_by(ISO3=iso3) %>% count()
 
 mapdon <- inner_join(map,don)
@@ -219,7 +220,7 @@ mf_layout(title = "Les 66 pays présents dans Afrobarometer 2023 & Eurobarometer
 
 ### Régions infranationale
 
-Les deux enquêtes indiquent unniveau infranational de découpage qui peut être intéressant pour des analyses plus géographiques même si les effectifs sont faibles.  Il faut faire un petit programme dans le cas de l'Eurobaromètre pour fusionner des colonnes ...
+Les deux enquêtes indiquent unniveau infranational de découpage qui peut être intéressant pour des analyses plus géographiques même si les effectifs sont faibles.  Un petit programme sera créé dans le cas de l'Eurobaromètre pour fusionner des colonnes ...
 
 ```{r}
 a$region <-as.character(abm$REGION)
@@ -237,7 +238,7 @@ e$region <-as.character(x)
 ```
 
 
-On peut indiquer à titre d'exemple la ventilation des effectifs d'enquête en France et au Sénégal en comparant le nombre de questionnaire et le poids après redressement. Ceci permet de vérifier su la stratification des enquêtes a bien été faite proportionellement à la population réelle des régions.
+On peut indiquer à titre d'exemple la ventilation des effectifs d'enquête en France et au Sénégal en comparant le nombre de questionnaire et le poids après redressement. Ceci permet de vérifier si la stratification des enquêtes a bien été faite proportionellement à la population réelle des régions.
 
 - **Sénégal** : Il y a très peu de différence entre les effectifs collectés et le poids réell dans la population.
 
@@ -258,7 +259,7 @@ kable(tab1, caption = "Effectif d'enquête par régions en France",
 
 ### Urbain-rural
 
-Les deux enquêtes proposent une typologie en trois modalités comme on peut le voir dans les tableau ci-dessous :
+Les deux enquêtes proposent une typologie en trois modalités comme on peut le voir dans les tableaux ci-dessous :
 
 - **Typologie Urbain-Rural dans Afrobarometer 2023**
 
@@ -354,11 +355,11 @@ e$age <- as.numeric(as.character(e$age))
 
 ```
 
-Nous ne discutions pas immédiatement du problème du choix des classes d'âge mais il convient de souligner tout de suite l'importance différentede structure par âge des deux échantillons. L'âge médian est en effet de **35 ans** pour l'échantillon de l'Afrobarometer 2023 contre **54 ans** pour celui de l'Eurobarometer 2025. Il faudra donc bien réfléchir à ce que l'on entend par "*Jeunes*", "*Adultes*" ou "*Vieux*" dans chacun des deux contextes ..
+Nous ne discutons pas immédiatement du problème du choix des classes d'âge mais il convient de souligner les différences structurelles de structure par âge des deux échantillons. L'âge médian est en effet de **35 ans** pour l'échantillon de l'Afrobarometer 2023 contre **54 ans** pour celui de l'Eurobarometer 2025. Il faudra donc bien réfléchir à ce que l'on entend par "*Jeunes*", "*Adultes*" ou "*Vieux*" dans chacun des deux contextes ...
 
 ```{r}
 p<-rbind(a,e)
-  beanplot(p$age~p$survey,ll = 0, main = "Structure par âge des répondants des deux enquêtes",col=list("pink", "lightblue"),overallline = "median")
+  beanplot(p$age~p$survey,ll = 0, main = "Structure par âge des répondants",col=list("pink", "lightblue"),overallline = "median")
 ```
 
 
@@ -377,7 +378,7 @@ L'analyse des valeurs médianes nous indique que dans l'échantillon Afrobaromet
 
 ```{r}
 p<-rbind(a,e)
-  beanplot(p$gen~p$survey,ll = 0, main = "Année de naissance des répondants des deux enquêtes",col=list("pink", "lightblue"),overallline = "median")
+  beanplot(p$gen~p$survey,ll = 0, main = "Année de naissance des répondants",col=list("pink", "lightblue"),overallline = "median")
 ```
 
 
@@ -511,7 +512,7 @@ a$clim_know <- as.character(a$clim_know)
 
 ```
 
-Comme on peut le constater, près de la moitié des personnes interrogées par Afrobarometer déclarent ne pas connaître le sujet deu changement climatique. Et logiquement, on ne les interrogera pas ensuite sur les effets du changement climatque dans la question suivante, ce qui est cohérent. 
+Comme on peut le constater, près de la moitié des personnes interrogées par Afrobarometer déclarent ne pas connaître le sujet du changement climatique. Et logiquement, on ne les interrogera pas ensuite sur les effets du changement climatque dans la question suivante, ce qui est cohérent. 
 
 
 
@@ -525,12 +526,12 @@ e$clim_know <- NA
 
 ## C.2 Impact 
 
-On cherche à mesurer dans quelle mesure les citoyens (informés ...) évaluent l'impact du changement climatique sur une échelle allant du négatif (impact fort, dommages conséquents, ...) au positive (impact faibles ou nuls, bénéfices éventuels, ...). Il s'agit évidemment d'une formulation imprécise où l'harmonisation est rendue délicate par les différences de formulation dans les deux questionnaires. 
+On cherche à mesurer dans quelle mesure les citoyens (informés ...) évaluent l'impact du changement climatique sur une échelle allant du négatif (impact fort, dommages conséquents...) au positif (impact faibles ou nuls, bénéfices éventuels, ...). Il s'agit évidemment d'une formulation imprécise où l'harmonisation est rendue délicate par les différences de formulation dans les deux questionnaires. 
 
 
 ### Afrobarometer
 
-La variable qui semble la plus adaptée pour mesuer l'impact est Q67B : *Do you think climate change is making life in [your country] better or worse, or haven’t you heard enough to say?*. Pont important, elle n'est posée que si les personnes ont répondu positivement à la question précédente sur la connaissance du phénomène. Cela réduit donc l'effectif de réponse de moitié puisque toutes les personnes qui ont déclaré ne pas connaîitre le changement climatique ont été exclues et n'ont pas répondu ce qui donnela modalité "*Not Applicable*" à ne pas confondre avec les refus de répondre ou les déclarations d'ignorance.
+La variable qui semble la plus adaptée pour mesuer l'impact est Q67B : *Do you think climate change is making life in [your country] better or worse, or haven’t you heard enough to say?*. Point important, elle n'est posée que si les personnes ont répondu positivement à la question précédente sur la connaissance du phénomène. Cela réduit donc l'effectif de réponse de moitié puisque toutes les personnes qui ont déclaré ne pas connaîitre le changement climatique ont été exclues et n'ont pas répondu ce qui donnela modalité "*Not Applicable*" à ne pas confondre avec les refus de répondre ou les déclarations d'ignorance.
 
 -**Impact du changement climatique dans l'Afrobarometer (variable brute)**
 
@@ -548,10 +549,11 @@ Si on élimine les non réponses et les personnes non interrogées, on aboutit �
 ```{r}
 
 a$clim_impact_abm<-abm$Q67B
-kable(table(abm$Q67B), col.names = c("modalités","effectif"))
+
 levels(a$clim_impact_abm)<-c(NA,"5.Much better","4.Somewhat better", "3.no change","2.Somewhat worse", "1.Much worse", NA, NA,NA)
 a$clim_impact_abm <- as.character(a$clim_impact_abm)
 
+kable(table(a$clim_impact_abm), col.names = c("modalités","effectif"))
 
 # Champ vide
 e$clim_impact_abm <- NA
@@ -604,7 +606,7 @@ p %>% tbl_summary(include=survey, by=clim_impact, percent = "row") %>% add_p()
 
 ## C.3 Evolution 
 
-Dans le questionnaire Afrobarometer, on dispose d'une information plus précise sur l'évolution de phénomènes climatique en ciblant des événements précis et la perception de leur évolution depuis 10 ans (soit 2013-2023). Ces données ne sont malheureusement pas disponibles dans le questionnaire Eurobarometer
+Dans le questionnaire Afrobarometer, on dispose d'une information plus précise sur l'évolution de phénomènes climatiques en ciblant des événements précis et la perception de leur évolution depuis 10 ans (soit 2013-2023). Ces données ne sont malheureusement pas disponibles dans le questionnaire Eurobarometer
 
 ### Sécheresses 
 
@@ -650,7 +652,7 @@ e$clim_evol_drought <- NA
 -**Responsabilité du changement climatique dans l'Afrobarometer**
 
 ```{r}
-kable(table(abm$Q66A), col.names = c("modalités","effectif"))
+kable(table(abm$Q66B), col.names = c("modalités","effectif"))
 
 ```
 
@@ -659,7 +661,7 @@ On aligne les réponses sur une échelle allant du plus négatif (1) au plus pos
 
 ```{r}
 
-a$clim_evol_flooding<-abm$Q66A
+a$clim_evol_flooding<-abm$Q66B
 levels(a$clim_evol_flooding)<-c(NA,
                              "5. Much more severe",
                              "4. Somewhat more severe",
@@ -679,7 +681,7 @@ p<-rbind(a,e)
 
 ## C.4 Responsabilité 
 
-Cette variable est disponible dans l'Eurobarometer 2025 mais pas dans la compilation harmonisée de l'Afrobarometer 2023. Elle pourrait néanmoins être trouvée dans des éditions antérieures ou spécifique à des pays. Les personnes interrogées dans l'Eurobarometer ont-répondu à la question suivante (*SD1 : To what extent do you agree with the following statement on climate change? Climate change is caused by human activity*).
+Cette variable est disponible dans l'Eurobarometer 2025 mais pas dans la compilation harmonisée de l'Afrobarometer 2023. Elle pourrait néanmoins être trouvée dans des éditions antérieures ou spécifique à des pays. Les personnes interrogées dans l'Eurobarometer ont-répondu à la question suivante (*SD1: To what extent do you agree with the following statement on climate change? Climate change is caused by human activity*).
 
 
 ```{r}
@@ -708,7 +710,7 @@ Cette variable est posée presque dans les mêmes termes dans les deux enquêtes
 
 ### Afrobarometer
 
-Cette variable est conditionné par le fait que les personnes enquêtées savent ce qu'est le changement climatique ce qui réduit automatiquement l'échantillon de moitié. Elle est formulée ainsi : "*Q70C : Should the government of your country need to do more to fight climate change*"
+Cette variable est conditionné par le fait que les personnes enquêtées savent ce qu'est le changement climatique ce qui réduit automatiquement l'échantillon de moitié. Elle est formulée ainsi: "*Q70C: Should the government of your country need to do more to fight climate change*"
 
 ```{r}
 a$clim_action_abm<-abm$Q70C
@@ -729,18 +731,18 @@ a$clim_action_abm <- as.character(a$clim_action_abm)
 e$clim_action_abm <- NA
 ```
 
-### Afrobarometer
+### Eurobarometer
 
-Cette variable est conditionné par le fait que les personnes enquêtées savent ce qu'est le changement climatique ce qui réduit automatiquement l'échantillon de moitié. Elle est formulée ainsi : "*Q70C : Should the government of your country need to do more to fight climate change*"
+On utilise ici la question qd7 qui est formulée de façon un peu différente.
 
 ```{r}
 kable(table(ebm$qd7), col.names = c("modalités","effectif"))
 ```
+
 On recode sur une échelle de Likert numérotée de 1 à 3
 
 ```{r}
 e$clim_action_ebm<-ebm$qd7
-levels(e$clim_action_ebm)
 levels(e$clim_action_ebm) <- c( "2. Enough",
                                 "3. Not enough",
                                 "1. Too much",
@@ -866,7 +868,7 @@ Le tableau final comporte 79752 observations et 27 variables. Certaines variable
 
 ## D.2 Métadonnées
 
-On créer un fichier de métadonnées sur le libellé des variables que l'on sauvegarde.
+On crée un fichier de métadonnées sur le libellé des variables que l'on sauvegarde.
 
 ```{r}
 base_meta <- data.frame(variable= names(base), definition=as.character(var_label(base)))
@@ -882,9 +884,9 @@ saveRDS(base_meta,"../../data/Axe2_survey/data/base_meta.RDS")
 ```
 
 
-# E. RESUMES PAR PAYS
+# E. COMPARAISONS 
 
-On procède à quelques analyses rapides sur les deux variables harmonisées relatives au changement climatique. On effectue dans les calculs avec pondération pour redresser les échantillons. On utilise les packages `survey` et `gt_summary` pour produire des tableaux de qualité
+On procède à quelques analyses rapides sur les variables harmonisées relatives au changement climatique. On effectue  les calculs avec pondération pour redresser les échantillons et on ramène les échelles de Likert à deux classes.
 
 ```{r}
 basew <- svydesign(ids = ~1, data = base, weights = ~ base$wgt)
@@ -897,54 +899,333 @@ Rappelons que cette question Q67A  n'est disponible que dans l'Afrobarometer et 
 
 
 
-```{r}
+```{r, eval=F}
 
 basew %>% tbl_svysummary(include=country, by=clim_know,percent="row") %>% add_p() 
+x<-base %>% group_by(country, clim_know) %>% summarise(n=sum(wgt))
 ```
+
+```{r}
+base$Y<-base$clim_know
+x<-base %>% filter(is.na(Y)==F) %>% 
+  group_by( iso3, country, Y) %>% 
+  summarise(n=sum(wgt)) %>% 
+  pivot_wider(values_from = n,names_from = Y) %>%
+  mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
+kable(x, digits=c(0,0,0,0,0,1),
+      col.names = c("Code", "Country","Yes","No","Total","% of Yes"),
+      caption = "Knowledge of climate change (Afrobarometer)"
+      )
+```
+
+
+```{r, fig.width=5, fig.height=5}
+m2 <- map %>% filter(REGION_UN %in% c("Europe","Africa"), ISO3 !="RUS")
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023", "Eurobarometer 2025")
+m <- map %>% select(iso3 = ISO3,REGION_UN, geometry) %>% right_join(x)
+mf_map(m[m$iso3 !="FRA",], type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_map(m, type="prop_choro",
+       var=c("Total","I"),
+       add=T,
+       inches=0.1,
+       pal="Reds",
+       border="black",
+       breaks=quantile(m$I),
+       leg_val_rnd = c(0,0),
+       leg_pos=c("topleft","topright"),
+       leg_title = c("Sample size","% answers"))
+mf_layout(title = "Knowledge of Climate Change",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
+```
+
+
 
 
 
 ## E.2 Impact 
 
-On utilise la variable harmonisée qui correspond à une échelle de Likert à quatre paliers renvoyant à des définitions légèrement différentes dans les deux enquêtes. 
+On utilise la variable harmonisée qui correspond à une échelle de Likert à quatre paliers renvoyant à des définitions légèrement différentes dans les deux enquêtes.  On regroupe en deux paliers pour isoler les réponses correspondant à un impact négatif assez fort ou très fort.
 
 
 
-```{r}
+```{r, eval=F}
 basew %>% tbl_svysummary(include=country, by=clim_impact,percent="row") %>% add_p() 
 ```
 
 
+```{r}
+base$Y<-base$clim_impact
+levels(base$Y) <- c("Yes","Yes","No","No")
+x<-base %>% filter(is.na(Y)==F) %>% 
+  group_by( iso3, country, Y) %>% 
+  summarise(n=sum(wgt)) %>% 
+  pivot_wider(values_from = n,names_from = Y) %>%
+  mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
+kable(x, digits=c(0,0,0,0,0,1),
+      col.names = c("Code", "Country","Negative","Positive","Total","% of Negative"),
+      caption = "Impact of climate change (Afrobarometer & Eurobarometer)"
+      )
+```
+
+
+```{r, fig.width=5, fig.height=7}
+m2 <- map %>% filter(REGION_UN %in% c("Europe","Africa"), ISO3 !="RUS")
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023", "Eurobarometer 2025")
+m <- map %>% select(iso3 = ISO3,REGION_UN, geometry) %>% right_join(x)
+mf_map(m[m$iso3 !="FRA",], type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_map(m, type="prop_choro",
+       var=c("Total","I"),
+       add=T,
+       inches=0.1,
+       pal="Reds",
+       border="black",
+       breaks=quantile(m$I),
+       leg_val_rnd = c(0,0),
+       leg_pos=c("topleft","topright"),
+       leg_title = c("Sample size","% answers"))
+mf_layout(title = "Negative impact of climate change",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
+```
+
+
+
 ## E.3.1 Evolution des sécheresses 
 
+On regroupe deux des cinq paliers de l'échelle pour mesurer la part des individus qui considèrent les sécheresses comme "*plus sévères*" ou "*beaucoup   plus sévères*" que par le passé. 
 
 
-
-```{r}
+```{r, eval=FALSE}
 basew %>% tbl_svysummary(include=country, by=clim_evol_drought,percent="row") %>% add_p() 
 ```
 
 
-## E.3.2 Evolution des inondations 
-
-
 
 ```{r}
+base$Y<-base$clim_evol_drought
+levels(base$Y) <- c("No","No","No","Yes","Yes")
+x<-base %>% filter(is.na(Y)==F) %>% 
+  group_by( iso3, country, Y) %>% 
+  summarise(n=sum(wgt)) %>% 
+  pivot_wider(values_from = n,names_from = Y) %>%
+  mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
+kable(x, digits=c(0,0,0,0,0,1),
+      col.names = c("Code", "Country","No","Yes","Total","% of Yes"),
+      caption = "Droughts more severe (Afrobarometer)"
+      )
+```
 
+
+```{r, fig.width=5, fig.height=5}
+m2 <- map %>% filter(REGION_UN %in% c("Europe","Africa"), ISO3 !="RUS")
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023", "Eurobarometer 2025")
+m <- map %>% select(iso3 = ISO3,REGION_UN, geometry) %>% right_join(x)
+mf_map(m[m$iso3 !="FRA",], type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_map(m, type="prop_choro",
+       var=c("Total","I"),
+       add=T,
+       inches=0.1,
+       pal="Reds",
+       border="black",
+       breaks=quantile(m$I),
+       leg_val_rnd = c(0,0),
+       leg_pos=c("topleft","topright"),
+       leg_title = c("Sample size","% answers"))
+mf_layout(title = "Droughts more severe",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
+```
+
+
+
+
+## E.3.2 Evolution des inondations 
+
+On regroupe deux des cinq paliers de l'échelle pour mesurer la part des individus qui considèrent les inondations comme "*plus sévères*" ou "*beaucoup   plus sévères*" que par le passé.
+
+
+```{r, eval=FALSE}
 basew %>% tbl_svysummary(include=country, by=clim_evol_flooding,percent="row") %>% add_p() 
 ```
 
 
-## E.4 Responsabilité humaine 
 
 ```{r}
+base$Y<-base$clim_evol_flooding
+levels(base$Y) <- c("No","No","No","Yes","Yes")
+x<-base %>% filter(is.na(Y)==F) %>% 
+  group_by( iso3, country, Y) %>% 
+  summarise(n=sum(wgt)) %>% 
+  pivot_wider(values_from = n,names_from = Y) %>%
+  mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
+kable(x, digits=c(0,0,0,0,0,1),
+      col.names = c("Code", "Country","No","Yes","Total","% of Yes"),
+      caption = "Flooding more severe (Afrobarometer)"
+      )
+```
+
+
+```{r, fig.width=5, fig.height=5}
+m2 <- map %>% filter(REGION_UN %in% c("Europe","Africa"), ISO3 !="RUS")
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023", "Eurobarometer 2025")
+m <- map %>% select(iso3 = ISO3,REGION_UN, geometry) %>% right_join(x)
+mf_map(m[m$iso3 !="FRA",], type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_map(m, type="prop_choro",
+       var=c("Total","I"),
+       add=T,
+       inches=0.1,
+       pal="Reds",
+       border="black",
+       breaks=quantile(m$I),
+       leg_val_rnd = c(0,0),
+       leg_pos=c("topleft","topright"),
+       leg_title = c("Sample size","% answers"))
+mf_layout(title = "Flooding more severe",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
+```
+
+
+
+
+
+## E.4 Responsabilité humaine 
+
+Les quatre paliers de l'échelle de Likert sont regroupés en deux niveaux pour calculer la part des personnes qui sont "*plutôt d'accord*" ou "*totalement d'accord*" avec la responsabilité des hommes dans le changement climatique actuel.
+
+```{r, eval=F}
 basew %>% tbl_svysummary(include=country, by=clim_resp,percent="row") %>% add_p() 
 ```
 
 
+
+```{r}
+base$Y<-base$clim_resp
+levels(base$Y) <- c("No","No","Yes","Yes")
+x<-base %>% filter(is.na(Y)==F) %>% 
+  group_by( iso3, country, Y) %>% 
+  summarise(n=sum(wgt)) %>% 
+  pivot_wider(values_from = n,names_from = Y) %>%
+  mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
+kable(x, digits=c(0,0,0,0,0,1),
+      col.names = c("Code", "Country","No","Yes","Total","% of Yes"),
+      caption = "Human responsibility (Eurobarometer)"
+      )
+```
+
+
+```{r, fig.width=5, fig.height=5}
+m2 <- map %>% filter(REGION_UN %in% c("Europe","Africa"), ISO3 !="RUS")
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023", "Eurobarometer 2025")
+m <- map %>% select(iso3 = ISO3,REGION_UN, geometry) %>% right_join(x)
+mf_map(m[m$iso3 !="FRA",], type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_map(m, type="prop_choro",
+       var=c("Total","I"),
+       add=T,
+       inches=0.1,
+       pal="Reds",
+       border="black",
+       breaks=quantile(m$I),
+       leg_val_rnd = c(0,0),
+       leg_pos=c("topleft","topright"),
+       leg_title = c("Sample size","% answers"))
+mf_layout(title = "Human responsiblity in climate change",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
+```
+
 ## E.5 Action du gouvernement
 
 
-```{r}
+```{r, eval=F}
 basew %>% tbl_svysummary(include=country, by=clim_action,percent="row") %>% add_p() 
 ```
+
+On regroupe ici les individus qui estiment que l'action du gouvernement face au changement climatique est "*Insuffisante*" (Eurobarometer) ou "*A renforcer fortement*" (Afrobarometer). Rappelons que l'alignement des deux questions est ici très imparfait. 
+
+
+```{r}
+base$Y<-base$clim_action
+table(base$Y)
+levels(base$Y) <- c("No","No","Yes")
+x<-base %>% filter(is.na(Y)==F) %>% 
+  group_by( iso3, country, Y) %>% 
+  summarise(n=sum(wgt)) %>% 
+  pivot_wider(values_from = n,names_from = Y) %>%
+  mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
+kable(x, digits=c(0,0,0,0,0,1),
+      col.names = c("Code", "Country","Negative","Positive","Total","% of Negative"),
+      caption = "More action of government (Afrobarometer & Eurobarometer)"
+      )
+```
+
+
+```{r, fig.width=5, fig.height=7}
+m2 <- map %>% filter(REGION_UN %in% c("Europe","Africa"), ISO3 !="RUS")
+m2$source<-as.factor(m2$REGION_UN)
+levels(m2$source) <- c("Afrobarometer 2023", "Eurobarometer 2025")
+m <- map %>% select(iso3 = ISO3,REGION_UN, geometry) %>% right_join(x)
+mf_map(m[m$iso3 !="FRA",], type="base")
+mf_map(map, type="base",add=T, col="gray90")
+mf_map(m2, type="typo",
+       var="source",
+       add=T, 
+       pal=c("lightyellow","lightblue"),
+       leg_pos="bottomright",
+       leg_title = "Source")
+mf_map(m, type="prop_choro",
+       var=c("Total","I"),
+       add=T,
+       inches=0.1,
+       pal="Reds",
+       border="black",
+       breaks=quantile(m$I),
+       leg_val_rnd = c(0,0),
+       leg_pos=c("topleft","topright"),
+       leg_title = c("Sample size","% answers"))
+mf_layout(title = "More action of government",
+          credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
+          frame=T, arrow=F, scale=F)
+```
+
