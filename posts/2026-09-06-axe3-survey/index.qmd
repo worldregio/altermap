@@ -1195,8 +1195,8 @@ x<-base %>% filter(is.na(Y)==F) %>%
   pivot_wider(values_from = n,names_from = Y) %>%
   mutate(Total= Yes+No, I = 100*Yes/(Yes+No)) %>% arrange(I)
 kable(x, digits=c(0,0,0,0,0,1),
-      col.names = c("Code", "Country","Negative","Positive","Total","% of Negative"),
-      caption = "More action of government (Afrobarometer & Eurobarometer)"
+      col.names = c("Code", "Country","Less or enough","Much more","Total","% of Much more"),
+      caption = "Much more action of government (Afrobarometer & Eurobarometer)"
       )
 ```
 
@@ -1224,7 +1224,7 @@ mf_map(m, type="prop_choro",
        leg_val_rnd = c(0,0),
        leg_pos=c("topleft","topright"),
        leg_title = c("Sample size","% answers"))
-mf_layout(title = "More action of government",
+mf_layout(title = "Much more action of government",
           credits = "(c) Altermap 2026 - Axe 3 : perception of climate change",
           frame=T, arrow=F, scale=F)
 ```
